@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 body {
     background-color: #F8FAFB
 ;
@@ -6,6 +6,8 @@ body {
 *{
     margin :0;
     padding :0;
+    box-sizing: border-box;
+
 }
 .HeaderMainContainer {
 display: flex;
@@ -178,120 +180,98 @@ gap: 10px;
 width: 84px;
 height: 42px;
 
+background: rgba(141, 142, 145, 0.1);
+
+border-radius: 34px;    
+
+}
+.AllActive {
+display: flex;
+box-sizing: border-box  ;
+
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 30px;
+gap: 10px;
+
+width: 84px;
+height: 42px;
+
 background: rgba(0, 56, 255, 0.1);
 border-radius: 34px;    
 
 }
+.All :hover {
+display: flex;
+box-sizing: border-box  ;
+
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 30px;
+gap: 10px;
+
+width: 84px;
+height: 42px;
+
+background: rgba(0, 56, 255, 0.1);
+border-radius: 34px;   
+}
 .Tech {
 
-/* Auto layout */
+display: flex;
 box-sizing: border-box  ;
-display: flex;
+
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding: 10px 30px;
+padding: 10px 20px;
 gap: 10px;
 
-width: 168px;
+width: 84px;
 height: 42px;
 
-border: 1px solid #141A31;
-border-radius: 34px;
+background: rgba(141, 142, 145, 0.1);
+border-radius: 34px;    
+width: 170px;
+height: 47px;
+
 
 
 }
-.health {
+.Tech:hover {
     box-sizing: border-box;
-
 /* Auto layout */
-
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding: 10px 30px;
-gap: 10px;
+padding: 10px 20px;
 
-width: 123px;
-height: 42px;
+width: 170px;
+height: 47px;
 
-border: 1px solid #141A31;
 border-radius: 34px;
-
+background: rgba(0, 56, 255, 0.1);
 }
-.gaming {
-    box-sizing: border-box;
-
+.TechActive  {
+box-sizing: border-box;
 /* Auto layout */
-
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding: 10px 30px;
-gap: 10px;
+padding: 10px 20px;
 
-width: 134px;
-height: 42px;
+width: 170px;
+height: 47px;
 
-border: 1px solid #141A31;
 border-radius: 34px;
+background: rgba(0, 56, 255, 0.1);
+
 }
-.fashion {
-    box-sizing: border-box;
 
-/* Auto layout */
-
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 30px;
-gap: 10px;
-
-width: 133px;
-height: 42px;
-
-border: 1px solid #141A31;
-border-radius: 34px;
-}
-.ai {
-    box-sizing: border-box;
-
-/* Auto layout */
-
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 30px;
-gap: 10px;
-
-width: 253px;
-height: 42px;
-
-border: 1px solid #141A31;
-border-radius: 34px;
-}
-.forex {
-    box-sizing: border-box;
-
-/* Auto layout */
-
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 30px;
-gap: 10px;
-
-width: 188px;
-height: 42px;
-
-border: 1px solid #141A31;
-border-radius: 34px;
-}
 .div2categories {
 
   display: flex;
@@ -323,6 +303,7 @@ border-radius: 34px;
 .mainPopularContainer {
     width: 90%;
     margin: auto;
+    margin-top: 50px;
 }
 
 .PopularCard {
@@ -456,7 +437,7 @@ color: #5F5F5F;
 width: 307.49px;
 height: 268.87px;
 left: 300px;
-top: 1800px;
+top: 1700px;
 }
 .div2Info {
     display: flex;
@@ -472,7 +453,7 @@ margin-top: 0px;
 width: 307.49px;
 height: 268.87px;
 left: 800px;
-top: 2045px;
+top: 1950px;
 
 }
 .contacthome {
@@ -557,7 +538,7 @@ position: absolute;
 width: 181px;
 height: 48px;
 left: 470px;
-top: 2653px;
+top: 2553px;
 
 }
 .footer {

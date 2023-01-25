@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Banner from "./Banner";
 import Categories from "./Categories.jsx";
 import ContactHome from "./ContactHome";
@@ -15,7 +16,7 @@ const Styles = {
 };
 const Home = () => {
   return (
-    <div style={{}}>
+    <>
       <Header />
       <Banner />
       <Categories />
@@ -23,7 +24,7 @@ const Home = () => {
       <Information />
       <ContactHome />
       <Footer />
-    </div>
+    </>
   );
 };
 
