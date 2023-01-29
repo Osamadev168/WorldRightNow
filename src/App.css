@@ -82,6 +82,35 @@ color: #000000;
     margin :auto;
   margin-top: 100px;
   }
+ 
+ @media only screen and (max-width: 400px) {
+  .text1banner  {
+    font-size: 30px;
+  }
+  .mainContainerBanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+  }
+  .bannerdiv2 {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .text1banner {
+   font-size: 55px;
+
+  }
+  .bannerdiv2 {
+    display: flex;
+flex-direction: row;
+  }
+}
+
 .bannerdiv1 {
     width : 55%;
   display: flex;
@@ -92,7 +121,6 @@ color: #000000;
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 800;
-font-size: 55px;
 color: #141A31;
 }
 .text2banner  {
@@ -103,8 +131,7 @@ font-size: 20px;
 color: #404040;
 }
 .bannerdiv2 {
-display: flex;
-flex-direction: row;
+
 align-items: center;
 padding: 0px;
 gap: 24px;
@@ -159,6 +186,8 @@ color: #000000;
 .categoriesmaindiv {
    width: 90%;
    margin: auto;
+   font-family : 'Montserrat';
+   font-size: small;
 }
 .div1categories  {
    margin-top: 200px;
@@ -170,6 +199,7 @@ color: #000000;
 .All {
 display: flex;
 box-sizing: border-box  ;
+ cursor: pointer;
 
 flex-direction: row;
 justify-content: center;
@@ -179,8 +209,8 @@ gap: 10px;
 
 width: 84px;
 height: 42px;
+border: 1px solid #141A31;
 
-background: rgba(141, 142, 145, 0.1);
 
 border-radius: 34px;    
 
@@ -222,7 +252,7 @@ border-radius: 34px;
 
 display: flex;
 box-sizing: border-box  ;
-
+ cursor: pointer;
 flex-direction: row;
 justify-content: center;
 align-items: center;
@@ -231,8 +261,7 @@ gap: 10px;
 
 width: 84px;
 height: 42px;
-
-background: rgba(141, 142, 145, 0.1);
+border: 1px solid #141A31;
 border-radius: 34px;    
 width: 170px;
 height: 47px;
@@ -304,8 +333,18 @@ border-radius: 34px;
     width: 90%;
     margin: auto;
     margin-top: 50px;
+    font-family: 'Montserrat';
 }
 
+.titleCategory {
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 800;
+font-size: 38px;
+line-height: 46px;
+
+color: #141A31;
+}
 .PopularCard {
 display: flex !important    ; 
 flex-direction: column;
@@ -322,17 +361,28 @@ border-radius: 12px;
 .image {
 width: 361px;
 height: 176px;
-background: url(../assets/cardimage.png);
+background-size: cover;
 border-radius: 12px 12px 0px 0px;
 }
 .title {
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-padding: 0px;
+padding: 15px;
 
 width: 325px;
 height: 37px;
+}
+.posttitle {
+   font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 22px;
+/* identical to box height */
+
+
+color: #000000;
 }
 .info {
  display: flex;
@@ -357,6 +407,7 @@ color: #848484;
 .description {
     width: 325px;
 height: 107px;
+padding: 15px;
 }
 .blogtitle  {
     font-family: 'Montserrat';
@@ -384,12 +435,11 @@ color: #7D7D7D;
 }
 .infoMainText {
     font-family: 'Montserrat';
-font-style: normal;
-font-weight: 800;
+font-style :normal;
+font-weight : 800;
+
 font-size: 48px;
 line-height: 59px;
-/* identical to box height */
-
  text-align: center;
  margin-top: 100px;
 color: #141A31;
@@ -397,10 +447,6 @@ color: #141A31;
 .div1Info {
     display: flex;
 flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-gap: 10px;
-
 width: 668px;
 height: 247.98px;
 margin-top: 40px;
@@ -433,11 +479,11 @@ line-height: 24px;
 color: #5F5F5F;
 }
 .vectorContainer1 {
-    position: absolute;
 width: 307.49px;
 height: 268.87px;
-left: 300px;
-top: 1700px;
+
+margin-left: 200px;
+margin-top: 30px;
 }
 .div2Info {
     display: flex;
@@ -446,41 +492,48 @@ align-items: flex-start;
 padding: 0px;
 gap: 10px;
 margin-left: 700px;
-margin-top: 0px;
 }
 .vectorContainer2 {
-   position: absolute;
-width: 307.49px;
+   width: 307.49px;
 height: 268.87px;
-left: 800px;
-top: 1950px;
-
+margin-top: 30px;
+}
+.div3Info {
+       display: flex;
+flex-direction: column;
+width: 668px;
+height: 250px;
+margin-right: 400px;
 }
 .contacthome {
     width: 90%;
     margin: auto;
- display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+
 padding: 0px;
 gap: 200px;
 }
 .picturecontactus {
-position: absolute;
+ 
 width: 387.44px;
 height: 380.1px;
-left: 837px;
-top: 2419px;
+margin-left: 100px;
+margin-top: 80px;
 
 }
 .rectangle  {
 width: 1240px;
 height: 490px;
 
-
 background: #141A31;
 border-radius: 0px 0px 50px 50px;
+}
+.div1 {
+    display: flex;
+    flex-direction: row;
+}
+.div2 {
+    display: flex;
+    flex-direction: column;
 }
 .textcontactus {
 display: flex;
@@ -489,6 +542,7 @@ justify-content: center;
 align-items: flex-start;
 padding: 0px;
 gap: 11px;
+width: 50%;
 margin-top: 60px;
 margin: 40px;
 }
@@ -512,7 +566,6 @@ font-family: 'Montserrat';
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
-line-height: 24px;
 /* or 133% */
 
 
@@ -521,38 +574,75 @@ color: #C8C8C8;
 .inputcontactus {
     box-sizing: border-box;
  color: #F8FAFB;
-width: 544px;
+width: 400px;
 height: 48px;
 left: 0px;
-top: 274px;
+padding: 10px;
   background: transparent;
     border: none;
 border: 1px solid #D7D7D7;
-border-radius: 36px;
+border-radius: 36px 0px 0px 36px;
 }
 .inputcontainer {
-    margin: 40px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
 }
-.contactusbutton {
-position: absolute;
-width: 181px;
-height: 48px;
-left: 470px;
-top: 2553px;
+
+.footer {
+    background: #FFFAF5;
+font-family: 'Montserrat';
 
 }
-.footer {
-    width: 90%;
-    margin: auto;
+.div1footer {
+    display: flex;
+flex-direction: row;
+align-items: flex-end;
+padding: 0px;
+gap: 40px;
+
+width: 583px;
+height: 24px;
 }
-.footer img {
-    margin-top: 100px;
+.div2footer {
+    margin: 20px;
 }
 .footercontent {
     display: flex;
 flex-direction: row;
 justify-content: space-between;
-align-items: flex-start;
-padding: 0px;
-gap: 409px;
+align-items: center;
+gap: 469px;
+font-family: 'Montserrat';
+}
+.footercontent h1 {
+    padding: 60px;
+}
+.div3footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.infofooter {
+    display: flex;
+    flex-direction: row;
+    font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16.2px;
+text-align: right;
+
+color: #303030;
+}
+.companyname {
+    font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16.2px;
+line-height: 27px;
+/* identical to box height, or 167% */
+
+
+color: #303030;
 }

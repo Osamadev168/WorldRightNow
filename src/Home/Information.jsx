@@ -17,10 +17,9 @@ const Information = () => {
           in quis enim nunc, cursus. Condimentum in iaculis libero laoreet
           pharetra.
         </h1>
+        <img src={Vector2} className="vectorContainer1" />
       </div>
-      <div className="vectorContainer1">
-        <img src={Vector2} />
-      </div>
+
       <div className="div2Info">
         <img src={Vector3} />
         <h1 className="text1">Select and purchase a plan</h1>
@@ -30,12 +29,9 @@ const Information = () => {
           in quis enim nunc, cursus. Condimentum in iaculis libero laoreet
           pharetra.
         </h1>
+        <img src={Vector5} className="vectorContainer2" />
       </div>
-      <div className="vectorContainer2 ">
-        <img src={Vector5} />
-      </div>
-
-      <div className="div1Info">
+      <div className="div3Info">
         <img className="vector1" src={Vector4} />
         <h1 className="text1">Select and purchase a plan</h1>
         <h1 className="text2">
