@@ -641,8 +641,142 @@ font-style: normal;
 font-weight: 400;
 font-size: 16.2px;
 line-height: 27px;
-/* identical to box height, or 167% */
-
-
 color: #303030;
+}
+.loginText {
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Montserrat';
+}
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input {
+    box-sizing: border-box;
+width: 544px;
+height: 42px;
+padding: 10px;
+border: 1px solid #575757;
+border-radius: 36px;
+}
+.inputContainer {
+       display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.email {
+ 
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 22px;
+line-height: 27px;
+text-align: left;
+float: left;
+display: flex;
+flex-direction: column;
+color: #263238;
+margin : 15px
+
+}
+.forgetPassword{
+  text-align: left;
+float: right;
+display: flex;
+flex-direction: column;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+color: #0038FF;
+}
+.loginButton {
+    display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+width: 544px;
+height: 52px;
+
+
+background: #0038FF;
+border-radius: 33px;
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+line-height: 24px;
+
+color: #FFFFFF;
+}
+.or {
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+
+color: #263238;
+}
+.facebookButton {
+    box-sizing: border-box;
+
+/* Auto layout */
+margin: 10px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 37px;
+gap: 14px;
+
+
+border: 1px solid #000000;
+border-radius: 35px;
+width: 544px;
+height: 38px;
+
+
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 10px;
+line-height: 22px;
+/* identical to box height */
+
+
+color: #000000;
+}
+.signupaccount {
+ 
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+
+color: #263238;
+}
+.loginsignuptoggle  {
+     display: flex;
+     flex-direction: row;
+}
+.signuptext {
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+color: #0038FF;
+cursor: pointer;
 }
