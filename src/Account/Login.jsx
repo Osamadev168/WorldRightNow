@@ -1,13 +1,56 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import fbicon from "../../assets/facebookicon.png";
 import googleicon from "../../assets/googleicon.png";
 import Footer from "../Home/Footer.jsx";
 import Header from "../Home/Header";
-
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
+  getAuth,
+} from "firebase/auth";
+import { app } from "../Firebase/Config";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/Context";
 export const Signup = ({ setActive }) => {
+  const navigate = useNavigate();
+
+  const loginwithFacebook = () => {
+    const auth = getAuth(app);
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((user) => {
+        navigate("/");
+        setUser(user.user);
+        console.log(user.user.displayName);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  const loginwithGoogle = () => {
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((user) => {
+        navigate("/");
+        console.log(user.user.displayName);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="mainLoginContainer">
-      <Header />
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          color: "inherit",
+        }}
+      >
+        <h1 className="accountLogo">LOGO</h1>
+      </Link>
       <div className="loginText">
         <h1>Sign up</h1>
       </div>
@@ -29,11 +72,11 @@ export const Signup = ({ setActive }) => {
           <h1>Sign Up</h1>
         </div>
         <h1 className="or">OR</h1>
-        <div className="facebookButton">
+        <div className="facebookButton" onClick={() => loginwithFacebook()}>
           <img src={fbicon} />
           <h1>Continue with Facebook</h1>
         </div>
-        <div className="facebookButton">
+        <div className="facebookButton" onClick={() => loginwithGoogle()}>
           <img src={googleicon} />
           <h1>Continue with Google</h1>
         </div>
@@ -50,7 +93,6 @@ export const Signup = ({ setActive }) => {
 };
 export const Account = () => {
   const [active, setActive] = useState("login");
-
   return (
     <>
       {active === "login" ? (
@@ -62,9 +104,44 @@ export const Account = () => {
   );
 };
 export const Login = ({ setActive }) => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  const loginwithFacebook = () => {
+    const auth = getAuth(app);
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((user) => {
+        navigate("/");
+        setUser(user.user);
+        console.log(user.user.displayName);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  const loginwithGoogle = () => {
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((user) => {
+        navigate("/");
+        console.log(user.user.displayName);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="mainLoginContainer">
-      <Header />
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          color: "inherit",
+        }}
+      >
+        <h1 className="accountLogo">LOGO</h1>
+      </Link>
       <div className="loginText">
         <h1>Log in</h1>
       </div>
@@ -85,11 +162,11 @@ export const Login = ({ setActive }) => {
           <h1>Login</h1>
         </div>
         <h1 className="or">OR</h1>
-        <div className="facebookButton">
+        <div className="facebookButton" onClick={() => loginwithFacebook()}>
           <img src={fbicon} />
           <h1>Continue with Facebook</h1>
         </div>
-        <div className="facebookButton">
+        <div className="facebookButton" onClick={() => loginwithGoogle()}>
           <img src={googleicon} />
           <h1>Continue with Google</h1>
         </div>

@@ -648,6 +648,10 @@ color: #303030;
     margin-top: 50px;
     font-family: 'Montserrat';
 }
+.accountLogo {
+    margin: 15px;
+    font-family: 'Montserrat';
+}
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -728,7 +732,7 @@ color: #263238;
 }
 .facebookButton {
     box-sizing: border-box;
-
+ cursor: pointer;
 /* Auto layout */
 margin: 10px;
 display: flex;
