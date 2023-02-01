@@ -1,16 +1,22 @@
 import { Box, Card, Grid } from "@mui/material";
+import bgimage from "../../assets/bgimage.png";
 import "../App.css";
 const Banner = () => {
   return (
-    <div>
-      <div container>
-        <div xs={12} item>
+    <div
+      style={{
+        backgroundImage: `url(${bgimage})`,
+        height: "100vh",
+        width: "100%",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0% 0%",
+      }}
+    >
+      <div>
+        <div xs={12}>
           <div className="mainContainerBanner">
-            <div
-              className="bannerdiv1"
-              xs={8}
-              style={{ display: "flex", flexDirection: "column" }}
-            >
+            <div className="bannerdiv1" xs={8}>
               <h1 className="text1banner">
                 Unlock Your Business's Potential with Our Blog Posting
               </h1>
