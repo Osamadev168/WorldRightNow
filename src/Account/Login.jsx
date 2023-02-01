@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import fbicon from "../../assets/facebookicon.png";
 import googleicon from "../../assets/googleicon.png";
 import Footer from "../Home/Footer.jsx";
-import Header from "../Home/Header";
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -11,7 +10,6 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../Context/Context";
 export const Signup = ({ setActive }) => {
   const navigate = useNavigate();
 
@@ -19,10 +17,8 @@ export const Signup = ({ setActive }) => {
     const auth = getAuth(app);
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
-      .then((user) => {
+      .then(() => {
         navigate("/");
-        setUser(user.user);
-        console.log(user.user.displayName);
       })
       .catch((e) => {
         console.log(e);
@@ -32,9 +28,8 @@ export const Signup = ({ setActive }) => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then((user) => {
+      .then(() => {
         navigate("/");
-        console.log(user.user.displayName);
       })
       .catch((e) => {
         console.log(e);
@@ -105,15 +100,12 @@ export const Account = () => {
 };
 export const Login = ({ setActive }) => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
   const loginwithFacebook = () => {
     const auth = getAuth(app);
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
-      .then((user) => {
+      .then(() => {
         navigate("/");
-        setUser(user.user);
-        console.log(user.user.displayName);
       })
       .catch((e) => {
         console.log(e);
@@ -123,9 +115,8 @@ export const Login = ({ setActive }) => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then((user) => {
+      .then(() => {
         navigate("/");
-        console.log(user.user.displayName);
       })
       .catch((e) => {
         console.log(e);

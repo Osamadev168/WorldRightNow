@@ -10,7 +10,6 @@ const Header = () => {
   const navigate = useNavigate();
   const logout = () => {
     signOut(getAuth(app)).then(() => {
-      console.log(user);
       setRefresh(true);
     });
     navigate("/account");
