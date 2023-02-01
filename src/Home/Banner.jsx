@@ -1,4 +1,3 @@
-import { Box, Card, Grid } from "@mui/material";
 import bgimage from "../../assets/bgimage.png";
 import "../App.css";
 const Banner = () => {
@@ -16,7 +15,7 @@ const Banner = () => {
       <div>
         <div xs={12}>
           <div className="mainContainerBanner">
-            <div className="bannerdiv1" xs={8}>
+            <div className="bannerdiv1">
               <h1 className="text1banner">
                 Unlock Your Business's Potential with Our Blog Posting
               </h1>
