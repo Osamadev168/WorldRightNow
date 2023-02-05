@@ -53,14 +53,6 @@ const Header = () => {
             >
               <p>Login</p>
             </Link>
-            <Link
-              to="/account"
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              <p>Signup</p>
-            </Link>
           </>
         )}
       </div>
