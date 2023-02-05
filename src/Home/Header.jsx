@@ -30,7 +30,10 @@ const Header = () => {
       <div className="div3Header">
         {user && user !== null ? (
           <>
-            <p>Welcome, {user.displayName}!</p>
+            {/* <p>
+              Welcome,{" "}
+              {user.displayName === null ? user.email : user.displayName}!
+            </p> */}
             <p
               onClick={() => logout()}
               style={{
