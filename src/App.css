@@ -697,6 +697,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 15px;
 color: #0038FF;
+cursor: pointer;
 }
 .loginButton {
     display: flex;
