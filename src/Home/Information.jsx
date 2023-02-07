@@ -1,7 +1,7 @@
-import Vector1 from "../../assets/Group.png";
+import Vector1 from "../../assets/icon 1.svg";
 import Vector2 from "../../assets/Vector 8.png";
-import Vector3 from "../../assets/Group2.png";
-import Vector4 from "../../assets/Group3.png";
+import Vector3 from "../../assets/icon 2.svg";
+import Vector4 from "../../assets/icon 3.svg";
 import Vector5 from "../../assets/Vector9.png";
 
 const Information = () => {

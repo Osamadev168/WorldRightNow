@@ -20,11 +20,11 @@ const Header = () => {
       <div className="div1Header">
         <p className="logoHeader">Logo</p>
         <div className="div2Header">
-          <p>About us</p>
-          <p>Pricing</p>
-          <p>Blogs</p>
-          <p>FAQ's</p>
-          <p>Contact us</p>
+          <a>About us</a>
+          <a>Pricing</a>
+          <a>Blogs</a>
+          <a>FAQ's</a>
+          <a>Contact us</a>
         </div>
       </div>
       <div className="div3Header">
@@ -51,7 +51,15 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <p>Login</p>
+              <a className="secondaryButton">Login</a>
+            </Link>
+            <Link
+              to="/account"
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <a className="primaryButton">Sign up</a>
             </Link>
           </>
         )}

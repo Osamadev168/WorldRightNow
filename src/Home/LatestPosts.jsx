@@ -2,16 +2,17 @@ import Slider from "react-slick";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
-
+import next from "../../assets/next.svg";
+import prev from "../../assets/Previous.svg";
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
-    speed: 500,
-    slidesToShow: 3,
+    speed: 300,
+    slidesToShow: 3.2,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
   };
   const getPosts = () => {
     fetchDataLatest(category).then((res) => {
@@ -44,8 +45,7 @@ const LatestPosts = ({ category }) => {
                   <h1 className="posttitle">{posts.category}</h1>
                   <div className="info">
                     <p>{displayDate}</p>
-
-                    <p>|</p>
+                    <p>&nbsp;|&nbsp;</p>
                     <p>4 mins read</p>
                   </div>
                 </div>
@@ -60,6 +60,20 @@ const LatestPosts = ({ category }) => {
           <>No data is available for this Category</>
         )}
       </Slider>
+      <div className="sliderButtons">
+        <div
+          className="prevButton"
+          onClick={() => sliderRef.current.slickPrev()}
+        >
+          <img src={prev} />
+        </div>
+        <div
+          onClick={() => sliderRef.current.slickNext()}
+          className="nextButton"
+        >
+          <img src={next} />
+        </div>
+      </div>
     </div>
   );
 };
