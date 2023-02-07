@@ -59,7 +59,7 @@ const dummyData = [
 const Popular = ({ category }) => {
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 300,
     slidesToShow: 3.2,
     slidesToScroll: 1,
