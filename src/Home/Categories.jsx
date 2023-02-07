@@ -13,134 +13,134 @@ const Categories = ({ setCategory }) => {
   }, []);
   return (
     <div className="categoriesmaindiv">
-      <div className="div1categories" xs={12}>
+      <div className="div1categories">
         <div
-          className={activediv === "div1" ? "AllActive" : "All"}
+          className={activediv === "div1" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div1");
             setCategory("");
           }}
         >
-          <p>All</p>
+          <a>All</a>
         </div>
         <div
-          className={activediv === "div2" ? "TechActive" : "Tech"}
+          className={activediv === "div2" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div2");
-            setCategory("Tech");
+            setCategory("category");
           }}
         >
-          <p>Technology</p>
+          <a>Technology</a>
         </div>
         <div
-          className={activediv === "div3" ? "TechActive" : "Tech"}
+          className={activediv === "div3" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div3");
             setCategory("Sports");
           }}
         >
-          <p>Sports</p>
+          <a>Sports</a>
         </div>
         <div
-          className={activediv === "div4" ? "TechActive" : "Tech"}
+          className={activediv === "div4" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div4");
             setCategory("Science");
           }}
         >
-          <p>Science</p>
+          <a>Science</a>
         </div>
         <div
-          className={activediv === "div5" ? "TechActive" : "Tech"}
+          className={activediv === "div5" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div5");
             setCategory("Fashion");
           }}
         >
-          <p>Fashion</p>
+          <a>Fashion</a>
         </div>
         <div
-          className={activediv === "div6" ? "TechActive" : "Tech"}
+          className={activediv === "div6" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div6");
             setCategory("AI");
           }}
         >
-          <p>AI</p>
+          <a>Artificial Intelligence</a>
         </div>
         <div
-          className={activediv === "div7" ? "TechActive" : "Tech"}
+          className={activediv === "div7" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div7");
             setCategory("Forex Trading");
           }}
         >
-          <p>Forex Trading</p>
+          <a>Forex Trading</a>
         </div>
       </div>
       <div className="div2categories">
         <div
-          className={activediv === "div8" ? "TechActive" : "Tech"}
+          className={activediv === "div8" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div8");
             setCategory("Politics");
           }}
         >
-          <p>Politics</p>
+          <a>Politics</a>
         </div>
         <div
-          className={activediv === "div9" ? "TechActive" : "Tech"}
+          className={activediv === "div9" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div9");
             setCategory("Art");
           }}
         >
-          <p>Art</p>
+          <a>Art</a>
         </div>
         <div
-          className={activediv === "div10" ? "TechActive" : "Tech"}
+          className={activediv === "div10" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div10");
             setCategory("Programming");
           }}
         >
-          <p>Programming</p>
+          <a>Programming</a>
         </div>
         <div
-          className={activediv === "div11" ? "TechActive" : "Tech"}
+          className={activediv === "div11" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div11");
             setCategory("Networking");
           }}
         >
-          <p>Networking</p>
+          <a>Networking</a>
         </div>
         <div
-          className={activediv === "div12" ? "TechActive" : "Tech"}
+          className={activediv === "div12" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div12");
             setCategory("Life Hacks");
           }}
         >
-          <p>Life Hacks</p>
+          <a>Life Hacks</a>
         </div>
         <div
-          className={activediv === "div13" ? "TechActive" : "Tech"}
+          className={activediv === "div13" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div13");
             setCategory("Crime");
           }}
         >
-          <p>Crime</p>
+          <a>Crime</a>
         </div>
         <div
-          className={activediv === "div14" ? "TechActive" : "Tech"}
+          className={activediv === "div14" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div14");
             setCategory("Anime");
           }}
         >
-          <p>Anime</p>
+          <a>Anime</a>
         </div>
       </div>
     </div>

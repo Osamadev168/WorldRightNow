@@ -2,15 +2,17 @@ import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import { fetchDataPopular } from "../Api/Api";
 import { Box, Grid } from "@mui/material";
+import next from "../../assets/next.svg";
+import prev from "../../assets/Previous.svg";
 const Popular = ({ category }) => {
   const [post, setPosts] = useState([]);
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
-    speed: 500,
-    slidesToShow: 3,
+    speed: 300,
+    slidesToShow: 3.2,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
   };
   const getPosts = () => {
     fetchDataPopular(category).then((res) => {
@@ -33,7 +35,7 @@ const Popular = ({ category }) => {
             let displayYear = date.substring(10);
             let displayDate = `${displayMonth},${displayYear}`;
             return (
-              <Grid container xs={12}>
+              <Grid container>
                 <div className="PopularCard" key={index}>
                   <div
                     className="image"
@@ -44,7 +46,7 @@ const Popular = ({ category }) => {
                     <div className="info">
                       <p>{displayDate}</p>
 
-                      <p>|</p>
+                      <p>&nbsp;|&nbsp;</p>
                       <p>4 mins read</p>
                     </div>
                   </div>
@@ -60,6 +62,20 @@ const Popular = ({ category }) => {
           <>No data is available for this Category</>
         )}
       </Slider>
+      <div className="sliderButtons">
+        <div
+          className="prevButton"
+          onClick={() => sliderRef.current.slickPrev()}
+        >
+          <img src={prev} />
+        </div>
+        <div
+          onClick={() => sliderRef.current.slickNext()}
+          className="nextButton"
+        >
+          <img src={next} />
+        </div>
+      </div>{" "}
     </Box>
   );
 };
