@@ -7,23 +7,41 @@ const Footer = () => {
       <div className="footercontent">
         <h1>LOGO</h1>
         <div className="div1footer">
-          <p>About us</p>
-          <p>Pricing</p>
-          <p>Blogs</p>
-          <p>FAQ's</p>
-          <p>Contact us</p>
+          <a>About us</a>
+          <a>Pricing</a>
+          <a>Blogs</a>
+          <a>FAQ's</a>
+          <a>Contact us</a>
         </div>
       </div>
       <div className="div2footer">
-        <Divider />
         <div className="div3footer">
           <div className="companyname">
             <p>Copyright © 2023 Company Name</p>
           </div>
           <div className="infofooter">
             <p>All Rights Reserved</p>
-            <p>| Terms and Conditions</p>
-            <p>| Privacy Policy</p>
+            <p className="separater">&nbsp;|&nbsp;</p>
+            <a
+              style={{
+                color: "#FC2C7E",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Terms and Conditions
+            </a>
+            <p className="separater">&nbsp;|&nbsp;</p>
+
+            <a
+              style={{
+                color: "#FC2C7E",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Privacy Policy
+            </a>
           </div>
         </div>
       </div>

@@ -34,14 +34,14 @@ const Header = () => {
               Welcome,{" "}
               {user.displayName === null ? user.email : user.displayName}!
             </p> */}
-            <p
+            <a
               onClick={() => logout()}
               style={{
                 cursor: "pointer",
               }}
             >
               Logout
-            </p>
+            </a>
           </>
         ) : (
           <>
@@ -51,7 +51,7 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <a className="secondaryButton">Login</a>
+              <a className="secondaryButton headerButton">Login</a>
             </Link>
             <Link
               to="/account"
@@ -59,10 +59,14 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <a className="primaryButton">Sign up</a>
+              <a className="primaryButton headerButton">Sign up</a>
             </Link>
           </>
         )}
+        <div className="hamburger">
+          <div className="line1"></div>
+          <div className="line2"></div>
+        </div>
       </div>
     </div>
   );

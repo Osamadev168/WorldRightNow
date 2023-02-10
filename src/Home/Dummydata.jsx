@@ -59,14 +59,40 @@ const dummyData = [
 const Popular = ({ category }) => {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 300,
     slidesToShow: 3.2,
     slidesToScroll: 1,
     arrows: false,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 1260,
+        settings: {
+          slidesToShow: 2.2,
+        },
+      },
+      {
+        breakpoint: 860,
+        settings: {
+          slidesToShow: 1.5,
+        },
+      },
+      {
+        breakpoint: 645,
+        settings: {
+          slidesToShow: 1.2,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   const sliderRef = useRef(null);
-  console.log(sliderRef);
   return (
     <Box className="mainPopularContainer">
       <div className="titleCategory">

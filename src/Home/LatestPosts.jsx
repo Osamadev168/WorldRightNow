@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
+import { Grid } from "@mui/material";
+import { useRef } from "react";
+
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
   const settings = {
@@ -23,12 +26,18 @@ const LatestPosts = ({ category }) => {
   useEffect(() => {
     getPosts();
   }, [category]);
+  const sliderRef = useRef(null);
+
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
-        {category === "" ? <p>Latest Blogs</p> : <p>Latest in {category}</p>}
+        {category === "" ? (
+          <h3>Latest Blogs</h3>
+        ) : (
+          <h3>Latest in {category}</h3>
+        )}
       </div>
-      <Slider {...settings}>
+      <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
             let date = new Date(posts.CreatedAt).toDateString();
@@ -36,24 +45,27 @@ const LatestPosts = ({ category }) => {
             let displayYear = date.substring(10);
             let displayDate = `${displayMonth},${displayYear}`;
             return (
-              <div className="PopularCard" key={index}>
-                <div
-                  className="image"
-                  style={{ backgroundImage: `url(${posts.image})` }}
-                ></div>
-                <div className="title">
-                  <h1 className="posttitle">{posts.category}</h1>
-                  <div className="info">
-                    <p>{displayDate}</p>
-                    <p>&nbsp;|&nbsp;</p>
-                    <p>4 mins read</p>
+              <Grid container>
+                <div className="PopularCard" key={index}>
+                  <div
+                    className="image"
+                    style={{ backgroundImage: `url(${posts.image})` }}
+                  ></div>
+                  <div className="title">
+                    <h1 className="posttitle">{posts.category}</h1>
+                    <div className="info">
+                      <p>{displayDate}</p>
+
+                      <p>&nbsp;|&nbsp;</p>
+                      <p>4 mins read</p>
+                    </div>
+                  </div>
+                  <div className="description">
+                    <p className="blogtitle">{posts.title}</p>
+                    <p className="data">{posts.description}</p>
                   </div>
                 </div>
-                <div className="description">
-                  <p className="blogtitle">{posts.title}</p>
-                  <p className="data">{posts.description}</p>
-                </div>
-              </div>
+              </Grid>
             );
           })
         ) : (

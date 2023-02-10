@@ -1,7 +1,7 @@
 @import "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&display=swap";
-/*# sourceMappingURL=App.css.map */
+
 body {
-  background-color: #f8fafb;
+  background-color: #f9f9f9;
 }
 
 * {
@@ -23,8 +23,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px;
-  gap: 200px;
   width: 90%;
   margin: auto;
   margin-top: 20px;
@@ -34,9 +32,7 @@ body {
   flex-direction: row;
   align-items: center;
   padding: 0px;
-  gap: 60px;
-  width: 646px;
-  height: 30px;
+  gap: 50px;
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -63,7 +59,7 @@ body {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
   color: #434343;
   cursor: pointer;
@@ -77,7 +73,7 @@ body {
   right: 0;
   height: 2px;
   width: 0;
-  background-color: #0038ff;
+  background-color: #fc2c7e;
   transition: all 0.3s ease-out;
   border-radius: 10px;
 }
@@ -94,23 +90,37 @@ body {
   align-items: center;
   padding: 0px;
   gap: 24px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 .HeaderMainContainer .div3Header .primaryButton,
 .HeaderMainContainer .div3Header .secondaryButton {
   font-size: 16px;
   padding: 8px 35px;
+  width: auto;
+}
+.HeaderMainContainer .hamburger {
+  width: 30px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  display: none;
+}
+.HeaderMainContainer .hamburger .line1,
+.HeaderMainContainer .hamburger .line2 {
+  width: 100%;
+  height: 2px;
+  background: #fc2c7e;
+  border-radius: 50px;
 }
 
 .heroContainer {
-  width: 90%;
+  max-width: 90%;
   margin: auto;
   display: flex;
   align-items: center;
   justify-items: center;
-  height: 90vh;
+  min-height: 90vh;
 }
 .heroContainer .mainContainerBanner .bannerdiv1 {
   width: 55%;
@@ -118,7 +128,7 @@ body {
   flex-direction: column;
 }
 .heroContainer .mainContainerBanner .bannerdiv1 .text1banner {
-  font-size: 55px;
+  font-size: 3.438em;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 800;
@@ -134,6 +144,8 @@ body {
   margin-top: 10px;
 }
 .heroContainer .mainContainerBanner .bannerdiv2 {
+  display: flex;
+  flex-direction: row;
   gap: 30px;
   margin-top: 40px;
 }
@@ -154,13 +166,13 @@ body {
 }
 
 .primaryButton {
-  background: #0038ff;
+  background: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
   color: #ffffff;
 }
 .primaryButton:hover {
   background: #ffffff;
-  color: #0038ff;
-  box-shadow: inset 0 0 0 1.5px #0038ff;
+  color: #fc2c7e;
+  box-shadow: inset 0 0 0 1.5px #fc2c7e;
   transition: all 200ms ease-out;
 }
 
@@ -169,9 +181,9 @@ body {
   color: #000000;
 }
 .secondaryButton:hover {
-  background: #0038ff;
+  background: #fc2c7e;
   color: #ffffff;
-  box-shadow: inset 0 0 0 1.5px #0038ff;
+  box-shadow: inset 0 0 0 1.5px #fc2c7e;
   transition: all 200ms ease-out;
 }
 
@@ -187,11 +199,12 @@ body {
 .categoriesmaindiv .div1categories,
 .categoriesmaindiv .div2categories {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 20px;
 }
-
-.category {
+.categoriesmaindiv .div1categories .category,
+.categoriesmaindiv .div2categories .category {
   display: flex;
   cursor: pointer;
   justify-content: center;
@@ -199,25 +212,26 @@ body {
   box-shadow: inset 0 0 0 1px #141a31;
   padding: 10px 35px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
 }
-.category:hover {
-  background: rgba(0, 56, 255, 0.1);
+.categoriesmaindiv .div1categories .category:hover,
+.categoriesmaindiv .div2categories .category:hover {
+  background: rgba(252, 44, 126, 0.1);
   box-shadow: none;
 }
-
-.categoryActive {
+.categoriesmaindiv .div1categories .categoryActive,
+.categoriesmaindiv .div2categories .categoryActive {
   display: flex;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   padding: 10px 35px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  background: rgba(0, 56, 255, 0.1);
-  color: #0038ff;
+  background: rgba(252, 44, 126, 0.1);
+  color: #fc2c7e;
 }
 
 .mainPopularContainer {
@@ -238,12 +252,12 @@ body {
 }
 
 .PopularCard {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   isolation: isolate;
-  width: 360px;
-  height: 368px;
+  max-width: 360px;
+  min-height: 368px;
   background: #ffffff;
   box-shadow: 0px 20px 50px rgba(168, 168, 168, 0.1);
   border-radius: 12px;
@@ -328,7 +342,7 @@ body {
 .sliderButtons .nextButton,
 .sliderButtons .prevButton {
   cursor: pointer;
-  background: rgba(0, 56, 255, 0.1);
+  background: rgba(252, 44, 126, 0.1);
   padding: 8px 20px;
   border-radius: 8px;
   display: flex;
@@ -339,21 +353,20 @@ body {
 .sliderButtons .nextButton:hover,
 .sliderButtons .prevButton:hover {
   background: transparent;
-  border: 1px solid #0038ff;
+  border: 1px solid #fc2c7e;
 }
 
 .slider {
-  cursor: -webkit-grab;
   cursor: grab;
 }
 .slider:active {
-  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 
 .informationmaincontainer {
   width: 90%;
   margin: auto;
+  margin-bottom: 5em;
 }
 
 .infoMainText {
@@ -367,12 +380,21 @@ body {
   color: #141a31;
 }
 
-.div1Info {
+.div1Info,
+.div2Info,
+.div3Info {
   display: flex;
-  flex-direction: column;
-  width: 668px;
-  height: 247.98px;
-  margin-top: 40px;
+  justify-content: space-between;
+  align-items: end;
+}
+.div1Info .infoContent,
+.div2Info .infoContent,
+.div3Info .infoContent {
+  width: 48%;
+}
+
+.div2Info {
+  margin: 30px 0;
 }
 
 .vector1 {
@@ -397,34 +419,20 @@ body {
   color: #5f5f5f;
 }
 
-.vectorContainer1 {
-  width: 307.49px;
-  height: 268.87px;
-  margin-left: 200px;
-  margin-top: 30px;
+.vectorContainer1,
+.vectorContainer2 {
+  width: 52%;
+  display: flex;
 }
 
-.div2Info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
-  margin-left: 700px;
+.vectorContainer1 {
+  justify-content: flex-end;
+  padding-right: 2.5em;
 }
 
 .vectorContainer2 {
-  width: 307.49px;
-  height: 268.87px;
-  margin-top: 30px;
-}
-
-.div3Info {
-  display: flex;
-  flex-direction: column;
-  width: 668px;
-  height: 250px;
-  margin-right: 400px;
+  justify-content: flex-start;
+  padding-left: 2.5em;
 }
 
 .contacthome {
@@ -432,25 +440,27 @@ body {
   margin: auto;
   padding: 0px;
   gap: 200px;
+  z-index: 50 !important;
+  position: relative;
 }
 
 .picturecontactus {
-  width: 387.44px;
-  height: 380.1px;
-  margin-left: 100px;
-  margin-top: 80px;
+  max-width: 50%;
+}
+.picturecontactus img {
+  width: 100%;
 }
 
 .rectangle {
-  width: 1240px;
-  height: 490px;
-  background: #141a31;
+  background: linear-gradient(265.52deg, #680029 0%, #3b0069 100%);
   border-radius: 0px 0px 50px 50px;
 }
 
 .div1 {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 3.125em 5em;
 }
 
 .div2 {
@@ -465,36 +475,32 @@ body {
   align-items: flex-start;
   padding: 0px;
   gap: 11px;
-  width: 50%;
-  margin-top: 60px;
-  margin: 40px;
+  max-width: 50%;
 }
 
 .text1contactus {
-  width: 569px;
-  height: 118px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 800;
   font-size: 48px;
   line-height: 59px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .text2contactus {
-  width: 549px;
-  height: 96px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
-  color: #c8c8c8;
+  color: #eaeaea;
+  line-height: 30px;
 }
 
 .inputcontainer {
   margin-top: 40px;
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 .inputcontainer .inputcontactus {
   box-sizing: border-box;
@@ -504,19 +510,12 @@ body {
   left: 0px;
   padding: 10px 20px;
   background: transparent;
-  border: none;
-  box-shadow: inset 0 0 0 1px #d7d7d7;
+  border: 1px solid #f8f8f8;
   border-radius: 50px 0px 0px 50px;
   font-size: 18px;
   font-weight: 500;
 }
 .inputcontainer .inputcontactus::-moz-placeholder {
-  color: #9a9a9a;
-  font-size: 16px;
-  font-weight: 500;
-  font-style: italic;
-}
-.inputcontainer .inputcontactus:-ms-input-placeholder {
   color: #9a9a9a;
   font-size: 16px;
   font-weight: 500;
@@ -529,7 +528,7 @@ body {
   font-style: italic;
 }
 .inputcontainer .newsletterButton {
-  background: #0038ff;
+  background: #fc2c7e;
   color: #ffffff;
   border-radius: 0px 50px 50px 0px;
   font-size: 18px;
@@ -540,21 +539,27 @@ body {
   justify-content: center;
   gap: 10px;
   cursor: pointer;
+  margin-left: -2px;
 }
 .inputcontainer .newsletterButton svg {
   stroke: #ffffff;
 }
 .inputcontainer .newsletterButton:hover {
   background: #ffffff;
-  color: #0038ff;
+  color: #fc2c7e;
 }
 .inputcontainer .newsletterButton:hover svg {
-  stroke: #0038ff;
+  stroke: #fc2c7e;
 }
 
 .footer {
-  background: #fffaf5;
+  background: #16021d;
   font-family: "Montserrat";
+  display: flex;
+  flex-direction: column;
+  gap: 6em;
+  margin-top: -243px;
+  z-index: 1 !important;
 }
 
 .div1footer {
@@ -563,12 +568,29 @@ body {
   align-items: flex-end;
   padding: 0px;
   gap: 40px;
-  width: 583px;
-  height: 24px;
+  flex-wrap: wrap;
+}
+.div1footer a {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f0f0f0;
 }
 
 .div2footer {
-  margin: 20px;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  margin-bottom: 30px;
+}
+.div2footer::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0.9px;
+  background-color: #717171;
+  position: absolute;
+  top: -0.938em;
 }
 
 .footercontent {
@@ -576,38 +598,35 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 469px;
   font-family: "Montserrat";
-}
-.footercontent h1 {
-  padding: 60px;
+  width: 90%;
+  margin: auto;
+  margin-top: 300px;
+  color: #f1f1f1;
 }
 
 .div3footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 50px;
 }
 
 .infofooter {
   display: flex;
   flex-direction: row;
-  font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16.2px;
   text-align: right;
-  color: #303030;
+  color: #f0f0f0;
 }
 
 .companyname {
-  font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16.2px;
   line-height: 27px;
-  color: #303030;
+  color: #f0f0f0;
 }
 
 .loginText {
@@ -745,27 +764,233 @@ body {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 400px) {
-  .text1banner {
-    font-size: 30px;
+@media only screen and (max-width: 1024px) {
+  .HeaderMainContainer .div1Header .div2Header {
+    gap: 30px;
   }
-  .mainContainerBanner {
+  .HeaderMainContainer .div1Header .div2Header a {
+    font-size: 15px;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 {
+    width: 55%;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 .text1banner {
+    font-size: 2.5em;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 .text2banner {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .categoriesmaindiv .div1categories .category {
+    padding: 8px 30px;
+    font-size: 14px;
+  }
+  .categoriesmaindiv .div1categories .categoryActive {
+    padding: 8px 30px;
+    font-size: 14px;
+  }
+  .div1 {
+    padding: 3.125em 3em;
+  }
+  .text1contactus {
+    font-size: 38px;
+  }
+  .text2contactus {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .HeaderMainContainer .div1Header .div2Header {
+    display: none;
+  }
+  .HeaderMainContainer .hamburger {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .heroSection {
+    background: url("./assets/BgTablet.jpg");
+    background-size: cover;
+    background-position: bottom;
+  }
+  .heroContainer {
+    align-items: flex-start;
+  }
+  .heroContainer .mainContainerBanner {
+    max-width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 80px;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 {
+    width: 100%;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 .text1banner,
+  .heroContainer .mainContainerBanner .bannerdiv1 .text2banner {
     text-align: center;
   }
-  .bannerdiv2 {
+  .categoriesmaindiv {
+    margin-top: 40px;
+  }
+  .infoMainText {
+    font-size: 38px;
+    margin-bottom: 40px;
+  }
+  .div1Info .infoContent,
+  .div2Info .infoContent,
+  .div3Info .infoContent {
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+  .div2Info {
+    margin: 60px 0;
+  }
+  .vectorContainer1,
+  .vectorContainer2 {
+    display: none;
+  }
+  .text1,
+  .text2 {
+    text-align: center;
+  }
+  .div1 {
+    flex-direction: column;
+    align-items: center;
+    padding: 3.125em 5em;
+    gap: 40px;
+  }
+  .textcontactus {
+    max-width: 100%;
+  }
+  .text1contactus,
+  .text2contactus {
+    text-align: center;
+  }
+  .text1contactus {
+    line-height: 50px;
+  }
+  .picturecontactus {
+    max-width: 60%;
+  }
+  .div3footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .companyname {
+    text-align: center;
+  }
+  .infofooter {
+    justify-content: center;
+  }
+  .footercontent {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .div1footer {
+    align-items: center;
+    justify-content: center;
   }
 }
-@media only screen and (min-width: 600px) {
-  .text1banner {
-    font-size: 55px;
+@media only screen and (max-width: 680px) {
+  .inputcontainer {
+    flex-direction: column;
   }
-  .bannerdiv2 {
-    display: flex;
-    flex-direction: row;
+  .inputcontainer .inputcontactus {
+    border-radius: 15px 15px 0px 0px;
+    width: 100%;
+  }
+  .inputcontainer .newsletterButton {
+    border-radius: 0px 0px 15px 15px;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    margin-top: -1px;
+  }
+}
+@media only screen and (max-width: 590px) {
+  .heroContainer .mainContainerBanner .bannerdiv2 {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+  }
+  .primaryButton,
+  .secondaryButton {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .heroContainer .mainContainerBanner {
+    max-width: 100%;
+  }
+  .heroSection {
+    background: none;
+  }
+  .headerButton {
+    display: none;
+  }
+  .div1 {
+    padding: 3.125em 3em;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .heroContainer .mainContainerBanner {
+    margin-top: 20px;
+  }
+  .categoriesmaindiv .div1categories .category {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+  .categoriesmaindiv .div1categories .categoryActive {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+  .PopularCard {
+    max-width: 100%;
+  }
+  .titleCategory {
+    font-size: 24px;
+  }
+  .infoMainText {
+    font-size: 32px;
+    line-height: 42px;
+  }
+  .text1 {
+    font-size: 28px;
+  }
+  .text2 {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .text1contactus {
+    font-size: 28px;
+    line-height: 40px;
+  }
+  .picturecontactus {
+    max-width: 90%;
+  }
+  .footercontent {
+    gap: 30px;
+  }
+  .div1footer {
+    gap: 20px;
+  }
+  .infofooter {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    font-size: 14px;
+  }
+  .separater {
+    display: none;
+  }
+  .div3footer {
+    gap: 20px;
   }
 }/*# sourceMappingURL=App.css.map */

@@ -4,6 +4,8 @@ import { fetchDataPopular } from "../Api/Api";
 import { Box, Grid } from "@mui/material";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
+import { useRef } from "react";
+
 const Popular = ({ category }) => {
   const [post, setPosts] = useState([]);
   const settings = {
@@ -22,12 +24,18 @@ const Popular = ({ category }) => {
   useEffect(() => {
     getPosts();
   }, [category]);
+  const sliderRef = useRef(null);
+
   return (
     <Box className="mainPopularContainer">
       <div className="titleCategory">
-        {category === "" ? <p>Popular Blogs</p> : <p>Popular in {category}</p>}
+        {category === "" ? (
+          <h3>Popular Blogs</h3>
+        ) : (
+          <h3>Popular in {category}</h3>
+        )}
       </div>
-      <Slider {...settings}>
+      <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
             let date = new Date(posts.CreatedAt).toDateString();
@@ -75,7 +83,7 @@ const Popular = ({ category }) => {
         >
           <img src={next} />
         </div>
-      </div>{" "}
+      </div>
     </Box>
   );
 };

@@ -77,8 +77,6 @@ const Categories = ({ setCategory }) => {
         >
           <a>Forex Trading</a>
         </div>
-      </div>
-      <div className="div2categories">
         <div
           className={activediv === "div8" ? "categoryActive" : "category"}
           onClick={() => {
