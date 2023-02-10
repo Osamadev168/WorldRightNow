@@ -9,6 +9,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +22,7 @@ export const Signup = ({
   setEmail,
   setPassword,
   setconfrimPassword,
+  user,
 }) => {
   const navigate = useNavigate();
   const createAccountwithEmailandPassword = () => {
@@ -27,15 +30,14 @@ export const Signup = ({
       const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+          sendEmailVerification(userCredential.user);
           navigate("/");
-
-          console.log(userCredential);
         })
         .catch((error) => {
           alert(error.message);
         });
     } else {
-      alert("passwords didnt matched");
+      alert("passwords didnt match");
     }
   };
 
@@ -160,7 +162,7 @@ export const Login = ({
   password,
 }) => {
   const navigate = useNavigate();
-  const loginwithEmailPassword = () => {
+  const loginwithEmailPassword = async () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
@@ -192,6 +194,10 @@ export const Login = ({
         console.log(e);
       });
   };
+  const resetPassword = async () => {
+    const auth = getAuth(app);
+    await sendPasswordResetEmail(auth, email);
+  };
   return (
     <div className="mainLoginContainer">
       <Link
@@ -218,7 +224,7 @@ export const Login = ({
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div>
+          <div onClick={resetPassword}>
             <h1 className="forgetPassword">Forget password?</h1>
           </div>
         </div>

@@ -670,11 +670,15 @@ body {
   font-size: 22px;
   line-height: 27px;
   text-align: left;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  color: #263238;
-  margin: 15px;
+float: right;
+display: flex;
+flex-direction: column;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+color: #0038FF;
+cursor: pointer;
 }
 
 .forgetPassword {
