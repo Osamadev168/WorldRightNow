@@ -187,8 +187,9 @@ export const Login = ({
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then(() => {
+      .then((userCredential) => {
         navigate("/");
+        console.log(userCredential);
       })
       .catch((e) => {
         console.log(e);

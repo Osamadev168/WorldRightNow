@@ -14,17 +14,27 @@ const Header = () => {
     });
     navigate("/account");
   };
-  useEffect(() => {}, [user, refresh]);
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
-        <p className="logoHeader">Logo</p>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <p className="logoHeader">Logo</p>
+        </Link>
         <div className="div2Header">
           <a>About us</a>
           <a>Pricing</a>
           <a>Blogs</a>
           <a>FAQ's</a>
           <a>Contact us</a>
+          <Link
+            to="createblog"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <a>Create blog</a>
+          </Link>
         </div>
       </div>
       <div className="div3Header">

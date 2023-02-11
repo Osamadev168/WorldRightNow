@@ -12,3 +12,10 @@ export const fetchDataLatest = async (category) => {
 
   return response;
 };
+export const submitPost = async (blog) => {
+  try {
+    await axios.post("http://localhost:5000/create", blog);
+  } catch (e) {
+    console.log(e);
+  }
+};

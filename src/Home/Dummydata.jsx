@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import { Box, Grid } from "@mui/material";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import image1 from "../../assets/1.jpg";
 import image2 from "../../assets/2.jpg";
 import image3 from "../../assets/3.jpg";
@@ -55,18 +55,27 @@ const dummyData = [
     CreatedAt: new Date().toString(),
   },
 ];
-
 const Popular = ({ category }) => {
+  const [width, setWidth] = useState(window.innerWidth);
+  const sliderRef = useRef(null);
+  const isMobile = width <= 768;
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 300,
-    slidesToShow: 3.2,
+    slidesToShow: isMobile ? 1 : 3.2,
     slidesToScroll: 1,
     arrows: false,
   };
-  const sliderRef = useRef(null);
-  console.log(sliderRef);
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, [category]);
   return (
     <Box className="mainPopularContainer">
       <div className="titleCategory">

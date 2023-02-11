@@ -1,11 +1,11 @@
 import Slider from "react-slick";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
+  const sliderRef = useRef(null);
   const settings = {
     dots: false,
     infinite: false,
@@ -23,14 +23,24 @@ const LatestPosts = ({ category }) => {
   useEffect(() => {
     getPosts();
   }, [category]);
+
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
         {category === "" ? <p>Latest Blogs</p> : <p>Latest in {category}</p>}
       </div>
-      <Slider {...settings}>
+      <Slider {...settings} ref={sliderRef}>
         {post && post.length > 0 ? (
           post.map((posts, index) => {
+            const addEllipsis = (str, limit) => {
+              return str.length > limit
+                ? str.substring(0, limit) + "...."
+                : str;
+            };
+            let wordsPerMinute = 250;
+            let noOfWords = posts.body.split(" ").length;
+            let readingTime = noOfWords / wordsPerMinute;
+            let round = Math.floor(readingTime);
             let date = new Date(posts.CreatedAt).toDateString();
             let displayMonth = date.substring(4, 10);
             let displayYear = date.substring(10);
@@ -46,12 +56,12 @@ const LatestPosts = ({ category }) => {
                   <div className="info">
                     <p>{displayDate}</p>
                     <p>&nbsp;|&nbsp;</p>
-                    <p>4 mins read</p>
+                    {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
                   </div>
                 </div>
                 <div className="description">
-                  <p className="blogtitle">{posts.title}</p>
-                  <p className="data">{posts.description}</p>
+                  <p className="blogtitle">{addEllipsis(posts.title, 20)}</p>
+                  <p className="data">{addEllipsis(posts.description, 80)}</p>
                 </div>
               </div>
             );
