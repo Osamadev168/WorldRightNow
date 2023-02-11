@@ -62,12 +62,12 @@ const LatestPosts = ({ category }) => {
                   <div className="info">
                     <p>{displayDate}</p>
                     <p>&nbsp;|&nbsp;</p>
-                    <p>4 mins read</p>
+                    {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
                   </div>
                 </div>
                 <div className="description">
-                  <p className="blogtitle">{posts.title}</p>
-                  <p className="data">{posts.description}</p>
+                  <p className="blogtitle">{addEllipsis(posts.title, 25)}</p>
+                  <p className="data">{addEllipsis(posts.description, 80)}</p>
                 </div>
               </div>
             );
