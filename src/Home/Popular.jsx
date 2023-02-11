@@ -67,7 +67,7 @@ const Popular = ({ category }) => {
                     </div>
                   </div>
                   <div className="description">
-                    <p className="blogtitle">{addEllipsis(posts.title, 20)}</p>
+                    <p className="blogtitle">{addEllipsis(posts.title, 50)}</p>
                     <p className="data">{addEllipsis(posts.description, 80)}</p>
                   </div>
                 </div>
