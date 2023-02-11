@@ -14,18 +14,38 @@ const Header = () => {
     });
     navigate("/account");
   };
+
+  useEffect(() => {}, [user, refresh]);
+  const [isOpen, setOpen] = useState(false);
+
+  const toggleHamburger = () => {
+    setOpen(!isOpen);
+  };
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <p className="logoHeader">Logo</p>
         </Link>
-        <div className="div2Header">
-          <a>About us</a>
-          <a>Pricing</a>
-          <a>Blogs</a>
-          <a>FAQ's</a>
-          <a>Contact us</a>
+        <ul
+          className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}
+          style={{ listStyle: "none" }}
+        >
+          <li>
+            <a>About us</a>
+          </li>
+          <li>
+            <a>Pricing</a>
+          </li>
+          <li>
+            <a>Blogs</a>
+          </li>
+          <li>
+            <a>FAQ's</a>
+          </li>
+          <li>
+            <a>Contact us</a>
+          </li>
           <Link
             to="createblog"
             style={{
@@ -35,7 +55,7 @@ const Header = () => {
           >
             <a>Create blog</a>
           </Link>
-        </div>
+        </ul>
       </div>
       <div className="div3Header">
         {user && user !== null ? (
@@ -44,14 +64,14 @@ const Header = () => {
               Welcome,{" "}
               {user.displayName === null ? user.email : user.displayName}!
             </p> */}
-            <p
+            <a
               onClick={() => logout()}
               style={{
                 cursor: "pointer",
               }}
             >
               Logout
-            </p>
+            </a>
           </>
         ) : (
           <>
@@ -61,7 +81,7 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <a className="secondaryButton">Login</a>
+              <a className="secondaryButton headerButton">Login</a>
             </Link>
             <Link
               to="/account"
@@ -69,10 +89,18 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <a className="primaryButton">Sign up</a>
+              <a className="primaryButton headerButton">Sign up</a>
             </Link>
           </>
         )}
+
+        <div
+          className={`hamburger ${isOpen ? "burgerOpened" : "burgerClosed"}`}
+          onClick={toggleHamburger}
+        >
+          <div className="line1"></div>
+          <div className="line2"></div>
+        </div>
       </div>
     </div>
   );

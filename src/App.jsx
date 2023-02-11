@@ -17,7 +17,6 @@ const App = () => {
           <Route path="/createblog" element={<CreateBlog />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </ContextProvider>
   );
 };
