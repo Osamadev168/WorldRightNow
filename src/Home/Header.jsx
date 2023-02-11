@@ -14,18 +14,48 @@ const Header = () => {
     });
     navigate("/account");
   };
+
   useEffect(() => {}, [user, refresh]);
+  const [isOpen, setOpen] = useState(false);
+
+  const toggleHamburger = () => {
+    setOpen(!isOpen);
+  };
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
-        <p className="logoHeader">Logo</p>
-        <div className="div2Header">
-          <a>About us</a>
-          <a>Pricing</a>
-          <a>Blogs</a>
-          <a>FAQ's</a>
-          <a>Contact us</a>
-        </div>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <p className="logoHeader">Logo</p>
+        </Link>
+        <ul
+          className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}
+          style={{ listStyle: "none" }}
+        >
+          <li>
+            <a>About us</a>
+          </li>
+          <li>
+            <a>Pricing</a>
+          </li>
+          <li>
+            <a>Blogs</a>
+          </li>
+          <li>
+            <a>FAQ's</a>
+          </li>
+          <li>
+            <a>Contact us</a>
+          </li>
+          <Link
+            to="createblog"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <a>Create blog</a>
+          </Link>
+        </ul>
       </div>
       <div className="div3Header">
         {user && user !== null ? (

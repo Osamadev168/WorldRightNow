@@ -4,7 +4,6 @@ import { fetchDataPopular } from "../Api/Api";
 import { Box, Grid } from "@mui/material";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { useRef } from "react";
 
 const Popular = ({ category }) => {
   const [post, setPosts] = useState([]);

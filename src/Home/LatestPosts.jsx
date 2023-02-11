@@ -4,7 +4,6 @@ import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 import { Grid } from "@mui/material";
-import { useRef } from "react";
 
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
@@ -26,7 +25,6 @@ const LatestPosts = ({ category }) => {
   useEffect(() => {
     getPosts();
   }, [category]);
-  const sliderRef = useRef(null);
 
   return (
     <div className="mainPopularContainer">
@@ -37,7 +35,7 @@ const LatestPosts = ({ category }) => {
           <h3>Latest in {category}</h3>
         )}
       </div>
-      <Slider {...settings}>
+      <Slider {...settings} ref={sliderRef}>
         {post && post.length > 0 ? (
           post.map((posts, index) => {
             const addEllipsis = (str, limit) => {
