@@ -104,7 +104,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  display: none;
 }
 .HeaderMainContainer .hamburger .line1,
 .HeaderMainContainer .hamburger .line2 {
@@ -112,6 +111,15 @@ body {
   height: 2px;
   background: #fc2c7e;
   border-radius: 50px;
+  transition: transform 0.3s ease-out;
+}
+
+.hamburger.opened .line1 {
+  transform: rotate(-45deg) translate(-1px, 8px);
+}
+
+.hamburger.opened .line2 {
+  transform: rotate(45deg) translate(-1px, -8px);
 }
 
 .heroContainer {
@@ -552,7 +560,7 @@ body {
   stroke: #fc2c7e;
 }
 
-.footer {
+.footerhome {
   background: #16021d;
   font-family: "Montserrat";
   display: flex;
@@ -560,6 +568,17 @@ body {
   gap: 6em;
   margin-top: -243px;
   z-index: 1 !important;
+}
+
+.footer {
+  background: #16021d;
+  font-family: "Montserrat";
+  display: flex;
+  flex-direction: column;
+  gap: 6em;
+}
+.footer .footercontent {
+  margin-top: 60px;
 }
 
 .div1footer {
@@ -645,6 +664,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 60px;
 }
 
 .input {
@@ -670,15 +690,11 @@ body {
   font-size: 22px;
   line-height: 27px;
   text-align: left;
-float: right;
-display: flex;
-flex-direction: column;
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 15px;
-color: #0038FF;
-cursor: pointer;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  color: #263238;
+  margin: 15px;
 }
 
 .forgetPassword {

@@ -15,17 +15,32 @@ const Header = () => {
     navigate("/account");
   };
   useEffect(() => {}, [user, refresh]);
+  const [isOpen, setOpen] = useState(false);
+
+  const toggleHamburger = () => {
+    setOpen(!isOpen);
+  };
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
         <p className="logoHeader">Logo</p>
-        <div className="div2Header">
-          <a>About us</a>
-          <a>Pricing</a>
-          <a>Blogs</a>
-          <a>FAQ's</a>
-          <a>Contact us</a>
-        </div>
+        <ul className="div2Header" style={{ listStyle: "none" }}>
+          <li>
+            <a>About us</a>
+          </li>
+          <li>
+            <a>Pricing</a>
+          </li>
+          <li>
+            <a>Blogs</a>
+          </li>
+          <li>
+            <a>FAQ's</a>
+          </li>
+          <li>
+            <a>Contact us</a>
+          </li>
+        </ul>
       </div>
       <div className="div3Header">
         {user && user !== null ? (
@@ -63,7 +78,11 @@ const Header = () => {
             </Link>
           </>
         )}
-        <div className="hamburger">
+
+        <div
+          className={`hamburger ${isOpen ? "opened" : "closed"}`}
+          onClick={toggleHamburger}
+        >
           <div className="line1"></div>
           <div className="line2"></div>
         </div>
