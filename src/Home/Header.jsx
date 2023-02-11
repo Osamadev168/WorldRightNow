@@ -14,6 +14,7 @@ const Header = () => {
     });
     navigate("/account");
   };
+
   useEffect(() => {}, [user, refresh]);
   const [isOpen, setOpen] = useState(false);
 

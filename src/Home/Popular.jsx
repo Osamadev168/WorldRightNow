@@ -1,5 +1,5 @@
 import Slider from "react-slick";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchDataPopular } from "../Api/Api";
 import { Box, Grid } from "@mui/material";
 import next from "../../assets/next.svg";
@@ -8,6 +8,7 @@ import { useRef } from "react";
 
 const Popular = ({ category }) => {
   const [post, setPosts] = useState([]);
+  const sliderRef = useRef(null);
   const settings = {
     dots: false,
     infinite: false,
@@ -35,9 +36,19 @@ const Popular = ({ category }) => {
           <h3>Popular in {category}</h3>
         )}
       </div>
+
       <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
+            const addEllipsis = (str, limit) => {
+              return str.length > limit
+                ? str.substring(0, limit) + "...."
+                : str;
+            };
+            let wordsPerMinute = 250;
+            let noOfWords = posts.body.split(" ").length;
+            let readingTime = noOfWords / wordsPerMinute;
+            let round = Math.floor(readingTime);
             let date = new Date(posts.CreatedAt).toDateString();
             let displayMonth = date.substring(4, 10);
             let displayYear = date.substring(10);
@@ -55,12 +66,12 @@ const Popular = ({ category }) => {
                       <p>{displayDate}</p>
 
                       <p>&nbsp;|&nbsp;</p>
-                      <p>4 mins read</p>
+                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
                     </div>
                   </div>
                   <div className="description">
-                    <p className="blogtitle">{posts.title}</p>
-                    <p className="data">{posts.description}</p>
+                    <p className="blogtitle">{addEllipsis(posts.title, 20)}</p>
+                    <p className="data">{addEllipsis(posts.description, 80)}</p>
                   </div>
                 </div>
               </Grid>

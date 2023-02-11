@@ -1,6 +1,5 @@
 import Slider from "react-slick";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
@@ -9,6 +8,7 @@ import { useRef } from "react";
 
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
+  const sliderRef = useRef(null);
   const settings = {
     dots: false,
     infinite: false,
@@ -26,8 +26,8 @@ const LatestPosts = ({ category }) => {
   useEffect(() => {
     getPosts();
   }, [category]);
-  const sliderRef = useRef(null);
 
+  const sliderRef = useRef(null);
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
@@ -37,9 +37,19 @@ const LatestPosts = ({ category }) => {
           <h3>Latest in {category}</h3>
         )}
       </div>
+
       <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
+            const addEllipsis = (str, limit) => {
+              return str.length > limit
+                ? str.substring(0, limit) + "...."
+                : str;
+            };
+            let wordsPerMinute = 250;
+            let noOfWords = posts.body.split(" ").length;
+            let readingTime = noOfWords / wordsPerMinute;
+            let round = Math.floor(readingTime);
             let date = new Date(posts.CreatedAt).toDateString();
             let displayMonth = date.substring(4, 10);
             let displayYear = date.substring(10);
