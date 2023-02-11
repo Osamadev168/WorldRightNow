@@ -56,26 +56,43 @@ const dummyData = [
   },
 ];
 const Popular = ({ category }) => {
-  const [width, setWidth] = useState(window.innerWidth);
   const sliderRef = useRef(null);
-  const isMobile = width <= 768;
   const settings = {
     dots: false,
     infinite: false,
     speed: 300,
-    slidesToShow: isMobile ? 1 : 3.2,
+    slidesToShow: 3.2,
     slidesToScroll: 1,
     arrows: false,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 1260,
+        settings: {
+          slidesToShow: 2.2,
+        },
+      },
+      {
+        breakpoint: 860,
+        settings: {
+          slidesToShow: 1.5,
+        },
+      },
+      {
+        breakpoint: 645,
+        settings: {
+          slidesToShow: 1.2,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, [category]);
+
   return (
     <Box className="mainPopularContainer">
       <div className="titleCategory">
