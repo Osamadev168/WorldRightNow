@@ -26,6 +26,7 @@ const LatestPosts = ({ category }) => {
     getPosts();
   }, [category]);
 
+  const sliderRef = useRef(null);
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
@@ -35,7 +36,8 @@ const LatestPosts = ({ category }) => {
           <h3>Latest in {category}</h3>
         )}
       </div>
-      <Slider {...settings} ref={sliderRef}>
+      <Slider {...settings} ref={sliderRef} className="slider">
+
         {post && post.length > 0 ? (
           post.map((posts, index) => {
             const addEllipsis = (str, limit) => {

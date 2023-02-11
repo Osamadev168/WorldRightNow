@@ -56,12 +56,16 @@ const dummyData = [
   },
 ];
 const Popular = ({ category }) => {
+
   const sliderRef = useRef(null);
+  
+
+
   const settings = {
     dots: false,
     infinite: false,
     speed: 300,
-    slidesToShow: 3.2,
+    slidesToShow: isMobile ? 1 : 3.2,
     slidesToScroll: 1,
     arrows: false,
     draggable: true,
@@ -92,6 +96,7 @@ const Popular = ({ category }) => {
       },
     ],
   };
+
 
   return (
     <Box className="mainPopularContainer">

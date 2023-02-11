@@ -34,6 +34,7 @@ const Popular = ({ category }) => {
           <h3>Popular in {category}</h3>
         )}
       </div>
+
       <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
