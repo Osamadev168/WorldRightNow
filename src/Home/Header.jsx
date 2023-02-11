@@ -24,7 +24,9 @@ const Header = () => {
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
-        <p className="logoHeader">Logo</p>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <p className="logoHeader">Logo</p>
+        </Link>
         <ul
           className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}
           style={{ listStyle: "none" }}
@@ -44,6 +46,15 @@ const Header = () => {
           <li>
             <a>Contact us</a>
           </li>
+          <Link
+            to="createblog"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <a>Create blog</a>
+          </Link>
         </ul>
       </div>
       <div className="div3Header">

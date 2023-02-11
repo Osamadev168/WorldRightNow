@@ -56,9 +56,11 @@ const dummyData = [
   },
 ];
 const Popular = ({ category }) => {
-  const [width, setWidth] = useState(window.innerWidth);
+
   const sliderRef = useRef(null);
-  const isMobile = width <= 768;
+  
+
+
   const settings = {
     dots: false,
     infinite: false,
@@ -94,7 +96,7 @@ const Popular = ({ category }) => {
       },
     ],
   };
-  const sliderRef = useRef(null);
+
 
   return (
     <Box className="mainPopularContainer">
