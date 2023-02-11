@@ -1,20 +1,19 @@
 import Picture from "../../assets/illustration.svg";
-import Button from "../../assets/Button.png";
 const ContactHome = () => {
   return (
     <div className="contacthome">
       <div className="rectangle">
         <div className="div1">
           <div className="textcontactus">
-            <h1 className="text1contactus">
+            <h3 className="text1contactus">
               Never miss out on an interesting blog
-            </h1>
-            <h1 className="text2contactus">
+            </h3>
+            <p className="text2contactus">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus
               quam sit non et quam vitae cras. Sed tincidunt purus semper sed.
               Adipiscing in quis enim nunc, cursus. Condimentum in iaculis
               libero laoreet pharetra.
-            </h1>
+            </p>
             <div className="inputcontainer">
               <input
                 className="inputcontactus"
@@ -41,7 +40,7 @@ const ContactHome = () => {
               </a>
             </div>
           </div>
-          <div className="div2"></div>
+
           <div className="picturecontactus">
             <img src={Picture} />
           </div>

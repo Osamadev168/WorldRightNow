@@ -14,27 +14,17 @@ const Header = () => {
     });
     navigate("/account");
   };
+  useEffect(() => {}, [user, refresh]);
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          <p className="logoHeader">Logo</p>
-        </Link>
+        <p className="logoHeader">Logo</p>
         <div className="div2Header">
           <a>About us</a>
           <a>Pricing</a>
           <a>Blogs</a>
           <a>FAQ's</a>
           <a>Contact us</a>
-          <Link
-            to="createblog"
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <a>Create blog</a>
-          </Link>
         </div>
       </div>
       <div className="div3Header">
@@ -44,14 +34,14 @@ const Header = () => {
               Welcome,{" "}
               {user.displayName === null ? user.email : user.displayName}!
             </p> */}
-            <p
+            <a
               onClick={() => logout()}
               style={{
                 cursor: "pointer",
               }}
             >
               Logout
-            </p>
+            </a>
           </>
         ) : (
           <>
@@ -61,7 +51,7 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <a className="secondaryButton">Login</a>
+              <a className="secondaryButton headerButton">Login</a>
             </Link>
             <Link
               to="/account"
@@ -69,10 +59,18 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              <a className="primaryButton">Sign up</a>
+              <a className="primaryButton headerButton">Sign up</a>
             </Link>
           </>
         )}
+
+        <div
+          className={`hamburger ${isOpen ? "burgerOpened" : "burgerClosed"}`}
+          onClick={toggleHamburger}
+        >
+          <div className="line1"></div>
+          <div className="line2"></div>
+        </div>
       </div>
     </div>
   );

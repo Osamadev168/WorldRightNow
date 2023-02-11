@@ -3,7 +3,7 @@ import Line from "../../assets/line.png";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footerhome">
       <div className="footercontent">
         <h1>LOGO</h1>
         <div className="div1footer">
