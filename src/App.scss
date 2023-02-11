@@ -115,11 +115,11 @@ body {
     }
   }
 }
-.hamburger.opened .line1 {
+.hamburger.burgerOpened .line1 {
   transform: rotate(-45deg) translate(-1px, 8px);
 }
 
-.hamburger.opened .line2 {
+.hamburger.burgerOpened .line2 {
   transform: rotate(45deg) translate(-1px, -8px);
 }
 .heroContainer {
@@ -774,10 +774,30 @@ body {
   }
 }
 @media only screen and (max-width: 920px) {
+  body,
+  html {
+    overflow-x: hidden;
+    position: relative;
+  }
   .HeaderMainContainer {
     .div1Header {
       .div2Header {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        top: 10vh;
+        background-color: #f9f9f9;
+        height: 90vh;
+        width: 80%;
+        transform: translateX(100%);
+        transition: transform 300ms ease-out;
+      }
+      .menuOpened {
+        transform: translateX(0%);
       }
     }
     .hamburger {

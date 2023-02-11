@@ -24,7 +24,10 @@ const Header = () => {
     <div className="HeaderMainContainer">
       <div className="div1Header">
         <p className="logoHeader">Logo</p>
-        <ul className="div2Header" style={{ listStyle: "none" }}>
+        <ul
+          className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}
+          style={{ listStyle: "none" }}
+        >
           <li>
             <a>About us</a>
           </li>
@@ -80,7 +83,7 @@ const Header = () => {
         )}
 
         <div
-          className={`hamburger ${isOpen ? "opened" : "closed"}`}
+          className={`hamburger ${isOpen ? "burgerOpened" : "burgerClosed"}`}
           onClick={toggleHamburger}
         >
           <div className="line1"></div>
