@@ -6,6 +6,8 @@ import ContextProvider from "./Context/Context.jsx";
 import CreateBlog from "./Create Blog/CreateBlog.jsx";
 import Header from "./Home/Header.jsx";
 import Footer from "./Home/Footer.jsx";
+import UserDashboard from "./Dashboards/UserDashboard.jsx";
+import Blog from "./Blog/Blog.jsx";
 const App = () => {
   return (
     <ContextProvider>
@@ -15,9 +17,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Login />} />
           <Route path="/createblog" element={<CreateBlog />} />
+          <Route path="/blogs/user/:authorId" element={<UserDashboard />} />
+          <Route path="/blogs/blog/:_id" element={<Blog />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </ContextProvider>
   );
 };
