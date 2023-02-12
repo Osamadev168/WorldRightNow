@@ -4,6 +4,7 @@ import { fetchDataPopular } from "../Api/Api";
 import { Box, Grid } from "@mui/material";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
+import { Link } from "react-router-dom";
 
 const Popular = ({ category }) => {
   const [post, setPosts] = useState([]);
@@ -43,7 +44,7 @@ const Popular = ({ category }) => {
                 ? str.substring(0, limit) + "...."
                 : str;
             };
-            let wordsPerMinute = 250;
+            let wordsPerMinute = 150;
             let noOfWords = posts.body.split(" ").length;
             let readingTime = noOfWords / wordsPerMinute;
             let round = Math.floor(readingTime);
@@ -53,25 +54,38 @@ const Popular = ({ category }) => {
             let displayDate = `${displayMonth},${displayYear}`;
             return (
               <Grid container>
-                <div className="PopularCard" key={index}>
-                  <div
-                    className="image"
-                    style={{ backgroundImage: `url(${posts.image})` }}
-                  ></div>
-                  <div className="title">
-                    <h1 className="posttitle">{posts.category}</h1>
-                    <div className="info">
-                      <p>{displayDate}</p>
+                <Link
+                  to={`blogs/blog/${posts._id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div className="PopularCard" key={index}>
+                    <div
+                      className="image"
+                      style={{ backgroundImage: `url(${posts.image})` }}
+                    ></div>
+                    <div className="title">
+                      <h1 className="posttitle">{posts.category}</h1>
+                      <div className="info">
+                        <p>{displayDate}</p>
 
-                      <p>&nbsp;|&nbsp;</p>
-                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
+                        <p>&nbsp;|&nbsp;</p>
+                        {round <= 0 ? (
+                          <p>Quick read</p>
+                        ) : (
+                          <p>{round}mins read</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="description">
+                      <p className="blogtitle">
+                        {addEllipsis(posts.title, 25)}
+                      </p>
+                      <p className="data">
+                        {addEllipsis(posts.description, 80)}
+                      </p>
                     </div>
                   </div>
-                  <div className="description">
-                    <p className="blogtitle">{addEllipsis(posts.title, 25)}</p>
-                    <p className="data">{addEllipsis(posts.description, 80)}</p>
-                  </div>
-                </div>
+                </Link>
               </Grid>
             );
           })

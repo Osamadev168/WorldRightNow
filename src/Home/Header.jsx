@@ -55,6 +55,15 @@ const Header = () => {
           >
             <a>Create blog</a>
           </Link>
+          <Link
+            to={`blogs/user/${user && user.uid}`}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <a>blogs</a>
+          </Link>
         </ul>
       </div>
       <div className="div3Header">
