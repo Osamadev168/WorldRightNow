@@ -12,7 +12,6 @@ const App = () => {
   return (
     <ContextProvider>
       <BrowserRouter>
-        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Login />} />

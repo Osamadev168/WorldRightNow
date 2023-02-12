@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
+import profilepic from "../../assets/profilepic.jpg";
 const Header = () => {
   const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
@@ -55,53 +56,78 @@ const Header = () => {
           >
             <a>Create blog</a>
           </Link>
-          <Link
-            to={`blogs/user/${user && user.uid}`}
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <a>blogs</a>
-          </Link>
         </ul>
       </div>
       <div className="div3Header">
-        {user && user !== null ? (
-          <>
-            {/* <p>
+        <div
+          className={`accountContainer ${isOpen ? "menuOpened" : "menuclosed"}`}
+        >
+          {user && user !== null ? (
+            <>
+              {/* <p>
               Welcome,{" "}
               {user.displayName === null ? user.email : user.displayName}!
             </p> */}
-            <a
-              onClick={() => logout()}
-              style={{
-                cursor: "pointer",
-              }}
-            >
-              Logout
-            </a>
-          </>
-        ) : (
-          <>
-            <Link
-              to="/account"
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              <a className="secondaryButton headerButton">Login</a>
-            </Link>
-            <Link
-              to="/account"
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              <a className="primaryButton headerButton">Sign up</a>
-            </Link>
-          </>
-        )}
+              <a
+                onClick={() => logout()}
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                Logout
+              </a>
+              <Link
+                to="createblog"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <a>Create blog</a>
+              </Link>
+              <div className="profile">
+                <div className="picdropdown">
+                  <img
+                    src={profilepic}
+                    alt="profilepic"
+                    className="profilepic"
+                  />
+                  <svg
+                    width="11"
+                    height="10"
+                    viewBox="0 0 11 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.97184 9.24648C5.76213 9.58451 5.23786 9.58451 5.02816 9.24648L0.0738061 1.26056C-0.135902 0.922535 0.126232 0.499999 0.545648 0.5L10.4544 0.5C10.8738 0.5 11.1359 0.922536 10.9262 1.26056L5.97184 9.24648Z"
+                      fill="#322638"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/account"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <a className="secondaryButton headerButton">Login</a>
+              </Link>
+              <Link
+                to="/account"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <a className="primaryButton headerButton">Sign up</a>
+              </Link>
+            </>
+          )}
+        </div>
 
         <div
           className={`hamburger ${isOpen ? "burgerOpened" : "burgerClosed"}`}
