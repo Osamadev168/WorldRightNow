@@ -22,9 +22,7 @@ const LatestPosts = ({ category }) => {
     });
   };
 
-  useEffect(() => {
-    getPosts();
-  }, [category]);
+  useEffect(() => {}, [category]);
 
   return (
     <div className="mainPopularContainer">
