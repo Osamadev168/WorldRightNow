@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../Context/Context";
 import axios from "axios";
 import { submitPost } from "../Api/Api";
+import Footer from "../Home/Footer";
 const blogdefaultValues = {
   title: "",
   description: "",
@@ -101,7 +102,11 @@ const CreateBlog = () => {
             className="titleinput"
             placeholder="Description"
             onChange={(e) => {
-              setBlog({ ...blog, description: e.target.value });
+              setBlog({
+                ...blog,
+                description: e.target.value,
+                CreatedAt: new Date(),
+              });
               setCharDescription(e.target.value.length);
             }}
           />
@@ -336,6 +341,7 @@ const CreateBlog = () => {
           <img src={Send} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

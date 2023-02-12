@@ -47,6 +47,15 @@ const Header = () => {
           <li>
             <a>Contact us</a>
           </li>
+          <Link
+            to="createblog"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <a>Create blog</a>
+          </Link>
         </ul>
       </div>
       <div className="div3Header">

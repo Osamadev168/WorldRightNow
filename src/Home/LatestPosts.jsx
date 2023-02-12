@@ -4,6 +4,7 @@ import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
@@ -22,7 +23,10 @@ const LatestPosts = ({ category }) => {
     });
   };
 
-  useEffect(() => {}, [category]);
+  useEffect(() => {
+    getPosts();
+    console.log(post);
+  }, [category]);
 
   return (
     <div className="mainPopularContainer">
@@ -41,7 +45,7 @@ const LatestPosts = ({ category }) => {
                 ? str.substring(0, limit) + "...."
                 : str;
             };
-            let wordsPerMinute = 250;
+            let wordsPerMinute = 150;
             let noOfWords = posts.body.split(" ").length;
             let readingTime = noOfWords / wordsPerMinute;
             let round = Math.floor(readingTime);
@@ -51,22 +55,32 @@ const LatestPosts = ({ category }) => {
             let displayDate = `${displayMonth},${displayYear}`;
             return (
               <div className="PopularCard" key={index}>
-                <div
-                  className="image"
-                  style={{ backgroundImage: `url(${posts.image})` }}
-                ></div>
-                <div className="title">
-                  <h1 className="posttitle">{posts.category}</h1>
-                  <div className="info">
-                    <p>{displayDate}</p>
-                    <p>&nbsp;|&nbsp;</p>
-                    <p>4 mins read</p>
+                <Link
+                  to={`blogs/blog/${posts._id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <div
+                    className="image"
+                    style={{ backgroundImage: `url(${posts.image})` }}
+                  ></div>
+                  <div className="title">
+                    <h1 className="posttitle">{posts.category}</h1>
+                    <div className="info">
+                      <p>{displayDate}</p>
+                      <p>&nbsp;|&nbsp;</p>
+                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
+                    </div>
                   </div>
-                </div>
-                <div className="description">
-                  <p className="blogtitle">{posts.title}</p>
-                  <p className="data">{posts.description}</p>
-                </div>
+                  <div className="description">
+                    <p className="blogtitle">{addEllipsis(posts.title, 25)}</p>
+                    <p className="data">
+                      {addEllipsis(posts.description, 120)}
+                    </p>
+                  </div>
+                </Link>
               </div>
             );
           })
