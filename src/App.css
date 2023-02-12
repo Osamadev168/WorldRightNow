@@ -1217,3 +1217,30 @@ body {
   font-size: 28px;
   color: #263238;
 }
+
+.auhtorImage {
+  width: 30px;
+height: 30px;
+
+border-radius: 104.5px;
+}
+.authorName {
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+color: #170525;
+margin-left:  10px;
+}
+.blogImage {
+  margin-top  : 30px;
+  margin-bottom : 20px
+}
+.blogBody {
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+color: #161616
+}
+
