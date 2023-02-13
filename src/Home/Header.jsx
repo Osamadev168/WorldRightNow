@@ -50,7 +50,6 @@ const Header = ({ children }) => {
   const toggleHamburger = () => {
     setOpen(!isOpen);
   };
-
   const [profileOpen, profileClose] = useState(false);
   const toggleProfile = () => {
     profileClose(!profileOpen);
@@ -106,7 +105,11 @@ const Header = ({ children }) => {
                 <div className="picdropdown" onClick={toggleProfile}>
                   <div
                     className="profilepic"
-                    style={{ backgroundImage: `url(${profilepic})` }}
+                    style={{
+                      backgroundImage: `url(${
+                        user && user !== null ? user.photoURL : profilepic
+                      })`,
+                    }}
                   ></div>
 
                   <svg
