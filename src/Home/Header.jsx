@@ -1,11 +1,13 @@
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import profilepic from "../../assets/profilepic.jpg";
-const Header = () => {
+// import image1 from "../../assets/1.jpg";
+// import profilepic from "../../assets/1.jpg";
+const Header = ({ children }) => {
   const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
@@ -17,10 +19,41 @@ const Header = () => {
   };
 
   useEffect(() => {}, [user, refresh]);
-  const [isOpen, setOpen] = useState(false);
 
+  let profileRef = useRef();
+  useEffect(() => {
+    let handler = (e) => {
+      if (!profileRef.current.contains(e.target)) {
+        profileClose(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  // let menuRef = useRef();
+  // useEffect(() => {
+  //   let handler = (e) => {
+  //     if (!menuRef.current.contains(e.target)) {
+  //       setOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handler);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handler);
+  //   };
+  // });
+
+  const [isOpen, setOpen] = useState(false);
   const toggleHamburger = () => {
     setOpen(!isOpen);
+  };
+
+  const [profileOpen, profileClose] = useState(false);
+  const toggleProfile = () => {
+    profileClose(!profileOpen);
   };
   return (
     <div className="HeaderMainContainer">
@@ -47,15 +80,6 @@ const Header = () => {
           <li>
             <a>Contact us</a>
           </li>
-          <Link
-            to="createblog"
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <a>Create blog</a>
-          </Link>
         </ul>
       </div>
       <div className="div3Header">
@@ -68,14 +92,7 @@ const Header = () => {
               Welcome,{" "}
               {user.displayName === null ? user.email : user.displayName}!
             </p> */}
-              <a
-                onClick={() => logout()}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                Logout
-              </a>
+              {/* <a onClick={() => logout()}>Logout</a> */}
               <Link
                 to="createblog"
                 style={{
@@ -83,15 +100,15 @@ const Header = () => {
                   color: "inherit",
                 }}
               >
-                <a>Create blog</a>
+                <a className="primaryButton headerButton">Create blog</a>
               </Link>
-              <div className="profile">
-                <div className="picdropdown">
-                  <img
-                    src={profilepic}
-                    alt="profilepic"
+              <div className="profile" ref={profileRef}>
+                <div className="picdropdown" onClick={toggleProfile}>
+                  <div
                     className="profilepic"
-                  />
+                    style={{ backgroundImage: `url(${profilepic})` }}
+                  ></div>
+
                   <svg
                     width="11"
                     height="10"
@@ -104,6 +121,17 @@ const Header = () => {
                       fill="#322638"
                     />
                   </svg>
+                </div>
+                <div
+                  className={`profiledropdown ${
+                    profileOpen ? "profileopened" : "profileclosed"
+                  }`}
+                >
+                  <ul>
+                    <DropdownItem text={"Dashboard"} />
+                    <DropdownItem text={"Help"} />
+                    <DropdownItem text={"Logout"} link={() => logout()} />
+                  </ul>
                 </div>
               </div>
             </>
@@ -140,5 +168,11 @@ const Header = () => {
     </div>
   );
 };
-
+function DropdownItem(props) {
+  return (
+    <li className="dropdownitem" onClick={props.link}>
+      <a>{props.text}</a>
+    </li>
+  );
+}
 export default Header;

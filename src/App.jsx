@@ -8,13 +8,23 @@ import Header from "./Home/Header.jsx";
 import Footer from "./Home/Footer.jsx";
 import UserDashboard from "./Dashboards/UserDashboard.jsx";
 import Blog from "./Blog/Blog.jsx";
+import Wrapper from "./Home/Wrapper.jsx";
 const App = () => {
   return (
     <ContextProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/account" element={<Login />} />
+          <Route
+            path="/account"
+            element={
+              <Wrapper>
+                <Header />
+                <Login />
+                <Footer />
+              </Wrapper>
+            }
+          />
           <Route path="/createblog" element={<CreateBlog />} />
           <Route path="/blogs/user/:authorId" element={<UserDashboard />} />
           <Route path="/blogs/blog/:_id" element={<Blog />} />

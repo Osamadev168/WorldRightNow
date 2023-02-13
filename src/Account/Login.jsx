@@ -2,6 +2,8 @@ import { useState } from "react";
 import fbicon from "../../assets/facebookicon.png";
 import googleicon from "../../assets/googleicon.png";
 import Footer from "../Home/Footer.jsx";
+import Header from "../Home/Header";
+import "../App.css";
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -65,15 +67,6 @@ export const Signup = ({
   };
   return (
     <div className="mainLoginContainer">
-      <Link
-        to="/"
-        style={{
-          textDecoration: "none",
-          color: "inherit",
-        }}
-      >
-        <h1 className="accountLogo">LOGO</h1>
-      </Link>
       <div className="loginText">
         <h1>Sign up</h1>
       </div>
@@ -121,7 +114,6 @@ export const Signup = ({
           </h1>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
@@ -201,15 +193,6 @@ export const Login = ({
   };
   return (
     <div className="mainLoginContainer">
-      <Link
-        to="/"
-        style={{
-          textDecoration: "none",
-          color: "inherit",
-        }}
-      >
-        <h1 className="accountLogo">LOGO</h1>
-      </Link>
       <div className="loginText">
         <h1>Log in</h1>
       </div>
@@ -249,7 +232,6 @@ export const Login = ({
           </h1>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
