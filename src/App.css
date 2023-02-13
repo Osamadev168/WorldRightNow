@@ -1181,8 +1181,7 @@ body {
   .div3footer {
     gap: 20px;
   }
-} /*# sourceMappingURL=App.css.map */
-
+}
 .titleinput {
   width: 927px;
   height: 71px;
@@ -1201,8 +1200,7 @@ body {
   border-width: 0 0 2px;
   background: transparent;
 }
-.titleinput::placeholder {
-}
+
 .titleinput::-moz-placeholder {
   font-family: "Montserrat";
   font-style: normal;
@@ -1211,7 +1209,7 @@ body {
   color: rgba(0, 0, 0, 0.25);
 }
 
-.titleinput::placeholder {
+.titleinput::-moz-placeholder {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;

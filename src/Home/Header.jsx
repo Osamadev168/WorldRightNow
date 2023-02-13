@@ -1,6 +1,6 @@
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef, useRef } from "react";
 import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
@@ -50,6 +50,11 @@ const Header = ({ children }) => {
   const toggleHamburger = () => {
     setOpen(!isOpen);
   };
+  const [profileOpen, profileClose] = useState(false);
+  const toggleProfile = () => {
+    profileClose(!profileOpen);
+  };
+
   const [profileOpen, profileClose] = useState(false);
   const toggleProfile = () => {
     profileClose(!profileOpen);
