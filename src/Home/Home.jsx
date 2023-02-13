@@ -9,6 +9,7 @@ import Popular from "./Popular";
 import Hero from "./hero";
 import DummyData from "./Dummydata";
 import FooterContainer from "./FooterContainer.jsx";
+import Banner from "./Banner.jsx";
 const Home = () => {
   const [category, setCategory] = useState("");
 
