@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { getBlog } from "../Api/Api";
-import Ali from "../../../../bolly.jpg";
+import profilepic from "../../assets/profilepic.jpg";
+
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const params = useParams();
@@ -14,7 +15,7 @@ const Blog = () => {
   };
   useEffect(() => {
     fetchBlog(id);
-  }, []);
+  }, [id]);
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;
   let readingTime = noOfWords / wordsPerMinute;
@@ -33,7 +34,7 @@ const Blog = () => {
         <p className="blogTitle">{blog.title}</p>
         <p className="blogDescription">{blog.description}</p>
         <div className="imageAuthorName">
-          <img src={Ali} className="auhtorImage" />
+          <img src={profilepic} className="auhtorImage" />
           <p className="authorName">{blog.author}</p>
         </div>
         <div className="blogImage">

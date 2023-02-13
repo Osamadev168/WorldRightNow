@@ -13,7 +13,7 @@ body {
 
 .heroSection {
   height: 100vh;
-  background: url("./assets/herobg.jpg");
+  background: url("./assets/herobg.png");
   background-size: cover;
   background-position: center;
 }
@@ -25,7 +25,7 @@ body {
   align-items: center;
   width: 90%;
   margin: auto;
-  margin-top: 20px;
+  min-height: 10vh;
 }
 .HeaderMainContainer .div1Header {
   display: flex;
@@ -84,6 +84,45 @@ body {
   width: 100%;
   transition: all 0.3s ease-out;
 }
+.HeaderMainContainer .profile {
+  position: relative;
+}
+.HeaderMainContainer .profile .picdropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.HeaderMainContainer .profile .picdropdown .profilepic {
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  background-size: cover;
+  background-position: center;
+}
+.HeaderMainContainer .profile .profiledropdown {
+  position: absolute;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
+  padding: 10px 30px;
+  right: -20px;
+  top: 50px;
+  transition: all 100ms ease-out;
+}
+.HeaderMainContainer .profile .profiledropdown .dropdownitem {
+  padding: 10px 0px;
+}
+.HeaderMainContainer .profileopened {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+.HeaderMainContainer .profileclosed {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+}
 .HeaderMainContainer .div3Header {
   display: flex;
   flex-direction: row;
@@ -97,6 +136,13 @@ body {
   padding: 8px 35px;
   width: auto;
 }
+.HeaderMainContainer .accountContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+}
 .HeaderMainContainer .hamburger {
   width: 30px;
   height: 15px;
@@ -104,6 +150,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  display: none;
 }
 .HeaderMainContainer .hamburger .line1,
 .HeaderMainContainer .hamburger .line2 {
@@ -648,9 +695,15 @@ body {
   color: #f0f0f0;
 }
 
+.mainLoginContainer {
+  max-width: 90%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
 .loginText {
   text-align: center;
-  margin-top: 50px;
   font-family: "Montserrat";
 }
 
@@ -664,13 +717,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 60px;
+  max-width: 550px;
+  margin: auto;
 }
 
 .input {
   box-sizing: border-box;
-  width: 544px;
-  height: 42px;
+  max-width: 100%;
+  min-height: 42px;
   padding: 10px;
   border: 1px solid #575757;
   border-radius: 36px;
@@ -685,6 +739,7 @@ body {
 
 .email {
   font-family: "Montserrat";
+  width: 100%;
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -717,8 +772,8 @@ body {
   padding: 10px;
   gap: 10px;
   cursor: pointer;
-  width: 544px;
-  height: 52px;
+  width: 100%;
+  min-height: 52px;
   background: #0038ff;
   border-radius: 33px;
   font-family: "Montserrat";
@@ -750,8 +805,8 @@ body {
   gap: 14px;
   border: 1px solid #000000;
   border-radius: 35px;
-  width: 544px;
-  height: 38px;
+  width: 100%;
+  min-height: 38px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
@@ -782,6 +837,71 @@ body {
   line-height: 24px;
   color: #0038ff;
   cursor: pointer;
+}
+
+.blogMainContainer {
+  margin: 50px;
+}
+
+.blogDateandReadTime {
+  display: flex;
+  flex-direction: row;
+}
+
+.titleandDescriptionImage {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogTitle {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 38px;
+  color: #170525;
+}
+
+.blogDescription {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  color: #515151;
+}
+
+.imageAuthorName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.auhtorImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 104.5px;
+}
+
+.authorName {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #170525;
+  margin-left: 10px;
+}
+
+.blogImage {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.blogBody {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #161616;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -830,16 +950,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 40px;
     flex-direction: column;
+    background-color: #f9f9f9;
+    border-left: 1px solid #e7e7e7;
     position: absolute;
     right: 0;
     top: 10vh;
-    background-color: #f9f9f9;
     height: 90vh;
     width: 80%;
     transform: translateX(100%);
     transition: transform 300ms ease-out;
+  }
+  .HeaderMainContainer .div1Header .div2Header a {
+    font-size: 18px;
   }
   .HeaderMainContainer .div1Header .menuOpened {
     transform: translateX(0%);
@@ -850,7 +974,7 @@ body {
 }
 @media only screen and (max-width: 768px) {
   .heroSection {
-    background: url("./assets/BgTablet.jpg");
+    background: url("./assets/BgTablet.png");
     background-size: cover;
     background-position: bottom;
   }
@@ -966,14 +1090,38 @@ body {
   }
 }
 @media only screen and (max-width: 520px) {
+  .HeaderMainContainer .accountContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 10vh;
+    background-color: #f9f9f9;
+    border-left: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    height: 20vh;
+    width: 80%;
+    transform: translateX(100%);
+    transition: transform 300ms ease-out;
+  }
+  .HeaderMainContainer .accountContainer .headerButton {
+    padding: 10px 50px;
+  }
+  .HeaderMainContainer .menuOpened {
+    transform: translateX(0%);
+  }
+  .HeaderMainContainer .div1Header .div2Header {
+    top: 30vh;
+    height: 70vh;
+  }
   .heroContainer .mainContainerBanner {
     max-width: 100%;
   }
   .heroSection {
     background: none;
-  }
-  .headerButton {
-    display: none;
   }
   .div1 {
     padding: 3.125em 3em;
@@ -1054,20 +1202,33 @@ body {
   background: transparent;
 }
 .titleinput::placeholder {
+}
+.titleinput::-moz-placeholder {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
   font-size: 42px;
   color: rgba(0, 0, 0, 0.25);
 }
+
+.titleinput::placeholder {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
 .ck-editor__editable {
   width: 927px;
   height: 382px;
 }
+
 /*Toolbar*/
 .ck-editor__top {
   min-width: 60px;
 }
+
 .texteditor {
   display: flex;
   flex-direction: column;
@@ -1077,6 +1238,7 @@ body {
   height: 71px;
   padding: 10px;
 }
+
 .createblogbodytext {
   font-family: "Montserrat";
   font-style: normal;
@@ -1085,12 +1247,14 @@ body {
   color: rgba(0, 0, 0, 0.25);
   margin-bottom: 30px;
 }
+
 .createbloginput {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .createblogformcontainer {
   font-family: "Montserrat";
   font-style: normal;
@@ -1101,6 +1265,7 @@ body {
   flex-direction: column;
   padding: 10px;
 }
+
 .labelcreateblog {
   font-family: "Montserrat";
   font-style: italic;
@@ -1108,6 +1273,7 @@ body {
   font-size: 18px;
   color: rgba(0, 0, 0, 0.8);
 }
+
 .createblogbutton {
   display: flex;
   flex-direction: row;
@@ -1127,6 +1293,7 @@ body {
   line-height: 24px;
   color: #ffffff;
 }
+
 .categorycreateblog {
   display: flex;
   cursor: pointer;
@@ -1138,6 +1305,7 @@ body {
   font-size: 16px;
   font-weight: 600;
 }
+
 .categoryActivecreateblog {
   display: flex;
   cursor: pointer;
@@ -1150,6 +1318,7 @@ body {
   background: rgba(0, 56, 255, 0.1);
   color: #0038ff;
 }
+
 .imagecontainer {
   box-sizing: border-box;
   display: flex;
@@ -1163,6 +1332,7 @@ body {
   border-radius: 20px;
   cursor: pointer;
 }
+
 .uploadimagetext {
   font-family: "Montserrat";
   font-style: normal;
@@ -1201,12 +1371,14 @@ body {
   align-items: center;
   margin-top: 20px;
 }
+
 .auhtorImage {
   width: 30px;
   height: 30px;
 
   border-radius: 104.5px;
 }
+
 .authorName {
   font-family: "Montserrat";
   font-style: normal;
@@ -1215,10 +1387,12 @@ body {
   color: #170525;
   margin-left: 10px;
 }
+
 .blogImage {
   margin-top: 30px;
   margin-bottom: 20px;
 }
+
 .blogBody {
   font-family: "Montserrat";
   font-style: normal;
