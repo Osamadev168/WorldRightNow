@@ -1033,12 +1033,12 @@ body {
   .div3footer {
     gap: 20px;
   }
-}/*# sourceMappingURL=App.css.map */
+} /*# sourceMappingURL=App.css.map */
 
 .titleinput {
   width: 927px;
-height: 71px;
-padding: 5px;
+  height: 71px;
+  padding: 5px;
   outline: 0;
   border-width: 0 0 2px;
   background: transparent;
@@ -1046,45 +1046,44 @@ padding: 5px;
 
 .titleinputred {
   width: 927px;
-height: 71px;
-padding: 5px;
+  height: 71px;
+  padding: 5px;
   outline: 0;
   border-color: red;
   border-width: 0 0 2px;
   background: transparent;
 }
 .titleinput::placeholder {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 42px;
-color: rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  color: rgba(0, 0, 0, 0.25);
 }
 .ck-editor__editable {
-       width: 927px;
-height: 382px;
-    }
-    /*Toolbar*/
-    .ck-editor__top {
-        min-width: 60px;
-    }
+  width: 927px;
+  height: 382px;
+}
+/*Toolbar*/
+.ck-editor__top {
+  min-width: 60px;
+}
 .texteditor {
- display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-margin-top: 200px;
+  margin-top: 200px;
   height: 71px;
-padding: 10px;
-
+  padding: 10px;
 }
 .createblogbodytext {
-  font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 42px;
-color: rgba(0, 0, 0, 0.25);
-margin-bottom: 30px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  color: rgba(0, 0, 0, 0.25);
+  margin-bottom: 30px;
 }
 .createbloginput {
   display: flex;
@@ -1093,34 +1092,34 @@ margin-bottom: 30px;
   align-items: center;
 }
 .createblogformcontainer {
-   font-family: "Montserrat";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
   line-height: 27px;
-display: flex;
-flex-direction: column;
-padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 .labelcreateblog {
-  font-family: 'Montserrat';
-font-style: italic;
-font-weight: 500;
-font-size: 18px;
-color: rgba(0, 0, 0, 0.8);
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.8);
 }
 .createblogbutton {
-   display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 10px;
   gap: 10px;
   cursor: pointer;
- width: 927px;
-height: 54px;
-  background: linear-gradient(265.52deg, #FC2C7E 0%, #A02CFC 100%);
-border-radius: 33px;
+  width: 927px;
+  height: 54px;
+  background: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
+  border-radius: 33px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
@@ -1129,7 +1128,7 @@ border-radius: 33px;
   color: #ffffff;
 }
 .categorycreateblog {
-   display: flex;
+  display: flex;
   cursor: pointer;
   justify-content: center;
   align-items: center;
@@ -1157,22 +1156,22 @@ border-radius: 33px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-width: 927px;
-height: 240px;
-margin: 50px;
-border: 1px dashed #000000;
-border-radius: 20px;
-cursor: pointer;
+  width: 927px;
+  height: 240px;
+  margin: 50px;
+  border: 1px dashed #000000;
+  border-radius: 20px;
+  cursor: pointer;
 }
 .uploadimagetext {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 28px;
-color: #263238;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  color: #263238;
 }
 .blogMainContainer {
-  margin : 50px
+  margin: 100px;
 }
 .blogDateandReadTime {
   display: flex;
@@ -1183,18 +1182,18 @@ color: #263238;
   flex-direction: column;
 }
 .blogTitle {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 800;
-font-size: 38px;
-color: #170525;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 38px;
+  color: #170525;
 }
 .blogDescription {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 17px;
-color: #515151;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  color: #515151;
 }
 .imageAuthorName {
   display: flex;
@@ -1204,26 +1203,26 @@ color: #515151;
 }
 .auhtorImage {
   width: 30px;
-height: 30px;
+  height: 30px;
 
-border-radius: 104.5px;
+  border-radius: 104.5px;
 }
 .authorName {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-color: #170525;
-margin-left:  10px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #170525;
+  margin-left: 10px;
 }
 .blogImage {
-  margin-top  : 30px;
-  margin-bottom : 20px
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 .blogBody {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-color: #161616
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #161616;
 }
