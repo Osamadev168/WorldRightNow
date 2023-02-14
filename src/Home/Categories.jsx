@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import "../App.css";
 
 const Categories = ({ setCategory }) => {
-  function getWindowSize() {}
-
   const [activediv, setActiveDiv] = useState("");
 
   useEffect(() => {

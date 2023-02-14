@@ -4,10 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WordRightNow</title>
+    <title>Worldrightnow</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script
+      async
+      charset="utf-8"
+      src="//cdn.embedly.com/widgets/platform.js"
+    ></script>
+    <script>
+      document.querySelectorAll("div[data-oembed-url]").forEach((element) => {
+        while (element.firstChild) {
+          element.removeChild(element.firstChild);
+        }
+        const anchor = document.createElement("a");
+
+        anchor.setAttribute("href", element.dataset.oembedUrl);
+        anchor.className = "embedly-card";
+
+        element.appendChild(anchor);
+      });
+    </script>
   </body>
 </html>

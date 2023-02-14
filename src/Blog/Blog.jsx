@@ -15,6 +15,7 @@ const Blog = () => {
   };
   useEffect(() => {
     fetchBlog(id);
+    window.scrollTo(0, 0);
   }, [id]);
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;

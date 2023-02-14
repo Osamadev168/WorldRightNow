@@ -1398,3 +1398,6 @@ body {
   font-size: 18px;
   color: #161616;
 }
+.blogBody figure {
+  display: block;
+}

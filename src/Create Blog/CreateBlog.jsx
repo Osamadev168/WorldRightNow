@@ -2,7 +2,6 @@ import Send from "../../assets/Send.svg";
 import Upload from "../../assets/imageUpload.png";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-decoupled-document";
-
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../Context/Context";
 import axios from "axios";
@@ -23,7 +22,6 @@ const blogdefaultValues = {
 };
 const CreateBlog = () => {
   const [char, setChar] = useState(0);
-  const toolBarRef = useRef(null);
   const [charDescription, setCharDescription] = useState(0);
   const [activediv, setActiveDiv] = useState("");
   const [blog, setBlog] = useState(blogdefaultValues);
@@ -43,6 +41,7 @@ const CreateBlog = () => {
         sessionStorage.setItem("image", res.data.url);
       });
   };
+
   const submitBlog = async () => {
     try {
       await submitPost(blog).then(() => {
@@ -131,28 +130,24 @@ const CreateBlog = () => {
         </div>
         <div className="createblogformcontainer">
           <h1 className="createblogbodytext">Body</h1>
-
           <CKEditor
             editor={ClassicEditor}
             onChange={(event, editor) =>
               setBlog({ ...blog, body: editor.getData() })
             }
             onReady={(editor) => {
-              console.log("Editor is ready to use!", editor);
-
-              // Insert the toolbar before the editable area.
               editor.ui
                 .getEditableElement()
                 .parentElement.insertBefore(
                   editor.ui.view.toolbar.element,
                   editor.ui.getEditableElement()
                 );
-
-              this.editor = editor;
             }}
             config={{
               placeholder: "Start typing your blog post here...",
+              mediaEmbed: { previewsInData: true },
               toolbar: [
+                "imageInsert",
                 "Heading",
                 "|",
                 "Bold",
@@ -165,11 +160,11 @@ const CreateBlog = () => {
                 "Undo",
                 "Redo",
                 "imageResize",
+                "MediaEmbed",
               ],
             }}
             data={blog.data}
           />
-
           <label className="labelcreateblog">
             Hint: Break the content in several parts
           </label>
@@ -366,3 +361,17 @@ const CreateBlog = () => {
 };
 
 export default CreateBlog;
+const Review = ({ blog }) => {
+  return (
+    <>
+      {blog ? (
+        <div
+          className="blogBody"
+          dangerouslySetInnerHTML={{ __html: blog.body }}
+        ></div>
+      ) : (
+        <>ajsd;j;asdj</>
+      )}
+    </>
+  );
+};
