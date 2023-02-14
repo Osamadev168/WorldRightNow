@@ -1,6 +1,6 @@
 import { useState } from "react";
-import fbicon from "../../assets/facebookicon.png";
-import googleicon from "../../assets/googleicon.png";
+import fbicon from "../../assets/facebookicon.svg";
+import googleicon from "../../assets/googleicon.svg";
 import Footer from "../Home/Footer.jsx";
 import Header from "../Home/Header";
 import "../App.css";
@@ -73,45 +73,69 @@ export const Signup = ({
       <div className="formContainer">
         <div className="email">
           <label>Email</label>
-          <input className="input" onChange={(e) => setEmail(e.target.value)} />
+          <input
+            className="input"
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            name="email"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            placeholder="example@domain.com"
+          />
         </div>
         <div className="email">
           <label>Password</label>
           <input
             className="input"
-            type="password"
             onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            name="password"
+            required
+            minlength="8"
+            placeholder="Enter your password"
           />
         </div>
         <div className="email">
           <label>Confirm Password</label>
           <input
             className="input"
-            type="password"
             onChange={(e) => setconfrimPassword(e.target.value)}
+            type="password"
+            name="confirmPassword"
+            required
+            minlength="8"
+            placeholder="Confirm your password"
           />
         </div>
 
         <div
-          className="loginButton"
+          className="primaryButton loginButton"
           onClick={createAccountwithEmailandPassword}
         >
           <h1>Sign Up</h1>
         </div>
-        <h1 className="or">OR</h1>
+        <div className="or">
+          <div className="orline"></div>
+          <p>OR</p>
+          <div className="orline"></div>
+        </div>
         <div className="facebookButton" onClick={() => loginwithFacebook()}>
           <img src={fbicon} />
-          <h1>Continue with Facebook</h1>
+          <a>Continue with Facebook</a>
         </div>
         <div className="facebookButton" onClick={() => loginwithGoogle()}>
           <img src={googleicon} />
-          <h1>Continue with Google</h1>
+          <a>Continue with Google</a>
         </div>
         <div className="loginsignuptoggle">
-          <h1 className="signupaccount">Already have an account?</h1>
-          <h1 className="signuptext" onClick={() => setActive("login")}>
+          <a className="signupaccount">Already have an account? &nbsp;</a>
+          <a
+            className="signuptext"
+            onClick={() => setActive("login")}
+            style={{ textDecoration: "underline" }}
+          >
             Login
-          </h1>
+          </a>
         </div>
       </div>
     </div>
@@ -199,37 +223,59 @@ export const Login = ({
       <div className="formContainer">
         <div className="email">
           <label>Email</label>
-          <input className="input" onChange={(e) => setEmail(e.target.value)} />
+          <input
+            className="input"
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            name="email"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            placeholder="example@domain.com"
+          />
         </div>
         <div className="email">
           <label>Password</label>
           <input
             className="input"
-            type="password"
             onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            name="password"
+            required
+            minlength="8"
+            placeholder="Enter your password"
           />
           <div onClick={resetPassword}>
             <h1 className="forgetPassword">Forget password?</h1>
           </div>
         </div>
-
-        <div className="loginButton" onClick={loginwithEmailPassword}>
+        <div
+          className="primaryButton loginButton"
+          onClick={loginwithEmailPassword}
+        >
           <h1>Login</h1>
         </div>
-        <h1 className="or">OR</h1>
+        <div className="or">
+          <div className="orline"></div>
+          <p>OR</p>
+          <div className="orline"></div>
+        </div>{" "}
         <div className="facebookButton" onClick={loginwithFacebook}>
           <img src={fbicon} />
-          <h1>Continue with Facebook</h1>
+          <a>Continue with Facebook</a>
         </div>
         <div className="facebookButton" onClick={loginwithGoogle}>
           <img src={googleicon} />
-          <h1>Continue with Google</h1>
+          <a>Continue with Google</a>
         </div>
         <div className="loginsignuptoggle">
-          <h1 className="signupaccount">Don't have an account?</h1>
-          <h1 className="signuptext" onClick={() => setActive("singup")}>
+          <a className="signupaccount">Don't have an account? &nbsp;</a>
+          <a
+            className="signuptext"
+            onClick={() => setActive("singup")}
+            style={{ textDecoration: "underline" }}
+          >
             Sign Up
-          </h1>
+          </a>
         </div>
       </div>
     </div>

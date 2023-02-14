@@ -32,25 +32,17 @@ const Header = ({ children }) => {
       document.removeEventListener("mousedown", handler);
     };
   });
-
-  // let menuRef = useRef();
-  // useEffect(() => {
-  //   let handler = (e) => {
-  //     if (!menuRef.current.contains(e.target)) {
-  //       setOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handler);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handler);
-  //   };
-  // });
-
   const [isOpen, setOpen] = useState(false);
   const toggleHamburger = () => {
     setOpen(!isOpen);
   };
+  useEffect(() => {
+    document.body.classList.toggle("noscroll", isOpen);
 
+    return () => {
+      document.body.classList.remove("noscroll");
+    };
+  }, [isOpen]);
   const [profileOpen, profileClose] = useState(false);
   const toggleProfile = () => {
     profileClose(!profileOpen);
