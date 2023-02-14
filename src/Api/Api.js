@@ -36,3 +36,13 @@ export const getBlog = async (id) => {
     console.log(e.message);
   }
 };
+export const submitComment = async (postId, comment) => {
+  try {
+    await axios.post(
+      `http://localhost:5000/post/${postId}/new/comment`,
+      comment
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};

@@ -1543,3 +1543,44 @@ body {
   font-size: 18px;
   color: #161616;
 } /*# sourceMappingURL=App.css.map */
+.comments {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 28px;
+  margin-top: 50px;
+  color: #170525;
+}
+.main_Comments_Container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.photo_UserName_Contianer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.avatar_Comment {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  border-radius: 104.5px;
+}
+.comment_Content {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  margin-top: 20px;
+  color: #161616;
+}
+.comment_Area {
+  box-sizing: border-box;
+
+  width: 900px;
+  height: 171px;
+
+  border: 1px solid #4e4e4e;
+  border-radius: 8px;
+}
