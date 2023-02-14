@@ -4,6 +4,10 @@ body {
   background-color: #f9f9f9;
 }
 
+.noscroll {
+  overflow: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,9 +27,11 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  margin: auto;
+  width: 100%;
+  padding: 0 5%;
   min-height: 10vh;
+  border-bottom: 1px solid #e7e7e7;
+  background-color: #f9f9f9;
 }
 .HeaderMainContainer .div1Header {
   display: flex;
@@ -109,6 +115,7 @@ body {
   right: -20px;
   top: 50px;
   transition: all 100ms ease-out;
+  z-index: 700;
 }
 .HeaderMainContainer .profile .profiledropdown .dropdownitem {
   padding: 10px 0px;
@@ -225,7 +232,7 @@ body {
   color: #ffffff;
 }
 .primaryButton:hover {
-  background: #ffffff;
+  background: transparent;
   color: #fc2c7e;
   box-shadow: inset 0 0 0 1.5px #fc2c7e;
   transition: all 200ms ease-out;
@@ -719,15 +726,31 @@ body {
   align-items: center;
   max-width: 550px;
   margin: auto;
+  gap: 15px;
 }
 
 .input {
   box-sizing: border-box;
   max-width: 100%;
   min-height: 42px;
-  padding: 10px;
+  padding: 10px 20px;
   border: 1px solid #575757;
   border-radius: 36px;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 500;
+}
+.input::-moz-placeholder {
+  color: #9a9a9a;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 500;
+}
+.input::placeholder {
+  color: #9a9a9a;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .inputContainer {
@@ -749,7 +772,7 @@ body {
   display: flex;
   flex-direction: column;
   color: #263238;
-  margin: 15px;
+  gap: 10px;
 }
 
 .forgetPassword {
@@ -761,7 +784,8 @@ body {
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
-  color: #0038ff;
+  color: #fc2c7e;
+  margin-top: -8px;
 }
 
 .loginButton {
@@ -769,34 +793,34 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  gap: 10px;
   cursor: pointer;
   width: 100%;
-  min-height: 52px;
-  background: #0038ff;
-  border-radius: 33px;
-  font-family: "Montserrat";
-  font-style: normal;
   font-weight: 700;
   font-size: 10px;
-  line-height: 24px;
   color: #ffffff;
 }
 
 .or {
-  font-family: "Montserrat";
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  line-height: 29px;
   color: #263238;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.orline {
+  width: 30%;
+  height: 2px;
+  background: #263238;
+  border-radius: 500px;
 }
 
 .facebookButton {
   box-sizing: border-box;
   cursor: pointer;
-  margin: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -807,40 +831,39 @@ body {
   border-radius: 35px;
   width: 100%;
   min-height: 38px;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 22px;
   color: #000000;
+  position: relative;
+}
+.facebookButton a {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
+.facebookButton:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .signupaccount {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
   color: #263238;
 }
 
 .loginsignuptoggle {
   display: flex;
   flex-direction: row;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .signuptext {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  color: #0038ff;
+  color: #fc2c7e;
   cursor: pointer;
 }
 
 .blogMainContainer {
-  margin: 50px;
+  max-width: 65%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .blogDateandReadTime {
@@ -851,29 +874,274 @@ body {
 .titleandDescriptionImage {
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 }
 
 .blogTitle {
-  font-family: "Montserrat";
-  font-style: normal;
   font-weight: 800;
   font-size: 38px;
   color: #170525;
 }
 
 .blogDescription {
-  font-family: "Montserrat";
-  font-style: normal;
   font-weight: 500;
   font-size: 17px;
   color: #515151;
+  margin-top: 5px;
+  line-height: 24px;
 }
 
 .imageAuthorName {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 15px;
+}
+
+.auhtorImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 104.5px;
+}
+
+.authorName {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #170525;
+  margin-left: 10px;
+}
+
+.blogImage {
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.blogBody p {
+  font-size: 17px;
+  color: #515151;
+  margin-top: 5px;
+  line-height: 24px;
+}
+.blogBody h2 {
+  font-weight: 800;
+  font-size: 32px;
+  color: #170525;
+}
+.blogBody h3 {
+  font-weight: 800;
+  font-size: 28px;
+  color: #170525;
+}
+.blogBody h4 {
+  font-weight: 800;
+  font-size: 22px;
+  color: #170525;
+}
+.blogBody img {
+  width: 100%;
+}
+.blogBody figure {
+  width: 100% !important;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.blogBody figure img {
+  max-width: 100% !important;
+}
+
+.titleinput {
+  width: 100%;
+  height: 80px;
+  padding: 0px 10px;
+  outline: 0;
+  border-width: 0 0 2px;
+  background: transparent;
+  font-size: 38px;
+  font-weight: 800;
+  color: #140421;
+}
+
+.descriptioninput {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.titleinputred {
+  width: 927px;
+  height: 71px;
+  padding: 5px;
+  outline: 0;
+  border-color: red;
+  border-width: 0 0 2px;
+  background: transparent;
+}
+
+.titleinput::-moz-placeholder {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 42px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.titleinput::placeholder {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 42px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.ck-editor__editable {
+  width: 927px;
+  height: 382px;
+}
+
+/*Toolbar*/
+.ck-editor__top {
+  min-width: 60px;
+}
+
+.texteditor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  height: 71px;
+  padding: 10px;
+}
+
+.createblogbodytext {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  color: rgba(0, 0, 0, 0.25);
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.createbloginput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 65%;
+  margin: auto;
+}
+.createbloginput .categoriesmaindiv {
+  width: 100%;
+}
+
+.ck {
+  width: 100%;
+}
+
+.createblogformcontainer {
+  width: 100%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.createblogformcontainer .hintcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+
+.labelcreateblog {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.createblogbutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+  gap: 10px;
+  cursor: pointer;
+  width: 100%;
+  background: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
+  border-radius: 33px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.categorycreateblog {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1px #141a31;
+  padding: 10px 30px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.categoryActivecreateblog {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  background: rgba(0, 56, 255, 0.1);
+  color: #0038ff;
+}
+
+.imagecontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  min-height: 240px;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.imagecontainer svg {
+  position: absolute;
+}
+.imagecontainer svg rect {
+  transition: 300ms ease-in-out;
+}
+.imagecontainer:hover svg rect {
+  stroke: #fc2c7e;
+}
+
+.uploadimagetext {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  color: #263238;
 }
 
 .auhtorImage {
@@ -961,6 +1229,7 @@ body {
     width: 80%;
     transform: translateX(100%);
     transition: transform 300ms ease-out;
+    z-index: 100;
   }
   .HeaderMainContainer .div1Header .div2Header a {
     font-size: 18px;
@@ -1060,6 +1329,19 @@ body {
     align-items: center;
     justify-content: center;
   }
+  .blogMainContainer {
+    max-width: 75%;
+  }
+  .blogTitle {
+    font-size: 34px;
+  }
+  .blogDescription {
+    font-size: 16px;
+    line-height: 23px;
+  }
+  .blogBody p {
+    font-size: 16px;
+  }
 }
 @media only screen and (max-width: 680px) {
   .inputcontainer {
@@ -1088,6 +1370,9 @@ body {
   .secondaryButton {
     width: 80%;
   }
+  .loginButton {
+    width: 100%;
+  }
 }
 @media only screen and (max-width: 520px) {
   .HeaderMainContainer .accountContainer {
@@ -1106,6 +1391,7 @@ body {
     width: 80%;
     transform: translateX(100%);
     transition: transform 300ms ease-out;
+    z-index: 500;
   }
   .HeaderMainContainer .accountContainer .headerButton {
     padding: 10px 50px;
@@ -1181,199 +1467,58 @@ body {
   .div3footer {
     gap: 20px;
   }
-}
-.titleinput {
-  width: 927px;
-  height: 71px;
-  padding: 5px;
-  outline: 0;
-  border-width: 0 0 2px;
-  background: transparent;
-}
-
-.titleinputred {
-  width: 927px;
-  height: 71px;
-  padding: 5px;
-  outline: 0;
-  border-color: red;
-  border-width: 0 0 2px;
-  background: transparent;
-}
-
-.titleinput::-moz-placeholder {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 42px;
-  color: rgba(0, 0, 0, 0.25);
-}
-
-.titleinput::-moz-placeholder {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 42px;
-  color: rgba(0, 0, 0, 0.25);
-}
-
-.ck-editor__editable {
-  width: 927px;
-  height: 382px;
-}
-
-/*Toolbar*/
-.ck-editor__top {
-  min-width: 60px;
-}
-
-.texteditor {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-  height: 71px;
-  padding: 10px;
-}
-
-.createblogbodytext {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 42px;
-  color: rgba(0, 0, 0, 0.25);
-  margin-bottom: 30px;
-}
-
-.createbloginput {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.createblogformcontainer {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 27px;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.labelcreateblog {
-  font-family: "Montserrat";
-  font-style: italic;
-  font-weight: 500;
-  font-size: 18px;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.createblogbutton {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-  cursor: pointer;
-  width: 927px;
-  height: 54px;
-  background: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
-  border-radius: 33px;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 10px;
-  line-height: 24px;
-  color: #ffffff;
-}
-
-.categorycreateblog {
-  display: flex;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  box-shadow: inset 0 0 0 1px #141a31;
-  padding: 10px 30px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.categoryActivecreateblog {
-  display: flex;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 35px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  background: rgba(0, 56, 255, 0.1);
-  color: #0038ff;
-}
-
-.imagecontainer {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 927px;
-  height: 240px;
-  margin: 50px;
-  border: 1px dashed #000000;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.uploadimagetext {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  color: #263238;
-}
-.blogMainContainer {
-  margin: 100px;
-}
-.blogDateandReadTime {
-  display: flex;
-  flex-direction: row;
-}
-.titleandDescriptionImage {
-  display: flex;
-  flex-direction: column;
-}
-.blogTitle {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 800;
-  font-size: 38px;
-  color: #170525;
-}
-.blogDescription {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 17px;
-  color: #515151;
-}
-.imageAuthorName {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 20px;
+  .createbloginput {
+    width: 90%;
+    margin: auto;
+  }
+  .labelcreateblog {
+    font-size: 16px;
+  }
+  .titleinput {
+    font-size: 32px;
+  }
+  .descriptioninput {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .titleinput::-moz-placeholder {
+    font-size: 32px;
+    line-height: 32px;
+  }
+  .titleinput::placeholder {
+    font-size: 32px;
+    line-height: 32px;
+  }
+  .createblogbodytext {
+    font-size: 32px;
+  }
+  .blogMainContainer {
+    max-width: 90%;
+  }
+  .blogTitle {
+    font-size: 28px;
+  }
+  .blogDescription {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .blogBody p {
+    font-size: 15px;
+  }
+  .blogBody h2 {
+    font-size: 28px;
+  }
+  .blogBody h3 {
+    font-size: 24px;
+  }
+  .blogBody h4 {
+    font-size: 18px;
+  }
 }
 
 .auhtorImage {
   width: 30px;
   height: 30px;
-
   border-radius: 104.5px;
 }
 
@@ -1397,7 +1542,4 @@ body {
   font-weight: 500;
   font-size: 18px;
   color: #161616;
-}
-.blogBody figure {
-  display: block;
-}
+} /*# sourceMappingURL=App.css.map */

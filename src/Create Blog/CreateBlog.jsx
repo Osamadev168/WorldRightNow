@@ -1,5 +1,5 @@
 import Send from "../../assets/Send.svg";
-import Upload from "../../assets/imageUpload.png";
+import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -59,15 +59,17 @@ const CreateBlog = () => {
       uploadImage();
     }
   }, [file]);
+
   return (
     <div
       style={{
         marginTop: 60,
+        marginBottom: 80,
       }}
     >
       <div className="createbloginput">
         <div className="createblogformcontainer">
-          <input
+          <textarea
             value={blog.title}
             className="titleinput"
             placeholder="Title"
@@ -76,32 +78,26 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 title: e.target.value,
-                author: user.displayName,
-                authorId: user.uid,
+                author: "iohuohouh",
+                authorId: "kjlih",
               });
               setChar(e.target.value.length);
             }}
           />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="hintcontainer">
             <label className="labelcreateblog">
               Hint: Keep it short and concise
             </label>
             <label className="labelcreateblog">
-              Characters remaining {`${char <= 100 ? char : 100}/100`}
+              {`${char <= 100 ? char : 100}/100`}
             </label>
           </div>
         </div>
         <div className="createblogformcontainer">
-          <input
+          <textarea
             value={blog.description}
-            maxLength={200}
-            className="titleinput"
+            maxLength={250}
+            className="titleinput descriptioninput"
             placeholder="Description"
             onChange={(e) => {
               setBlog({
@@ -112,24 +108,17 @@ const CreateBlog = () => {
               setCharDescription(e.target.value.length);
             }}
           />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="hintcontainer">
             <label className="labelcreateblog">
               Hint: Keep it short and concise
             </label>
             <label className="labelcreateblog">
-              Characters remaining
-              {`${charDescription <= 200 ? charDescription : 200}/200`}
+              {`${charDescription <= 250 ? charDescription : 250}/250`}
             </label>
           </div>
         </div>
         <div className="createblogformcontainer">
-          <h1 className="createblogbodytext">Body</h1>
+          <h4 className="createblogbodytext">Body</h4>
           <CKEditor
             editor={ClassicEditor}
             onChange={(event, editor) =>
@@ -170,7 +159,141 @@ const CreateBlog = () => {
           </label>
         </div>
         <div className="createblogformcontainer">
+          <h4 className="createblogbodytext">Select a category</h4>
+
           <div className="categoriesmaindiv">
+            <div className="div1categories">
+              <div
+                className={activediv === "div2" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div2");
+                  setBlog({ ...blog, category: "Technology" });
+                }}
+              >
+                <a>Technology</a>
+              </div>
+              <div
+                className={activediv === "div3" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div3");
+                  setBlog({ ...blog, category: "Sports" });
+                }}
+              >
+                <a>Sports</a>
+              </div>
+              <div
+                className={activediv === "div4" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div4");
+                  setBlog({ ...blog, category: "Science" });
+                }}
+              >
+                <a>Science</a>
+              </div>
+              <div
+                className={activediv === "div5" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div5");
+                  setBlog({ ...blog, category: "Fashion" });
+                }}
+              >
+                <a>Fashion</a>
+              </div>
+              <div
+                className={activediv === "div6" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div6");
+                  setBlog({ ...blog, category: "Artificial Intelligence" });
+                }}
+              >
+                <a>Artificial Intelligence</a>
+              </div>
+              <div
+                className={activediv === "div7" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div7");
+                  setBlog({ ...blog, category: "Forex Trading" });
+                }}
+              >
+                <a>Forex Trading</a>
+              </div>
+              <div
+                className={activediv === "div8" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div8");
+                  setBlog({ ...blog, category: "Politics" });
+                }}
+              >
+                <a>Politics</a>
+              </div>
+              <div
+                className={activediv === "div9" ? "categoryActive" : "category"}
+                onClick={() => {
+                  setActiveDiv("div9");
+                  setBlog({ ...blog, category: "Art" });
+                }}
+              >
+                <a>Art</a>
+              </div>
+              <div
+                className={
+                  activediv === "div10" ? "categoryActive" : "category"
+                }
+                onClick={() => {
+                  setActiveDiv("div10");
+                  setBlog({ ...blog, category: "Programming" });
+                }}
+              >
+                <a>Programming</a>
+              </div>
+              <div
+                className={
+                  activediv === "div11" ? "categoryActive" : "category"
+                }
+                onClick={() => {
+                  setActiveDiv("div11");
+                  setBlog({ ...blog, category: "Networking" });
+                }}
+              >
+                <a>Networking</a>
+              </div>
+              <div
+                className={
+                  activediv === "div12" ? "categoryActive" : "category"
+                }
+                onClick={() => {
+                  setActiveDiv("div12");
+                  setBlog({ ...blog, category: "Life Hacks" });
+                }}
+              >
+                <a>Life Hacks</a>
+              </div>
+              <div
+                className={
+                  activediv === "div13" ? "categoryActive" : "category"
+                }
+                onClick={() => {
+                  setActiveDiv("div13");
+                  setBlog({ ...blog, category: "Crime" });
+                }}
+              >
+                <a>Crime</a>
+              </div>
+              <div
+                className={
+                  activediv === "div14" ? "categoryActive" : "category"
+                }
+                onClick={() => {
+                  setActiveDiv("div14");
+                  setBlog({ ...blog, category: "Anime" });
+                }}
+              >
+                <a>Anime</a>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="categoriesmaindiv">
             <div className="div1categories">
               <div
                 className={activediv === "div2" ? "categoryActive" : "category"}
@@ -302,7 +425,7 @@ const CreateBlog = () => {
                 <a>Anime</a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="createblogformcontainer">
           {image ? (
@@ -315,8 +438,8 @@ const CreateBlog = () => {
               <img
                 src={image}
                 style={{
-                  width: 927,
-                  height: 240,
+                  width: "100%",
+                  height: "100%",
                 }}
               />
               <input
@@ -347,6 +470,21 @@ const CreateBlog = () => {
                 }}
               />
               <p className="uploadimagetext">Select Image</p>
+              <svg
+                width="100%"
+                height="100%"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  width="100%"
+                  height="100%"
+                  rx="20"
+                  stroke="black"
+                  stroke-dasharray="20 20"
+                  strokeWidth="2"
+                />
+              </svg>
             </div>
           )}
         </div>
@@ -355,7 +493,6 @@ const CreateBlog = () => {
           <img src={Send} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

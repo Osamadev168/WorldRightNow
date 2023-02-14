@@ -28,19 +28,28 @@ const Blog = () => {
   return (
     <div className="blogMainContainer">
       <div className="blogDateandReadTime">
-        <p>{displayDate} |</p>
+        <p>{displayDate}</p>
+        <p>&nbsp;|&nbsp;</p>
+
         {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
       </div>
       <div className="titleandDescriptionImage">
-        <p className="blogTitle">{blog.title}</p>
+        <h1 className="blogTitle">{blog.title}</h1>
         <p className="blogDescription">{blog.description}</p>
         <div className="imageAuthorName">
           <img src={profilepic} className="auhtorImage" />
           <p className="authorName">{blog.author}</p>
         </div>
-        <div className="blogImage">
-          <img style={{ width: "100%", height: 524 }} src={blog.image} />
-        </div>
+        <div
+          className="blogImage"
+          style={{
+            backgroundImage: `url(${blog.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            width: "100%",
+            height: "450px",
+          }}
+        ></div>
       </div>
 
       <div

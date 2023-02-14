@@ -25,9 +25,27 @@ const App = () => {
               </Wrapper>
             }
           />
-          <Route path="/createblog" element={<CreateBlog />} />
+          <Route
+            path="/createblog"
+            element={
+              <Wrapper>
+                <Header />
+                <CreateBlog />
+                <Footer />
+              </Wrapper>
+            }
+          />
           <Route path="/blogs/user/:authorId" element={<UserDashboard />} />
-          <Route path="/blogs/blog/:_id" element={<Blog />} />
+          <Route
+            path="/blogs/blog/:_id"
+            element={
+              <Wrapper>
+                <Header />
+                <Blog />
+                <Footer />
+              </Wrapper>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </ContextProvider>

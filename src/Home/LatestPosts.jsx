@@ -15,6 +15,32 @@ const LatestPosts = ({ category }) => {
     slidesToShow: 3.2,
     slidesToScroll: 1,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 1260,
+        settings: {
+          slidesToShow: 2.2,
+        },
+      },
+      {
+        breakpoint: 860,
+        settings: {
+          slidesToShow: 1.5,
+        },
+      },
+      {
+        breakpoint: 645,
+        settings: {
+          slidesToShow: 1.2,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   const getPosts = () => {
     fetchDataLatest(category).then((res) => {
@@ -73,10 +99,8 @@ const LatestPosts = ({ category }) => {
                     </div>
                   </div>
                   <div className="description">
-                    <p className="blogtitle">{addEllipsis(posts.title, 25)}</p>
-                    <p className="data">
-                      {addEllipsis(posts.description, 120)}
-                    </p>
+                    <p className="blogtitle">{posts.title}</p>
+                    <p className="data">{posts.description}</p>
                   </div>
                 </Link>
               </div>
