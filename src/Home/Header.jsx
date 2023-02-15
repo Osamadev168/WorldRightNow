@@ -120,7 +120,7 @@ const Header = ({ children }) => {
                   }`}
                 >
                   <ul>
-                    <DropdownItem text={"Dashboard"} />
+                    <DropdownItem text={"Dashboard"} link={"/dashboard"} />
                     <DropdownItem text={"Help"} />
                     <DropdownItem text={"Logout"} link={() => logout()} />
                   </ul>
