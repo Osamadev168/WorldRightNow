@@ -55,7 +55,7 @@ export const Signup = ({
     signInWithRedirect(auth, provider);
   };
   return (
-    <div className="mainLoginContainer">
+    <div className="mainLoginContainer paddingtop">
       <div className="loginText">
         <h1>Sign up</h1>
       </div>
@@ -205,7 +205,7 @@ export const Login = ({
     await sendPasswordResetEmail(auth, email);
   };
   return (
-    <div className="mainLoginContainer">
+    <div className="mainLoginContainer paddingtop">
       <div className="loginText">
         <h1>Log in</h1>
       </div>
