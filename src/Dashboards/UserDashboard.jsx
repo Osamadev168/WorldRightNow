@@ -33,6 +33,7 @@ const UserDashboard = () => {
       <h3 className="dashboardTitle">Dashboard</h3>
       {blog.length > 0 ? (
         blog.map((blogs, key) => {
+          let date = new Date(blogs.CreatedAt).toDateString();
           return (
             <div className="blogsContainer">
               <div className="blogCard">
@@ -48,7 +49,7 @@ const UserDashboard = () => {
                       <span className="status active">Active</span>
                     )}
                     <div className="dateTime">
-                      <p>{blogs.CreatedAt}</p>
+                      <p>{date}</p>
                       <p>&nbsp;|&nbsp;</p>
                       <p>4 mins read</p>
                     </div>
