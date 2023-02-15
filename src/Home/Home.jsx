@@ -4,7 +4,6 @@ import Information from "./Information";
 import LatestPosts from "./LatestPosts";
 import Popular from "./Popular";
 import Hero from "./hero";
-import DummyData from "./Dummydata";
 import FooterContainer from "./FooterContainer.jsx";
 const Home = () => {
   const [category, setCategory] = useState("");

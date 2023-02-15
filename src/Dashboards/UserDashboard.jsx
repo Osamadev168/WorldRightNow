@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserPosts } from "../Api/Api";
-
+import moment from "moment";
 const UserDashboard = () => {
   const params = useParams();
   const authorId = params.authorId;
@@ -17,25 +17,15 @@ const UserDashboard = () => {
   }, [authorId]);
   return (
     <div className="dashboardContainer paddingtop">
-      {/* {blog.length > 0 ? (
-        blog.map((blogs, index) => {
-          return (
-            <div>
-              <h1>{blogs.authorId}</h1>
-              <h1>{blogs.title}</h1>
-              <h1>Status: {blogs.approved === true ? "true" : "false"}</h1>
-            </div>
-          );
-        })
-      ) : (
-        <></>
-      )} */}
       <h3 className="dashboardTitle">Dashboard</h3>
       {blog.length > 0 ? (
-        blog.map((blogs, key) => {
-          let date = new Date(blogs.CreatedAt).toDateString();
+        blog.map((blogs, index) => {
+          let wordsPerMinute = 150;
+          let noOfWords = blogs.body.split(" ").length;
+          let readingTime = noOfWords / wordsPerMinute;
+          let round = Math.floor(readingTime);
           return (
-            <div className="blogsContainer">
+            <div className="blogsContainer" key={index}>
               <div className="blogCard">
                 <div className="blogInfo">
                   <div className="blogTitleDescription">
@@ -49,9 +39,9 @@ const UserDashboard = () => {
                       <span className="status active">Active</span>
                     )}
                     <div className="dateTime">
-                      <p>{date}</p>
+                      <p> {moment(blogs.CreatedAt).fromNow()}</p>
                       <p>&nbsp;|&nbsp;</p>
-                      <p>4 mins read</p>
+                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
                     </div>
                   </div>
                 </div>
