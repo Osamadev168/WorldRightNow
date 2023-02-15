@@ -47,24 +47,12 @@ export const Signup = ({
   const loginwithFacebook = () => {
     const auth = getAuth(app);
     const provider = new FacebookAuthProvider();
-    signInWithRedirect(auth, provider)
-      .then(() => {
-        navigate("/account/info/user");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    signInWithRedirect(auth, provider);
   };
   const loginwithGoogle = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider)
-      .then(() => {
-        navigate("/account/info/user");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    signInWithRedirect(auth, provider);
   };
   return (
     <div className="mainLoginContainer">
