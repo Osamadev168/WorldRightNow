@@ -35,7 +35,17 @@ const App = () => {
               </Wrapper>
             }
           />
-          <Route path="/blogs/user/:authorId" element={<UserDashboard />} />
+          {/* <Route path="/blogs/user/:authorId" element={<UserDashboard />} /> */}
+          <Route
+            path="/dashboard"
+            element={
+              <Wrapper>
+                <Header />
+                <UserDashboard />
+                <Footer />
+              </Wrapper>
+            }
+          />
           <Route
             path="/blogs/blog/:_id"
             element={

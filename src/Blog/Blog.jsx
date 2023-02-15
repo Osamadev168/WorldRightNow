@@ -25,7 +25,7 @@ const Blog = () => {
   let displayYear = date.substring(10);
   let displayDate = `${displayMonth},${displayYear}`;
   return (
-    <div className="blogMainContainer">
+    <div className="blogMainContainer paddingtop">
       <div className="blogDateandReadTime">
         <p>{displayDate}</p>
         <p>&nbsp;|&nbsp;</p>
