@@ -13,6 +13,7 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
+  signInWithRedirect,
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,7 +34,7 @@ export const Signup = ({
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           sendEmailVerification(userCredential.user);
-          navigate("/");
+          navigate("/account/info/user");
         })
         .catch((error) => {
           alert(error.message);
@@ -46,9 +47,9 @@ export const Signup = ({
   const loginwithFacebook = () => {
     const auth = getAuth(app);
     const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
+    signInWithRedirect(auth, provider)
       .then(() => {
-        navigate("/");
+        navigate("/account/info/user");
       })
       .catch((e) => {
         console.log(e);
@@ -57,9 +58,9 @@ export const Signup = ({
   const loginwithGoogle = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    signInWithRedirect(auth, provider)
       .then(() => {
-        navigate("/");
+        navigate("/account/info/user");
       })
       .catch((e) => {
         console.log(e);
@@ -119,11 +120,11 @@ export const Signup = ({
           <p>OR</p>
           <div className="orline"></div>
         </div>
-        <div className="facebookButton" onClick={() => loginwithFacebook()}>
+        <div className="facebookButton" onClick={loginwithFacebook}>
           <img src={fbicon} />
           <a>Continue with Facebook</a>
         </div>
-        <div className="facebookButton" onClick={() => loginwithGoogle()}>
+        <div className="facebookButton" onClick={loginwithGoogle}>
           <img src={googleicon} />
           <a>Continue with Google</a>
         </div>

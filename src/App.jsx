@@ -9,6 +9,7 @@ import Footer from "./Home/Footer.jsx";
 import UserDashboard from "./Dashboards/UserDashboard.jsx";
 import Blog from "./Blog/Blog.jsx";
 import Wrapper from "./Home/Wrapper.jsx";
+import UserInfo from "./Account/UserInfo.jsx";
 const App = () => {
   return (
     <ContextProvider>
@@ -21,6 +22,16 @@ const App = () => {
               <Wrapper>
                 <Header />
                 <Login />
+                <Footer />
+              </Wrapper>
+            }
+          />
+          <Route
+            path="/account/info/user"
+            element={
+              <Wrapper>
+                <Header />
+                <UserInfo />
                 <Footer />
               </Wrapper>
             }

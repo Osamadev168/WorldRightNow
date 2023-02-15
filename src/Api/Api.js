@@ -1,4 +1,11 @@
 import axios from "axios";
+export const addUser = async (user) => {
+  try {
+    await axios.post("http://localhost:5000/createUser", user);
+  } catch (e) {
+    console.log(e);
+  }
+};
 export const fetchDataPopular = async (category) => {
   let response = await axios.post("http://localhost:5000/popularposts", {
     category: category,
