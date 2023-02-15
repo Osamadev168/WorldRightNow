@@ -124,7 +124,9 @@ const Header = ({ children }) => {
                   }`}
                 >
                   <ul>
-                    <DropdownItem text={"Dashboard"} link={"/dashboard"} />
+                    <Link to={`blogs/user/${user.uid}`}>
+                      <DropdownItem text={"Dashboard"} />
+                    </Link>
                     <DropdownItem text={"Help"} />
                     <DropdownItem text={"Logout"} link={() => logout()} />
                   </ul>

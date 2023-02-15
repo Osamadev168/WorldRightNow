@@ -78,8 +78,8 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 title: e.target.value,
-                author: "iohuohouh",
-                authorId: "kjlih",
+                author: user.displayName,
+                authorId: user.uid,
               });
               setChar(e.target.value.length);
             }}
