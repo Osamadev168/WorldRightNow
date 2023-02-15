@@ -6,7 +6,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../Context/Context";
 import axios from "axios";
 import { submitPost } from "../Api/Api";
-import Footer from "../Home/Footer";
 import "../App.css";
 const blogdefaultValues = {
   title: "",
@@ -79,8 +78,8 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 title: e.target.value,
-                author: "iohuohouh",
-                authorId: "kjlih",
+                author: user.displayName,
+                authorId: user.uid,
               });
               setChar(e.target.value.length);
             }}

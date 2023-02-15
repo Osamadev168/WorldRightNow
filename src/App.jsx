@@ -48,7 +48,7 @@ const App = () => {
           />
           {/* <Route path="/blogs/user/:authorId" element={<UserDashboard />} /> */}
           <Route
-            path="/dashboard"
+            path="/blogs/user/:authorId"
             element={
               <Wrapper>
                 <Header />
