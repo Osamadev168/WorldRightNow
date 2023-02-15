@@ -1,4 +1,11 @@
 import axios from "axios";
+export const addUser = async (user) => {
+  try {
+    await axios.post("http://localhost:5000/createUser", user);
+  } catch (e) {
+    console.log(e);
+  }
+};
 export const fetchDataPopular = async (category) => {
   let response = await axios.post("http://localhost:5000/popularposts", {
     category: category,
@@ -34,5 +41,15 @@ export const getBlog = async (id) => {
     return response;
   } catch (e) {
     console.log(e.message);
+  }
+};
+export const submitComment = async (postId, comment) => {
+  try {
+    await axios.post(
+      `http://localhost:5000/post/${postId}/new/comment`,
+      comment
+    );
+  } catch (e) {
+    console.log(e);
   }
 };

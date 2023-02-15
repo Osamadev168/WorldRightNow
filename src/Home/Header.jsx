@@ -38,7 +38,6 @@ const Header = ({ children }) => {
   };
   useEffect(() => {
     document.body.classList.toggle("noscroll", isOpen);
-
     return () => {
       document.body.classList.remove("noscroll");
     };
@@ -47,6 +46,7 @@ const Header = ({ children }) => {
   const toggleProfile = () => {
     profileClose(!profileOpen);
   };
+
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
@@ -98,7 +98,11 @@ const Header = ({ children }) => {
                 <div className="picdropdown" onClick={toggleProfile}>
                   <div
                     className="profilepic"
-                    style={{ backgroundImage: `url(${profilepic})` }}
+                    style={{
+                      backgroundImage: `url(${
+                        user && user !== null ? user.photoURL : profilepic
+                      })`,
+                    }}
                   ></div>
 
                   <svg

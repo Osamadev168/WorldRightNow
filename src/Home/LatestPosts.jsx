@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const LatestPosts = ({ category }) => {
@@ -51,7 +50,6 @@ const LatestPosts = ({ category }) => {
 
   useEffect(() => {
     getPosts();
-    console.log(post);
   }, [category]);
 
   return (

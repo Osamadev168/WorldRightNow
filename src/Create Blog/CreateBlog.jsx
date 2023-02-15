@@ -1,7 +1,7 @@
 import Send from "../../assets/Send.svg";
 import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../Context/Context";
 import axios from "axios";
@@ -41,6 +41,7 @@ const CreateBlog = () => {
         sessionStorage.setItem("image", res.data.url);
       });
   };
+
   const submitBlog = async () => {
     try {
       await submitPost(blog).then(() => {
@@ -124,9 +125,19 @@ const CreateBlog = () => {
             onChange={(event, editor) =>
               setBlog({ ...blog, body: editor.getData() })
             }
+            onReady={(editor) => {
+              editor.ui
+                .getEditableElement()
+                .parentElement.insertBefore(
+                  editor.ui.view.toolbar.element,
+                  editor.ui.getEditableElement()
+                );
+            }}
             config={{
               placeholder: "Start typing your blog post here...",
+              mediaEmbed: { previewsInData: true },
               toolbar: [
+                "imageInsert",
                 "Heading",
                 "|",
                 "Bold",
@@ -138,6 +149,8 @@ const CreateBlog = () => {
                 "BlockQuote",
                 "Undo",
                 "Redo",
+                "imageResize",
+                "MediaEmbed",
               ],
             }}
             data={blog.data}
@@ -486,3 +499,17 @@ const CreateBlog = () => {
 };
 
 export default CreateBlog;
+const Review = ({ blog }) => {
+  return (
+    <>
+      {blog ? (
+        <div
+          className="blogBody"
+          dangerouslySetInnerHTML={{ __html: blog.body }}
+        ></div>
+      ) : (
+        <>ajsd;j;asdj</>
+      )}
+    </>
+  );
+};

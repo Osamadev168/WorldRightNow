@@ -1696,15 +1696,72 @@ body {
     gap: 13px;
   }
 }
-@media only screen and (max-width: 375px) {
-  .facebookButton {
-    gap: 10px;
-    padding: 8px 10px;
-  }
-  .facebookButton a {
-    font-size: 14px;
-  }
-  .loginsignuptoggle {
-    font-size: 17px;
-  }
-}/*# sourceMappingURL=App.css.map */
+
+.auhtorImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 104.5px;
+}
+
+.authorName {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #170525;
+  margin-left: 10px;
+}
+
+.blogImage {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.blogBody {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #161616;
+} /*# sourceMappingURL=App.css.map */
+.comments {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 28px;
+  margin-top: 50px;
+  color: #170525;
+}
+.main_Comments_Container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.photo_UserName_Contianer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.avatar_Comment {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  border-radius: 104.5px;
+}
+.comment_Content {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  margin-top: 20px;
+  color: #161616;
+}
+.comment_Area {
+  box-sizing: border-box;
+
+  width: 900px;
+  height: 171px;
+
+  border: 1px solid #4e4e4e;
+  border-radius: 8px;
+}
