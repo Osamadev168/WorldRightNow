@@ -66,6 +66,7 @@ const CreateBlog = () => {
         marginTop: 60,
         marginBottom: 80,
       }}
+      className="paddingtop"
     >
       <div className="createbloginput">
         <div className="createblogformcontainer">
