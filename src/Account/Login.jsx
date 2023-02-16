@@ -34,12 +34,12 @@ export const Signup = ({
       const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
-          sendEmailVerification(userCredential.user);
-
           await updateProfile(userCredential.user, {
             displayName: userName,
           });
+
           navigate("/account/info/user");
+          sendEmailVerification(userCredential.user);
         })
         .catch((error) => {
           alert(error.message);

@@ -1,3 +1,4 @@
+import { sendEmailVerification } from "firebase/auth";
 import { useEffect } from "react";
 import { useContext, useState } from "react";
 import { addUser } from "../Api/Api";
@@ -21,10 +22,19 @@ const UserInfo = () => {
   return (
     <div style={{ margin: 100 }}>
       <h3>Welcome {user && user !== null ? user.displayName : ""}</h3>
-      <input onChange={(e) => setUserName(e.target.value)} />
-      <button onClick={createUser}>submit</button>
 
-      <p>Verify your email first</p>
+      <button
+        onClick={() => {
+          sendEmailVerification(user);
+        }}
+      >
+        Send Again
+      </button>
+      {user && user !== null && user.emailVerified === true ? (
+        <p>Email is Verified</p>
+      ) : (
+        <p>Verify Email</p>
+      )}
     </div>
   );
 };
