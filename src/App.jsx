@@ -6,6 +6,7 @@ import ContextProvider from "./Context/Context.jsx";
 import CreateBlog from "./Create Blog/CreateBlog.jsx";
 import Header from "./Home/Header.jsx";
 import Footer from "./Home/Footer.jsx";
+import FooterContainer from "./Home/FooterContainer.jsx";
 import UserDashboard from "./Dashboards/UserDashboard.jsx";
 import Blog from "./Blog/Blog.jsx";
 import Wrapper from "./Home/Wrapper.jsx";
@@ -63,7 +64,7 @@ const App = () => {
               <Wrapper>
                 <Header />
                 <Blog />
-                <Footer />
+                <FooterContainer />
               </Wrapper>
             }
           />

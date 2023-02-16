@@ -141,15 +141,7 @@ const Header = ({ children }) => {
                   textDecoration: "none",
                 }}
               >
-                <a className="secondaryButton headerButton">Login</a>
-              </Link>
-              <Link
-                to="/account"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <a className="primaryButton headerButton">Sign up</a>
+                <a className="primaryButton headerButton">Sign in</a>
               </Link>
             </>
           )}

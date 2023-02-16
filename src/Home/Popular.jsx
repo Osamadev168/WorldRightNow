@@ -90,7 +90,11 @@ const Popular = ({ category }) => {
                       <p>{displayDate}</p>
 
                       <p>&nbsp;|&nbsp;</p>
-                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
+                      {round <= 0 ? (
+                        <p>Quick read</p>
+                      ) : (
+                        <p>{round} mins read</p>
+                      )}
                     </div>
                   </div>
                   <div className="description">
