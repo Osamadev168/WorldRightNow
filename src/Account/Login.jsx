@@ -34,11 +34,10 @@ export const Signup = ({
       const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
-          sendEmailVerification(userCredential.user);
-
           await updateProfile(userCredential.user, {
             displayName: userName,
           });
+          sendEmailVerification(userCredential.user);
           navigate("/account/info/user");
         })
         .catch((error) => {
@@ -249,9 +248,10 @@ export const Login = ({
             minlength="8"
             placeholder="Enter your password"
           />
-          <div onClick={resetPassword}>
-            <h1 className="forgetPassword">Forget password?</h1>
-          </div>
+
+          <a onClick={resetPassword} className="forgetPassword">
+            Forgot password?
+          </a>
         </div>
         <div
           className="primaryButton loginButton"
