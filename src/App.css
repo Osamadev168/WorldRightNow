@@ -968,6 +968,9 @@ body {
 .blogBody figure img {
   max-width: 100% !important;
 }
+.blogBody figure figcaption {
+  height: 30px !important;
+}
 
 .titleinput {
   width: 100%;
@@ -1243,7 +1246,12 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2:hover {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogTitleDescription
+  h2:hover {
   text-decoration: underline;
 }
 .dashboardContainer
@@ -1885,4 +1893,4 @@ body {
   .loginsignuptoggle {
     font-size: 17px;
   }
-}/*# sourceMappingURL=App.css.map */
+} /*# sourceMappingURL=App.css.map */

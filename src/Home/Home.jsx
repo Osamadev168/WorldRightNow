@@ -7,7 +7,6 @@ import Hero from "./hero";
 import FooterContainer from "./FooterContainer.jsx";
 const Home = () => {
   const [category, setCategory] = useState("");
-
   return (
     <>
       <Hero />
@@ -19,5 +18,4 @@ const Home = () => {
     </>
   );
 };
-
 export default Home;

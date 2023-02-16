@@ -1,6 +1,6 @@
-import Home from "./Home/Home.jsx";
 import "./App.css";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import Home from "./Home/Home.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Account/Login.jsx";
 import ContextProvider from "./Context/Context.jsx";
 import CreateBlog from "./Create Blog/CreateBlog.jsx";
@@ -47,7 +47,6 @@ const App = () => {
               </Wrapper>
             }
           />
-          {/* <Route path="/blogs/user/:authorId" element={<UserDashboard />} /> */}
           <Route
             path="/blogs/user/:authorId"
             element={

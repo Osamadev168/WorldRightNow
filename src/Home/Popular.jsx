@@ -1,11 +1,11 @@
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
 import { fetchDataPopular } from "../Api/Api";
-import { Box, Grid } from "@mui/material";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-
+import { useNavigate } from "react-router-dom";
 const Popular = ({ category }) => {
+  const navigate = useNavigate();
   const [post, setPosts] = useState([]);
   const sliderRef = useRef(null);
   const settings = {
@@ -50,9 +50,8 @@ const Popular = ({ category }) => {
   useEffect(() => {
     getPosts();
   }, [category]);
-
   return (
-    <Box className="mainPopularContainer">
+    <div className="mainPopularContainer">
       <div className="titleCategory">
         {category === "" ? (
           <h3>Popular Blogs</h3>
@@ -60,15 +59,9 @@ const Popular = ({ category }) => {
           <h3>Popular in {category}</h3>
         )}
       </div>
-
       <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
-            const addEllipsis = (str, limit) => {
-              return str.length > limit
-                ? str.substring(0, limit) + "...."
-                : str;
-            };
             let wordsPerMinute = 250;
             let noOfWords = posts.body.split(" ").length;
             let readingTime = noOfWords / wordsPerMinute;
@@ -78,31 +71,29 @@ const Popular = ({ category }) => {
             let displayYear = date.substring(10);
             let displayDate = `${displayMonth},${displayYear}`;
             return (
-              <Grid container>
-                <div className="PopularCard" key={index}>
-                  <div
-                    className="image"
-                    style={{ backgroundImage: `url(${posts.image})` }}
-                  ></div>
-                  <div className="title">
-                    <h1 className="posttitle">{posts.category}</h1>
-                    <div className="info">
-                      <p>{displayDate}</p>
+              <div
+                className="PopularCard"
+                key={index}
+                onClick={() => navigate(`/blogs/blog/${posts._id}`)}
+              >
+                <div
+                  className="image"
+                  style={{ backgroundImage: `url(${posts.image})` }}
+                ></div>
+                <div className="title">
+                  <h1 className="posttitle">{posts.category}</h1>
+                  <div className="info">
+                    <p>{displayDate}</p>
 
-                      <p>&nbsp;|&nbsp;</p>
-                      {round <= 0 ? (
-                        <p>Quick read</p>
-                      ) : (
-                        <p>{round} mins read</p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="description">
-                    <p className="blogtitle">{posts.title}</p>
-                    <p className="data">{posts.description}</p>
+                    <p>&nbsp;|&nbsp;</p>
+                    {round <= 0 ? <p>Quick read</p> : <p>{round} mins read</p>}
                   </div>
                 </div>
-              </Grid>
+                <div className="description">
+                  <p className="blogtitle">{posts.title}</p>
+                  <p className="data">{posts.description}</p>
+                </div>
+              </div>
             );
           })
         ) : (
@@ -123,8 +114,7 @@ const Popular = ({ category }) => {
           <img src={next} />
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
-
 export default Popular;

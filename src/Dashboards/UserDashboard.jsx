@@ -13,7 +13,6 @@ const UserDashboard = () => {
   };
   useEffect(() => {
     getData();
-    console.log(blog);
   }, [authorId]);
   return (
     <div className="dashboardContainer paddingtop">
