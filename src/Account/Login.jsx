@@ -37,8 +37,9 @@ export const Signup = ({
           await updateProfile(userCredential.user, {
             displayName: userName,
           });
-          sendEmailVerification(userCredential.user);
+
           navigate("/account/info/user");
+          sendEmailVerification(userCredential.user);
         })
         .catch((error) => {
           alert(error.message);
@@ -248,10 +249,9 @@ export const Login = ({
             minlength="8"
             placeholder="Enter your password"
           />
-
-          <a onClick={resetPassword} className="forgetPassword">
-            Forgot password?
-          </a>
+          <div onClick={resetPassword}>
+            <h1 className="forgetPassword">Forget password?</h1>
+          </div>
         </div>
         <div
           className="primaryButton loginButton"
