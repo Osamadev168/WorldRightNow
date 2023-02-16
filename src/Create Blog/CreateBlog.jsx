@@ -3,6 +3,7 @@ import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { useContext, useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { UserContext } from "../Context/Context";
 import axios from "axios";
 import { submitPost } from "../Api/Api";
@@ -44,9 +45,9 @@ const CreateBlog = () => {
   const submitBlog = async () => {
     try {
       await submitPost(blog).then(() => {
-        sessionStorage.setItem("image", "");
         setBlog(blogdefaultValues);
-        alert("Blog submitted!");
+        sessionStorage.setItem("image", "");
+        toast("Blog Submitted :)");
       });
     } catch (e) {
       alert(e);
@@ -93,6 +94,9 @@ const CreateBlog = () => {
             </label>
           </div>
         </div>
+        <div>
+          <ToastContainer />
+        </div>
         <div className="createblogformcontainer">
           <textarea
             value={blog.description}
@@ -120,6 +124,7 @@ const CreateBlog = () => {
         <div className="createblogformcontainer">
           <h4 className="createblogbodytext">Body</h4>
           <CKEditor
+            data={blog.body}
             editor={ClassicEditor}
             onChange={(event, editor) =>
               setBlog({ ...blog, body: editor.getData() })
@@ -152,7 +157,6 @@ const CreateBlog = () => {
                 "MediaEmbed",
               ],
             }}
-            data={blog.data}
           />
           <label className="labelcreateblog">
             Hint: Break the content in several parts
@@ -292,140 +296,6 @@ const CreateBlog = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className="categoriesmaindiv">
-            <div className="div1categories">
-              <div
-                className={activediv === "div2" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div2");
-                  setBlog({ ...blog, category: "Technology" });
-                }}
-              >
-                <a>Technology</a>
-              </div>
-              <div
-                className={activediv === "div3" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div3");
-                  setBlog({ ...blog, category: "Sports" });
-                }}
-              >
-                <a>Sports</a>
-              </div>
-              <div
-                className={activediv === "div4" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div4");
-                  setBlog({ ...blog, category: "Science" });
-                }}
-              >
-                <a>Science</a>
-              </div>
-              <div
-                className={activediv === "div5" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div5");
-                  setBlog({ ...blog, category: "Fashion" });
-                }}
-              >
-                <a>Fashion</a>
-              </div>
-              <div
-                className={activediv === "div6" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div6");
-                  setBlog({ ...blog, category: "AI" });
-                }}
-              >
-                <a>Artificial Intelligence</a>
-              </div>
-              <div
-                className={activediv === "div7" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div7");
-                  setBlog({ ...blog, category: "Forex Trading" });
-                }}
-              >
-                <a>Forex Trading</a>
-              </div>
-            </div>
-            <div className="div2categories">
-              <div
-                className={activediv === "div8" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div8");
-                  setBlog({ ...blog, category: "Politics" });
-                }}
-              >
-                <a>Politics</a>
-              </div>
-              <div
-                className={activediv === "div9" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div9");
-                  setBlog({ ...blog, category: "Art" });
-                }}
-              >
-                <a>Art</a>
-              </div>
-              <div
-                className={
-                  activediv === "div10" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div10");
-                  setBlog({ ...blog, category: "Programming" });
-                }}
-              >
-                <a>Programming</a>
-              </div>
-              <div
-                className={
-                  activediv === "div11" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div11");
-                  setBlog({ ...blog, category: "Networking" });
-                }}
-              >
-                <a>Networking</a>
-              </div>
-              <div
-                className={
-                  activediv === "div12" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div12");
-                  setBlog({ ...blog, category: "Life Hacks" });
-                }}
-              >
-                <a>Life Hacks</a>
-              </div>
-              <div
-                className={
-                  activediv === "div13" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div13");
-                  setBlog({ ...blog, category: "Crime" });
-                }}
-              >
-                <a>Crime</a>
-              </div>
-              <div
-                className={
-                  activediv === "div14" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div14");
-                  setBlog({ ...blog, category: "Anime" });
-                }}
-              >
-                <a>Anime</a>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="createblogformcontainer">
           {image ? (
@@ -498,17 +368,3 @@ const CreateBlog = () => {
 };
 
 export default CreateBlog;
-const Review = ({ blog }) => {
-  return (
-    <>
-      {blog ? (
-        <div
-          className="blogBody"
-          dangerouslySetInnerHTML={{ __html: blog.body }}
-        ></div>
-      ) : (
-        <>ajsd;j;asdj</>
-      )}
-    </>
-  );
-};

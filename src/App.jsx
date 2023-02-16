@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home/Home.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Account/Login.jsx";
