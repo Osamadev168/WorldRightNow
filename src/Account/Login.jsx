@@ -14,6 +14,7 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithRedirect,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,15 +26,19 @@ export const Signup = ({
   setEmail,
   setPassword,
   setconfrimPassword,
-  user,
 }) => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
   const createAccountwithEmailandPassword = () => {
     if (password === confirmpassword) {
       const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           sendEmailVerification(userCredential.user);
+
+          await updateProfile(userCredential.user, {
+            displayName: userName,
+          });
           navigate("/account/info/user");
         })
         .catch((error) => {
@@ -72,6 +77,17 @@ export const Signup = ({
             placeholder="example@domain.com"
           />
         </div>
+        <div className="email">
+          <label>Username</label>
+          <input
+            className="input"
+            onChange={(e) => setUserName(e.target.value)}
+            type="text"
+            name="text"
+            placeholder="Username"
+          />
+        </div>
+
         <div className="email">
           <label>Password</label>
           <input
