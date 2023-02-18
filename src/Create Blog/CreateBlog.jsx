@@ -1,9 +1,10 @@
 import Send from "../../assets/Send.svg";
 import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import axios from "axios";
 import { submitPost } from "../Api/Api";
@@ -21,6 +22,7 @@ const blogdefaultValues = {
   approved: true,
 };
 const CreateBlog = () => {
+  const [progress, setProgress] = useState(false);
   const [char, setChar] = useState(0);
   const [charDescription, setCharDescription] = useState(0);
   const [activediv, setActiveDiv] = useState("");
@@ -29,7 +31,11 @@ const CreateBlog = () => {
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
   const { user } = useContext(UserContext);
+  const setApproved = () => {
+    return user.uid === "Idfri64OkLcihU4YP5j2hvC14M32" ? true : false;
+  };
   const uploadImage = async () => {
+    setProgress(true);
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "kalo7xt1");
@@ -45,9 +51,9 @@ const CreateBlog = () => {
   const submitBlog = async () => {
     try {
       await submitPost(blog).then(() => {
-        setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
         toast("Blog Submitted :)");
+        setBlog(blogdefaultValues);
       });
     } catch (e) {
       alert(e);
@@ -81,6 +87,7 @@ const CreateBlog = () => {
                 title: e.target.value,
                 author: user.displayName,
                 authorId: user.uid,
+                approved: setApproved(),
               });
               setChar(e.target.value.length);
             }}
@@ -129,14 +136,6 @@ const CreateBlog = () => {
             onChange={(event, editor) =>
               setBlog({ ...blog, body: editor.getData() })
             }
-            onReady={(editor) => {
-              editor.ui
-                .getEditableElement()
-                .parentElement.insertBefore(
-                  editor.ui.view.toolbar.element,
-                  editor.ui.getEditableElement()
-                );
-            }}
             config={{
               placeholder: "Start typing your blog post here...",
               mediaEmbed: { previewsInData: true },
@@ -153,7 +152,6 @@ const CreateBlog = () => {
                 "BlockQuote",
                 "Undo",
                 "Redo",
-                "imageResize",
                 "MediaEmbed",
               ],
             }}
@@ -319,6 +317,7 @@ const CreateBlog = () => {
                 style={{ display: "none" }}
                 onChange={(e) => {
                   setFile(e.target.files[0]);
+                  setProgress(true);
                 }}
               />
             </div>
@@ -329,7 +328,12 @@ const CreateBlog = () => {
                 inputFile.current.click();
               }}
             >
-              <img src={Upload} />
+              {progress ? (
+                <CircularProgress color="inherit" />
+              ) : (
+                <img src={Upload} />
+              )}
+
               <input
                 type="file"
                 id="file"
@@ -337,6 +341,7 @@ const CreateBlog = () => {
                 style={{ display: "none" }}
                 onChange={(e) => {
                   setFile(e.target.files[0]);
+                  setProgress(true);
                 }}
               />
               <p className="uploadimagetext">Select Image</p>
@@ -358,10 +363,29 @@ const CreateBlog = () => {
             </div>
           )}
         </div>
-        <div className="createblogbutton" onClick={submitBlog}>
+        <button
+          className={
+            blog.title === "" ||
+            blog.description === "" ||
+            blog.body === "" ||
+            blog.category === ""
+              ? "createblogbutton2"
+              : "createblogbutton"
+          }
+          disabled={
+            blog.title === "" ||
+            blog.description === "" ||
+            blog.body === "" ||
+            blog.category === ""
+              ? true
+              : false
+          }
+          type="button"
+          onClick={submitBlog}
+        >
           <h1>Submit</h1>
           <img src={Send} />
-        </div>
+        </button>
       </div>
     </div>
   );

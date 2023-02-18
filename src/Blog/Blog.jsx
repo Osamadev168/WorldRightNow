@@ -87,10 +87,14 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
   const [comment, setComment] = useState(defaultValues);
   const { user } = useContext(UserContext);
   const submit_Comment = () => {
-    submitComment(id, comment).then(() => {
-      setComment(defaultValues);
-      setRefresh(!refresh);
-    });
+    if (comment.comment !== "") {
+      submitComment(id, comment).then(() => {
+        setComment(defaultValues);
+        setRefresh(!refresh);
+      });
+    } else {
+      alert("Comment must not be empty..!!");
+    }
   };
 
   return (

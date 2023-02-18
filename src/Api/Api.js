@@ -35,6 +35,21 @@ export const getUserPosts = async (authorId) => {
     console.log(e);
   }
 };
+export const getSubmittedPosts = async () => {
+  try {
+    let response = await axios.get(`http://localhost:5000/posts/submitted`);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const approveBlog = async (id) => {
+  try {
+    await axios.post(`http://localhost:5000/post/approve/${id}`);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 export const getBlog = async (id) => {
   try {
     let response = await axios.get(`http://localhost:5000/blog/${id}`);

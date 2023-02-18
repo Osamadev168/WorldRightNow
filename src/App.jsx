@@ -12,6 +12,7 @@ import UserDashboard from "./Dashboards/UserDashboard.jsx";
 import Blog from "./Blog/Blog.jsx";
 import Wrapper from "./Home/Wrapper.jsx";
 import UserInfo from "./Account/UserInfo.jsx";
+import AdminDashboard from "../src/Dashboards/AdminDashboard";
 const App = () => {
   return (
     <ContextProvider>
@@ -49,11 +50,21 @@ const App = () => {
             }
           />
           <Route
-            path="/blogs/user/:authorId"
+            path="/dashboard/user/:authorId"
             element={
               <Wrapper>
                 <Header />
                 <UserDashboard />
+                <Footer />
+              </Wrapper>
+            }
+          />
+          <Route
+            path="/dashboard/admin"
+            element={
+              <Wrapper>
+                <Header />
+                <AdminDashboard />
                 <Footer />
               </Wrapper>
             }

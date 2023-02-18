@@ -117,7 +117,13 @@ const Header = ({ children }) => {
                   }`}
                 >
                   <ul>
-                    <div onClick={() => navigate(`/blogs/user/${user.uid}`)}>
+                    <div
+                      onClick={() => {
+                        user.uid === "Idfri64OkLcihU4YP5j2hvC14M32"
+                          ? navigate(`/dashboard/admin`)
+                          : navigate(`/dashboard/user/${user.uid}`);
+                      }}
+                    >
                       <DropdownItem text={"Dashboard"} />
                     </div>
                     <DropdownItem text={"Help"} />

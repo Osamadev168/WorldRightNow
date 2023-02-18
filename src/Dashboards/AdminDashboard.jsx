@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deletePostUser, getUserPosts } from "../Api/Api";
+import { approveBlog, deletePostUser, getSubmittedPosts } from "../Api/Api";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,19 +11,18 @@ import moment from "moment";
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
-  const params = useParams();
   const navigate = useNavigate();
-  const authorId = params.authorId;
   const [blog, setBlog] = useState([]);
   const getData = () => {
-    getUserPosts(authorId).then((res) => {
+    getSubmittedPosts().then((res) => {
       setBlog(res.data);
     });
   };
 
   useEffect(() => {
     getData();
-  }, [authorId, refresh]);
+  }, [refresh]);
+
   return (
     <div className="dashboardContainer paddingtop">
       <h3 className="dashboardTitle">Dashboard</h3>
@@ -42,6 +41,11 @@ const UserDashboard = () => {
           };
           const handleCloseNo = () => {
             setOpen(false);
+          };
+          const approve_Blog = () => {
+            approveBlog(blogs._id).then(() => {
+              setRefreh(!refresh);
+            });
           };
           let wordsPerMinute = 150;
           let noOfWords = blogs.body.split(" ").length;
@@ -181,6 +185,7 @@ const UserDashboard = () => {
                   </div>
                 </div>
               </div>
+              <button onClick={approve_Blog}>Approve</button>
             </div>
           );
         })
