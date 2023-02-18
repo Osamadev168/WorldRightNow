@@ -18,7 +18,6 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 export const Signup = ({
   setActive,
   email,
@@ -30,7 +29,6 @@ export const Signup = ({
 }) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
-  const [error, setError] = useState("");
   const createAccountwithEmailandPassword = () => {
     if (password === confirmpassword) {
       const auth = getAuth(app);
@@ -44,13 +42,7 @@ export const Signup = ({
           sendEmailVerification(userCredential.user);
         })
         .catch((error) => {
-          if (error === "Firebase: Error (auth/invalid-email).") {
-            setError("Invalid Email");
-          } else if (error === "Firebase: Error (auth/user-not-found).") {
-            setError("Account does not exists");
-          } else if (error === "Firebase: Error (auth/wrong-password).") {
-            setError("wrong password");
-          }
+          alert(error.message);
         });
     } else {
       alert("passwords didnt match");
@@ -191,8 +183,6 @@ export const Login = ({
   password,
 }) => {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const loginwithEmailPassword = async () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -200,13 +190,7 @@ export const Login = ({
         navigate("/");
       })
       .catch((error) => {
-        if (error.message === "Firebase: Error (auth/invalid-email).") {
-          setError("Invalid Email");
-        } else if (error.message === "Firebase: Error (auth/user-not-found).") {
-          setError("Account does not exists");
-        } else if (error.message === "Firebase: Error (auth/wrong-password).") {
-          setError("wrong password");
-        }
+        alert(error.message);
       });
   };
   const loginwithFacebook = () => {
@@ -234,13 +218,8 @@ export const Login = ({
   };
   const resetPassword = async () => {
     const auth = getAuth(app);
-    await sendPasswordResetEmail(auth, email).then(() => {
-      setMessage("password reset link sent!");
-    });
+    await sendPasswordResetEmail(auth, email);
   };
-  // useEffect(() => {
-  //   setError(error);
-  // }, [error]);
   return (
     <div className="mainLoginContainer paddingtop">
       <div className="loginText">
@@ -271,14 +250,7 @@ export const Login = ({
             placeholder="Enter your password"
           />
           <div onClick={resetPassword}>
-            {message === "" ? (
-              <h1 className="forgetPassword">Forget password?</h1>
-            ) : (
-              <p className="forgetPassword">{message}</p>
-            )}
-          </div>
-          <div onClick={resetPassword}>
-            {error === "" ? <></> : <p className="forgetPassword">{error}</p>}
+            <h1 className="forgetPassword">Forget password?</h1>
           </div>
         </div>
         <div
