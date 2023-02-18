@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deletePostUser, getUserPosts } from "../Api/Api";
 import moment from "moment";
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const params = useParams();
+  const navigate = useNavigate();
   const authorId = params.authorId;
   const [blog, setBlog] = useState([]);
   const getData = () => {
@@ -34,7 +35,10 @@ const UserDashboard = () => {
             <div className="blogsContainer" key={index}>
               <div className="blogCard">
                 <div className="blogInfo">
-                  <div className="blogTitleDescription">
+                  <div
+                    className="blogTitleDescription"
+                    onClick={() => navigate(`/blogs/blog/${blogs._id}`)}
+                  >
                     <h2>{blogs.title}</h2>
                     <p>{blogs.description}</p>
                   </div>
