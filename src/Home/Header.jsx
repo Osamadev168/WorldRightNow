@@ -5,8 +5,6 @@ import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import profilepic from "../../assets/profilepic.jpg";
-// import image1 from "../../assets/1.jpg";
-// import profilepic from "../../assets/1.jpg";
 const Header = ({ children }) => {
   const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
@@ -17,9 +15,6 @@ const Header = ({ children }) => {
     });
     navigate("/account");
   };
-
-  useEffect(() => {}, [user, refresh]);
-
   let profileRef = useRef();
   useEffect(() => {
     let handler = (e) => {
@@ -85,15 +80,13 @@ const Header = ({ children }) => {
               {user.displayName === null ? user.email : user.displayName}!
             </p> */}
               {/* <a onClick={() => logout()}>Logout</a> */}
-              <Link
-                to="createblog"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
+
+              <a
+                className="primaryButton headerButton"
+                onClick={() => navigate("/createblog")}
               >
-                <a className="primaryButton headerButton">Create blog</a>
-              </Link>
+                Create blog
+              </a>
               <div className="profile" ref={profileRef}>
                 <div className="picdropdown" onClick={toggleProfile}>
                   <div
@@ -124,9 +117,9 @@ const Header = ({ children }) => {
                   }`}
                 >
                   <ul>
-                    <Link to={`blogs/user/${user.uid}`}>
+                    <div onClick={() => navigate(`/blogs/user/${user.uid}`)}>
                       <DropdownItem text={"Dashboard"} />
-                    </Link>
+                    </div>
                     <DropdownItem text={"Help"} />
                     <DropdownItem text={"Logout"} link={() => logout()} />
                   </ul>

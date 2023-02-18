@@ -53,3 +53,10 @@ export const submitComment = async (postId, comment) => {
     console.log(e);
   }
 };
+export const deletePostUser = async (id) => {
+  try {
+    await axios.delete(`http://localhost:5000/post/user/delete/blog/${id}`);
+  } catch (e) {
+    console.log(e.message);
+  }
+};

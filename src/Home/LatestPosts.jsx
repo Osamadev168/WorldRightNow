@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
+  const navigate = useNavigate();
   const sliderRef = useRef(null);
   const settings = {
     dots: false,
@@ -47,11 +47,9 @@ const LatestPosts = ({ category }) => {
       setPosts(res.data);
     });
   };
-
   useEffect(() => {
     getPosts();
   }, [category]);
-
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
@@ -64,11 +62,6 @@ const LatestPosts = ({ category }) => {
       <Slider {...settings} ref={sliderRef} className="slider">
         {post && post.length > 0 ? (
           post.map((posts, index) => {
-            const addEllipsis = (str, limit) => {
-              return str.length > limit
-                ? str.substring(0, limit) + "...."
-                : str;
-            };
             let wordsPerMinute = 150;
             let noOfWords = posts.body.split(" ").length;
             let readingTime = noOfWords / wordsPerMinute;
@@ -78,31 +71,27 @@ const LatestPosts = ({ category }) => {
             let displayYear = date.substring(10);
             let displayDate = `${displayMonth},${displayYear}`;
             return (
-              <div className="PopularCard" key={index}>
-                <Link
-                  to={`blogs/blog/${posts._id}`}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                >
-                  <div
-                    className="image"
-                    style={{ backgroundImage: `url(${posts.image})` }}
-                  ></div>
-                  <div className="title">
-                    <h1 className="posttitle">{posts.category}</h1>
-                    <div className="info">
-                      <p>{displayDate}</p>
-                      <p>&nbsp;|&nbsp;</p>
-                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
-                    </div>
+              <div
+                className="PopularCard"
+                key={index}
+                onClick={() => navigate(`/blogs/blog/${posts._id}`)}
+              >
+                <div
+                  className="image"
+                  style={{ backgroundImage: `url(${posts.image})` }}
+                ></div>
+                <div className="title">
+                  <h1 className="posttitle">{posts.category}</h1>
+                  <div className="info">
+                    <p>{displayDate}</p>
+                    <p>&nbsp;|&nbsp;</p>
+                    {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
                   </div>
-                  <div className="description">
-                    <p className="blogtitle">{posts.title}</p>
-                    <p className="data">{posts.description}</p>
-                  </div>
-                </Link>
+                </div>
+                <div className="description">
+                  <p className="blogtitle">{posts.title}</p>
+                  <p className="data">{posts.description}</p>
+                </div>
               </div>
             );
           })
@@ -127,5 +116,4 @@ const LatestPosts = ({ category }) => {
     </div>
   );
 };
-
 export default LatestPosts;

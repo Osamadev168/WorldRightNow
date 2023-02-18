@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserPosts } from "../Api/Api";
+import { deletePostUser, getUserPosts } from "../Api/Api";
 import moment from "moment";
 const UserDashboard = () => {
+  const [refresh, setRefreh] = useState(false);
   const params = useParams();
   const authorId = params.authorId;
   const [blog, setBlog] = useState([]);
@@ -11,15 +12,20 @@ const UserDashboard = () => {
       setBlog(res.data);
     });
   };
+
   useEffect(() => {
     getData();
-    console.log(blog);
-  }, [authorId]);
+  }, [authorId, refresh]);
   return (
     <div className="dashboardContainer paddingtop">
       <h3 className="dashboardTitle">Dashboard</h3>
       {blog.length > 0 ? (
         blog.map((blogs, index) => {
+          const removePostUser = (id) => {
+            deletePostUser(id).then(() => {
+              setRefreh(!refresh);
+            });
+          };
           let wordsPerMinute = 150;
           let noOfWords = blogs.body.split(" ").length;
           let readingTime = noOfWords / wordsPerMinute;
@@ -47,7 +53,11 @@ const UserDashboard = () => {
                 </div>
                 <div className="blogOptionsStats">
                   <div className="blogOptions">
-                    <div className="delete" style={{ cursor: "pointer" }}>
+                    <div
+                      className="delete"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => removePostUser(blogs._id)}
+                    >
                       <svg
                         width="22"
                         height="25"

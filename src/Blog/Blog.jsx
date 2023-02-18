@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { getBlog, submitComment } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
-import commentPicture from "../../assets/comment.png";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
@@ -17,6 +16,7 @@ const Blog = () => {
       setBlog(res.data);
     });
   };
+
   useEffect(() => {
     fetchBlog(id);
     window.scrollTo(0, 0);
@@ -78,7 +78,6 @@ const Blog = () => {
     </>
   );
 };
-
 const Comments = ({ blog, id, setRefresh, refresh }) => {
   const defaultValues = {
     username: "",
