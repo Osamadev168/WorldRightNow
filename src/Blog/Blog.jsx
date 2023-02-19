@@ -16,15 +16,16 @@ const Blog = () => {
       setBlog(res.data);
     });
   };
-
+  const doc_title = blog.title;
   useEffect(() => {
     fetchBlog(id);
-    window.scrollTo(0, 0);
+    document.title = doc_title;
 
+    window.scrollTo(0, 0);
     if (refresh) {
       fetchBlog(id);
     }
-  }, [id, refresh]);
+  }, [id, refresh, doc_title]);
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;
   let readingTime = noOfWords / wordsPerMinute;
@@ -104,7 +105,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
       </h4>
       {blog.comments && blog.comments.length > 0 ? (
         blog.comments.map((commment) => {
-          const date = new Date(comment.date).toDateString();
+          const date = new Date(commment.date).toDateString();
           return (
             <div className="main_Comments_Container">
               <div className="photo_UserName_Contianer">

@@ -151,6 +151,8 @@ export const Account = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfrimPassword] = useState("");
+  document.title = active === "login" ? "Login" : "Sign up";
+
   return (
     <>
       {active === "login" ? (

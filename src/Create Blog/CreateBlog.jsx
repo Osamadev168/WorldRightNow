@@ -3,9 +3,9 @@ import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useContext, useEffect, useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { submitPost } from "../Api/Api";
 import "../App.css";
@@ -31,6 +31,7 @@ const CreateBlog = () => {
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const setApproved = () => {
     return user.uid === "Idfri64OkLcihU4YP5j2hvC14M32" ? true : false;
   };
@@ -47,19 +48,19 @@ const CreateBlog = () => {
         sessionStorage.setItem("image", res.data.url);
       });
   };
-
   const submitBlog = async () => {
     try {
       await submitPost(blog).then(() => {
-        sessionStorage.setItem("image", "");
-        toast("Blog Submitted :)");
+        navigate("/");
         setBlog(blogdefaultValues);
+        sessionStorage.setItem("image", "");
       });
     } catch (e) {
-      alert(e);
+      alert(e.message);
     }
   };
   useEffect(() => {
+    document.title = "Create Blog";
     setImage(sessionStorage.getItem("image"));
     if (file) {
       uploadImage();
@@ -101,9 +102,7 @@ const CreateBlog = () => {
             </label>
           </div>
         </div>
-        <div>
-          <ToastContainer />
-        </div>
+        <div></div>
         <div className="createblogformcontainer">
           <textarea
             value={blog.description}

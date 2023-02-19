@@ -15,9 +15,11 @@ import UserInfo from "./Account/UserInfo.jsx";
 import AdminDashboard from "../src/Dashboards/AdminDashboard";
 import { useContext } from "react";
 const ProtectedRoutes = ({ children }) => {
-  const { user } = useContext(UserContext);
-  if (user === null) {
+  const { user, loading } = useContext(UserContext);
+  if (!user) {
     return <Navigate to="/" replace />;
+  } else if (loading) {
+    return children;
   } else if (user !== null) {
     return children;
   } else if (user && user.uid !== "Idfri64OkLcihU4YP5j2hvC14M32") {
@@ -97,7 +99,7 @@ const App = () => {
             }
           />
           <Route
-            path="/blogs/blog/:_id"
+            path="/blogs/:title/:_id"
             element={
               <Wrapper>
                 <Header />

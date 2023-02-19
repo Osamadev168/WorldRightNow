@@ -11,6 +11,7 @@ import moment from "moment";
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState("");
   const params = useParams();
   const navigate = useNavigate();
   const authorId = params.authorId;
@@ -20,56 +21,47 @@ const UserDashboard = () => {
       setBlog(res.data);
     });
   };
-
+  const handleYesDailog = () => {
+    deletePostUser(id).then(() => {
+      setOpen(false);
+      setRefreh(!refresh);
+    });
+  };
   useEffect(() => {
+    document.title = "Dashboard";
+
     getData();
   }, [authorId, refresh]);
   return (
     <div className="dashboardContainer paddingtop">
       <h3 className="dashboardTitle">Dashboard</h3>
-
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Deleting Blog"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this blog?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>No</Button>
+          <Button onClick={handleYesDailog} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
       {blog.length > 0 ? (
         blog.map((blogs, index) => {
-          const handleClickOpen = () => {
-            setOpen(true);
-          };
-
-          const handleCloseYes = () => {
-            deletePostUser(blogs._id).then(() => {
-              setOpen(false);
-              setRefreh(!refresh);
-            });
-          };
-          const handleCloseNo = () => {
-            setOpen(false);
-          };
           let wordsPerMinute = 150;
           let noOfWords = blogs.body.split(" ").length;
           let readingTime = noOfWords / wordsPerMinute;
           let round = Math.floor(readingTime);
           return (
             <div className="blogsContainer" key={index}>
-              <Dialog
-                open={open}
-                onClose={handleCloseNo}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"Deleting Blog"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to delete this blog?
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleCloseNo}>No</Button>
-                  <Button onClick={handleCloseYes} autoFocus>
-                    Yes
-                  </Button>
-                </DialogActions>
-              </Dialog>
               <div className="blogCard">
                 <div className="blogInfo">
                   <div
@@ -97,7 +89,10 @@ const UserDashboard = () => {
                     <div
                       className="delete"
                       style={{ cursor: "pointer" }}
-                      onClick={handleClickOpen}
+                      onClick={() => {
+                        setId(blogs._id);
+                        setOpen(true);
+                      }}
                     >
                       <svg
                         width="22"
