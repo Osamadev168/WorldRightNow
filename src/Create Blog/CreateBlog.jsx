@@ -20,9 +20,14 @@ const blogdefaultValues = {
   author: "",
   auhtorId: "",
   approved: true,
+  tags: [],
 };
 const CreateBlog = () => {
+  document.title = "Create Blog";
   const [progress, setProgress] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [value, setValue] = useState("");
+  const [refresh, setRefresh] = useState(false);
   const [char, setChar] = useState(0);
   const [charDescription, setCharDescription] = useState(0);
   const [activediv, setActiveDiv] = useState("");
@@ -59,13 +64,21 @@ const CreateBlog = () => {
       alert(e.message);
     }
   };
+  const handleEnterPress = (e) => {
+    if (e.key === "Enter" && value) {
+      setTags([...tags, value.toLowerCase().replace(/\s+/g, "-")]);
+      setBlog({ ...blog, tags: tags });
+      setRefresh(!refresh);
+      setValue("");
+    }
+  };
   useEffect(() => {
-    document.title = "Create Blog";
+    setBlog({ ...blog, tags: tags });
     setImage(sessionStorage.getItem("image"));
     if (file) {
       uploadImage();
     }
-  }, [file]);
+  }, [file, refresh]);
 
   return (
     <div
@@ -139,7 +152,6 @@ const CreateBlog = () => {
               placeholder: "Start typing your blog post here...",
               mediaEmbed: { previewsInData: true },
               toolbar: [
-                "imageInsert",
                 "Heading",
                 "|",
                 "Bold",
@@ -159,6 +171,39 @@ const CreateBlog = () => {
             Hint: Break the content in several parts
           </label>
         </div>
+        <div>Tags</div>
+        <input
+          value={value}
+          type="text"
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          onKeyDown={handleEnterPress}
+        />
+
+        <ul>
+          {tags.length > 0 ? (
+            tags.map((tag, index) => {
+              return (
+                <div
+                  style={{ display: "flex", flexDirection: "row-reverse" }}
+                  key={index}
+                >
+                  <button
+                    onClick={() => {
+                      tags.splice(tags.indexOf(tag), 1);
+                      setRefresh(!refresh);
+                    }}
+                  >
+                    <p>{tag}</p>x
+                  </button>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </ul>
         <div className="createblogformcontainer">
           <h4 className="createblogbodytext">Select a category</h4>
 

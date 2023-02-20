@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { getBlog, submitComment } from "../Api/Api";
+import { useParams, useNavigate } from "react-router-dom";
+import { getBlog, getBlogsfromTag, submitComment } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
@@ -16,6 +16,7 @@ const Blog = () => {
       setBlog(res.data);
     });
   };
+  const navigate = useNavigate();
   const doc_title = blog.title;
   useEffect(() => {
     fetchBlog(id);
@@ -66,6 +67,26 @@ const Blog = () => {
           className="blogBody"
           dangerouslySetInnerHTML={{ __html: blog.body }}
         ></div>
+        <div>
+          {blog.tags && blog.tags.length > 0 ? (
+            blog.tags.map((tags) => {
+              return (
+                <div style={{ color: "green", backgroundColor: "black" }}>
+                  <p
+                    onClick={() =>
+                      navigate(`/blog/${tags.replace(/\s+/g, "-")}`)
+                    }
+                    style={{ cursor: "pointer" }}
+                  >
+                    {tags}
+                  </p>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </div>
         <Comments
           blog={blog}
           id={id}
