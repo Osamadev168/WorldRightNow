@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getBlogsfromTag } from "../Api/Api";
-
 const BlogTag = () => {
   const [blogs, setBlogs] = useState([]);
-  //   useEffect(() => {
-  //     first;
-
-  //     return () => {
-  //       second;
-  //     };
-  //   }, [third]);
   const params = useParams();
   const tag = params.tags;
   const getData = () => {
@@ -22,7 +14,6 @@ const BlogTag = () => {
     getData();
     console.log(blogs);
   }, [tag]);
-
   return (
     <div style={{ margin: 100 }}>
       {blogs && blogs.length > 0 ? (
@@ -35,5 +26,4 @@ const BlogTag = () => {
     </div>
   );
 };
-
 export default BlogTag;

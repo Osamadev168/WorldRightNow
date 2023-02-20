@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getBlog, getBlogsfromTag, submitComment } from "../Api/Api";
+import { getBlog, submitComment } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
