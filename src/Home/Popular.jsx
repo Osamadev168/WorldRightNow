@@ -70,11 +70,13 @@ const Popular = ({ category }) => {
             let displayMonth = date.substring(4, 10);
             let displayYear = date.substring(10);
             let displayDate = `${displayMonth},${displayYear}`;
+            let title = posts.title;
+            title = title.replace(/\s+/g, "-");
             return (
               <div
                 className="PopularCard"
                 key={index}
-                onClick={() => navigate(`/blogs/blog/${posts._id}`)}
+                onClick={() => navigate(`/blogs/${title}/${posts._id}`)}
               >
                 <div
                   className="image"

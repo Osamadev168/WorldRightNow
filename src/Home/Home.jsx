@@ -6,6 +6,7 @@ import Popular from "./Popular";
 import Hero from "./hero";
 import FooterContainer from "./FooterContainer.jsx";
 const Home = () => {
+  document.title = "Home";
   const [category, setCategory] = useState("");
   return (
     <>

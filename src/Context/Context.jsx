@@ -4,9 +4,11 @@ import { app } from "../Firebase/Config";
 export const UserContext = createContext(null);
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const auth = getAuth(app);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setLoading(true);
       setUser(currentUser);
     });
     return () => {
@@ -14,7 +16,7 @@ const ContextProvider = ({ children }) => {
     };
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loading }}>
       {children}
     </UserContext.Provider>
   );
