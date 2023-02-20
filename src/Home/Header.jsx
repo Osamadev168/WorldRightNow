@@ -44,10 +44,14 @@ const Header = ({ children }) => {
 
   return (
     <div className="HeaderMainContainer">
-      <div className="div1Header">
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          <p className="logoHeader">Logo</p>
-        </Link>
+      <div
+        className="div1Header"
+        onClick={() => navigate("/")}
+        style={{
+          cursor: "pointer",
+        }}
+      >
+        <p className="logoHeader">Logo</p>
         <ul
           className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}
           style={{ listStyle: "none" }}
