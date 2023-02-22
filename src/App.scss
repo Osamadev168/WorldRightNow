@@ -892,6 +892,9 @@ body {
     }
   }
 }
+
+//Create Blog Page
+
 .titleinput {
   width: 100%;
   height: 80px;
@@ -988,6 +991,49 @@ body {
     padding: 0px 10px;
   }
 }
+.tagssectioncontainer {
+  flex-direction: row;
+  gap: 40px;
+  .container1,
+  .container2 {
+    width: 50%;
+    .tagsinput {
+      font-size: 18px;
+      font-weight: 600;
+      height: 50px;
+    }
+    .labelcreateblog {
+      font-size: 14px;
+    }
+    .tagscontainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      .tag {
+        display: flex;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        box-shadow: inset 0 0 0 1px $black;
+        padding: 4px 20px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+        gap: 8px;
+        &:hover {
+          background: rgba(0, 0, 0, 0.05);
+          box-shadow: none;
+        }
+      }
+    }
+    .notags {
+      font-style: italic;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+}
 .labelcreateblog {
   font-family: "Montserrat";
   font-style: italic;
@@ -1004,7 +1050,6 @@ body {
   gap: 10px;
   cursor: pointer;
   width: 100%;
-  // height: 54px;
   background: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
   border-radius: 33px;
   font-family: "Montserrat";
@@ -1013,6 +1058,25 @@ body {
   font-size: 10px;
   line-height: 24px;
   color: #ffffff;
+  border: none;
+}
+.createblogbutton2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+  gap: 10px;
+  cursor: pointer;
+  width: 100%;
+  background: transparent;
+  border-radius: 33px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 24px;
+  color: #909090;
 }
 .categorycreateblog {
   display: flex;
@@ -1566,6 +1630,45 @@ body {
   .blogBody {
     p {
       font-size: 16px;
+    }
+  }
+
+  .tagssectioncontainer {
+    flex-direction: column;
+    gap: 40px;
+    .container1,
+    .container2 {
+      width: 100%;
+      .tagsinput {
+        font-size: 18px;
+        font-weight: 600;
+        height: 50px;
+      }
+      .labelcreateblog {
+        font-size: 14px;
+      }
+      .tagscontainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        .tag {
+          display: flex;
+          cursor: pointer;
+          justify-content: center;
+          align-items: center;
+          box-shadow: inset 0 0 0 1px $black;
+          padding: 4px 20px;
+          border-radius: 50px;
+          font-size: 12px;
+          font-weight: 600;
+          gap: 8px;
+          &:hover {
+            background: rgba(0, 0, 0, 0.05);
+            box-shadow: none;
+          }
+        }
+      }
     }
   }
   //Dashboard Page
