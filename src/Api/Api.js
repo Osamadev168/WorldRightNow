@@ -90,3 +90,10 @@ export const getBlogsfromTag = async (tag) => {
     console.log(e.message);
   }
 };
+export const edit_Blog = async (id, blog) => {
+  try {
+    await axios.put(`http://localhost:5000/blog/update/${id}`, blog);
+  } catch (e) {
+    console.log(e.message);
+  }
+};

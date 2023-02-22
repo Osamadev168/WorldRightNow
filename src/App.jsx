@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home/Home.jsx";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Account/Login.jsx";
 import ContextProvider, { UserContext } from "./Context/Context.jsx";
 import CreateBlog from "./Create Blog/CreateBlog.jsx";
@@ -10,21 +10,30 @@ import Footer from "./Home/Footer.jsx";
 import FooterContainer from "./Home/FooterContainer.jsx";
 import UserDashboard from "./Dashboards/UserDashboard.jsx";
 import Blog from "./Blog/Blog.jsx";
+import EditBlog from "./Blog/EditBlog";
 import Wrapper from "./Home/Wrapper.jsx";
 import UserInfo from "./Account/UserInfo.jsx";
 import AdminDashboard from "../src/Dashboards/AdminDashboard";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import BlogTag from "./Blog/BlogTag";
+import { useState } from "react";
+
 const ProtectedRoutes = ({ children }) => {
-  const { user, loading } = useContext(UserContext);
-  if (!user && loading) {
+  const [authUser, setAuthUser] = useState({});
+  useEffect(() => {
+    setAuthUser(JSON.parse(localStorage.getItem("authUser")));
+  }, []);
+  if (!authUser) {
     return <Navigate to="/" replace />;
-  } else if (user && loading) {
+  } else if (authUser) {
     return children;
-  } else if (user !== null && loading) {
-    return children;
-  } else if (user && user.uid !== "Idfri64OkLcihU4YP5j2hvC14M32") {
-    return children;
+  }
+  return children;
+};
+const AdminRoute = ({ children }) => {
+  const { user } = useContext(UserContext);
+  if (user && user.uid !== "Idfri64OkLcihU4YP5j2hvC14M32") {
+    return <Navigate to="/" />;
   }
   return children;
 };
@@ -35,6 +44,7 @@ const InValidRoute = () => {
     </div>
   );
 };
+
 const App = () => {
   return (
     <ContextProvider>
@@ -76,6 +86,18 @@ const App = () => {
             }
           />
           <Route
+            path="/blog/edit/:blogid"
+            element={
+              <ProtectedRoutes>
+                <Wrapper>
+                  <Header />
+                  <EditBlog />
+                  <Footer />
+                </Wrapper>
+              </ProtectedRoutes>
+            }
+          />
+          <Route
             path="/dashboard/user/:authorId"
             element={
               <ProtectedRoutes>
@@ -90,13 +112,13 @@ const App = () => {
           <Route
             path="/dashboard/admin"
             element={
-              <ProtectedRoutes>
+              <AdminRoute>
                 <Wrapper>
                   <Header />
                   <AdminDashboard />
                   <Footer />
                 </Wrapper>
-              </ProtectedRoutes>
+              </AdminRoute>
             }
           />
           <Route
