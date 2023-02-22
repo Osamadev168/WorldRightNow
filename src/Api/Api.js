@@ -82,3 +82,11 @@ export const deletePostUser = async (id) => {
     console.log(e.message);
   }
 };
+export const getBlogsfromTag = async (tag) => {
+  try {
+    let response = await axios.get(`http://localhost:5000/blog/tag/${tag}`);
+    return response;
+  } catch (e) {
+    console.log(e.message);
+  }
+};

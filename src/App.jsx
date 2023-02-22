@@ -14,13 +14,14 @@ import Wrapper from "./Home/Wrapper.jsx";
 import UserInfo from "./Account/UserInfo.jsx";
 import AdminDashboard from "../src/Dashboards/AdminDashboard";
 import { useContext } from "react";
+import BlogTag from "./Blog/BlogTag";
 const ProtectedRoutes = ({ children }) => {
   const { user, loading } = useContext(UserContext);
-  if (!user) {
+  if (!user && loading) {
     return <Navigate to="/" replace />;
-  } else if (loading) {
+  } else if (user && loading) {
     return children;
-  } else if (user !== null) {
+  } else if (user !== null && loading) {
     return children;
   } else if (user && user.uid !== "Idfri64OkLcihU4YP5j2hvC14M32") {
     return children;
@@ -104,6 +105,16 @@ const App = () => {
               <Wrapper>
                 <Header />
                 <Blog />
+                <FooterContainer />
+              </Wrapper>
+            }
+          />
+          <Route
+            path="/blog/:tags"
+            element={
+              <Wrapper>
+                <Header />
+                <BlogTag />
                 <FooterContainer />
               </Wrapper>
             }
