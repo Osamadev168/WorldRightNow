@@ -17,6 +17,7 @@ import AdminDashboard from "../src/Dashboards/AdminDashboard";
 import { useContext, useEffect } from "react";
 import BlogTag from "./Blog/BlogTag";
 import { useState } from "react";
+import AllBlogs from "./All Blogs/AllBlogs";
 
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState({});
@@ -137,6 +138,16 @@ const App = () => {
               <Wrapper>
                 <Header />
                 <BlogTag />
+                <FooterContainer />
+              </Wrapper>
+            }
+          />
+          <Route
+            path="/blogs"
+            element={
+              <Wrapper>
+                <Header />
+                <AllBlogs />
                 <FooterContainer />
               </Wrapper>
             }
