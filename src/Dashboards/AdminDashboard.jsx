@@ -16,6 +16,7 @@ import moment from "moment";
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState("");
   const navigate = useNavigate();
   const [blog, setBlog] = useState([]);
   const getData = () => {
@@ -33,7 +34,33 @@ const UserDashboard = () => {
   return (
     <div className="dashboardContainer paddingtop">
       <h3 className="dashboardTitle">Dashboard</h3>
-
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Deleting Blog"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this blog?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>No</Button>
+          <Button
+            onClick={() =>
+              deletePostAdmin(id).then(() => {
+                setOpen(false);
+                setRefreh(!refresh);
+              })
+            }
+            autoFocus
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
       {blog.length > 0 ? (
         blog.map((blogs, index) => {
           const handleClickOpen = () => {
@@ -82,7 +109,10 @@ const UserDashboard = () => {
                     <div
                       className="delete"
                       style={{ cursor: "pointer" }}
-                      onClick={() => setOpen(true)}
+                      onClick={() => {
+                        setId(blogs._id);
+                        setOpen(true);
+                      }}
                     >
                       <svg
                         width="22"
@@ -107,39 +137,10 @@ const UserDashboard = () => {
                           d="M14.6158 8.70687C14.5229 8.7411 14.4006 8.8389 14.3371 8.93181L14.2246 9.09807V15.0491V21.0001L14.3273 21.1321C14.4544 21.2935 14.6647 21.4059 14.8456 21.4059C15.0217 21.4059 15.271 21.2543 15.3835 21.0783C15.4666 20.9512 15.4715 20.648 15.4715 15.0246C15.4715 9.45014 15.4666 9.09807 15.3835 8.97093C15.2173 8.71176 14.9092 8.60419 14.6158 8.70687Z"
                           fill="black"
                         />
-                        <Dialog
-                          open={open}
-                          onClose={() => setOpen(false)}
-                          aria-labelledby="alert-dialog-title"
-                          aria-describedby="alert-dialog-description"
-                        >
-                          <DialogTitle id="alert-dialog-title">
-                            {"Deleting Blog"}
-                          </DialogTitle>
-                          <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                              Are you sure you want to delete this blog?
-                            </DialogContentText>
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={() => setOpen(false)}>No</Button>
-                            <Button
-                              onClick={() =>
-                                deletePostAdmin(blogs._id).then(() => {
-                                  setOpen(false);
-                                  setRefreh(!refresh);
-                                })
-                              }
-                              autoFocus
-                            >
-                              Yes
-                            </Button>
-                          </DialogActions>
-                        </Dialog>
                       </svg>
                       Delete
                     </div>
-                    <div className="edit" style={{ cursor: "pointer" }}>
+                    {/* <div className="edit" style={{ cursor: "pointer" }}>
                       <svg
                         width="25"
                         height="25"
@@ -157,7 +158,7 @@ const UserDashboard = () => {
                         />
                       </svg>
                       Edit
-                    </div>
+                    </div> */}
                   </div>
                   <div className="blogStats">
                     <div className="views">
