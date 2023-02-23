@@ -2,7 +2,6 @@
 
 body {
   background-color: #f9f9f9;
-  scroll-behavior: smooth;
 }
 
 .noscroll {
@@ -427,8 +426,8 @@ body {
   justify-content: center;
   border: 1px solid transparent;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .sliderButtons .nextButton:hover,
 .sliderButtons .prevButton:hover {
@@ -1086,6 +1085,56 @@ body {
   padding: 0px 10px;
 }
 
+.tagssectioncontainer {
+  flex-direction: row;
+  gap: 40px;
+}
+.tagssectioncontainer .container1,
+.tagssectioncontainer .container2 {
+  width: 50%;
+}
+.tagssectioncontainer .container1 .tagsinput,
+.tagssectioncontainer .container2 .tagsinput {
+  font-size: 18px;
+  font-weight: 600;
+  height: 50px;
+}
+.tagssectioncontainer .container1 .labelcreateblog,
+.tagssectioncontainer .container2 .labelcreateblog {
+  font-size: 14px;
+}
+.tagssectioncontainer .container1 .tagscontainer,
+.tagssectioncontainer .container2 .tagscontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+.tagssectioncontainer .container1 .tagscontainer .tag,
+.tagssectioncontainer .container2 .tagscontainer .tag {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1px #141a31;
+  padding: 4px 20px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 8px;
+}
+.tagssectioncontainer .container1 .tagscontainer .tag:hover,
+.tagssectioncontainer .container2 .tagscontainer .tag:hover {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+}
+.tagssectioncontainer .container1 .notags,
+.tagssectioncontainer .container2 .notags {
+  font-style: italic;
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .labelcreateblog {
   font-family: "Montserrat";
   font-style: italic;
@@ -1108,11 +1157,12 @@ body {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
-  border: none;
   font-size: 10px;
   line-height: 24px;
   color: #ffffff;
+  border: none;
 }
+
 .createblogbutton2 {
   display: flex;
   flex-direction: row;
@@ -1122,14 +1172,14 @@ body {
   gap: 10px;
   cursor: pointer;
   width: 100%;
-  background: "transparent";
+  background: transparent;
   border-radius: 33px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 10px;
   line-height: 24px;
-  color: #d45656;
+  color: #909090;
 }
 
 .categorycreateblog {
@@ -1245,12 +1295,7 @@ body {
   width: 60%;
   gap: 20px;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  h2 {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
   font-size: 28px;
   font-weight: 800;
   line-height: 34px;
@@ -1263,20 +1308,10 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  h2:hover {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2:hover {
   text-decoration: underline;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  p {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -1291,50 +1326,24 @@ body {
   gap: 20px;
   align-items: center;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .status {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .status {
   padding: 10px 25px;
   border-radius: 50px;
   font-size: 18px;
   font-weight: 700;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .underreview {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .underreview {
   color: #000000;
   background-color: #ffa800;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .active {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .active {
   color: #ffffff;
   background-color: #009006;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .dateTime {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime {
   display: flex;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .dateTime
-  p {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime p {
   color: #140421;
   font-size: 16px;
   font-weight: 600;
@@ -1352,54 +1361,14 @@ body {
   align-items: center;
   gap: 25px;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .delete,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .edit,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .views,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .comments,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .delete,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .edit,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .views,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .comments {
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .delete,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .edit,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .views,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .delete,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .edit,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .views,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1478,6 +1447,83 @@ body {
   gap: 20px;
 }
 
+.AllBlogsContainer {
+  margin-top: 50px;
+}
+.AllBlogsContainer .heroSlideshow {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 15px;
+  background: #f2f2f2;
+  margin-bottom: 50px;
+  padding: 30px;
+}
+.AllBlogsContainer .heroSlideshow .slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogImage {
+  flex: 3.1; /* Add this line */
+  margin: 0;
+  -o-object-fit: cover;
+     object-fit: cover; /* Add this line */
+}
+.AllBlogsContainer .heroSlideshow .slide .blogInfo {
+  flex: 5.5; /* Add this line */
+}
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription {
+  margin-top: 10px;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 38px;
+  color: #140421;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2:hover {
+  text-decoration: underline;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
+  font-size: 16px;
+  color: #140421;
+  font-weight: 500;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .imageAuthorName .blogCategory {
+  color: #fc2c7e;
+  font-weight: 600;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogType {
+  flex: 1.4;
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-start;
+}
+.AllBlogsContainer .heroSlideshow .slide .blogType span {
+  background: rgba(252, 44, 126, 0.1);
+  border-radius: 50px;
+  color: #fc2c7e;
+  padding: 8px 25px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 @media only screen and (max-width: 1024px) {
   .HeaderMainContainer .div1Header .div2Header {
     gap: 30px;
@@ -1512,6 +1558,29 @@ body {
   .text2contactus {
     font-size: 16px;
     line-height: 24px;
+  }
+  .AllBlogsContainer .heroSlideshow {
+    border-radius: 15px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide {
+    gap: 20px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogImage {
+    flex: 4; /* Add this line */
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo {
+    flex: 5.5; /* Add this line */
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogType {
+    flex: 0.5;
   }
 }
 @media only screen and (max-width: 920px) {
@@ -1648,6 +1717,49 @@ body {
   .blogBody p {
     font-size: 16px;
   }
+  .tagssectioncontainer {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .tagssectioncontainer .container1,
+  .tagssectioncontainer .container2 {
+    width: 100%;
+  }
+  .tagssectioncontainer .container1 .tagsinput,
+  .tagssectioncontainer .container2 .tagsinput {
+    font-size: 18px;
+    font-weight: 600;
+    height: 50px;
+  }
+  .tagssectioncontainer .container1 .labelcreateblog,
+  .tagssectioncontainer .container2 .labelcreateblog {
+    font-size: 14px;
+  }
+  .tagssectioncontainer .container1 .tagscontainer,
+  .tagssectioncontainer .container2 .tagscontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .tagssectioncontainer .container1 .tagscontainer .tag,
+  .tagssectioncontainer .container2 .tagscontainer .tag {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 0 1px #141a31;
+    padding: 4px 20px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 8px;
+  }
+  .tagssectioncontainer .container1 .tagscontainer .tag:hover,
+  .tagssectioncontainer .container2 .tagscontainer .tag:hover {
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: none;
+  }
   .dashboardContainer .dashboardTitle {
     text-align: center;
   }
@@ -1660,20 +1772,10 @@ body {
     width: 80%;
     align-items: center;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    h2 {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
     text-align: center;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    p {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
     text-align: center;
   }
   .dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime {
@@ -1696,6 +1798,32 @@ body {
   }
   .dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats {
     order: 1;
+  }
+  .AllBlogsContainer .heroSlideshow {
+    border-radius: 15px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide {
+    gap: 20px;
+    flex-direction: column;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogImage {
+    flex: auto;
+    width: 100%;
+    height: 250px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo {
+    flex: 5.5; /* Add this line */
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogType {
+    flex: 0.5;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -1876,26 +2004,30 @@ body {
   .dashboardContainer .blogsContainer .blogCard .blogInfo {
     width: 100%;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    h2 {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
     font-size: 20px;
     line-height: 28px;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    p {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
     font-size: 14px;
     line-height: 20px;
   }
   .dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime {
     gap: 13px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogImage {
+    height: 180px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
+    font-size: 15px;
+    line-height: 21px;
+  }
+  .AllBlogsContainer .heroSlideshow .slide .blogInfo .imageAuthorName p {
+    font-size: 13px;
   }
 }
 @media only screen and (max-width: 375px) {
@@ -1909,4 +2041,4 @@ body {
   .loginsignuptoggle {
     font-size: 17px;
   }
-} /*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map */
