@@ -44,14 +44,16 @@ const Header = ({ children }) => {
 
   return (
     <div className="HeaderMainContainer">
-      <div
-        className="div1Header"
-        onClick={() => navigate("/")}
-        style={{
-          cursor: "pointer",
-        }}
-      >
-        <p className="logoHeader">Logo</p>
+      <div className="div1Header">
+        <p
+          className="logoHeader"
+          onClick={() => navigate("/")}
+          style={{
+            cursor: "pointer",
+          }}
+        >
+          Logo
+        </p>
         <ul
           className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}
           style={{ listStyle: "none" }}
@@ -63,7 +65,7 @@ const Header = ({ children }) => {
             <a>Pricing</a>
           </li>
           <li>
-            <a>Blogs</a>
+            <a onClick={() => navigate("/blogs")}>Blogs</a>
           </li>
           <li>
             <a>FAQ's</a>

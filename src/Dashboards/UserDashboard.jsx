@@ -120,7 +120,11 @@ const UserDashboard = () => {
                       </svg>
                       Delete
                     </div>
-                    <div className="edit" style={{ cursor: "pointer" }}>
+                    <div
+                      className="edit"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/blog/edit/${blogs._id}`)}
+                    >
                       <svg
                         width="25"
                         height="25"
