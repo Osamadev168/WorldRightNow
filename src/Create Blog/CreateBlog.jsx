@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { submitPost } from "../Api/Api";
 import "../App.css";
+import { updateProfile } from "firebase/auth";
 const blogdefaultValues = {
   title: "",
   description: "",
@@ -56,10 +57,13 @@ const CreateBlog = () => {
   };
   const submitBlog = async () => {
     try {
-      await submitPost(blog).then(() => {
+      await submitPost(blog).then(async () => {
         navigate("/");
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
+        await updateProfile(user, {
+          photoURL: image,
+        });
       });
     } catch (e) {
       alert(e.message);
@@ -71,6 +75,7 @@ const CreateBlog = () => {
       setBlog({ ...blog, tags: tags });
       setRefresh(!refresh);
       setValue("");
+      setCharTags(0);
     }
   };
   useEffect(() => {
@@ -329,19 +334,25 @@ const CreateBlog = () => {
               </label>
             </div>
           </div>
-          {tags.length > 0 ? (
-            tags.map((tag, index) => {
-              return (
-                <div
-                  className="container2"
-                  onClick={() => {
-                    tags.splice(tags.indexOf(tag), 1);
-                    setRefresh(!refresh);
-                  }}
-                  key={index}
-                >
-                  <div className="tagscontainer">
-                    <div className="tag">
+          <div className="container2">
+            {tags.length > 0 ? (
+              <h4 className="createblogbodytext">Added Tags</h4>
+            ) : (
+              <></>
+            )}
+
+            <div className="tagscontainer">
+              {tags.length > 0 ? (
+                tags.map((tag, index) => {
+                  return (
+                    <div
+                      className="tag"
+                      onClick={() => {
+                        tags.splice(tags.indexOf(tag), 1);
+                        setRefresh(!refresh);
+                      }}
+                      key={index}
+                    >
                       {tag}
                       <svg
                         width="10"
@@ -356,13 +367,16 @@ const CreateBlog = () => {
                         />
                       </svg>
                     </div>
-                  </div>
+                  );
+                })
+              ) : (
+                <div>
+                  <h4 className="createblogbodytext">Added Tags</h4>
+                  <p className="notags">Not Tags added yet</p>
                 </div>
-              );
-            })
-          ) : (
-            <p className="notags">Not Tags added yet</p>
-          )}
+              )}
+            </div>
+          </div>
         </div>
         {/* <input
           className="titleinput tagsinput"

@@ -111,7 +111,7 @@ const App = () => {
             }
           />
           <Route
-            path="/dashboard/admin"
+            path="/dashboard/admin/:adminId"
             element={
               <AdminRoute>
                 <Wrapper>

@@ -99,7 +99,7 @@ const Header = ({ children }) => {
                     className="profilepic"
                     style={{
                       backgroundImage: `url(${
-                        user && user !== null ? user.photoURL : profilepic
+                        user ? user.photoURL : profilepic
                       })`,
                     }}
                   ></div>
@@ -126,7 +126,7 @@ const Header = ({ children }) => {
                     <div
                       onClick={() => {
                         user.uid === "Idfri64OkLcihU4YP5j2hvC14M32"
-                          ? navigate(`/dashboard/admin`)
+                          ? navigate(`/dashboard/admin/${user.uid}`)
                           : navigate(`/dashboard/user/${user.uid}`);
                       }}
                     >

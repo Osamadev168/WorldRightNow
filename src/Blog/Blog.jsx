@@ -67,6 +67,7 @@ const Blog = () => {
           className="blogBody"
           dangerouslySetInnerHTML={{ __html: blog.body }}
         ></div>
+
         <div>
           {blog.tags && blog.tags.length > 0 ? (
             blog.tags.map((tags) => {
