@@ -34,7 +34,7 @@ const Blog = () => {
     if (refresh) {
       fetchBlog(id);
     }
-  }, [id, refresh, doc_title]);
+  }, [id, refresh, doc_title, blog.author]);
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;
   let readingTime = noOfWords / wordsPerMinute;
