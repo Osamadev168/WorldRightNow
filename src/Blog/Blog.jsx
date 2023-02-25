@@ -76,26 +76,7 @@ const Blog = () => {
             className="blogBody"
             dangerouslySetInnerHTML={{ __html: blog.body }}
           ></div>
-          <div>
-            {blog.tags && blog.tags.length > 0 ? (
-              blog.tags.map((tags) => {
-                return (
-                  <div style={{ color: "green", backgroundColor: "black" }}>
-                    <p
-                      onClick={() =>
-                        navigate(`/blog/${tags.replace(/\s+/g, "-")}`)
-                      }
-                      style={{ cursor: "pointer" }}
-                    >
-                      {tags}
-                    </p>
-                  </div>
-                );
-              })
-            ) : (
-              <></>
-            )}
-          </div>
+
           <Comments
             blog={blog}
             id={id}
@@ -117,8 +98,13 @@ const Blog = () => {
                   let displayMonth = date.substring(4, 10);
                   let displayYear = date.substring(10);
                   let displayDate = `${displayMonth},${displayYear}`;
+                  let title = blog.title;
+                  title = title.replace(/\s+/g, "-");
                   return (
-                    <div className="Card">
+                    <div
+                      className="Card"
+                      onClick={() => navigate(`/blogs/${title}/${blog._id}`)}
+                    >
                       <div className="blogContent">
                         <h5 className="posttitle">{"Technology"}</h5>
                         <div className="info">

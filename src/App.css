@@ -21,7 +21,7 @@ body {
 
 .heroSection {
   height: 100vh;
-  background: url("./assets/herobg.png");
+  background-image: url("./assets/herobg.png");
   background-size: cover;
   background-position: center;
 }
@@ -434,8 +434,8 @@ body {
   justify-content: center;
   border: 1px solid transparent;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .sliderButtons .nextButton:hover,
 .sliderButtons .prevButton:hover {
@@ -916,7 +916,12 @@ body {
   display: flex;
   gap: 10px;
 }
-.blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
+.blogMainContainer
+  .blogRight
+  .blogRightContent
+  .authorBlogs
+  .Card
+  .blogContent {
   flex: 7;
 }
 .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
@@ -973,7 +978,12 @@ body {
   font-size: 12px;
   font-weight: 600;
 }
-.blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag:hover {
+.blogMainContainer
+  .blogRight
+  .blogRightContent
+  .blogTags
+  .tagsContainer
+  .tag:hover {
   background: rgba(0, 0, 0, 0.05);
   box-shadow: none;
 }
@@ -1473,7 +1483,12 @@ body {
   width: 60%;
   gap: 20px;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogTitleDescription
+  h2 {
   font-size: 28px;
   font-weight: 800;
   line-height: 34px;
@@ -1486,10 +1501,20 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2:hover {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogTitleDescription
+  h2:hover {
   text-decoration: underline;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogTitleDescription
+  p {
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -1504,24 +1529,50 @@ body {
   gap: 20px;
   align-items: center;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .status {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogStatusDateTime
+  .status {
   padding: 10px 25px;
   border-radius: 50px;
   font-size: 18px;
   font-weight: 700;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .underreview {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogStatusDateTime
+  .underreview {
   color: #000000;
   background-color: #ffa800;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .active {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogStatusDateTime
+  .active {
   color: #ffffff;
   background-color: #009006;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogStatusDateTime
+  .dateTime {
   display: flex;
 }
-.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime p {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogInfo
+  .blogStatusDateTime
+  .dateTime
+  p {
   color: #140421;
   font-size: 16px;
   font-weight: 600;
@@ -1539,22 +1590,72 @@ body {
   align-items: center;
   gap: 25px;
 }
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .delete,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .edit,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .views,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .delete,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .edit,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .views,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogOptions
+  .delete,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogOptions
+  .edit,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogOptions
+  .views,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogOptions
+  .comments,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogStats
+  .delete,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogStats
+  .edit,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogStats
+  .views,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogStats
+  .comments {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 16px;
   font-weight: 600;
 }
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
-.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogOptions
+  .comments,
+.dashboardContainer
+  .blogsContainer
+  .blogCard
+  .blogOptionsStats
+  .blogStats
+  .comments {
   margin: 0;
 }
 
@@ -1649,7 +1750,7 @@ body {
   flex: 3.1; /* Add this line */
   margin: 0;
   -o-object-fit: cover;
-     object-fit: cover; /* Add this line */
+  object-fit: cover; /* Add this line */
 }
 .AllBlogsContainer .heroSlideshow .slide .blogInfo {
   flex: 5.5; /* Add this line */
@@ -1670,7 +1771,12 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2:hover {
+.AllBlogsContainer
+  .heroSlideshow
+  .slide
+  .blogInfo
+  .blogTitleDescription
+  h2:hover {
   text-decoration: underline;
 }
 .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
@@ -1684,7 +1790,12 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-.AllBlogsContainer .heroSlideshow .slide .blogInfo .imageAuthorName .blogCategory {
+.AllBlogsContainer
+  .heroSlideshow
+  .slide
+  .blogInfo
+  .imageAuthorName
+  .blogCategory {
   color: #fc2c7e;
   font-weight: 600;
 }
@@ -1764,10 +1875,20 @@ body {
   .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card {
     gap: 8px;
   }
-  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
+  .blogMainContainer
+    .blogRight
+    .blogRightContent
+    .authorBlogs
+    .Card
+    .blogContent {
     flex: 7.5;
   }
-  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
+  .blogMainContainer
+    .blogRight
+    .blogRightContent
+    .authorBlogs
+    .Card
+    .blogImage {
     flex: 2.5;
     height: 50px;
   }
@@ -1777,7 +1898,12 @@ body {
   .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer {
     gap: 12px;
   }
-  .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag {
+  .blogMainContainer
+    .blogRight
+    .blogRightContent
+    .blogTags
+    .tagsContainer
+    .tag {
     padding: 6px 12px;
     font-size: 10px;
   }
@@ -1982,10 +2108,20 @@ body {
     width: 80%;
     align-items: center;
   }
-  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
+  .dashboardContainer
+    .blogsContainer
+    .blogCard
+    .blogInfo
+    .blogTitleDescription
+    h2 {
     text-align: center;
   }
-  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
+  .dashboardContainer
+    .blogsContainer
+    .blogCard
+    .blogInfo
+    .blogTitleDescription
+    p {
     text-align: center;
   }
   .dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime {
@@ -2200,11 +2336,21 @@ body {
   .dashboardContainer .blogsContainer .blogCard .blogInfo {
     width: 100%;
   }
-  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
+  .dashboardContainer
+    .blogsContainer
+    .blogCard
+    .blogInfo
+    .blogTitleDescription
+    h2 {
     font-size: 20px;
     line-height: 28px;
   }
-  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
+  .dashboardContainer
+    .blogsContainer
+    .blogCard
+    .blogInfo
+    .blogTitleDescription
+    p {
     font-size: 14px;
     line-height: 20px;
   }
@@ -2237,4 +2383,4 @@ body {
   .loginsignuptoggle {
     font-size: 17px;
   }
-}/*# sourceMappingURL=App.css.map */
+} /*# sourceMappingURL=App.css.map */
