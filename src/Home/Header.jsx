@@ -4,7 +4,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
-import profilepic from "../../assets/profilepic.jpg";
+import profilepic from "../../assets/Avatar.svg";
 import imgDashboard from "../../assets/dashboard.svg";
 import imgWrite from "../../assets/write.svg";
 import imgHelp from "../../assets/help.svg";
@@ -91,9 +91,7 @@ const Header = ({ children }) => {
                   <div
                     className="profilepic"
                     style={{
-                      backgroundImage: `url(${
-                        user ? user.photoURL : profilepic
-                      })`,
+                      backgroundImage: `url(${profilepic})`,
                     }}
                   ></div>
 
