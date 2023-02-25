@@ -9,6 +9,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import moment from "moment";
 import profilepic from "../../assets/Avatar.svg";
+import { useContext } from "react";
+import { UserContext } from "../Context/Context";
 
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
@@ -29,6 +31,7 @@ const UserDashboard = () => {
       setRefreh(!refresh);
     });
   };
+  const { user } = useContext(UserContext);
   useEffect(() => {
     document.title = "Dashboard";
 
@@ -63,7 +66,11 @@ const UserDashboard = () => {
           <div className="userCredentialContainer">
             <div className="userNameContainer">
               <p>Username: </p>
-              <input type="text" className="userName" value={"Daniyal Habib"} />
+              <input
+                type="text"
+                className="userName"
+                value={user && user.displayName}
+              />
               <div className="userNameButton">
                 <svg
                   width="18"
@@ -93,13 +100,13 @@ const UserDashboard = () => {
             </div>
             <div className="userEmailContainer">
               <p>Email: </p>
-              <p className="userEmail">daniyalhundred@gmail.com</p>
+              <p className="userEmail">{user && user.email}</p>
             </div>
           </div>
         </div>
         <div className="totalBlogsContainer">
           <h5>Total Blogs</h5>
-          <h4 className="totalBlogs">32</h4>
+          <h4 className="totalBlogs">{blog && blog.length}</h4>
         </div>
       </div>
       <h3 className="dashboardTitle">Your Blogs</h3>
