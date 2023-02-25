@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getBlog, submitComment } from "../Api/Api";
+import { author_blogs, getBlog, submitComment } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
 import image from "../../assets/1.jpg";
 import Popular from "../Home/Popular";
@@ -9,6 +9,8 @@ import { useContext } from "react";
 import { UserContext } from "../Context/Context";
 const Blog = () => {
   const [blog, setBlog] = useState({});
+  const [authorBlogs, setAuthorBlogs] = useState([]);
+
   const [refresh, setRefresh] = useState(false);
   const params = useParams();
   const id = params._id;
@@ -17,12 +19,17 @@ const Blog = () => {
       setBlog(res.data);
     });
   };
+  const getAuhorBlogs = () => {
+    author_blogs(blog.author).then((res) => {
+      setAuthorBlogs(res.data);
+    });
+  };
   const navigate = useNavigate();
   const doc_title = blog.title;
   useEffect(() => {
     fetchBlog(id);
     document.title = doc_title;
-
+    getAuhorBlogs();
     window.scrollTo(0, 0);
     if (refresh) {
       fetchBlog(id);
@@ -99,89 +106,64 @@ const Blog = () => {
         <div className="blogRight">
           <div className="blogRightContent">
             <div className="authorBlogs">
-              <h4>More from Daniyal</h4>
-              <div className="Card">
-                <div className="blogContent">
-                  <h5 className="posttitle">{"Technology"}</h5>
-                  <div className="info">
-                    <p>{"Jan 19, 2023"}</p>
-                    <p>&nbsp;|&nbsp;</p>
-                    {<p>4 mins read</p>}
-                  </div>
-                  <h3 className="blogtitle">
-                    {"10 Breakthrough Technologies Changing Our World"}
-                  </h3>
-                </div>
-                <div
-                  className="blogImage"
-                  style={{ backgroundImage: `url(${image})` }}
-                ></div>
-              </div>
-              <div className="Card">
-                <div className="blogContent">
-                  <h5 className="posttitle">{"Technology"}</h5>
-                  <div className="info">
-                    <p>{"Jan 19, 2023"}</p>
-                    <p>&nbsp;|&nbsp;</p>
-                    {<p>4 mins read</p>}
-                  </div>
-                  <h3 className="blogtitle">
-                    {"10 Breakthrough Technologies Changing Our World"}
-                  </h3>
-                </div>
-                <div
-                  className="blogImage"
-                  style={{ backgroundImage: `url(${image})` }}
-                ></div>
-              </div>
-              <div className="Card">
-                <div className="blogContent">
-                  <h5 className="posttitle">{"Technology"}</h5>
-                  <div className="info">
-                    <p>{"Jan 19, 2023"}</p>
-                    <p>&nbsp;|&nbsp;</p>
-                    {<p>4 mins read</p>}
-                  </div>
-                  <h3 className="blogtitle">
-                    {"10 Breakthrough Technologies Changing Our World"}
-                  </h3>
-                </div>
-                <div
-                  className="blogImage"
-                  style={{ backgroundImage: `url(${image})` }}
-                ></div>
-              </div>
-              <div className="Card">
-                <div className="blogContent">
-                  <h5 className="posttitle">{"Technology"}</h5>
-                  <div className="info">
-                    <p>{"Jan 19, 2023"}</p>
-                    <p>&nbsp;|&nbsp;</p>
-                    {<p>4 mins read</p>}
-                  </div>
-                  <h3 className="blogtitle">
-                    {"10 Breakthrough Technologies Changing Our World"}
-                  </h3>
-                </div>
-                <div
-                  className="blogImage"
-                  style={{ backgroundImage: `url(${image})` }}
-                ></div>
-              </div>
+              <h4>More from {blog.author}</h4>
+              {authorBlogs && authorBlogs.length > 0 ? (
+                authorBlogs.map((blog, index) => {
+                  let wordsPerMinute = 150;
+                  let noOfWords = blog.body?.split(" ").length;
+                  let readingTime = noOfWords / wordsPerMinute;
+                  let round = Math.floor(readingTime);
+                  let date = new Date(blog.CreatedAt).toDateString();
+                  let displayMonth = date.substring(4, 10);
+                  let displayYear = date.substring(10);
+                  let displayDate = `${displayMonth},${displayYear}`;
+                  return (
+                    <div className="Card">
+                      <div className="blogContent">
+                        <h5 className="posttitle">{"Technology"}</h5>
+                        <div className="info">
+                          <p>{displayDate}</p>
+                          <p>&nbsp;|&nbsp;</p>
+                          <p>
+                            {round <= 0 ? (
+                              <p>Quick Read</p>
+                            ) : (
+                              <p>{round} mins read</p>
+                            )}
+                          </p>
+                        </div>
+                        <h3 className="blogtitle">{blog.title}</h3>
+                      </div>
+                      <div
+                        className="blogImage"
+                        style={{ backgroundImage: `url(${blog.image})` }}
+                      ></div>
+                    </div>
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </div>
             <div className="blogTags">
               <h4>Tags</h4>
               <div className="tagsContainer">
-                <a className="tag">Gadgets</a>
-                <a className="tag">Artificial Intelligence</a>
-                <a className="tag">Cybersecurity</a>
-                <a className="tag">Software Development</a>
-                <a className="tag">Tech News</a>
-                <a className="tag">Digital Marketing</a>
-                <a className="tag">Mobile Devices</a>
-                <a className="tag">Future Technology</a>
-                <a className="tag">Cloud Computing</a>
-                <a className="tag">Blockchain</a>
+                {blog.tags && blog.tags.length > 0 ? (
+                  blog.tags.map((tag, index) => {
+                    return (
+                      <a
+                        className="tag"
+                        onClick={() =>
+                          navigate(`/blog/${tag.replace(/\s+/g, "-")}`)
+                        }
+                      >
+                        {tag}
+                      </a>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
