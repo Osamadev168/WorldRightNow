@@ -248,22 +248,27 @@ const CreateBlog = () => {
               </label>
             </div>
           </div>
-          {tags.length > 0 ? (
-            tags.map((tag, index) => {
-              return (
-                <div
-                  className="container2"
-                  onClick={() => {
-                    setData(false);
+          <div className="container2">
+            {tags.length > 0 ? (
+              <h4 className="createblogbodytext">Added Tags</h4>
+            ) : (
+              <></>
+            )}
+            <div className="tagscontainer">
+              {tags.length > 0 ? (
+                tags.map((tag, index) => {
+                  return (
+                    <div
+                      className="tag"
+                      onClick={() => {
+                        setData(false);
 
-                    tags.splice(tags.indexOf(tag), 1);
+                        tags.splice(tags.indexOf(tag), 1);
 
-                    setRefresh(!refresh);
-                  }}
-                  key={index}
-                >
-                  <div className="tagscontainer">
-                    <div className="tag">
+                        setRefresh(!refresh);
+                      }}
+                      key={index}
+                    >
                       {tag}
                       <svg
                         width="10"
@@ -278,13 +283,16 @@ const CreateBlog = () => {
                         />
                       </svg>
                     </div>
-                  </div>
+                  );
+                })
+              ) : (
+                <div>
+                  <h4 className="createblogbodytext">Added Tags</h4>
+                  <p className="notags">Not Tags added yet</p>
                 </div>
-              );
-            })
-          ) : (
-            <p className="notags">Not Tags added yet</p>
-          )}
+              )}
+            </div>
+          </div>
         </div>
         {/* {editBlog.tags.length > 0 ? (
           editBlog.tags.map((tags) => {
