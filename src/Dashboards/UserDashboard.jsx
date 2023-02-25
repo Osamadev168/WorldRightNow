@@ -22,7 +22,6 @@ const UserDashboard = () => {
   const inputFile = useRef(null);
   const [file, setFile] = useState("");
   const [progress, setProgress] = useState(false);
-  const [image, setImage] = useState("");
   const params = useParams();
   const navigate = useNavigate();
   const authorId = params.authorId;
