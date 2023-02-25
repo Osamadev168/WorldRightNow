@@ -4,7 +4,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
-import profilepic from "../../assets/profilepic.jpg";
+import profilepic from "../../assets/Asset 1.svg";
 const Header = ({ children }) => {
   const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
