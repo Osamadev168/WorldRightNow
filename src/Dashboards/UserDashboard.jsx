@@ -11,11 +11,18 @@ import moment from "moment";
 import profilepic from "../../assets/Avatar.svg";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
+import { useRef } from "react";
+import { updateProfile } from "firebase/auth";
+import axios from "axios";
 
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
+  const inputFile = useRef(null);
+  const [file, setFile] = useState("");
+  const [progress, setProgress] = useState(false);
+  const [image, setImage] = useState("");
   const params = useParams();
   const navigate = useNavigate();
   const authorId = params.authorId;
@@ -31,12 +38,28 @@ const UserDashboard = () => {
       setRefreh(!refresh);
     });
   };
+  const uploadImage = async () => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "kalo7xt1");
+    await axios
+      .post("https://api.cloudinary.com/v1_1/ddwvsarat/image/upload", data)
+      .then(async (res) => {
+        await updateProfile(user, {
+          photoURL: res.data.url,
+        });
+        setProgress(true);
+      });
+  };
   const { user } = useContext(UserContext);
   useEffect(() => {
     document.title = "Dashboard";
 
     getData();
-  }, [authorId, refresh]);
+    if (file) {
+      uploadImage();
+    }
+  }, [authorId, refresh, file, progress]);
   return (
     <div className="dashboardContainer paddingtop">
       <div className="userSettingContainer">
@@ -44,10 +67,25 @@ const UserDashboard = () => {
           <div
             className="profilePic"
             style={{
-              backgroundImage: `url(${profilepic})`,
+              backgroundImage: `url(${
+                user && user.photoURL ? user.photoURL : profilepic
+              })`,
+            }}
+            onClick={() => {
+              inputFile.current.click();
             }}
           >
             <div className="imageEditButton">
+              <input
+                ref={inputFile}
+                type="file"
+                style={{ display: "none" }}
+                id="file"
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                }}
+              />
+
               <p>Edit</p>
               <svg
                 width="14"
