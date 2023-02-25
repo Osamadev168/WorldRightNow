@@ -113,13 +113,11 @@ const App = () => {
           <Route
             path="/dashboard/admin/:adminId"
             element={
-              <AdminRoute>
-                <Wrapper>
-                  <Header />
-                  <AdminDashboard />
-                  <Footer />
-                </Wrapper>
-              </AdminRoute>
+              <Wrapper>
+                <Header />
+                <AdminDashboard />
+                <Footer />
+              </Wrapper>
             }
           />
           <Route
