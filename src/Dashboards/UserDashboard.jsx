@@ -8,6 +8,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import moment from "moment";
+import profilepic from "../../assets/Avatar.svg";
+
 const UserDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
@@ -34,7 +36,73 @@ const UserDashboard = () => {
   }, [authorId, refresh]);
   return (
     <div className="dashboardContainer paddingtop">
-      <h3 className="dashboardTitle">Dashboard</h3>
+      <div className="userSettingContainer">
+        <div className="userInfo">
+          <div
+            className="profilePic"
+            style={{
+              backgroundImage: `url(${profilepic})`,
+            }}
+          >
+            <div className="imageEditButton">
+              <p>Edit</p>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.7725 3.14373C14.0758 2.84044 14.0758 2.33495 13.7725 2.04722L11.9528 0.227468C11.665 -0.0758228 11.1596 -0.0758228 10.8563 0.227468L9.42536 1.6506L12.3416 4.56687M0 11.0837V14H2.91626L11.5173 5.3912L8.60103 2.47493L0 11.0837Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </div>
+          <div className="userCredentialContainer">
+            <div className="userNameContainer">
+              <p>Username: </p>
+              <input type="text" className="userName" value={"Daniyal Habib"} />
+              <div className="userNameButton">
+                <svg
+                  width="18"
+                  height="14"
+                  viewBox="0 0 18 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.7713 9.96861L15.296 0.443946C15.5919 0.147981 15.9686 0 16.426 0C16.8834 0 17.2601 0.147981 17.5561 0.443946C17.852 0.73991 18 1.11659 18 1.57399C18 2.03139 17.852 2.40807 17.5561 2.70404L6.90134 13.3587C6.57847 13.6816 6.20179 13.843 5.7713 13.843C5.34081 13.843 4.96413 13.6816 4.64126 13.3587L0.443946 9.16144C0.147981 8.86547 0 8.48879 0 8.03139C0 7.57399 0.147981 7.19731 0.443946 6.90134C0.73991 6.60538 1.11659 6.4574 1.57399 6.4574C2.03139 6.4574 2.40807 6.60538 2.70404 6.90134L5.7713 9.96861Z"
+                    fill="black"
+                  />
+                </svg>
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 19 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17.71 4.0425C18.1 3.6525 18.1 3.0025 17.71 2.6325L15.37 0.2925C15 -0.0975 14.35 -0.0975 13.96 0.2925L12.12 2.1225L15.87 5.8725M0 14.2525V18.0025H3.75L14.81 6.9325L11.06 3.1825L0 14.2525Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="userEmailContainer">
+              <p>Email: </p>
+              <p className="userEmail">daniyalhundred@gmail.com</p>
+            </div>
+          </div>
+        </div>
+        <div className="totalBlogsContainer">
+          <h5>Total Blogs</h5>
+          <h4 className="totalBlogs">32</h4>
+        </div>
+      </div>
+      <h3 className="dashboardTitle">Your Blogs</h3>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}

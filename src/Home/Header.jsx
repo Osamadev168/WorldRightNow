@@ -91,7 +91,9 @@ const Header = ({ children }) => {
                   <div
                     className="profilepic"
                     style={{
-                      backgroundImage: `url(${profilepic})`,
+                      backgroundImage: `url(${
+                        user && user.photoURL ? user.photoURL : profilepic
+                      })`,
                     }}
                   ></div>
 
