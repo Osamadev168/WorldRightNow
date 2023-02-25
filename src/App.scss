@@ -22,7 +22,7 @@ body {
 }
 .heroSection {
   height: 100vh;
-  background: url("./assets/herobg.png");
+  background-image: url("./assets/herobg.png");
   background-size: cover;
   background-position: center;
 }
@@ -1276,7 +1276,9 @@ body {
       .profilePic {
         width: 130px;
         height: 130px;
+        border-radius: 100%;
         background-size: cover;
+        background-position: center;
         cursor: pointer;
 
         .imageEditButton {
@@ -1901,6 +1903,22 @@ body {
   //Dashboard Page
 
   .dashboardContainer {
+    .userSettingContainer {
+      flex-direction: column;
+      .userInfo {
+        .userCredentialContainer {
+          flex-direction: column;
+        }
+      }
+      .totalBlogsContainer {
+        h5 {
+          text-align: center;
+        }
+        .totalBlogs {
+          text-align: center;
+        }
+      }
+    }
     .dashboardTitle {
       text-align: center;
     }
@@ -2013,6 +2031,14 @@ body {
   .loginButton {
     width: 100%;
   }
+  .dashboardContainer {
+    .userSettingContainer {
+      gap: 30px;
+      .userInfo {
+        flex-direction: column;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 520px) {
@@ -2046,6 +2072,24 @@ body {
   }
   .div1 {
     padding: 3.125em 3em;
+  }
+  .dashboardContainer {
+    .userSettingContainer {
+      .userInfo {
+        .userCredentialContainer {
+          .userNameContainer,
+          .userEmailContainer {
+            flex-direction: column;
+            align-items: center;
+            .userName {
+              display: inline-block;
+              box-sizing: content-box;
+              width: auto;
+            }
+          }
+        }
+      }
+    }
   }
 }
 @media only screen and (max-width: 425px) {
