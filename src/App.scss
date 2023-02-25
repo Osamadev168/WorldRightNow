@@ -121,12 +121,20 @@ body {
       top: 50px;
       transition: all 100ms ease-out;
       z-index: 700;
+      ul {
+        width: 100%;
+        display: inline-block;
+      }
       .dropdownitem {
         padding: 10px 30px;
         font-size: 16px;
         font-weight: 600;
         color: #434343;
         cursor: pointer;
+        box-sizing: border-box;
+        display: flex;
+        gap: 15px;
+        width: 200px;
         &:hover {
           background: rgba(0, 0, 0, 0.05);
         }
@@ -809,11 +817,103 @@ body {
   color: $primaryColor;
   cursor: pointer;
 }
+
+//Blog Page
 .blogMainContainer {
-  max-width: 65%;
+  max-width: 90%;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 150px;
+  display: flex;
+  .blogLeft {
+    width: 75%;
+    padding-right: 20px;
+    border-right: 1px solid #dedede;
+  }
+  .blogRight {
+    width: 25%;
+    padding-left: 20px;
+    .blogRightContent {
+      position: sticky;
+      top: 150px;
+      .authorBlogs {
+        h4 {
+          margin-bottom: 20px;
+        }
+        .Card {
+          cursor: pointer;
+          margin-bottom: 20px;
+          padding-bottom: 15px;
+          border-bottom: 0.5px solid #b9b9b9;
+          display: flex;
+          gap: 10px;
+          .blogContent {
+            flex: 7;
+          }
+          .blogImage {
+            width: 100%;
+            height: 70px;
+            background-size: cover;
+            border-radius: 5px;
+            margin: 0;
+            flex: 3;
+          }
+        }
+        .title {
+          padding: 8px 20px 8px 20px;
+        }
+        .posttitle {
+          font-size: 12px;
+          line-height: 22px;
+        }
+        .info {
+          p {
+            font-size: 10px;
+            line-height: 15px;
+          }
+          margin-bottom: 5px;
+        }
+        .description {
+          padding: 0px 20px 15px 20px;
+        }
+        .blogtitle {
+          font-size: 14px;
+          line-height: 18px;
+          -webkit-line-clamp: 3;
+        }
+        .data {
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+      .blogTags {
+        h4 {
+          margin-bottom: 20px;
+        }
+        .tagsContainer {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: left;
+          gap: 12px;
+          .tag {
+            display: flex;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 0 1px $black;
+            padding: 7px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            &:hover {
+              background: rgba(0, 0, 0, 0.05);
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .blogDateandReadTime {
   display: flex;
@@ -1261,6 +1361,9 @@ body {
             font-size: 16px;
             font-weight: 600;
           }
+          .comments {
+            margin: 0;
+          }
         }
       }
     }
@@ -1276,6 +1379,7 @@ body {
   font-weight: 800;
   font-size: 28px;
   color: #170525;
+  margin-bottom: 25px;
 }
 .main_Comments_Container {
   margin-bottom: 30px;
@@ -1312,9 +1416,6 @@ body {
   padding: 15px 20px;
   font-size: 17px;
   font-weight: 600;
-}
-.commentAreaContainer {
-  margin-top: 60px;
 }
 .commentButton {
   font-size: 17px;
@@ -1487,11 +1588,42 @@ body {
       }
     }
   }
+  //Blog Page
+  .blogMainContainer {
+    .blogRight {
+      .blogRightContent {
+        .authorBlogs {
+          .Card {
+            gap: 8px;
+            .blogContent {
+              flex: 7.5;
+            }
+            .blogImage {
+              flex: 2.5;
+              height: 50px;
+            }
+          }
+          .blogtitle {
+            line-height: 16px;
+          }
+        }
+        .blogTags {
+          .tagsContainer {
+            gap: 12px;
+            .tag {
+              padding: 6px 12px;
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 @media only screen and (max-width: 920px) {
   body,
   html {
-    overflow-x: hidden;
+    // overflow-x: hidden;
     position: relative;
   }
   .HeaderMainContainer {
@@ -1618,7 +1750,24 @@ body {
     justify-content: center;
   }
   .blogMainContainer {
-    max-width: 75%;
+    max-width: 90%;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 80px;
+    .blogLeft {
+      width: 100%;
+      padding: 0;
+      border: none;
+    }
+    .blogRight {
+      width: 100%;
+      padding: 0;
+      .authorBlogs {
+        .Card {
+          // width: 45%;
+        }
+      }
+    }
   }
   .blogTitle {
     font-size: 34px;

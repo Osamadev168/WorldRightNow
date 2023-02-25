@@ -5,6 +5,12 @@ import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import profilepic from "../../assets/Asset 1.svg";
+import profilepic from "../../assets/profilepic.jpg";
+import imgDashboard from "../../assets/dashboard.svg";
+import imgWrite from "../../assets/write.svg";
+import imgHelp from "../../assets/help.svg";
+import imgLogout from "../../assets/logout.svg";
+
 const Header = ({ children }) => {
   const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
@@ -81,18 +87,6 @@ const Header = ({ children }) => {
         >
           {user && user !== null ? (
             <>
-              {/* <p>
-              Welcome,{" "}
-              {user.displayName === null ? user.email : user.displayName}!
-            </p> */}
-              {/* <a onClick={() => logout()}>Logout</a> */}
-
-              <a
-                className="primaryButton headerButton"
-                onClick={() => navigate("/createblog")}
-              >
-                Create blog
-              </a>
               <div className="profile" ref={profileRef}>
                 <div className="picdropdown" onClick={toggleProfile}>
                   <div
@@ -130,10 +124,19 @@ const Header = ({ children }) => {
                           : navigate(`/dashboard/user/${user.uid}`);
                       }}
                     >
-                      <DropdownItem text={"Dashboard"} />
+                      <DropdownItem text={"Dashboard"} image={imgDashboard} />
                     </div>
-                    <DropdownItem text={"Help"} />
-                    <DropdownItem text={"Logout"} link={() => logout()} />
+                    <DropdownItem
+                      text={"Create Blog"}
+                      image={imgWrite}
+                      link={() => navigate("/createblog")}
+                    />
+                    <DropdownItem text={"Help"} image={imgHelp} />
+                    <DropdownItem
+                      text={"Logout"}
+                      link={() => logout()}
+                      image={imgLogout}
+                    />
                   </ul>
                 </div>
               </div>
@@ -166,6 +169,7 @@ const Header = ({ children }) => {
 function DropdownItem(props) {
   return (
     <li className="dropdownitem" onClick={props.link}>
+      <img src={props.image} />
       <a>{props.text}</a>
     </li>
   );

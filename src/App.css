@@ -124,12 +124,20 @@ body {
   transition: all 100ms ease-out;
   z-index: 700;
 }
+.HeaderMainContainer .profile .profiledropdown ul {
+  width: 100%;
+  display: inline-block;
+}
 .HeaderMainContainer .profile .profiledropdown .dropdownitem {
   padding: 10px 30px;
   font-size: 16px;
   font-weight: 600;
   color: #434343;
   cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  gap: 15px;
+  width: 200px;
 }
 .HeaderMainContainer .profile .profiledropdown .dropdownitem:hover {
   background: rgba(0, 0, 0, 0.05);
@@ -878,10 +886,96 @@ body {
 }
 
 .blogMainContainer {
-  max-width: 65%;
+  max-width: 90%;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 150px;
+  display: flex;
+}
+.blogMainContainer .blogLeft {
+  width: 75%;
+  padding-right: 20px;
+  border-right: 1px solid #dedede;
+}
+.blogMainContainer .blogRight {
+  width: 25%;
+  padding-left: 20px;
+}
+.blogMainContainer .blogRight .blogRightContent {
+  position: sticky;
+  top: 150px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs h4 {
+  margin-bottom: 20px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .Card {
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 0.5px solid #b9b9b9;
+  display: flex;
+  gap: 10px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
+  flex: 7;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
+  width: 100%;
+  height: 70px;
+  background-size: cover;
+  border-radius: 5px;
+  margin: 0;
+  flex: 3;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .title {
+  padding: 8px 20px 8px 20px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .posttitle {
+  font-size: 12px;
+  line-height: 22px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .info {
+  margin-bottom: 5px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .info p {
+  font-size: 10px;
+  line-height: 15px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .description {
+  padding: 0px 20px 15px 20px;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .blogtitle {
+  font-size: 14px;
+  line-height: 18px;
+  -webkit-line-clamp: 3;
+}
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .data {
+  font-size: 12px;
+  line-height: 16px;
+}
+.blogMainContainer .blogRight .blogRightContent .blogTags h4 {
+  margin-bottom: 20px;
+}
+.blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 12px;
+}
+.blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1px #141a31;
+  padding: 7px 15px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag:hover {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
 .blogDateandReadTime {
@@ -1375,6 +1469,10 @@ body {
   font-size: 16px;
   font-weight: 600;
 }
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
+  margin: 0;
+}
 
 .commentsContainer {
   max-width: 100%;
@@ -1385,6 +1483,7 @@ body {
   font-weight: 800;
   font-size: 28px;
   color: #170525;
+  margin-bottom: 25px;
 }
 
 .main_Comments_Container {
@@ -1426,10 +1525,6 @@ body {
   padding: 15px 20px;
   font-size: 17px;
   font-weight: 600;
-}
-
-.commentAreaContainer {
-  margin-top: 60px;
 }
 
 .commentButton {
@@ -1582,11 +1677,30 @@ body {
   .AllBlogsContainer .heroSlideshow .slide .blogType {
     flex: 0.5;
   }
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card {
+    gap: 8px;
+  }
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
+    flex: 7.5;
+  }
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
+    flex: 2.5;
+    height: 50px;
+  }
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .blogtitle {
+    line-height: 16px;
+  }
+  .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer {
+    gap: 12px;
+  }
+  .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
 }
 @media only screen and (max-width: 920px) {
   body,
   html {
-    overflow-x: hidden;
     position: relative;
   }
   .HeaderMainContainer .div1Header .div2Header {
@@ -1705,7 +1819,19 @@ body {
     justify-content: center;
   }
   .blogMainContainer {
-    max-width: 75%;
+    max-width: 90%;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 80px;
+  }
+  .blogMainContainer .blogLeft {
+    width: 100%;
+    padding: 0;
+    border: none;
+  }
+  .blogMainContainer .blogRight {
+    width: 100%;
+    padding: 0;
   }
   .blogTitle {
     font-size: 34px;

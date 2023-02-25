@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getBlog, submitComment } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
+import image from "../../assets/1.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
@@ -38,62 +39,153 @@ const Blog = () => {
   return (
     <>
       <div className="blogMainContainer paddingtop">
-        <div className="blogDateandReadTime">
-          <p>{displayDate}</p>
-          <p>&nbsp;|&nbsp;</p>
+        <div className="blogLeft">
+          <div className="blogDateandReadTime">
+            <p>{displayDate}</p>
+            <p>&nbsp;|&nbsp;</p>
 
-          {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
-        </div>
-        <div className="titleandDescriptionImage">
-          <h1 className="blogTitle">{blog.title}</h1>
-          <p className="blogDescription">{blog.description}</p>
-          <div className="imageAuthorName">
-            <img src={profilepic} className="auhtorImage" />
-            <p className="authorName">{blog.author}</p>
+            {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
           </div>
+          <div className="titleandDescriptionImage">
+            <h1 className="blogTitle">{blog.title}</h1>
+            <p className="blogDescription">{blog.description}</p>
+            <div className="imageAuthorName">
+              <img src={profilepic} className="auhtorImage" />
+              <p className="authorName">{blog.author}</p>
+            </div>
+            <div
+              className="blogImage"
+              style={{
+                backgroundImage: `url(${blog.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                width: "100%",
+                height: "450px",
+              }}
+            ></div>
+          </div>
+
           <div
-            className="blogImage"
-            style={{
-              backgroundImage: `url(${blog.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              width: "100%",
-              height: "450px",
-            }}
+            className="blogBody"
+            dangerouslySetInnerHTML={{ __html: blog.body }}
           ></div>
+          <div>
+            {blog.tags && blog.tags.length > 0 ? (
+              blog.tags.map((tags) => {
+                return (
+                  <div style={{ color: "green", backgroundColor: "black" }}>
+                    <p
+                      onClick={() =>
+                        navigate(`/blog/${tags.replace(/\s+/g, "-")}`)
+                      }
+                      style={{ cursor: "pointer" }}
+                    >
+                      {tags}
+                    </p>
+                  </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <Comments
+            blog={blog}
+            id={id}
+            setRefresh={setRefresh}
+            refresh={refresh}
+          />
         </div>
-
-        <div
-          className="blogBody"
-          dangerouslySetInnerHTML={{ __html: blog.body }}
-        ></div>
-
-        <div>
-          {blog.tags && blog.tags.length > 0 ? (
-            blog.tags.map((tags) => {
-              return (
-                <div style={{ color: "green", backgroundColor: "black" }}>
-                  <p
-                    onClick={() =>
-                      navigate(`/blog/${tags.replace(/\s+/g, "-")}`)
-                    }
-                    style={{ cursor: "pointer" }}
-                  >
-                    {tags}
-                  </p>
+        <div className="blogRight">
+          <div className="blogRightContent">
+            <div className="authorBlogs">
+              <h4>More from Daniyal</h4>
+              <div className="Card">
+                <div className="blogContent">
+                  <h5 className="posttitle">{"Technology"}</h5>
+                  <div className="info">
+                    <p>{"Jan 19, 2023"}</p>
+                    <p>&nbsp;|&nbsp;</p>
+                    {<p>4 mins read</p>}
+                  </div>
+                  <h3 className="blogtitle">
+                    {"10 Breakthrough Technologies Changing Our World"}
+                  </h3>
                 </div>
-              );
-            })
-          ) : (
-            <></>
-          )}
+                <div
+                  className="blogImage"
+                  style={{ backgroundImage: `url(${image})` }}
+                ></div>
+              </div>
+              <div className="Card">
+                <div className="blogContent">
+                  <h5 className="posttitle">{"Technology"}</h5>
+                  <div className="info">
+                    <p>{"Jan 19, 2023"}</p>
+                    <p>&nbsp;|&nbsp;</p>
+                    {<p>4 mins read</p>}
+                  </div>
+                  <h3 className="blogtitle">
+                    {"10 Breakthrough Technologies Changing Our World"}
+                  </h3>
+                </div>
+                <div
+                  className="blogImage"
+                  style={{ backgroundImage: `url(${image})` }}
+                ></div>
+              </div>
+              <div className="Card">
+                <div className="blogContent">
+                  <h5 className="posttitle">{"Technology"}</h5>
+                  <div className="info">
+                    <p>{"Jan 19, 2023"}</p>
+                    <p>&nbsp;|&nbsp;</p>
+                    {<p>4 mins read</p>}
+                  </div>
+                  <h3 className="blogtitle">
+                    {"10 Breakthrough Technologies Changing Our World"}
+                  </h3>
+                </div>
+                <div
+                  className="blogImage"
+                  style={{ backgroundImage: `url(${image})` }}
+                ></div>
+              </div>
+              <div className="Card">
+                <div className="blogContent">
+                  <h5 className="posttitle">{"Technology"}</h5>
+                  <div className="info">
+                    <p>{"Jan 19, 2023"}</p>
+                    <p>&nbsp;|&nbsp;</p>
+                    {<p>4 mins read</p>}
+                  </div>
+                  <h3 className="blogtitle">
+                    {"10 Breakthrough Technologies Changing Our World"}
+                  </h3>
+                </div>
+                <div
+                  className="blogImage"
+                  style={{ backgroundImage: `url(${image})` }}
+                ></div>
+              </div>
+            </div>
+            <div className="blogTags">
+              <h4>Tags</h4>
+              <div className="tagsContainer">
+                <a className="tag">Gadgets</a>
+                <a className="tag">Artificial Intelligence</a>
+                <a className="tag">Cybersecurity</a>
+                <a className="tag">Software Development</a>
+                <a className="tag">Tech News</a>
+                <a className="tag">Digital Marketing</a>
+                <a className="tag">Mobile Devices</a>
+                <a className="tag">Future Technology</a>
+                <a className="tag">Cloud Computing</a>
+                <a className="tag">Blockchain</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <Comments
-          blog={blog}
-          id={id}
-          setRefresh={setRefresh}
-          refresh={refresh}
-        />
       </div>
       <div className="sliderBlogPage">
         <Popular category={blog.category} />
