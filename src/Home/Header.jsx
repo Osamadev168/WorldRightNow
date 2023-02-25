@@ -116,7 +116,7 @@ const Header = ({ children }) => {
                   <ul>
                     <div
                       onClick={() => {
-                        user.uid === "Idfri64OkLcihU4YP5j2hvC14M32"
+                        user.email === "daniyalhundred@gmail.com"
                           ? navigate(`/dashboard/admin/${user.uid}`)
                           : navigate(`/dashboard/user/${user.uid}`);
                       }}
