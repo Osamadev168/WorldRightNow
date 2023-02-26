@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletePostUser, getUserPosts } from "../Api/Api";
+import { CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,11 +15,11 @@ import { UserContext } from "../Context/Context";
 import { useRef } from "react";
 import { updateProfile } from "firebase/auth";
 import axios from "axios";
-
 const UserDashboard = () => {
   document.title = "Dashboard";
   const { user } = useContext(UserContext);
   const [change, setChange] = useState(false);
+  const [progress, setProgress] = useState(false);
   const [refresh, setRefreh] = useState(false);
   const [edit, setEdit] = useState(false);
   const [open, setOpen] = useState(false);
@@ -54,7 +55,7 @@ const UserDashboard = () => {
         });
         setTimeout(() => {
           window.location.reload(false);
-        }, 2000);
+        }, 1000);
       });
   };
   const setUser = () => {
@@ -65,6 +66,7 @@ const UserDashboard = () => {
     });
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     setUser();
     getData();
     if (file) {
@@ -87,29 +89,35 @@ const UserDashboard = () => {
             }}
           >
             <div className="imageEditButton">
-              <input
-                ref={inputFile}
-                type="file"
-                style={{ display: "none" }}
-                id="file"
-                onChange={(e) => {
-                  setFile(e.target.files[0]);
-                }}
-              />
-
-              <p>Edit</p>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.7725 3.14373C14.0758 2.84044 14.0758 2.33495 13.7725 2.04722L11.9528 0.227468C11.665 -0.0758228 11.1596 -0.0758228 10.8563 0.227468L9.42536 1.6506L12.3416 4.56687M0 11.0837V14H2.91626L11.5173 5.3912L8.60103 2.47493L0 11.0837Z"
-                  fill="white"
-                />
-              </svg>
+              {!progress ? (
+                <>
+                  <input
+                    ref={inputFile}
+                    type="file"
+                    style={{ display: "none" }}
+                    id="file"
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                      setProgress(true);
+                    }}
+                  />
+                  <p>Edit</p>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M13.7725 3.14373C14.0758 2.84044 14.0758 2.33495 13.7725 2.04722L11.9528 0.227468C11.665 -0.0758228 11.1596 -0.0758228 10.8563 0.227468L9.42536 1.6506L12.3416 4.56687M0 11.0837V14H2.91626L11.5173 5.3912L8.60103 2.47493L0 11.0837Z"
+                      fill="white"
+                    />
+                  </svg>
+                </>
+              ) : (
+                <CircularProgress />
+              )}
             </div>
           </div>
           <div className="userCredentialContainer">

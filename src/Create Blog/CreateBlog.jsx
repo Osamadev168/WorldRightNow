@@ -61,7 +61,7 @@ const CreateBlog = () => {
   const submitBlog = async () => {
     try {
       await submitPost(blog).then(async () => {
-        navigate("/");
+        navigate(`/dashboard/user/${user.uid}`);
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
       });
@@ -70,7 +70,7 @@ const CreateBlog = () => {
     }
   };
   const handleEnterPress = (e) => {
-    if (e.key === "Enter" && value) {
+    if (e.key === "Enter" && value && tags.length < 10) {
       setTags([...tags, value.toLowerCase().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setRefresh(!refresh);
