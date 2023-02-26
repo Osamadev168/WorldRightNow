@@ -7,7 +7,7 @@ import profilepic from "../../assets/profilepic.jpg";
 
 const AllBlogs = () => {
   const [category, setCategory] = useState("");
-
+  window.scrollTo(0, 0);
   return (
     <>
       <div className="AllBlogsContainer paddingtop">
