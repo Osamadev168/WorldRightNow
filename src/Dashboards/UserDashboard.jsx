@@ -16,13 +16,15 @@ import { updateProfile } from "firebase/auth";
 import axios from "axios";
 
 const UserDashboard = () => {
+  document.title = "Dashboard";
+  const { user } = useContext(UserContext);
+  const [change, setChange] = useState(false);
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
   const inputFile = useRef(null);
+  const [userdata, setUserData] = useState({});
   const [file, setFile] = useState("");
-  const [progress, setProgress] = useState(false);
-  const [image, setImage] = useState("");
   const params = useParams();
   const navigate = useNavigate();
   const authorId = params.authorId;
@@ -45,21 +47,28 @@ const UserDashboard = () => {
     await axios
       .post("https://api.cloudinary.com/v1_1/ddwvsarat/image/upload", data)
       .then(async (res) => {
-        await updateProfile(user, {
+        updateProfile(user, {
           photoURL: res.data.url,
         });
-        setProgress(true);
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 2000);
       });
   };
-  const { user } = useContext(UserContext);
+  const setUser = () => {
+    setUserData({
+      ...userdata,
+      name: user && user.displayName,
+      image: user && user.photoURL,
+    });
+  };
   useEffect(() => {
-    document.title = "Dashboard";
-
+    setUser();
     getData();
     if (file) {
       uploadImage();
     }
-  }, [authorId, refresh, file, progress]);
+  }, [refresh, file]);
   return (
     <div className="dashboardContainer paddingtop">
       <div className="userSettingContainer">
@@ -107,7 +116,11 @@ const UserDashboard = () => {
               <input
                 type="text"
                 className="userName"
-                value={user && user.displayName}
+                value={change === true ? user.name : user && user.displayName}
+                onChange={(e) => {
+                  setChange(true);
+                  setUserData({ ...userdata, name: e.target.value });
+                }}
               />
               <div className="userNameButton">
                 <svg
@@ -116,6 +129,14 @@ const UserDashboard = () => {
                   viewBox="0 0 18 14"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  onClick={() => {
+                    setChange(true);
+                    updateProfile(user, {
+                      displayName: userdata.name,
+                    }).then(() => {
+                      alert("User name changed!");
+                    });
+                  }}
                 >
                   <path
                     d="M5.7713 9.96861L15.296 0.443946C15.5919 0.147981 15.9686 0 16.426 0C16.8834 0 17.2601 0.147981 17.5561 0.443946C17.852 0.73991 18 1.11659 18 1.57399C18 2.03139 17.852 2.40807 17.5561 2.70404L6.90134 13.3587C6.57847 13.6816 6.20179 13.843 5.7713 13.843C5.34081 13.843 4.96413 13.6816 4.64126 13.3587L0.443946 9.16144C0.147981 8.86547 0 8.48879 0 8.03139C0 7.57399 0.147981 7.19731 0.443946 6.90134C0.73991 6.60538 1.11659 6.4574 1.57399 6.4574C2.03139 6.4574 2.40807 6.60538 2.70404 6.90134L5.7713 9.96861Z"

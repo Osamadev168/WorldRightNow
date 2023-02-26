@@ -164,6 +164,7 @@ const Blog = () => {
 const Comments = ({ blog, id, setRefresh, refresh }) => {
   const defaultValues = {
     username: "",
+    userimage: "",
     comment: "",
     date: new Date(),
   };
@@ -191,7 +192,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
           return (
             <div className="main_Comments_Container">
               <div className="photo_UserName_Contianer">
-                <img className="avatar_Comment" src={profilepic} />
+                <img className="avatar_Comment" src={commment.userimage} />
                 <p>{commment.username}</p>
                 <p>&nbsp;&nbsp;|&nbsp; &nbsp;{date}</p>
               </div>
@@ -206,7 +207,10 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
         <div className="commentAreaContainer">
           <div>
             <div className="photo_UserName_Contianer">
-              <img className="avatar_Comment" src={profilepic} />
+              <img
+                className="avatar_Comment"
+                src={user && user.photoURL ? user.photoURL : profilepic}
+              />
               <p>{user.displayName}</p>
             </div>
             <textarea
@@ -216,6 +220,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
                 setComment({
                   ...comment,
                   username: user.displayName,
+                  userimage: user && user.photoURL ? user.photoURL : profilepic,
                   comment: e.target.value,
                   date: new Date(),
                 })

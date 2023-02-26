@@ -40,7 +40,10 @@ const CreateBlog = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const setApproved = () => {
-    return user.uid === "Idfri64OkLcihU4YP5j2hvC14M32" ? true : false;
+    return user.email === "daniyalhundred@gmail.com" ||
+      user.email === "osamatwenty@gmail.com"
+      ? true
+      : false;
   };
   const uploadImage = async () => {
     setProgress(true);
@@ -61,9 +64,6 @@ const CreateBlog = () => {
         navigate("/");
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
-        await updateProfile(user, {
-          photoURL: image,
-        });
       });
     } catch (e) {
       alert(e.message);
