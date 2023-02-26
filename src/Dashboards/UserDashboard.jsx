@@ -20,9 +20,11 @@ const UserDashboard = () => {
   const { user } = useContext(UserContext);
   const [change, setChange] = useState(false);
   const [refresh, setRefreh] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
   const inputFile = useRef(null);
+  const editName = useRef(null);
   const [userdata, setUserData] = useState({});
   const [file, setFile] = useState("");
   const params = useParams();
@@ -114,47 +116,61 @@ const UserDashboard = () => {
             <div className="userNameContainer">
               <p>Username: </p>
               <input
+                ref={editName}
                 type="text"
                 className="userName"
                 value={change === true ? user.name : user && user.displayName}
                 onChange={(e) => {
                   setChange(true);
+                  setEdit(true);
                   setUserData({ ...userdata, name: e.target.value });
                 }}
               />
               <div className="userNameButton">
-                <svg
-                  width="18"
-                  height="14"
-                  viewBox="0 0 18 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  onClick={() => {
-                    setChange(true);
-                    updateProfile(user, {
-                      displayName: userdata.name,
-                    }).then(() => {
-                      alert("User name changed!");
-                    });
-                  }}
-                >
-                  <path
-                    d="M5.7713 9.96861L15.296 0.443946C15.5919 0.147981 15.9686 0 16.426 0C16.8834 0 17.2601 0.147981 17.5561 0.443946C17.852 0.73991 18 1.11659 18 1.57399C18 2.03139 17.852 2.40807 17.5561 2.70404L6.90134 13.3587C6.57847 13.6816 6.20179 13.843 5.7713 13.843C5.34081 13.843 4.96413 13.6816 4.64126 13.3587L0.443946 9.16144C0.147981 8.86547 0 8.48879 0 8.03139C0 7.57399 0.147981 7.19731 0.443946 6.90134C0.73991 6.60538 1.11659 6.4574 1.57399 6.4574C2.03139 6.4574 2.40807 6.60538 2.70404 6.90134L5.7713 9.96861Z"
-                    fill="black"
-                  />
-                </svg>
-                <svg
-                  width="19"
-                  height="19"
-                  viewBox="0 0 19 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17.71 4.0425C18.1 3.6525 18.1 3.0025 17.71 2.6325L15.37 0.2925C15 -0.0975 14.35 -0.0975 13.96 0.2925L12.12 2.1225L15.87 5.8725M0 14.2525V18.0025H3.75L14.81 6.9325L11.06 3.1825L0 14.2525Z"
-                    fill="black"
-                  />
-                </svg>
+                {edit ? (
+                  <svg
+                    width="18"
+                    height="14"
+                    viewBox="0 0 18 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    onClick={() => {
+                      setChange(true);
+                      updateProfile(user, {
+                        displayName: userdata.name,
+                      }).then(() => {
+                        alert("User name changed!");
+                        setEdit(false);
+                      });
+                    }}
+                  >
+                    <path
+                      d="M5.7713 9.96861L15.296 0.443946C15.5919 0.147981 15.9686 0 16.426 0C16.8834 0 17.2601 0.147981 17.5561 0.443946C17.852 0.73991 18 1.11659 18 1.57399C18 2.03139 17.852 2.40807 17.5561 2.70404L6.90134 13.3587C6.57847 13.6816 6.20179 13.843 5.7713 13.843C5.34081 13.843 4.96413 13.6816 4.64126 13.3587L0.443946 9.16144C0.147981 8.86547 0 8.48879 0 8.03139C0 7.57399 0.147981 7.19731 0.443946 6.90134C0.73991 6.60538 1.11659 6.4574 1.57399 6.4574C2.03139 6.4574 2.40807 6.60538 2.70404 6.90134L5.7713 9.96861Z"
+                      fill="black"
+                    />
+                  </svg>
+                ) : (
+                  <></>
+                )}
+                {!edit ? (
+                  <svg
+                    width="19"
+                    height="19"
+                    viewBox="0 0 19 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    onClick={() => {
+                      editName.current.focus();
+                    }}
+                  >
+                    <path
+                      d="M17.71 4.0425C18.1 3.6525 18.1 3.0025 17.71 2.6325L15.37 0.2925C15 -0.0975 14.35 -0.0975 13.96 0.2925L12.12 2.1225L15.87 5.8725M0 14.2525V18.0025H3.75L14.81 6.9325L11.06 3.1825L0 14.2525Z"
+                      fill="black"
+                    />
+                  </svg>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="userEmailContainer">
