@@ -70,7 +70,6 @@ const CreateBlog = () => {
   const submitBlog = async () => {
     try {
       setBlog({ ...blog, image: sessionStorage.getItem("image") });
-
       await edit_Blog(blog_id, blog).then(() => {
         navigate("/");
         setBlog(blogdefaultValues);

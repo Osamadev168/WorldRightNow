@@ -69,6 +69,8 @@ const UserDashboard = () => {
     window.scrollTo(0, 0);
     setUser();
     getData();
+    console.log(user);
+
     if (file) {
       uploadImage();
     }
