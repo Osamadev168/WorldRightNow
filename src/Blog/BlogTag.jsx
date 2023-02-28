@@ -18,6 +18,7 @@ const BlogTag = () => {
       setTags(unique);
     });
   };
+
   useEffect(() => {
     getData();
   }, [tag]);
