@@ -52,10 +52,16 @@ const UserDashboard = () => {
       .then(async (res) => {
         updateProfile(user, {
           photoURL: res.data.url,
+        }).then(() => {
+          axios.post(`http://localhost:7000/blog/update`, {
+            authorId: user.uid,
+            authorName: user.displayName,
+            authorImage: user.photoURL,
+          });
+          setTimeout(() => {
+            window.location.reload(false);
+          }, 1000);
         });
-        setTimeout(() => {
-          window.location.reload(false);
-        }, 1000);
       });
   };
   const setUser = () => {
@@ -133,7 +139,7 @@ const UserDashboard = () => {
                 onChange={(e) => {
                   setChange(true);
                   setEdit(true);
-                  setUserData({ ...userdata, name: e.target.value });
+                  setUserData({ ...userdata, name: e.target.value.trim() });
                 }}
               />
               <div className="userNameButton">
@@ -151,6 +157,11 @@ const UserDashboard = () => {
                       }).then(() => {
                         alert("User name changed!");
                         setEdit(false);
+                        axios.post(`http://localhost:7000/blog/update`, {
+                          authorId: user.uid,
+                          authorName: user.displayName,
+                          authorImage: user.photoURL,
+                        });
                       });
                     }}
                   >
@@ -219,13 +230,21 @@ const UserDashboard = () => {
           let readingTime = noOfWords / wordsPerMinute;
           let round = Math.floor(readingTime);
           let blog_status = blogs.approved === true ? true : false;
+          let title = blogs.title;
+          title = title.replace(/\s+/g, "-");
           return (
             <div className="blogsContainer" key={index}>
               <div className="blogCard">
                 <div className="blogInfo">
                   <div
                     className="blogTitleDescription"
-                    onClick={() => navigate(`/blogs/blog/${blogs._id}`)}
+                    onClick={() =>
+                      navigate(
+                        `/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                          blogs._id
+                        }`
+                      )
+                    }
                   >
                     <h2>{blogs.title}</h2>
                     <p>{blogs.description}</p>

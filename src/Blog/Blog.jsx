@@ -57,7 +57,7 @@ const Blog = () => {
             <h1 className="blogTitle">{blog.title}</h1>
             <p className="blogDescription">{blog.description}</p>
             <div className="imageAuthorName">
-              <img src={profilepic} className="auhtorImage" />
+              <img src={blog.authorImage} className="auhtorImage" />
               <p className="authorName">{blog.author}</p>
             </div>
             <div
@@ -106,7 +106,7 @@ const Blog = () => {
                       onClick={() => navigate(`/blogs/${title}/${blog._id}`)}
                     >
                       <div className="blogContent">
-                        <h5 className="posttitle">{"Technology"}</h5>
+                        <h5 className="posttitle">{blog.category}</h5>
                         <div className="info">
                           <p>{displayDate}</p>
                           <p>&nbsp;|&nbsp;</p>

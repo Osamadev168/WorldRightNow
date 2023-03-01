@@ -77,7 +77,13 @@ const LatestPosts = ({ category }) => {
               <div
                 className="PopularCard"
                 key={index}
-                onClick={() => navigate(`/blogs/${title}/${posts._id}`)}
+                onClick={() =>
+                  navigate(
+                    `/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                      posts._id
+                    }`
+                  )
+                }
               >
                 <div
                   className="image"

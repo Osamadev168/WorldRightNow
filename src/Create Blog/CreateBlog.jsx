@@ -19,6 +19,7 @@ const blogdefaultValues = {
   comments: [],
   CreatedAt: new Date(),
   author: "",
+  authorImage: "",
   auhtorId: "",
   approved: true,
   tags: [],
@@ -106,6 +107,7 @@ const CreateBlog = () => {
                 ...blog,
                 title: e.target.value,
                 author: user.displayName,
+                authorImage: user.photoURL,
                 authorId: user.uid,
                 approved: setApproved(),
               });

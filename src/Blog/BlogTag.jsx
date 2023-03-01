@@ -47,171 +47,41 @@ const BlogTag = () => {
       <div className="tagsContainerMain">
         <div className="tagsLeft">
           <div className="blogsContainer">
-            <div className="blogCard">
-              <div className="blogCardLeft">
-                <div className="blogDateandReadTime">
-                  <p>Jan 19, 2023</p>
-                  <p>&nbsp;|&nbsp;</p>
-                  <p>4 mins read</p>
-                </div>
-                <div className="titleandDescriptionImage">
-                  <h1 className="blogTitle">
-                    10 Breakthrough Technologies Changing Our World
-                  </h1>
-                  <p className="blogDescription">
-                    Explore 10 cutting-edge technologies shaping our world: AI,
-                    biotechnology, quantum computing, IoT, VR/AR, 5G, robotics,
-                    blockchain, renewable energy, & 3D printing. Learn...
-                  </p>
-                  <div className="imageAuthorName">
-                    <img src={profilepic} className="auhtorImage" />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
+            {blogs && blogs.length > 0 ? (
+              blogs.map((blog, index) => {
+                return (
+                  <div className="blogCard" key={index}>
+                    <div className="blogCardLeft">
+                      <div className="blogDateandReadTime">
+                        <p>Jan 19, 2023</p>
+                        <p>&nbsp;|&nbsp;</p>
+                        <p>4 mins read</p>
+                      </div>
+                      <div className="titleandDescriptionImage">
+                        <h1 className="blogTitle">{blog.title}</h1>
+                        <p className="blogDescription">{blog.description}</p>
+                        <div className="imageAuthorName">
+                          <img src={blog.authorImage} className="auhtorImage" />
+                          <p className="authorName">{blog.author}</p>
+                          <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
+                          <p className="blogCategory">{blog.category}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="blogImage"
+                      style={{
+                        backgroundImage: `url(${blog.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
                   </div>
-                </div>
-              </div>
-              <div
-                className="blogImage"
-                style={{
-                  backgroundImage: `url(${image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            </div>
-            <div className="blogCard">
-              <div className="blogCardLeft">
-                <div className="blogDateandReadTime">
-                  <p>Jan 19, 2023</p>
-                  <p>&nbsp;|&nbsp;</p>
-                  <p>4 mins read</p>
-                </div>
-                <div className="titleandDescriptionImage">
-                  <h1 className="blogTitle">
-                    10 Breakthrough Technologies Changing Our World
-                  </h1>
-                  <p className="blogDescription">
-                    Explore 10 cutting-edge technologies shaping our world: AI,
-                    biotechnology, quantum computing, IoT, VR/AR, 5G, robotics,
-                    blockchain, renewable energy, & 3D printing. Learn...
-                  </p>
-                  <div className="imageAuthorName">
-                    <img src={profilepic} className="auhtorImage" />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="blogImage"
-                style={{
-                  backgroundImage: `url(${image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            </div>
-            <div className="blogCard">
-              <div className="blogCardLeft">
-                <div className="blogDateandReadTime">
-                  <p>Jan 19, 2023</p>
-                  <p>&nbsp;|&nbsp;</p>
-                  <p>4 mins read</p>
-                </div>
-                <div className="titleandDescriptionImage">
-                  <h1 className="blogTitle">
-                    10 Breakthrough Technologies Changing Our World
-                  </h1>
-                  <p className="blogDescription">
-                    Explore 10 cutting-edge technologies shaping our world: AI,
-                    biotechnology, quantum computing, IoT, VR/AR, 5G, robotics,
-                    blockchain, renewable energy, & 3D printing. Learn...
-                  </p>
-                  <div className="imageAuthorName">
-                    <img src={profilepic} className="auhtorImage" />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="blogImage"
-                style={{
-                  backgroundImage: `url(${image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            </div>
-            <div className="blogCard">
-              <div className="blogCardLeft">
-                <div className="blogDateandReadTime">
-                  <p>Jan 19, 2023</p>
-                  <p>&nbsp;|&nbsp;</p>
-                  <p>4 mins read</p>
-                </div>
-                <div className="titleandDescriptionImage">
-                  <h1 className="blogTitle">
-                    10 Breakthrough Technologies Changing Our World
-                  </h1>
-                  <p className="blogDescription">
-                    Explore 10 cutting-edge technologies shaping our world: AI,
-                    biotechnology, quantum computing, IoT, VR/AR, 5G, robotics,
-                    blockchain, renewable energy, & 3D printing. Learn...
-                  </p>
-                  <div className="imageAuthorName">
-                    <img src={profilepic} className="auhtorImage" />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="blogImage"
-                style={{
-                  backgroundImage: `url(${image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            </div>
-            <div className="blogCard">
-              <div className="blogCardLeft">
-                <div className="blogDateandReadTime">
-                  <p>Jan 19, 2023</p>
-                  <p>&nbsp;|&nbsp;</p>
-                  <p>4 mins read</p>
-                </div>
-                <div className="titleandDescriptionImage">
-                  <h1 className="blogTitle">
-                    10 Breakthrough Technologies Changing Our World
-                  </h1>
-                  <p className="blogDescription">
-                    Explore 10 cutting-edge technologies shaping our world: AI,
-                    biotechnology, quantum computing, IoT, VR/AR, 5G, robotics,
-                    blockchain, renewable energy, & 3D printing. Learn...
-                  </p>
-                  <div className="imageAuthorName">
-                    <img src={profilepic} className="auhtorImage" />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="blogImage"
-                style={{
-                  backgroundImage: `url(${image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="tagsRight">
@@ -232,72 +102,28 @@ const BlogTag = () => {
                   />
                 </svg>
 
-                <h5>512</h5>
+                <h5>{blogs && blogs.length}</h5>
               </span>
             </h6>
             <div className="blogTags">
               <h6 className="totalBlogs relatedTags">Related Tags</h6>
               <div className="tagsContainer">
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
-                <a
-                  className="tag"
-                  onClick={() => navigate(`/blog/${tag.replace(/\s+/g, "-")}`)}
-                >
-                  uidesign
-                </a>
+                {tags && tags.length > 0 ? (
+                  tags.slice(0, 11).map((tag, index) => {
+                    return (
+                      <a
+                        className="tag"
+                        onClick={() =>
+                          navigate(`/blog/${tag.replace(/\s+/g, "-")}`)
+                        }
+                      >
+                        {tag}
+                      </a>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
