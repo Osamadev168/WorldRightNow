@@ -46,7 +46,7 @@ const AllBlogs = () => {
               </div>
             </div>
             <div className="blogType">
-              <span className="type">Featured</span>
+              <span className="type">Popular Today</span>
             </div>
           </div>
         </div>

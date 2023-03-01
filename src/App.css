@@ -1705,6 +1705,129 @@ body {
   font-size: 14px;
 }
 
+.TagsContainerParent {
+  max-width: 90%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 150px;
+}
+.TagsContainerParent .tagsContainerMain {
+  width: 100%;
+  display: flex;
+  margin-top: 40px;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft {
+  width: 75%;
+  padding-right: 20px;
+  border-right: 1px solid #dedede;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard {
+  display: flex;
+  gap: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #dedede;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
+  flex: 7.5;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage {
+  margin-top: 10px;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 27px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogDescription {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogImage {
+  flex: 2.5;
+  border-radius: 15px;
+  margin: 0;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight {
+  width: 25%;
+  padding-left: 20px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .scrollContainer {
+  position: sticky;
+  top: 100px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .totalBlogs {
+  font-weight: 500;
+  font-size: 24px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight h5 {
+  font-weight: 700;
+  font-size: 24px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .relatedTags {
+  margin-bottom: 30px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .blogTags {
+  margin-top: 30px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .blogTags .tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .blogTags .tagsContainer .tag {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1px #141a31;
+  padding: 4px 20px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 8px;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .blogTags .tagsContainer .tag:hover {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+}
+.TagsContainerParent .tagsContainerMain .tagsRight .blogTags .notags {
+  font-style: italic;
+  font-weight: 600;
+  font-size: 18px;
+}
+.TagsContainerParent .blogsContaining {
+  display: flex;
+  font-weight: 500;
+  font-size: 32px;
+  color: #140421;
+  gap: 15px;
+}
+.TagsContainerParent .blogsContaining span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.TagsContainerParent .blogsContaining span h3 {
+  font-weight: 700;
+}
+
 @media only screen and (max-width: 1024px) {
   .HeaderMainContainer .div1Header .div2Header {
     gap: 30px;
@@ -1782,6 +1905,18 @@ body {
   .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag {
     padding: 6px 12px;
     font-size: 10px;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
+    flex: 7;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogImage {
+    flex: 3;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsRight .totalBlogs {
+    font-size: 20px;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsRight h5 {
+    font-size: 20px;
   }
 }
 @media only screen and (max-width: 920px) {
@@ -2049,6 +2184,19 @@ body {
   .AllBlogsContainer .heroSlideshow .slide .blogType {
     flex: 0.5;
   }
+  .TagsContainerParent .tagsContainerMain {
+    flex-direction: column;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft {
+    width: 100%;
+    padding-right: 0;
+    border-right: none;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsRight {
+    margin-top: 50px;
+    width: 100%;
+    padding-left: 0;
+  }
 }
 @media only screen and (max-width: 680px) {
   .inputcontainer {
@@ -2116,12 +2264,16 @@ body {
   .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer {
     flex-direction: column;
     align-items: center;
+    gap: 5px;
+  }
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer p,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer p {
+    font-size: 14px;
   }
   .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
   .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
-    display: inline-block;
-    box-sizing: content-box;
-    width: auto;
+    text-align: center;
+    font-size: 14px;
   }
 }
 @media only screen and (max-width: 425px) {
