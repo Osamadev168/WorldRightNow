@@ -89,6 +89,8 @@ const Popular = ({ category }) => {
 
                     <p>&nbsp;|&nbsp;</p>
                     {round <= 0 ? <p>Quick read</p> : <p>{round} mins read</p>}
+                    <p>&nbsp;|&nbsp;</p>
+                    {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
                   </div>
                 </div>
                 <div className="description">

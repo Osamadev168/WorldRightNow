@@ -64,6 +64,9 @@ const Header = ({ children }) => {
           style={{ listStyle: "none" }}
         >
           <li>
+            <a onClick={() => navigate("/")}>Home</a>
+          </li>
+          <li>
             <a>About us</a>
           </li>
           <li>
@@ -118,7 +121,8 @@ const Header = ({ children }) => {
                   <ul>
                     <div
                       onClick={() => {
-                        user.email === "daniyalhundred@gmail.com"
+                        user.email === "osamatwenty@gmail.com" ||
+                        "daniyalhundred@gmail.com"
                           ? navigate(`/dashboard/admin/${user.uid}`)
                           : navigate(`/dashboard/user/${user.uid}`);
                       }}

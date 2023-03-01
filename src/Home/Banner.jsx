@@ -1,5 +1,7 @@
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <div className="heroParentContainer">
       <div className="heroContainer">
@@ -18,7 +20,9 @@ const Banner = () => {
           </div>
           <div className="bannerdiv2">
             <a className="primaryButton">Contact us</a>
-            <a className="secondaryButton">Explore Blogs</a>
+            <a className="secondaryButton" onClick={() => navigate("/blogs")}>
+              Explore Blogs
+            </a>
           </div>
         </div>
       </div>

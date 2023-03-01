@@ -10,7 +10,7 @@ import { UserContext } from "../Context/Context";
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [authorBlogs, setAuthorBlogs] = useState([]);
-
+  const [author, setblogAuthor] = useState(blog && blog.author);
   const [refresh, setRefresh] = useState(false);
   const params = useParams();
   const id = params._id;
@@ -34,7 +34,7 @@ const Blog = () => {
     if (refresh) {
       fetchBlog(id);
     }
-  }, [id, refresh, doc_title, blog.author]);
+  }, [id, refresh, doc_title, author]);
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;
   let readingTime = noOfWords / wordsPerMinute;
