@@ -122,7 +122,7 @@ const Header = ({ children }) => {
                     <div
                       onClick={() => {
                         user.email === "osamatwenty@gmail.com" ||
-                        "daniyalhundred@gmail.com"
+                        user.email === "daniyalhundred@gmail.com"
                           ? navigate(`/dashboard/admin/${user.uid}`)
                           : navigate(`/dashboard/user/${user.uid}`);
                       }}
