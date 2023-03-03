@@ -21,7 +21,6 @@ body {
 
 .heroSection {
   height: 100vh;
-  background-image: url("./assets/herobg.png");
   background-size: cover;
   background-position: center;
 }
@@ -212,7 +211,7 @@ body {
   flex-direction: column;
 }
 .heroContainer .mainContainerBanner .bannerdiv1 .text1banner {
-  font-size: 3.438em;
+  font-size: 55px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 800;
@@ -1366,6 +1365,11 @@ body {
   margin-top: 70px;
   margin-bottom: 70px;
 }
+.dashboardContainer .switchAccount {
+  width: 220px;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
 .dashboardContainer .userSettingContainer {
   display: flex;
   justify-content: space-between;
@@ -1384,6 +1388,13 @@ body {
   background-size: cover;
   background-position: center;
   cursor: pointer;
+  position: relative;
+}
+.dashboardContainer .userSettingContainer .userInfo .profilePic .circularProgress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .dashboardContainer .userSettingContainer .userInfo .profilePic .imageEditButton {
   background: #000000;
@@ -1630,6 +1641,7 @@ body {
 
 .AllBlogsContainer {
   margin-top: 50px;
+  margin-bottom: 80px;
 }
 .AllBlogsContainer .heroSlideshow {
   width: 90%;
@@ -1953,7 +1965,7 @@ body {
 }
 @media only screen and (max-width: 768px) {
   .heroSection {
-    background: url("./assets/BgTablet.png");
+    background-image: url("./assets/BgTablet.png") !important;
     background-size: cover;
     background-position: bottom;
   }
@@ -2184,6 +2196,9 @@ body {
   .AllBlogsContainer .heroSlideshow .slide .blogType {
     flex: 0.5;
   }
+  .TagsContainerParent .blogsContaining {
+    font-size: 24px;
+  }
   .TagsContainerParent .tagsContainerMain {
     flex-direction: column;
   }
@@ -2233,6 +2248,9 @@ body {
   }
   .dashboardContainer .userSettingContainer .userInfo {
     flex-direction: column;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
+    font-size: 20px;
   }
 }
 @media only screen and (max-width: 520px) {
@@ -2407,6 +2425,24 @@ body {
   }
   .AllBlogsContainer .heroSlideshow .slide .blogInfo .imageAuthorName p {
     font-size: 13px;
+  }
+  .TagsContainerParent .blogsContaining {
+    font-size: 18px;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
+    flex: 7.5;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogDescription {
+    font-size: 12px;
+  }
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogImage {
+    flex: none;
+    width: 100px;
+    height: 100px;
   }
 }
 @media only screen and (max-width: 375px) {

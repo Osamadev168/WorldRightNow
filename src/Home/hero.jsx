@@ -4,7 +4,10 @@ import Banner from "./Banner";
 import "../App.css";
 const Hero = () => {
   return (
-    <div className="heroSection">
+    <div
+      className="heroSection"
+      style={{ backgroundImage: 'url("./assets/herobg.png")' }}
+    >
       <Header />
       <Banner />
     </div>
