@@ -95,7 +95,9 @@ const Header = ({ children }) => {
                     className="profilepic"
                     style={{
                       backgroundImage: `url(${
-                        user && user.photoURL ? user.photoURL : profilepic
+                        user && user.photoURL.includes("googleusercontent")
+                          ? profilepic
+                          : user.photoURL
                       })`,
                     }}
                   ></div>
