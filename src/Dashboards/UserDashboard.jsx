@@ -128,7 +128,7 @@ const UserDashboard = () => {
                 </svg>
               </div>
             ) : (
-              <div>
+              <div className="circularProgress">
                 <CircularProgress />
               </div>
             )}
