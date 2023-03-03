@@ -7,6 +7,7 @@ import image from "../../assets/1.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
+import { CircularProgress } from "@mui/material";
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [authorBlogs, setAuthorBlogs] = useState([]);
@@ -129,7 +130,7 @@ const Blog = () => {
                   );
                 })
               ) : (
-                <></>
+                <CircularProgress />
               )}
             </div>
             <div className="blogTags">

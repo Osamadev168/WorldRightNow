@@ -379,7 +379,7 @@ const UserDashboard = () => {
           );
         })
       ) : (
-        <>no blogs yet</>
+        <CircularProgress />
       )}
     </div>
   );
