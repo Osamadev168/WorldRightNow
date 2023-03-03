@@ -94,7 +94,9 @@ const UserDashboard = () => {
             className="profilePic"
             style={{
               backgroundImage: `url(${
-                user && user.photoURL ? user.photoURL : profilepic
+                user && user.photoURL.includes("googleusercontent")
+                  ? profilepic
+                  : user.photoURL
               })`,
             }}
             onClick={() => {
