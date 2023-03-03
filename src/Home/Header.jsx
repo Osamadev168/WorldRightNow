@@ -11,7 +11,7 @@ import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
 
 const Header = ({ children }) => {
-  const { user } = useContext(UserContext);
+  const { user, avatar } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const logout = () => {
@@ -91,16 +91,15 @@ const Header = ({ children }) => {
             <>
               <div className="profile" ref={profileRef}>
                 <div className="picdropdown" onClick={toggleProfile}>
-                  <div
+                  <img
+                    referrerPolicy="no-referrer"
                     className="profilepic"
                     style={{
                       backgroundImage: `url(${
-                        user && user.photoURL.includes("googleusercontent")
-                          ? profilepic
-                          : user.photoURL
+                        user && user.photoURL ? user.photoURL : profilepic
                       })`,
                     }}
-                  ></div>
+                  />
 
                   <svg
                     width="11"

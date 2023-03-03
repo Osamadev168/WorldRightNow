@@ -56,12 +56,12 @@ const UserDashboard = () => {
           axios.put(`http://localhost:7000/blog/update`, {
             authorId: user.uid,
             authorName: user.displayName,
-            authorImage: user.photoURL,
+            authorImage: user && user.photoURL,
           });
           axios.post("http://localhost:7000/blog/update/comments", {
             authorId: user.uid,
             authorName: user.displayName,
-            authorImage: user.photoURL,
+            authorImage: user && user.photoURL,
           });
           setTimeout(() => {
             window.location.reload(false);
@@ -91,12 +91,11 @@ const UserDashboard = () => {
       <div className="userSettingContainer">
         <div className="userInfo">
           <div
+            referrerPolicy="no-referrer"
             className="profilePic"
             style={{
               backgroundImage: `url(${
-                user && user.photoURL.includes("googleusercontent")
-                  ? profilepic
-                  : user.photoURL
+                user && user.photoURL ? user.photoURL : profilepic
               })`,
             }}
             onClick={() => {
@@ -167,14 +166,14 @@ const UserDashboard = () => {
                         axios.put(`http://localhost:7000/blog/update`, {
                           authorId: user.uid,
                           authorName: user.displayName,
-                          authorImage: user.photoURL,
+                          authorImage: user && user.photoURL,
                         });
                         axios.post(
                           "http://localhost:7000/blog/update/comments",
                           {
                             authorId: user.uid,
                             authorName: user.displayName,
-                            authorImage: user.photoURL,
+                            authorImage: user && user.photoURL,
                           }
                         );
                       });
