@@ -53,7 +53,12 @@ const UserDashboard = () => {
         updateProfile(user, {
           photoURL: res.data.url,
         }).then(() => {
-          axios.post(`http://localhost:7000/blog/update`, {
+          axios.put(`http://localhost:7000/blog/update`, {
+            authorId: user.uid,
+            authorName: user.displayName,
+            authorImage: user.photoURL,
+          });
+          axios.post("http://localhost:7000/blog/update/comments", {
             authorId: user.uid,
             authorName: user.displayName,
             authorImage: user.photoURL,
@@ -157,11 +162,19 @@ const UserDashboard = () => {
                       }).then(() => {
                         alert("User name changed!");
                         setEdit(false);
-                        axios.post(`http://localhost:7000/blog/update`, {
+                        axios.put(`http://localhost:7000/blog/update`, {
                           authorId: user.uid,
                           authorName: user.displayName,
                           authorImage: user.photoURL,
                         });
+                        axios.post(
+                          "http://localhost:7000/blog/update/comments",
+                          {
+                            authorId: user.uid,
+                            authorName: user.displayName,
+                            authorImage: user.photoURL,
+                          }
+                        );
                       });
                     }}
                   >
@@ -366,7 +379,7 @@ const UserDashboard = () => {
           );
         })
       ) : (
-        <>no blogs yet</>
+        <CircularProgress />
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import image from "../../assets/1.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
+import { CircularProgress } from "@mui/material";
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [authorBlogs, setAuthorBlogs] = useState([]);
@@ -20,6 +21,7 @@ const Blog = () => {
     });
   };
   const getAuhorBlogs = () => {
+    setblogAuthor(blog.author);
     author_blogs(blog.author).then((res) => {
       setAuthorBlogs(res.data);
     });
@@ -128,7 +130,7 @@ const Blog = () => {
                   );
                 })
               ) : (
-                <></>
+                <CircularProgress />
               )}
             </div>
             <div className="blogTags">
@@ -162,7 +164,12 @@ const Blog = () => {
   );
 };
 const Comments = ({ blog, id, setRefresh, refresh }) => {
+  const [userid, setuserid] = useState("");
+  useEffect(() => {
+    setuserid(user && user.uid);
+  }, [userid]);
   const defaultValues = {
+    authorid: "",
     username: "",
     userimage: "",
     comment: "",
@@ -174,8 +181,8 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
     if (comment.comment !== "") {
       submitComment(id, comment).then(() => {
         setComment(defaultValues);
-        setRefresh(!refresh);
       });
+      setRefresh(!refresh);
     } else {
       alert("Comment must not be empty..!!");
     }
@@ -216,15 +223,17 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
             <textarea
               value={comment.comment}
               className="comment_Area"
-              onChange={(e) =>
+              onChange={(e) => {
+                setuserid(user && user.uid);
                 setComment({
                   ...comment,
-                  username: user.displayName,
+                  authorid: userid,
+                  username: user && user.displayName,
                   userimage: user && user.photoURL ? user.photoURL : profilepic,
                   comment: e.target.value,
                   date: new Date(),
-                })
-              }
+                });
+              }}
             />
           </div>
           <a onClick={submit_Comment} className="commentButton">
