@@ -1,107 +1,104 @@
 import axios from "axios";
-export const addUser = async (user) => {
+const url = "http://localhost:7000";
+export const upload_Image = async (image) => {
   try {
-    await axios.post("http://localhost:7000/createUser", user);
+    let response = await axios.post(`${url}/upload/image`, image);
+    return response;
   } catch (e) {
-    console.log(e);
+    alert(e.message);
   }
 };
 export const fetchDataPopular = async (category) => {
-  let response = await axios.post("http://localhost:7000/popularposts", {
+  let response = await axios.post(`${url}/popularposts`, {
     category: category,
   });
   return response;
 };
 export const fetchDataLatest = async (category) => {
-  let response = await axios.post(`http://localhost:7000/latestposts`, {
+  let response = await axios.post(`${url}/latestposts`, {
     category: category,
   });
   return response;
 };
 export const submitPost = async (blog) => {
   try {
-    await axios.post("http://localhost:7000/create", blog);
+    await axios.post(`${url}/create`, blog);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 export const getUserPosts = async (authorId) => {
   try {
     let response = await axios.get(
-      `http://localhost:7000/posts/submitted/user/author/${authorId}`
+      `${url}/posts/submitted/user/author/${authorId}`
     );
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 export const getSubmittedPosts = async () => {
   try {
-    let response = await axios.get(`http://localhost:7000/posts/submitted`);
+    let response = await axios.get(`${url}/posts/submitted`);
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 export const approveBlog = async (id) => {
   try {
-    await axios.post(`http://localhost:7000/post/approve/${id}`);
+    await axios.post(`${url}/post/approve/${id}`);
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
 };
 export const getBlog = async (id) => {
   try {
-    let response = await axios.get(`http://localhost:7000/blog/${id}`);
+    let response = await axios.get(`${url}/blog/${id}`);
     return response;
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
 };
 export const submitComment = async (postId, comment) => {
   try {
-    await axios.post(
-      `http://localhost:7000/post/${postId}/new/comment`,
-      comment
-    );
+    await axios.post(`${url}/post/${postId}/new/comment`, comment);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 export const deletePostAdmin = async (id) => {
   try {
-    await axios.delete(`http://localhost:7000/post/${id}`);
+    await axios.delete(`${url}/post/${id}`);
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
 };
 export const deletePostUser = async (id) => {
   try {
-    await axios.delete(`http://localhost:7000/post/user/delete/blog/${id}`);
+    await axios.delete(`${url}/post/user/delete/blog/${id}`);
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
 };
 export const getBlogsfromTag = async (tag) => {
   try {
-    let response = await axios.get(`http://localhost:7000/blog/tag/${tag}`);
+    let response = await axios.get(`${url}/blog/tag/${tag}`);
     return response;
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
 };
 export const edit_Blog = async (id, blog) => {
   try {
-    await axios.put(`http://localhost:7000/blog/update/${id}`, blog);
+    await axios.put(`${url}/blog/update/${id}`, blog);
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
 };
 export const author_blogs = async (author) => {
   try {
-    let response = await axios.get(
-      `http://localhost:7000/blogs/author/${author}`
-    );
+    let response = await axios.get(`${url}/blogs/author/${author}`);
     return response;
   } catch (e) {
     console.error(e.message);

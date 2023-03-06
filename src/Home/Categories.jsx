@@ -1,10 +1,7 @@
-import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import "../App.css";
-
 const Categories = ({ setCategory }) => {
   const [activediv, setActiveDiv] = useState("");
-
   useEffect(() => {
     setActiveDiv("div1");
     setCategory("");

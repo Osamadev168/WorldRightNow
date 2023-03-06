@@ -18,6 +18,7 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 export const Signup = ({
   setActive,
   email,
@@ -184,8 +185,11 @@ export const Login = ({
   email,
   password,
 }) => {
+  const [progress, setProgress] = useState(false);
   const navigate = useNavigate();
   const loginwithEmailPassword = async () => {
+    setProgress(true);
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
@@ -259,7 +263,7 @@ export const Login = ({
           className="primaryButton loginButton"
           onClick={loginwithEmailPassword}
         >
-          <h1>Login</h1>
+          {progress ? <CircularProgress /> : <h1>Login</h1>}
         </div>
         <div className="or">
           <div className="orline"></div>

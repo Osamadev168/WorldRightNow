@@ -1,46 +1,33 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home/Home.jsx";
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Account/Login.jsx";
-import ContextProvider, { UserContext } from "./Context/Context.jsx";
+import ContextProvider from "./Context/Context.jsx";
 import CreateBlog from "./Create Blog/CreateBlog.jsx";
 import Header from "./Home/Header.jsx";
 import Footer from "./Home/Footer.jsx";
 import FooterContainer from "./Home/FooterContainer.jsx";
-import UserDashboard from "./Dashboards/UserDashboard.jsx";
 import Blog from "./Blog/Blog.jsx";
 import EditBlog from "./Blog/EditBlog";
 import Wrapper from "./Home/Wrapper.jsx";
-import UserInfo from "./Account/UserInfo.jsx";
-import AdminDashboard from "../src/Dashboards/AdminDashboard";
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import BlogTag from "./Blog/BlogTag";
-import { useState } from "react";
 import AllBlogs from "./All Blogs/AllBlogs";
-
+import Dashboard from "./Dashboards/Dashboard";
 const ProtectedRoutes = ({ children }) => {
-  const [authUser, setAuthUser] = useState({});
+  const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
-    setAuthUser(JSON.parse(localStorage.getItem("authUser")));
+    setAuthUser(localStorage.getItem("authUser"));
   }, []);
   if (!authUser) {
-    return <Navigate to="/" replace />;
-  } else if (authUser) {
-    return children;
-  }
-  return children;
-};
-const AdminRoute = ({ children }) => {
-  const { user } = useContext(UserContext);
-  if (user && user.uid !== "Idfri64OkLcihU4YP5j2hvC14M32") {
-    return <Navigate to="/" />;
+    return <Navigate to="/account" replace />;
   }
   return children;
 };
 const InValidRoute = () => {
   return (
-    <div>
+    <div style={{ margin: 160 }}>
       <h1>Not found :(</h1>
     </div>
   );
@@ -51,7 +38,16 @@ const App = () => {
     <ContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<InValidRoute />} />
+          <Route
+            path="*"
+            element={
+              <Wrapper>
+                <Header />
+                <InValidRoute />
+                <Footer />
+              </Wrapper>
+            }
+          />
 
           <Route path="/" element={<Home />} />
           <Route
@@ -64,16 +60,7 @@ const App = () => {
               </Wrapper>
             }
           />
-          <Route
-            path="/account/info/user"
-            element={
-              <Wrapper>
-                <Header />
-                <UserInfo />
-                <Footer />
-              </Wrapper>
-            }
-          />
+
           <Route
             path="/createblog"
             element={
@@ -98,26 +85,17 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+
           <Route
-            path="/dashboard/user/:authorId"
+            path="/dashboard"
             element={
               <ProtectedRoutes>
                 <Wrapper>
                   <Header />
-                  <UserDashboard />
+                  <Dashboard />
                   <Footer />
                 </Wrapper>
               </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/dashboard/admin/:adminId"
-            element={
-              <Wrapper>
-                <Header />
-                <AdminDashboard />
-                <Footer />
-              </Wrapper>
             }
           />
           <Route

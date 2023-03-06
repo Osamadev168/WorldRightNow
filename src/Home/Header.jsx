@@ -10,13 +10,14 @@ import imgWrite from "../../assets/write.svg";
 import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
 
-const Header = ({ children }) => {
-  const { user, avatar } = useContext(UserContext);
+const Header = () => {
+  const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const logout = () => {
     signOut(getAuth(app)).then(() => {
       setRefresh(true);
+      localStorage.removeItem("authUser");
     });
     navigate("/account");
   };
@@ -122,10 +123,7 @@ const Header = ({ children }) => {
                   <ul>
                     <div
                       onClick={() => {
-                        user.email === "osamatwenty@gmail.com" ||
-                        user.email === "daniyalhundred@gmail.com"
-                          ? navigate(`/dashboard/admin/${user.uid}`)
-                          : navigate(`/dashboard/user/${user.uid}`);
+                        navigate("/dashboard");
                       }}
                     >
                       <DropdownItem text={"Dashboard"} image={imgDashboard} />
@@ -138,7 +136,7 @@ const Header = ({ children }) => {
                     <DropdownItem text={"Help"} image={imgHelp} />
                     <DropdownItem
                       text={"Logout"}
-                      link={() => logout()}
+                      link={logout}
                       image={imgLogout}
                     />
                   </ul>

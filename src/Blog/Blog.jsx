@@ -48,44 +48,48 @@ const Blog = () => {
   return (
     <>
       <div className="blogMainContainer paddingtop">
-        <div className="blogLeft">
-          <div className="blogDateandReadTime">
-            <p>{displayDate}</p>
-            <p>&nbsp;|&nbsp;</p>
+        {blog ? (
+          <div className="blogLeft">
+            <div className="blogDateandReadTime">
+              <p>{displayDate}</p>
+              <p>&nbsp;|&nbsp;</p>
 
-            {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
-          </div>
-          <div className="titleandDescriptionImage">
-            <h1 className="blogTitle">{blog.title}</h1>
-            <p className="blogDescription">{blog.description}</p>
-            <div className="imageAuthorName">
-              <img src={blog.authorImage} className="auhtorImage" />
-              <p className="authorName">{blog.author}</p>
+              {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
             </div>
+            <div className="titleandDescriptionImage">
+              <h1 className="blogTitle">{blog.title}</h1>
+              <p className="blogDescription">{blog.description}</p>
+              <div className="imageAuthorName">
+                <img src={blog.authorImage} className="auhtorImage" />
+                <p className="authorName">{blog.author}</p>
+              </div>
+              <div
+                className="blogImage"
+                style={{
+                  backgroundImage: `url(${blog.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  width: "100%",
+                  height: "450px",
+                }}
+              ></div>
+            </div>
+
             <div
-              className="blogImage"
-              style={{
-                backgroundImage: `url(${blog.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: "100%",
-                height: "450px",
-              }}
+              className="blogBody"
+              dangerouslySetInnerHTML={{ __html: blog.body }}
             ></div>
+
+            <Comments
+              blog={blog}
+              id={id}
+              setRefresh={setRefresh}
+              refresh={refresh}
+            />
           </div>
-
-          <div
-            className="blogBody"
-            dangerouslySetInnerHTML={{ __html: blog.body }}
-          ></div>
-
-          <Comments
-            blog={blog}
-            id={id}
-            setRefresh={setRefresh}
-            refresh={refresh}
-          />
-        </div>
+        ) : (
+          <CircularProgress />
+        )}
         <div className="blogRight">
           <div className="blogRightContent">
             <div className="authorBlogs">

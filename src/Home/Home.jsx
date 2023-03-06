@@ -5,8 +5,11 @@ import LatestPosts from "./LatestPosts";
 import Popular from "./Popular";
 import Hero from "./hero";
 import FooterContainer from "./FooterContainer.jsx";
+import { useEffect } from "react";
 const Home = () => {
-  document.title = "Home";
+  useEffect(() => {
+    document.title = "Home";
+  }, []);
   const [category, setCategory] = useState("");
   return (
     <>

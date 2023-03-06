@@ -15,25 +15,24 @@ import { UserContext } from "../Context/Context";
 import { useRef } from "react";
 import { updateProfile } from "firebase/auth";
 import axios from "axios";
-const UserDashboard = () => {
+const UserDashboard = ({ user, admin }) => {
   document.title = "Dashboard";
-  const { user } = useContext(UserContext);
   const [change, setChange] = useState(false);
   const [progress, setProgress] = useState(false);
   const [refresh, setRefreh] = useState(false);
   const [edit, setEdit] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
+  const [author, setAuthor] = useState(true);
   const inputFile = useRef(null);
   const editName = useRef(null);
   const [userdata, setUserData] = useState({});
   const [file, setFile] = useState("");
-  const params = useParams();
   const navigate = useNavigate();
-  const authorId = params.authorId;
   const [blog, setBlog] = useState([]);
   const getData = () => {
-    getUserPosts(authorId).then((res) => {
+    setAuthor(true);
+    getUserPosts(user && user.uid).then((res) => {
       setBlog(res.data);
     });
   };
@@ -77,15 +76,16 @@ const UserDashboard = () => {
     });
   };
   useEffect(() => {
+    if (author) {
+      getData();
+    }
     window.scrollTo(0, 0);
     setUser();
-    getData();
-    console.log(user);
-
     if (file) {
       uploadImage();
     }
-  }, [refresh, file]);
+    console.log(author);
+  }, [refresh, file, user]);
   return (
     <div className="dashboardContainer paddingtop">
       <div className="userSettingContainer">
@@ -237,7 +237,7 @@ const UserDashboard = () => {
           <Button onClick={handleYesDailog}>Yes</Button>
         </DialogActions>
       </Dialog>
-      {blog.length > 0 ? (
+      {blog && blog.length > 0 ? (
         blog.map((blogs, index) => {
           let wordsPerMinute = 150;
           let noOfWords = blogs.body.split(" ").length;

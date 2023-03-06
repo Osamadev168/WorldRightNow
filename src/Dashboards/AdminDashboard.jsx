@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  approveBlog,
-  deletePostAdmin,
-  deletePostUser,
-  getSubmittedPosts,
-} from "../Api/Api";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { approveBlog, deletePostAdmin, getSubmittedPosts } from "../Api/Api";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,7 +8,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import moment from "moment";
-const UserDashboard = () => {
+import { UserContext } from "../Context/Context";
+const AdminDashboard = () => {
   const [refresh, setRefreh] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
@@ -24,16 +20,20 @@ const UserDashboard = () => {
       setBlog(res.data);
     });
   };
-
+  const { setAdmin } = useContext(UserContext);
   useEffect(() => {
     document.title = "Dashboard";
-
     getData();
   }, [refresh]);
 
   return (
     <div className="dashboardContainer paddingtop">
-      <a className="switchAccount primaryButton">Switch to User</a>
+      <a
+        className="switchAccount primaryButton"
+        onClick={() => setAdmin(false)}
+      >
+        My Blogs
+      </a>
       <h3 className="dashboardTitle">Dashboard</h3>
       <Dialog
         open={open}
@@ -64,14 +64,6 @@ const UserDashboard = () => {
       </Dialog>
       {blog.length > 0 ? (
         blog.map((blogs, index) => {
-          const handleClickOpen = () => {
-            setOpen(true);
-          };
-
-          const handleCloseYes = (id) => {};
-          const handleCloseNo = () => {
-            setOpen(false);
-          };
           const approve_Blog = () => {
             approveBlog(blogs._id).then(() => {
               setRefreh(!refresh);
@@ -94,7 +86,9 @@ const UserDashboard = () => {
                   </div>
                   <div className="blogStatusDateTime">
                     {blogs.approved === false ? (
-                      <span className="status underreview">Under Review</span>
+                      <span className="status underreview">
+                        Waiting for Approval
+                      </span>
                     ) : (
                       <span className="status active">Active</span>
                     )}
@@ -141,7 +135,11 @@ const UserDashboard = () => {
                       </svg>
                       Delete
                     </div>
-                    <div className="edit" style={{ cursor: "pointer" }}>
+                    <div
+                      className="edit"
+                      style={{ cursor: "pointer" }}
+                      onClick={approve_Blog}
+                    >
                       <svg
                         width="25"
                         height="25"
@@ -205,7 +203,6 @@ const UserDashboard = () => {
                   </div>
                 </div>
               </div>
-              <button onClick={approve_Blog}>Approve</button>
             </div>
           );
         })
@@ -216,4 +213,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default AdminDashboard;
