@@ -123,3 +123,19 @@ export const author_blogs = async (author) => {
     console.error(e.message);
   }
 };
+export const UpdateUserData = async (user, uid, displayName, photoURL) => {
+  try {
+    await axios.put(`http://localhost:7000/blog/update`, {
+      authorId: uid,
+      authorName: displayName,
+      authorImage: user && photoURL,
+    });
+    await axios.post("http://localhost:7000/blog/update/comments", {
+      authorId: uid,
+      authorName: displayName,
+      authorImage: user && photoURL,
+    });
+  } catch (e) {
+    console.error(e.message);
+  }
+};

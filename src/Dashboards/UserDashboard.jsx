@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { deletePostUser, getUserPosts } from "../Api/Api";
+import { useNavigate } from "react-router-dom";
+import {
+  deletePostUser,
+  getUserPosts,
+  UpdateUserData,
+  upload_Image,
+} from "../Api/Api";
 import { CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -12,11 +17,9 @@ import moment from "moment";
 import profilepic from "../../assets/Avatar.svg";
 import { useRef } from "react";
 import { updateProfile } from "firebase/auth";
-import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
 const UserDashboard = () => {
-  document.title = "Dashboard";
   const [change, setChange] = useState(false);
   const [progress, setProgress] = useState(false);
   const [refresh, setRefreh] = useState(false);
@@ -45,29 +48,32 @@ const UserDashboard = () => {
   };
   const uploadImage = async () => {
     const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "kalo7xt1");
-    await axios
-      .post("https://api.cloudinary.com/v1_1/ddwvsarat/image/upload", data)
-      .then(async (res) => {
-        updateProfile(user, {
-          photoURL: res.data.url,
-        }).then(() => {
-          axios.put(`http://localhost:7000/blog/update`, {
-            authorId: user.uid,
-            authorName: user.displayName,
-            authorImage: user && user.photoURL,
-          });
-          axios.post("http://localhost:7000/blog/update/comments", {
-            authorId: user.uid,
-            authorName: user.displayName,
-            authorImage: user && user.photoURL,
-          });
-          setTimeout(() => {
-            window.location.reload(false);
-          }, 1000);
-        });
+    data.append("image", file);
+    upload_Image(data).then(async (res) => {
+      updateProfile(user, {
+        photoURL: res.data.url,
+      }).then(() => {
+        UpdateUserData(user, user.uid, user.displayName, user.photoURL);
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1000);
       });
+    });
+  };
+  const userNameInput = (e) => {
+    setChange(true);
+    setEdit(true);
+    setUserData({ ...userdata, name: e.target.value.trim() });
+  };
+  const updateUserName = () => {
+    setChange(true);
+    updateProfile(user, {
+      displayName: userdata.name,
+    }).then(() => {
+      alert("User name changed!");
+      setEdit(false);
+      UpdateUserData(user, user.uid, user.displayName, user.photoURL);
+    });
   };
   const setUser = () => {
     setUserData({
@@ -77,6 +83,7 @@ const UserDashboard = () => {
     });
   };
   useEffect(() => {
+    document.title = "Dashboard";
     if (author) {
       getData();
     }
@@ -85,7 +92,6 @@ const UserDashboard = () => {
     if (file) {
       uploadImage();
     }
-    console.log(author);
   }, [refresh, file, user]);
   return (
     <div className="dashboardContainer paddingtop">
@@ -142,11 +148,9 @@ const UserDashboard = () => {
                 ref={editName}
                 type="text"
                 className="userName"
-                value={change === true ? user.name : user && user.displayName}
+                value={change ? user.name : user && user.displayName}
                 onChange={(e) => {
-                  setChange(true);
-                  setEdit(true);
-                  setUserData({ ...userdata, name: e.target.value.trim() });
+                  userNameInput(e);
                 }}
               />
               <div className="userNameButton">
@@ -157,28 +161,7 @@ const UserDashboard = () => {
                     viewBox="0 0 18 14"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => {
-                      setChange(true);
-                      updateProfile(user, {
-                        displayName: userdata.name,
-                      }).then(() => {
-                        alert("User name changed!");
-                        setEdit(false);
-                        axios.put(`http://localhost:7000/blog/update`, {
-                          authorId: user.uid,
-                          authorName: user.displayName,
-                          authorImage: user && user.photoURL,
-                        });
-                        axios.post(
-                          "http://localhost:7000/blog/update/comments",
-                          {
-                            authorId: user.uid,
-                            authorName: user.displayName,
-                            authorImage: user && user.photoURL,
-                          }
-                        );
-                      });
-                    }}
+                    onClick={updateUserName}
                   >
                     <path
                       d="M5.7713 9.96861L15.296 0.443946C15.5919 0.147981 15.9686 0 16.426 0C16.8834 0 17.2601 0.147981 17.5561 0.443946C17.852 0.73991 18 1.11659 18 1.57399C18 2.03139 17.852 2.40807 17.5561 2.70404L6.90134 13.3587C6.57847 13.6816 6.20179 13.843 5.7713 13.843C5.34081 13.843 4.96413 13.6816 4.64126 13.3587L0.443946 9.16144C0.147981 8.86547 0 8.48879 0 8.03139C0 7.57399 0.147981 7.19731 0.443946 6.90134C0.73991 6.60538 1.11659 6.4574 1.57399 6.4574C2.03139 6.4574 2.40807 6.60538 2.70404 6.90134L5.7713 9.96861Z"

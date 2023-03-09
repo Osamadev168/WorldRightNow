@@ -39,7 +39,7 @@ const CreateBlog = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const setApproved = () => {
-    return user.uid === "Idfri64OkLcihU4YP5j2hvC14M32" ? true : false;
+    return admin ? true : false;
   };
   const params = useParams();
   const blog_id = params.blogid;
@@ -90,7 +90,7 @@ const CreateBlog = () => {
     if (file) {
       uploadImage();
     }
-  }, [file, data === true, refresh === true]);
+  }, [file, data, refresh]);
 
   return (
     <div

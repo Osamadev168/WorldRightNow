@@ -11,16 +11,14 @@ import { UserContext } from "../Context/Context.jsx";
 const Home = () => {
   useEffect(() => {
     document.title = "Home";
-    console.log(token && token);
   }, []);
   const [category, setCategory] = useState("");
-  const { token } = useContext(UserContext);
   return (
     <>
       <Hero />
       <Categories setCategory={setCategory} />
-      <Popular category={category} />
       <LatestPosts category={category} />
+      <Popular category={category} />
       <Information />
       <FooterContainer />
     </>
