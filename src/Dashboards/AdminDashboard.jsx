@@ -9,8 +9,10 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import moment from "moment";
 import { UserContext } from "../Context/Context";
+import AdminPosts from "./AdminPosts";
 const AdminDashboard = () => {
   const [refresh, setRefreh] = useState(false);
+  const [adminPosts, setAdminPosts] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
   const navigate = useNavigate();
@@ -26,14 +28,15 @@ const AdminDashboard = () => {
     getData();
   }, [refresh]);
 
-  return (
+  return !adminPosts ? (
     <div className="dashboardContainer paddingtop">
       <a
         className="switchAccount primaryButton"
-        onClick={() => setAdmin(false)}
+        onClick={() => setAdminPosts(true)}
       >
         My Blogs
       </a>
+
       <h3 className="dashboardTitle">Dashboard</h3>
       <Dialog
         open={open}
@@ -210,6 +213,8 @@ const AdminDashboard = () => {
         <>no blogs yet</>
       )}
     </div>
+  ) : (
+    <AdminPosts setAdminPosts={setAdminPosts} />
   );
 };
 

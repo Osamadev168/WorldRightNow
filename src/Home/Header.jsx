@@ -18,6 +18,7 @@ const Header = () => {
     signOut(getAuth(app)).then(() => {
       setRefresh(true);
       localStorage.removeItem("authUser");
+      localStorage.removeItem("admin");
     });
     navigate("/account");
   };

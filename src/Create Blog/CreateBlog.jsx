@@ -36,13 +36,10 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
-  const { user } = useContext(UserContext);
+  const { user, admin } = useContext(UserContext);
   const navigate = useNavigate();
   const setApproved = () => {
-    return user.email === "daniyalhundred@gmail.com" ||
-      user.email === "osamatwenty@gmail.com"
-      ? true
-      : false;
+    return admin ? true : false;
   };
   const uploadImage = async () => {
     setProgress(true);
@@ -56,7 +53,8 @@ const CreateBlog = () => {
   };
   const submitBlog = async () => {
     try {
-      await submitPost(blog).then(async () => {
+      let token;
+      await submitPost(blog, token).then(async () => {
         navigate("/dashboard");
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");

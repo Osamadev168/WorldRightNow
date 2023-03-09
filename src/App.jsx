@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import BlogTag from "./Blog/BlogTag";
 import AllBlogs from "./All Blogs/AllBlogs";
 import Dashboard from "./Dashboards/Dashboard";
+import Blogs from "./Blog/Blogs";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -124,6 +125,16 @@ const App = () => {
               <Wrapper>
                 <Header />
                 <AllBlogs />
+                <FooterContainer />
+              </Wrapper>
+            }
+          />
+          <Route
+            path="/all/blogs"
+            element={
+              <Wrapper>
+                <Header />
+                <Blogs />
                 <FooterContainer />
               </Wrapper>
             }

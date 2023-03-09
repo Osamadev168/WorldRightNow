@@ -8,6 +8,25 @@ export const upload_Image = async (image) => {
     alert(e.message);
   }
 };
+export const getAllBlogs = async (page, limit) => {
+  try {
+    let response = await axios.get(`${url}/get/all/blogs/${page}/${limit}`);
+
+    return response;
+  } catch (e) {
+    console.error(e.message);
+  }
+};
+export const UserStatus = async (token) => {
+  try {
+    let response = await axios.post(`${url}/admin`, {
+      idToken: token,
+    });
+    return response;
+  } catch {
+    console.error(e.message);
+  }
+};
 export const fetchDataPopular = async (category) => {
   let response = await axios.post(`${url}/popularposts`, {
     category: category,

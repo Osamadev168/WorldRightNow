@@ -5,6 +5,7 @@ import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const Popular = ({ category }) => {
   const navigate = useNavigate();
   const [post, setPosts] = useState([]);
@@ -82,10 +83,14 @@ const Popular = ({ category }) => {
                   key={index}
                   onClick={() => navigate(`/blogs/${title}/${posts._id}`)}
                 >
-                  <div
+                  <img
+                    src={posts.image}
                     className="image"
-                    style={{ backgroundImage: `url(${posts.image})` }}
-                  ></div>
+                    loading="lazy"
+                    alt="blog_Image"
+                    placeholder="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmuma.ir%2Fwp-content%2Fuploads%2F2022%2F11%2F%3FND&psig=AOvVaw3RQQy1z2uVtTtbXR6VV5Ve&ust=1678208652683000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNj2rsfkx_0CFQAAAAAdAAAAABAE"
+                  />
+
                   <div className="title">
                     <h1 className="posttitle">{posts.category}</h1>
                     <div className="info">

@@ -15,7 +15,7 @@ import { updateProfile } from "firebase/auth";
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
-const UserDashboard = () => {
+const AdminPosts = ({ setAdminPosts }) => {
   document.title = "Dashboard";
   const [change, setChange] = useState(false);
   const [progress, setProgress] = useState(false);
@@ -91,6 +91,9 @@ const UserDashboard = () => {
     <div className="dashboardContainer paddingtop">
       <div className="userSettingContainer">
         <div className="userInfo">
+          <button onClick={() => setAdminPosts(false)}>
+            Show Submiited Posts
+          </button>
           <div
             referrerPolicy="no-referrer"
             className="profilePic"
@@ -387,4 +390,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default AdminPosts;

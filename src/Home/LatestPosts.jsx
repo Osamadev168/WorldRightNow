@@ -1,4 +1,5 @@
 import Slider from "react-slick";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useEffect, useRef, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
@@ -89,10 +90,7 @@ const LatestPosts = ({ category }) => {
                     )
                   }
                 >
-                  <div
-                    className="image"
-                    style={{ backgroundImage: `url(${posts.image})` }}
-                  ></div>
+                  <img src={posts.image} className="image" loading="lazy" />
                   <div className="title">
                     <h1 className="posttitle">{posts.category}</h1>
                     <div className="info">

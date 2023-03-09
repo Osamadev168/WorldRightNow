@@ -3,13 +3,13 @@ import { UserContext } from "../Context/Context";
 import AdminDashboard from "./AdminDashboard";
 import UserDashboard from "./UserDashboard";
 const Dashboard = () => {
-  const { admin, user } = useContext(UserContext);
-  return !admin ? <User user={user} admin={admin} /> : <Admin admin={admin} />;
+  const { admin } = useContext(UserContext);
+  return !admin ? <User /> : <Admin />;
 };
-const User = ({ user }) => {
-  return <UserDashboard user={user} />;
+const User = () => {
+  return <UserDashboard />;
 };
-const Admin = ({ admin }) => {
-  return <AdminDashboard admin={admin} />;
+const Admin = () => {
+  return <AdminDashboard />;
 };
 export default Dashboard;
