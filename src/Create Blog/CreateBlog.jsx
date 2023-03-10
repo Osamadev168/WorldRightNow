@@ -65,7 +65,7 @@ const CreateBlog = () => {
   };
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value && tags.length < 10) {
-      setTags([...tags, value.toLowerCase().replace(/\s+/g, "-")]);
+      setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setRefresh(!refresh);
       setValue("");

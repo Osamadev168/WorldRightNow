@@ -8,6 +8,7 @@ import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
 import { CircularProgress } from "@mui/material";
+import { Helmet } from "react-helmet";
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [authorBlogs, setAuthorBlogs] = useState([]);
@@ -48,6 +49,11 @@ const Blog = () => {
   return (
     <>
       <div className="blogMainContainer paddingtop">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Title</title>
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
         {blog ? (
           <div className="blogLeft">
             <div className="blogDateandReadTime">
@@ -234,7 +240,10 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
                   authorid: userid,
                   username: user && user.displayName,
                   userimage: user && user.photoURL ? user.photoURL : profilepic,
-                  comment: e.target.value,
+                  comment: e.target.value.replace(
+                    /(?:https?|ftp):\/\/[\n\S]+/g,
+                    ""
+                  ),
                   date: new Date(),
                 });
               }}

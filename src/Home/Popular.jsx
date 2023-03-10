@@ -125,13 +125,13 @@ const Popular = ({ category }) => {
           className="prevButton"
           onClick={() => sliderRef.current.slickPrev()}
         >
-          <img src={prev} />
+          <img src={prev} alt="button" />
         </div>
         <div
           onClick={() => sliderRef.current.slickNext()}
           className="nextButton"
         >
-          <img src={next} />
+          <img src={next} alt="button" />
         </div>
       </div>
     </div>

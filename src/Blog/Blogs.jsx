@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllBlogs } from "../Api/Api";
 import { Skeleton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const Blogs = () => {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
@@ -35,9 +36,13 @@ const Blogs = () => {
   }, []);
   return (
     <div style={{ margin: 100 }}>
-      <h4>{blogs.length}</h4>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blogs</title>
+        <link rel="canonical" href="/all/blogs" />
+      </Helmet>
+      <h1 style={{ margin: 20 }}>Read Blogs</h1>
 
-      <h1>All Blogs Page!</h1>
       <InfiniteScroll
         dataLength={blogs.length}
         next={loadProducts}
@@ -98,7 +103,7 @@ const Blogs = () => {
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       width: "100%",
-                      minHeight: 100,
+                      height: 400,
                     }}
                     src={blog.image}
                     loading="lazy"

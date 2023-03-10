@@ -90,7 +90,12 @@ const LatestPosts = ({ category }) => {
                     )
                   }
                 >
-                  <img src={posts.image} className="image" loading="lazy" />
+                  <img
+                    src={posts.image}
+                    className="image"
+                    loading="lazy"
+                    alt="blog_image"
+                  />
                   <div className="title">
                     <h1 className="posttitle">{posts.category}</h1>
                     <div className="info">
@@ -118,13 +123,13 @@ const LatestPosts = ({ category }) => {
           className="prevButton"
           onClick={() => sliderRef.current.slickPrev()}
         >
-          <img src={prev} />
+          <img src={prev} alt="button" />
         </div>
         <div
           onClick={() => sliderRef.current.slickNext()}
           className="nextButton"
         >
-          <img src={next} />
+          <img src={next} alt="button" />
         </div>
       </div>
     </div>

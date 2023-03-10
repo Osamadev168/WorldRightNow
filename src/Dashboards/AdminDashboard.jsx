@@ -22,7 +22,7 @@ const AdminDashboard = () => {
       setBlog(res.data);
     });
   };
-  const { setAdmin } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   useEffect(() => {
     document.title = "Dashboard";
     getData();
@@ -68,7 +68,7 @@ const AdminDashboard = () => {
       {blog.length > 0 ? (
         blog.map((blogs, index) => {
           const approve_Blog = () => {
-            approveBlog(blogs._id).then(() => {
+            approveBlog(blogs._id, { idToken: token }).then(() => {
               setRefreh(!refresh);
             });
           };

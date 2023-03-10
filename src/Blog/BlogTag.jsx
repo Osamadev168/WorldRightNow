@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getBlogsfromTag } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
 import image from "../../assets/1.jpg";
+import { Helmet } from "react-helmet";
 
 const BlogTag = () => {
   const [blogs, setBlogs] = useState([]);
@@ -27,6 +28,11 @@ const BlogTag = () => {
   }, [tag]);
   return (
     <div className="TagsContainerParent paddingtop">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Explore</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <h4 className="blogsContaining">
         Blogs Containing
         <span>

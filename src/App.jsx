@@ -16,6 +16,7 @@ import BlogTag from "./Blog/BlogTag";
 import AllBlogs from "./All Blogs/AllBlogs";
 import Dashboard from "./Dashboards/Dashboard";
 import Blogs from "./Blog/Blogs";
+import { Helmet } from "react-helmet";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -38,6 +39,11 @@ const App = () => {
   return (
     <ContextProvider>
       <BrowserRouter>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Title</title>
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
         <Routes>
           <Route
             path="*"

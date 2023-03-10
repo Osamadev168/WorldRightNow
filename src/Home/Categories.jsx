@@ -16,7 +16,7 @@ const Categories = ({ setCategory }) => {
             setCategory("");
           }}
         >
-          <a>All</a>
+          <div>All</div>
         </div>
         <div
           className={activediv === "div2" ? "categoryActive" : "category"}
@@ -25,7 +25,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Tech");
           }}
         >
-          <a>Technology</a>
+          <div>Technology</div>
         </div>
         <div
           className={activediv === "div3" ? "categoryActive" : "category"}
@@ -34,7 +34,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Sports");
           }}
         >
-          <a>Sports</a>
+          <div>Sports</div>
         </div>
         <div
           className={activediv === "div4" ? "categoryActive" : "category"}
@@ -43,7 +43,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Science");
           }}
         >
-          <a>Science</a>
+          <div>Science</div>
         </div>
         <div
           className={activediv === "div5" ? "categoryActive" : "category"}
@@ -52,7 +52,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Fashion");
           }}
         >
-          <a>Fashion</a>
+          <div>Fashion</div>
         </div>
         <div
           className={activediv === "div6" ? "categoryActive" : "category"}
@@ -61,7 +61,7 @@ const Categories = ({ setCategory }) => {
             setCategory("AI");
           }}
         >
-          <a>Artificial Intelligence</a>
+          <div>Artificial Intelligence</div>
         </div>
         <div
           className={activediv === "div7" ? "categoryActive" : "category"}
@@ -70,7 +70,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Forex Trading");
           }}
         >
-          <a>Forex Trading</a>
+          <div>Forex Trading</div>
         </div>
         <div
           className={activediv === "div8" ? "categoryActive" : "category"}
@@ -79,7 +79,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Politics");
           }}
         >
-          <a>Politics</a>
+          <div>Politics</div>
         </div>
         <div
           className={activediv === "div9" ? "categoryActive" : "category"}
@@ -88,7 +88,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Art");
           }}
         >
-          <a>Art</a>
+          <div>Art</div>
         </div>
         <div
           className={activediv === "div10" ? "categoryActive" : "category"}
@@ -97,7 +97,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Programming");
           }}
         >
-          <a>Programming</a>
+          <div>Programming</div>
         </div>
         <div
           className={activediv === "div11" ? "categoryActive" : "category"}
@@ -106,7 +106,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Networking");
           }}
         >
-          <a>Networking</a>
+          <div>Networking</div>
         </div>
         <div
           className={activediv === "div12" ? "categoryActive" : "category"}
@@ -115,7 +115,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Life Hacks");
           }}
         >
-          <a>Life Hacks</a>
+          <div>Life Hacks</div>
         </div>
         <div
           className={activediv === "div13" ? "categoryActive" : "category"}
@@ -124,7 +124,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Crime");
           }}
         >
-          <a>Crime</a>
+          <div>Crime</div>
         </div>
         <div
           className={activediv === "div14" ? "categoryActive" : "category"}
@@ -133,7 +133,7 @@ const Categories = ({ setCategory }) => {
             setCategory("Anime");
           }}
         >
-          <a>Anime</a>
+          <div>Anime</div>
         </div>
       </div>
     </div>

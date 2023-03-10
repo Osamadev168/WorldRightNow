@@ -19,8 +19,14 @@ const Banner = () => {
             </p>
           </div>
           <div className="bannerdiv2">
-            <a className="primaryButton">Contact us</a>
-            <a className="secondaryButton" onClick={() => navigate("/blogs")}>
+            <a className="primaryButton" href="/blogs">
+              Contact us
+            </a>
+            <a
+              className="secondaryButton"
+              // onClick={() => window.open("/all/blogs", "_self")}
+              href="/all/blogs"
+            >
               Explore Blogs
             </a>
           </div>

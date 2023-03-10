@@ -64,9 +64,9 @@ export const getSubmittedPosts = async () => {
     console.error(e);
   }
 };
-export const approveBlog = async (id) => {
+export const approveBlog = async (id, token) => {
   try {
-    await axios.post(`${url}/post/approve/${id}`);
+    await axios.post(`${url}/post/approve/${id}`, token);
   } catch (e) {
     console.error(e.message);
   }

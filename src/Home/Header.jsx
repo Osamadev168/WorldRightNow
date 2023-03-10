@@ -66,22 +66,22 @@ const Header = () => {
           style={{ listStyle: "none" }}
         >
           <li>
-            <a onClick={() => navigate("/")}>Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
-            <a>About us</a>
+            <a href="/">About us</a>
           </li>
           <li>
-            <a>Pricing</a>
+            <a href="/">Pricing</a>
           </li>
           <li>
-            <a onClick={() => navigate("/blogs")}>Blogs</a>
+            <a href="/all/blogs">Blogs</a>
           </li>
           <li>
-            <a>FAQ's</a>
+            <a href="/">FAQ's</a>
           </li>
           <li>
-            <a>Contact us</a>
+            <a href="/">Contact us</a>
           </li>
         </ul>
       </div>
@@ -101,6 +101,7 @@ const Header = () => {
                         user && user.photoURL ? user.photoURL : profilepic
                       })`,
                     }}
+                    alt="user_image"
                   />
 
                   <svg
@@ -122,39 +123,28 @@ const Header = () => {
                   }`}
                 >
                   <ul>
-                    <div
-                      onClick={() => {
-                        navigate("/dashboard");
-                      }}
-                    >
+                    <a href="/dashboard">
                       <DropdownItem text={"Dashboard"} image={imgDashboard} />
-                    </div>
-                    <DropdownItem
-                      text={"Create Blog"}
-                      image={imgWrite}
-                      link={() => navigate("/createblog")}
-                    />
+                    </a>
+                    <a href="/createblog">
+                      <DropdownItem text={"Create Blog"} image={imgWrite} />
+                    </a>
                     <DropdownItem text={"Help"} image={imgHelp} />
-                    <DropdownItem
-                      text={"Logout"}
-                      link={logout}
-                      image={imgLogout}
-                    />
+                    <a href="/account">
+                      <DropdownItem
+                        text={"Logout"}
+                        link={logout}
+                        image={imgLogout}
+                      />
+                    </a>
                   </ul>
                 </div>
               </div>
             </>
           ) : (
-            <>
-              <Link
-                to="/account"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <a className="primaryButton headerButton">Sign in</a>
-              </Link>
-            </>
+            <a className="primaryButton headerButton" href="/account">
+              Create Blog
+            </a>
           )}
         </div>
 
@@ -173,7 +163,7 @@ function DropdownItem(props) {
   return (
     <li className="dropdownitem" onClick={props.link}>
       <img src={props.image} />
-      <a>{props.text}</a>
+      <p>{props.text}</p>
     </li>
   );
 }
