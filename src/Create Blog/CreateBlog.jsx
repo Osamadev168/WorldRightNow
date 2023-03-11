@@ -6,10 +6,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { submitPost } from "../Api/Api";
+import { submitPost, upload_Image } from "../Api/Api";
 import "../App.css";
-import { updateProfile } from "firebase/auth";
 const blogdefaultValues = {
   title: "",
   description: "",
@@ -38,31 +36,26 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
-  const { user } = useContext(UserContext);
+  const { user, admin } = useContext(UserContext);
   const navigate = useNavigate();
   const setApproved = () => {
-    return user.email === "daniyalhundred@gmail.com" ||
-      user.email === "osamatwenty@gmail.com"
-      ? true
-      : false;
+    return admin ? true : false;
   };
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "kalo7xt1");
-    await axios
-      .post("https://api.cloudinary.com/v1_1/ddwvsarat/image/upload", data)
-      .then((res) => {
-        setBlog({ ...blog, image: res.data.url });
-        setImage(res.data.url);
-        sessionStorage.setItem("image", res.data.url);
-      });
+    data.append("image", file);
+    upload_Image(data).then((res) => {
+      setBlog({ ...blog, image: res.data.url, CreatedAt: new Date() });
+      setImage(res.data.url);
+      sessionStorage.setItem("image", res.data.url);
+    });
   };
   const submitBlog = async () => {
     try {
-      await submitPost(blog).then(async () => {
-        navigate(`/dashboard/user/${user.uid}`);
+      let token;
+      await submitPost(blog, token).then(async () => {
+        navigate("/dashboard");
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
       });
@@ -72,7 +65,7 @@ const CreateBlog = () => {
   };
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value && tags.length < 10) {
-      setTags([...tags, value.toLowerCase().replace(/\s+/g, "-")]);
+      setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setRefresh(!refresh);
       setValue("");
@@ -134,7 +127,6 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 description: e.target.value,
-                CreatedAt: new Date(),
               });
               setCharDescription(e.target.value.length);
             }}

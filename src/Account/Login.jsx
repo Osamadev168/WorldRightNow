@@ -1,8 +1,6 @@
 import { useState } from "react";
 import fbicon from "../../assets/facebookicon.svg";
 import googleicon from "../../assets/googleicon.svg";
-import Footer from "../Home/Footer.jsx";
-import Header from "../Home/Header";
 import "../App.css";
 import {
   GoogleAuthProvider,
@@ -17,7 +15,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../Context/Context";
+
 export const Signup = ({
   setActive,
   email,
@@ -151,6 +154,15 @@ export const Account = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfrimPassword] = useState("");
+  const { token } = useContext(UserContext);
+  const isAdmin = async () => {
+    await axios
+      .post("http://localhost:7000/admin", { idToken: token })
+      .then(async (res) => {
+        localStorage.setItem("admin", res.data.isAdmin);
+        console.log(res);
+      });
+  };
   document.title = active === "login" ? "Login" : "Sign up";
 
   return (
@@ -162,6 +174,7 @@ export const Account = () => {
           password={password}
           setEmail={setEmail}
           setPassword={setPassword}
+          isAdmin={isAdmin}
         />
       ) : (
         <Signup
@@ -183,9 +196,13 @@ export const Login = ({
   setPassword,
   email,
   password,
+  isAdmin,
 }) => {
+  const [progress, setProgress] = useState(false);
   const navigate = useNavigate();
   const loginwithEmailPassword = async () => {
+    setProgress(true);
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
@@ -209,10 +226,14 @@ export const Login = ({
   const loginwithGoogle = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    signInWithPopup(
+      auth,
+      provider.setCustomParameters({
+        prompt: "select_account",
+      })
+    )
       .then((userCredential) => {
         navigate("/");
-        console.log(userCredential);
       })
       .catch((e) => {
         console.log(e);
@@ -259,7 +280,7 @@ export const Login = ({
           className="primaryButton loginButton"
           onClick={loginwithEmailPassword}
         >
-          <h1>Login</h1>
+          {progress ? <CircularProgress /> : <h1>Login</h1>}
         </div>
         <div className="or">
           <div className="orline"></div>

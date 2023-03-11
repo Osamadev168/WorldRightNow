@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getBlogsfromTag } from "../Api/Api";
 import profilepic from "../../assets/profilepic.jpg";
 import image from "../../assets/1.jpg";
+import { Helmet } from "react-helmet";
 
 const BlogTag = () => {
   const [blogs, setBlogs] = useState([]);
@@ -22,10 +23,16 @@ const BlogTag = () => {
     });
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     getData();
   }, [tag]);
   return (
     <div className="TagsContainerParent paddingtop">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Explore</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <h4 className="blogsContaining">
         Blogs Containing
         <span>
@@ -49,13 +56,34 @@ const BlogTag = () => {
           <div className="blogsContainer">
             {blogs && blogs.length > 0 ? (
               blogs.map((blog, index) => {
+                let wordsPerMinute = 150;
+                let noOfWords = blog.body.split(" ").length;
+                let readingTime = noOfWords / wordsPerMinute;
+                let round = Math.floor(readingTime);
+                let date = new Date(blog.CreatedAt).toDateString();
+                let displayMonth = date.substring(4, 10);
+                let displayYear = date.substring(10);
+                let displayDate = `${displayMonth},${displayYear}`;
+                let title = blog.title;
+                title = title.replace(/\s+/g, "-");
                 return (
-                  <div className="blogCard" key={index}>
+                  <div
+                    className="blogCard"
+                    key={index}
+                    onClick={() => navigate(`/blogs/${title}/${blog._id}`)}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
                     <div className="blogCardLeft">
                       <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
+                        <p>{displayDate}</p>
                         <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
+                        {round <= 0 ? (
+                          <p>Quick read</p>
+                        ) : (
+                          <p>{round}mins read</p>
+                        )}
                       </div>
                       <div className="titleandDescriptionImage">
                         <h1 className="blogTitle">{blog.title}</h1>

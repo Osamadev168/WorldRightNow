@@ -21,7 +21,7 @@ const ContactHome = () => {
                 name="email"
                 placeholder="Enter your email"
               />
-              <a className="newsletterButton">
+              <a className="newsletterButton" href="/account">
                 Subscribe
                 <svg
                   width="21"
@@ -42,7 +42,7 @@ const ContactHome = () => {
           </div>
 
           <div className="picturecontactus">
-            <img src={Picture} />
+            <img src={Picture} alt="info" />
           </div>
         </div>
       </div>

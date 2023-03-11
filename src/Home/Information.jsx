@@ -10,7 +10,7 @@ const Information = () => {
       <h2 className="infoMainText">Quick Blog Publication</h2>
       <div className="div1Info">
         <div className="infoContent">
-          <img className="vector1" src={Vector1} />
+          <img className="vector1" src={Vector1} alt="info" />
           <h3 className="text1">Select and purchase a plan</h3>
           <p className="text2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus quam
@@ -27,7 +27,7 @@ const Information = () => {
         </div>
 
         <div className="infoContent">
-          <img src={Vector3} />
+          <img src={Vector3} alt="info" />
           <h3 className="text1">Select and purchase a plan</h3>
           <p className="text2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus quam
@@ -39,7 +39,7 @@ const Information = () => {
       </div>
       <div className="div3Info">
         <div className="infoContent">
-          <img className="vector1" src={Vector4} />
+          <img className="vector1" src={Vector4} alt="info" />
           <h3 className="text1">Select and purchase a plan</h3>
           <p className="text2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus quam
@@ -49,7 +49,7 @@ const Information = () => {
           </p>
         </div>
         <div className="vectorContainer2">
-          <img src={Vector5} />
+          <img src={Vector5} alt="info" />
         </div>
       </div>
     </div>

@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="footercontent">
         <h1>LOGO</h1>
         <div className="div1footer">
-          <a>About us</a>
-          <a>Pricing</a>
-          <a>Blogs</a>
-          <a>FAQ's</a>
-          <a>Contact us</a>
+          <a href="/">About us</a>
+          <a href="/">Pricing</a>
+          <a href="/">Blogs</a>
+          <a href="/">FAQ's</a>
+          <a href="/">Contact us</a>
         </div>
       </div>
       <div className="div2footer">
@@ -28,6 +28,7 @@ const Footer = () => {
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
+              href="/"
             >
               Terms and Conditions
             </a>
@@ -39,6 +40,7 @@ const Footer = () => {
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
+              href="/"
             >
               Privacy Policy
             </a>

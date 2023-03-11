@@ -1,15 +1,12 @@
 import Send from "../../assets/Send.svg";
-import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { edit_Blog, getBlog, submitPost } from "../Api/Api";
+import { edit_Blog, getBlog, upload_Image } from "../Api/Api";
 import "../App.css";
-
 const CreateBlog = () => {
   const blogdefaultValues = {
     title: "",
@@ -33,7 +30,6 @@ const CreateBlog = () => {
   const [refresh, setRefresh] = useState(false);
   const [char, setChar] = useState(0);
   const [charTags, setCharTags] = useState(0);
-
   const [charDescription, setCharDescription] = useState(0);
   const [activediv, setActiveDiv] = useState("");
   const [blog, setBlog] = useState({});
@@ -42,24 +38,20 @@ const CreateBlog = () => {
   const inputFile = useRef(null);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-
   const setApproved = () => {
-    return user.uid === "Idfri64OkLcihU4YP5j2hvC14M32" ? true : false;
+    return admin ? true : false;
   };
   const params = useParams();
   const blog_id = params.blogid;
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "kalo7xt1");
-    await axios
-      .post("https://api.cloudinary.com/v1_1/ddwvsarat/image/upload", data)
-      .then((res) => {
-        setBlog({ ...blog, image: res.data.url });
-        setImage(res.data.url);
-        sessionStorage.setItem("image", res.data.url);
-      });
+    data.append("image", file);
+    upload_Image(data).then((res) => {
+      setBlog({ ...blog, image: res.data.url });
+      setImage(res.data.url);
+      sessionStorage.setItem("image", res.data.url);
+    });
   };
   const getBlogData = () => {
     getBlog(blog_id).then((res) => {
@@ -71,7 +63,7 @@ const CreateBlog = () => {
     try {
       setBlog({ ...blog, image: sessionStorage.getItem("image") });
       await edit_Blog(blog_id, blog).then(() => {
-        navigate("/");
+        navigate("/dashboard");
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
       });
@@ -94,12 +86,11 @@ const CreateBlog = () => {
       getBlogData();
     }
     setBlog({ ...blog, tags: tags });
-
     setImage(sessionStorage.getItem("image"));
     if (file) {
       uploadImage();
     }
-  }, [file, data === true, refresh === true]);
+  }, [file, data, refresh]);
 
   return (
     <div
@@ -191,39 +182,6 @@ const CreateBlog = () => {
             Hint: Break the content in several parts
           </label>
         </div>
-        {/* <div>Tags</div>
-        <input
-          value={value}
-          type="text"
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          onKeyDown={handleEnterPress}
-        />
-
-        <ul>
-          {tags &&
-            tags.map((tag, index) => {
-              return (
-                <div
-                  style={{ display: "flex", flexDirection: "row-reverse" }}
-                  key={index}
-                >
-                  <button
-                    onClick={() => {
-                      setData(false);
-
-                      tags.splice(tags.indexOf(tag), 1);
-
-                      setRefresh(!refresh);
-                    }}
-                  >
-                    <p>{tag}</p>x
-                  </button>
-                </div>
-              );
-            })}
-        </ul> */}
         <div className="createblogformcontainer tagssectioncontainer">
           <div className="container1">
             <h4 className="createblogbodytext">Add Tags</h4>
@@ -293,13 +251,6 @@ const CreateBlog = () => {
             </div>
           </div>
         </div>
-        {/* {editBlog.tags.length > 0 ? (
-          editBlog.tags.map((tags) => {
-            return <p>{tags}</p>;
-          })
-        ) : (
-          <></>
-        )} */}
         <div>{editBlog.tags}</div>
         <div className="createblogformcontainer">
           <h4 className="createblogbodytext">Select a category</h4>
@@ -444,13 +395,7 @@ const CreateBlog = () => {
                 inputFile.current.click();
               }}
             >
-              <img
-                src={image}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
+              <img src={image} className="imagecontainer" />
               <input
                 type="file"
                 id="file"
@@ -469,11 +414,7 @@ const CreateBlog = () => {
                 inputFile.current.click();
               }}
             >
-              {progress ? (
-                <CircularProgress color="inherit" />
-              ) : (
-                <img src={blog.image} />
-              )}
+              {progress ? <CircularProgress color="inherit" /> : <></>}
 
               <input
                 type="file"
@@ -485,22 +426,28 @@ const CreateBlog = () => {
                   setProgress(true);
                 }}
               />
-              <p className="uploadimagetext">Select Image</p>
-              <svg
-                width="100%"
-                height="100%"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect
-                  width="100%"
-                  height="100%"
-                  rx="20"
-                  stroke="black"
-                  stroke-dasharray="20 20"
-                  strokeWidth="2"
-                />
-              </svg>
+              {blog && blog.image !== "" ? (
+                <img src={blog.image} className="imagecontainer" />
+              ) : (
+                <>
+                  <p className="uploadimagetext">Select Image</p>
+                  <svg
+                    width="100%"
+                    height="100%"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      width="100%"
+                      height="100%"
+                      rx="20"
+                      stroke="black"
+                      stroke-dasharray="20 20"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </>
+              )}
             </div>
           )}
         </div>
@@ -516,5 +463,4 @@ const CreateBlog = () => {
     </div>
   );
 };
-
 export default CreateBlog;
