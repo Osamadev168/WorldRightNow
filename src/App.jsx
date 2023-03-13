@@ -140,7 +140,7 @@ const App = () => {
             element={
               <Wrapper>
                 <Header />
-                <Blogs />
+                <AllBlogs />
                 <FooterContainer />
               </Wrapper>
             }
