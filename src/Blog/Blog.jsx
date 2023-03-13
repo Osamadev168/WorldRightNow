@@ -50,7 +50,7 @@ const Blog = () => {
     <>
       <div className="blogMainContainer paddingtop">
         <Helmet>
-          <meta charSet="utf-8" />
+          <meta charSet="utf-8" name="description" content={blog.description} />
           <title>My Title</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
@@ -66,19 +66,25 @@ const Blog = () => {
               <h1 className="blogTitle">{blog.title}</h1>
               <p className="blogDescription">{blog.description}</p>
               <div className="imageAuthorName">
-                <img src={blog.authorImage} className="auhtorImage" />
+                <img
+                  src={blog.authorImage}
+                  className="auhtorImage"
+                  alt="author_Image"
+                />
                 <p className="authorName">{blog.author}</p>
               </div>
-              <div
+              <img
                 className="blogImage"
+                src={blog.image}
                 style={{
-                  backgroundImage: `url(${blog.image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  objectFit: "cover",
+                  objectPosition: "center",
                   width: "100%",
                   height: "450px",
                 }}
-              ></div>
+                loading="lazy"
+                alt="blog_image"
+              />
             </div>
 
             <div
@@ -132,10 +138,11 @@ const Blog = () => {
                         </div>
                         <h3 className="blogtitle">{blog.title}</h3>
                       </div>
-                      <div
+                      <img
                         className="blogImage"
-                        style={{ backgroundImage: `url(${blog.image})` }}
-                      ></div>
+                        src={blog.image}
+                        alt="author_blog_image"
+                      />
                     </div>
                   );
                 })
@@ -151,9 +158,7 @@ const Blog = () => {
                     return (
                       <a
                         className="tag"
-                        onClick={() =>
-                          navigate(`/blog/${tag.replace(/\s+/g, "-")}`)
-                        }
+                        href={`/blog/${tag.replace(/\s+/g, "-")}`}
                       >
                         {tag}
                       </a>
@@ -209,7 +214,11 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
           return (
             <div className="main_Comments_Container">
               <div className="photo_UserName_Contianer">
-                <img className="avatar_Comment" src={commment.userimage} />
+                <img
+                  className="avatar_Comment"
+                  src={commment.userimage}
+                  alt="profile_Image"
+                />
                 <p>{commment.username}</p>
                 <p>&nbsp;&nbsp;|&nbsp; &nbsp;{date}</p>
               </div>
@@ -227,12 +236,15 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
               <img
                 className="avatar_Comment"
                 src={user && user.photoURL ? user.photoURL : profilepic}
+                alt="profile_Image"
               />
               <p>{user.displayName}</p>
             </div>
+
             <textarea
               value={comment.comment}
               className="comment_Area"
+              aria-label="comment_Area"
               onChange={(e) => {
                 setuserid(user && user.uid);
                 setComment({
@@ -249,7 +261,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
               }}
             />
           </div>
-          <a onClick={submit_Comment} className="commentButton">
+          <div onClick={submit_Comment} className="commentButton">
             Submit
             <svg
               width="22"
@@ -263,7 +275,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
                 fill="#FC2C7E"
               />
             </svg>
-          </a>
+          </div>
         </div>
       ) : (
         <p>Login to comment on this blog</p>
