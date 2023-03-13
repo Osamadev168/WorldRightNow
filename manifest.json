@@ -1,0 +1,9 @@
+{
+  "name": "Worldrightnow",
+  "short_name": "wrn",
+  "theme_color": "#424c54",
+  "background_color": "#2196f3",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/"
+}

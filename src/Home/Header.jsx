@@ -130,13 +130,9 @@ const Header = () => {
                       <DropdownItem text={"Create Blog"} image={imgWrite} />
                     </a>
                     <DropdownItem text={"Help"} image={imgHelp} />
-                    <a href="/account">
-                      <DropdownItem
-                        text={"Logout"}
-                        link={logout}
-                        image={imgLogout}
-                      />
-                    </a>
+                    <div onClick={logout}>
+                      <DropdownItem text={"Logout"} image={imgLogout} />
+                    </div>
                   </ul>
                 </div>
               </div>

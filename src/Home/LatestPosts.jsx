@@ -79,41 +79,51 @@ const LatestPosts = ({ category }) => {
               title = title.replace(/\s+/g, "-");
 
               return (
-                <div
-                  className="PopularCard"
-                  key={index}
-                  onClick={() =>
-                    navigate(
-                      `/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                        posts._id
-                      }`
-                    )
-                  }
+                <a
+                  href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                    posts._id
+                  }`}
                 >
-                  <img
-                    src={posts.image}
-                    className="image"
-                    loading="lazy"
-                    alt="blog_image"
-                  />
-                  <div className="title">
-                    <h1 className="posttitle">{posts.category}</h1>
-                    <div className="info">
-                      <p>{displayDate}</p>
-                      <p>&nbsp;|&nbsp;</p>
-                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
+                  <div
+                    className="PopularCard"
+                    key={index}
+                    onClick={() =>
+                      navigate(
+                        `/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                          posts._id
+                        }`
+                      )
+                    }
+                  >
+                    <img
+                      src={posts.image}
+                      className="image"
+                      loading="lazy"
+                      alt="blog_image"
+                    />
+                    <div className="title">
+                      <h1 className="posttitle">{posts.category}</h1>
+                      <div className="info">
+                        <p>{displayDate}</p>
+                        <p>&nbsp;|&nbsp;</p>
+                        {round <= 0 ? (
+                          <p>Quick read</p>
+                        ) : (
+                          <p>{round}mins read</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="description">
+                      <p className="blogtitle">{posts.title}</p>
+                      <p className="data">{posts.description}</p>
                     </div>
                   </div>
-                  <div className="description">
-                    <p className="blogtitle">{posts.title}</p>
-                    <p className="data">{posts.description}</p>
-                  </div>
-                </div>
+                </a>
               );
             })
           ) : (
             <div>
-              <CircularProgress />
+              <span className="loader"></span>
             </div>
           )}
         </Slider>

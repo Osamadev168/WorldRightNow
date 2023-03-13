@@ -23,7 +23,7 @@ export const UserStatus = async (token) => {
       idToken: token,
     });
     return response;
-  } catch {
+  } catch (e) {
     console.error(e.message);
   }
 };
@@ -39,9 +39,9 @@ export const fetchDataLatest = async (category) => {
   });
   return response;
 };
-export const submitPost = async (blog) => {
+export const submitPost = async (blog, token) => {
   try {
-    await axios.post(`${url}/create`, blog);
+    await axios.post(`${url}/create/${token}`, blog);
   } catch (e) {
     console.error(e);
   }
@@ -103,6 +103,14 @@ export const deletePostUser = async (id) => {
 export const getBlogsfromTag = async (tag) => {
   try {
     let response = await axios.get(`${url}/blog/tag/${tag}`);
+    return response;
+  } catch (e) {
+    console.error(e.message);
+  }
+};
+export const getBlogData_Update = async (id) => {
+  try {
+    let response = await axios.get(`${url}/blog/data/${id}`);
     return response;
   } catch (e) {
     console.error(e.message);

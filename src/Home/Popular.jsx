@@ -5,7 +5,6 @@ import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 const Popular = ({ category }) => {
   const navigate = useNavigate();
   const [post, setPosts] = useState([]);
@@ -62,7 +61,7 @@ const Popular = ({ category }) => {
         )}
       </div>
       {post.length < 0 ? (
-        <CircularProgress />
+        <CircularProgress role="progressbar" />
       ) : (
         <Slider {...settings} ref={sliderRef} className="slider">
           {post && post.length > 0 ? (
@@ -115,7 +114,7 @@ const Popular = ({ category }) => {
             })
           ) : (
             <div>
-              <CircularProgress />
+              <span className="loader"></span>
             </div>
           )}
         </Slider>
