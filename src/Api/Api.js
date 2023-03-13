@@ -147,3 +147,12 @@ export const UpdateUserData = async (user, uid, displayName, photoURL) => {
     console.error(e.message);
   }
 };
+
+export const SearchBlogs = async (query) => {
+  try {
+    let response = await axios.get(`${url}/search?blogs=${query}`);
+    return response;
+  } catch (e) {
+    console.error(e.message);
+  }
+};
