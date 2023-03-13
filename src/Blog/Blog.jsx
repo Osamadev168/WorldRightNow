@@ -50,11 +50,10 @@ const Blog = () => {
   let displayDate = `${displayMonth},${displayYear}`;
   return (
     <>
-       <div className="blogMainContainer paddingtop">
+      <div className="blogMainContainer paddingtop">
         <Helmet>
           <meta charSet="utf-8" name="description" content={blog.description} />
           <title>{blog && blog.title}</title>
-          <title>My Title</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
 
@@ -97,32 +96,6 @@ const Blog = () => {
                 className="blogBody"
                 dangerouslySetInnerHTML={{ __html: blog.body }}
               ></div>
-              {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
-            </div>
-            <div className="titleandDescriptionImage">
-              <h1 className="blogTitle">{blog.title}</h1>
-              <p className="blogDescription">{blog.description}</p>
-              <div className="imageAuthorName">
-                <img
-                  src={blog.authorImage}
-                  className="auhtorImage"
-                  alt="author_Image"
-                />
-                <p className="authorName">{blog.author}</p>
-              </div>
-              <img
-                className="blogImage"
-                src={blog.image}
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  width: "100%",
-                  height: "450px",
-                }}
-                loading="lazy"
-                alt="blog_image"
-              />
-            </div>
 
               <Comments
                 blog={blog}
@@ -251,7 +224,6 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
                   className="avatar_Comment"
                   src={commment.userimage}
                   alt="comment_author"
-                  // alt="profile_Image"
                 />
                 <p>{commment.username}</p>
                 <p>&nbsp;&nbsp;|&nbsp; &nbsp;{date}</p>
@@ -270,8 +242,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
               <img
                 className="avatar_Comment"
                 src={user && user.photoURL ? user.photoURL : profilepic}
-                // alt="author_image"
-                alt="profile_Image"
+                alt="author_image"
               />
               <p>{user.displayName}</p>
             </div>
@@ -298,7 +269,6 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
             />
           </div>
           <p onClick={submit_Comment} className="commentButton">
-          {/* <div onClick={submit_Comment} className="commentButton"> */}
             Submit
             <svg
               width="22"
@@ -313,7 +283,6 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
               />
             </svg>
           </p>
-          {/* </div> */}
         </div>
       ) : (
         <p>Login to comment on this blog</p>
