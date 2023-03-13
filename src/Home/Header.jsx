@@ -96,12 +96,9 @@ const Header = () => {
                   <img
                     referrerPolicy="no-referrer"
                     className="profilepic"
-                    style={{
-                      backgroundImage: `url(${
-                        user && user.photoURL ? user.photoURL : profilepic
-                      })`,
-                    }}
+                    src={user && user.photoURL ? user.photoURL : profilepic}
                     alt="user_image"
+                    loading="lazy"
                   />
 
                   <svg
@@ -139,7 +136,7 @@ const Header = () => {
             </>
           ) : (
             <a className="primaryButton headerButton" href="/account">
-              Create Blog
+              Sign in
             </a>
           )}
         </div>

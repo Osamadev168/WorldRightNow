@@ -29,7 +29,11 @@ const BlogTag = () => {
   return (
     <div className="TagsContainerParent paddingtop">
       <Helmet>
-        <meta charSet="utf-8" />
+        <meta
+          charSet="utf-8"
+          name="description"
+          content={`Explore a wealth of information on ${tag} with [Website Name]. Our curated collection of articles and blog posts provides insights and expertise on all aspects of ${tag}. Stay up-to-date with the latest trends and ideas in ${tag} by browsing our comprehensive resources today.`}
+        />
         <title>Explore</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
@@ -67,44 +71,59 @@ const BlogTag = () => {
                 let title = blog.title;
                 title = title.replace(/\s+/g, "-");
                 return (
-                  <div
-                    className="blogCard"
+                  <article
                     key={index}
-                    onClick={() => navigate(`/blogs/${title}/${blog._id}`)}
                     style={{
                       cursor: "pointer",
                     }}
                   >
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>{displayDate}</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        {round <= 0 ? (
-                          <p>Quick read</p>
-                        ) : (
-                          <p>{round}mins read</p>
-                        )}
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">{blog.title}</h1>
-                        <p className="blogDescription">{blog.description}</p>
-                        <div className="imageAuthorName">
-                          <img src={blog.authorImage} className="auhtorImage" />
-                          <p className="authorName">{blog.author}</p>
-                          <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                          <p className="blogCategory">{blog.category}</p>
+                    <a
+                      href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                        blog._id
+                      }`}
+                      className="blogCard"
+                    >
+                      <div className="blogCardLeftWrapper">
+                        <div className="blogCardLeft">
+                          <div className="blogDateandReadTime">
+                            <p>{displayDate}</p>
+                            <p>&nbsp;|&nbsp;</p>
+                            {round <= 0 ? (
+                              <p>Quick read</p>
+                            ) : (
+                              <p>{round}mins read</p>
+                            )}
+                          </div>
+                          <div className="titleandDescriptionImage">
+                            <h1 className="blogTitle">{blog.title}</h1>
+                            <p className="blogDescription">
+                              {blog.description}
+                            </p>
+                          </div>
                         </div>
+                        <img
+                          className="blogImage"
+                          src={blog.image}
+                          style={{
+                            objectFit: "cover",
+                            objectPosition: "center",
+                          }}
+                          alt="blog-Image"
+                        />
                       </div>
-                    </div>
-                    <div
-                      className="blogImage"
-                      style={{
-                        backgroundImage: `url(${blog.image})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    ></div>
-                  </div>
+
+                      <div className="imageAuthorName">
+                        <img
+                          src={blog.authorImage}
+                          className="auhtorImage"
+                          alt="author-image"
+                        />
+                        <p className="authorName">{blog.author}</p>
+                        <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
+                        <p className="blogCategory">{blog.category}</p>
+                      </div>
+                    </a>
+                  </article>
                 );
               })
             ) : (
@@ -141,9 +160,7 @@ const BlogTag = () => {
                     return (
                       <a
                         className="tag"
-                        onClick={() =>
-                          navigate(`/blog/${tag.replace(/\s+/g, "-")}`)
-                        }
+                        href={`/blog/${tag.replace(/\s+/g, "-")}`}
                       >
                         {tag}
                       </a>
