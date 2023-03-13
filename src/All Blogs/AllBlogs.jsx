@@ -4,10 +4,76 @@ import LatestPosts from "../Home/LatestPosts";
 import Popular from "../Home/Popular";
 import BlogImage from "../../assets/1.jpg";
 import profilepic from "../../assets/profilepic.jpg";
+import { useEffect } from "react";
+import { fetchDataLatest, fetchDataPopular, SearchBlogs } from "../Api/Api";
 
 const AllBlogs = () => {
   const [category, setCategory] = useState("");
-  window.scrollTo(0, 0);
+  const [value, setValue] = useState("");
+  const [search, setSearch] = useState(false);
+  const [blogs, setBlogs] = useState([]);
+  const [query, setQuery] = useState("");
+  const [activediv, setActiveDiv] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [popular, setPopular] = useState(false);
+  const [latest, setLatest] = useState(false);
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      setLoading(true);
+      setSearch(true);
+      setQuery(value);
+      setCategory("");
+      // console.log(query);
+    }
+  };
+  const getDataLatest = () => {
+    setLoading(true);
+    setLatest(true);
+    setActiveDiv("Latest");
+
+    setQuery("");
+    fetchDataLatest(category).then((res) => {
+      setBlogs(res.data);
+      setLoading(false);
+      if (res.data.length === 0) {
+        setError("No Blogs Found in this category:(");
+      }
+    });
+  };
+  const getBlogsPopular = () => {
+    setLoading(true);
+    setQuery("");
+    setActiveDiv("Popular");
+    fetchDataPopular(category).then((res) => {
+      setBlogs(res.data);
+      setLoading(false);
+      if (res.data.length === 0) {
+        setError("No Blogs Found in this category:(");
+      }
+    });
+  };
+  const Search = () => {
+    SearchBlogs(query).then((res) => {
+      setBlogs(res.data);
+      setLoading(false);
+      if (res.data.length === 0) {
+        setError("No Blogs Found");
+      }
+    });
+  };
+  useEffect(() => {
+    if (!query || category) {
+      getBlogsPopular();
+      if (latest) {
+        getDataLatest();
+      }
+    }
+    if (query) {
+      Search();
+    }
+  }, [query, category]);
   return (
     <>
       <div className="AllBlogsContainer paddingtop">
@@ -60,545 +126,71 @@ const AllBlogs = () => {
         <div className="tagsContainerMain">
           <div className="tagsLeft">
             <div className="blogsContainer">
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
+              <div>
+                {query && !category ? (
+                  <p>Search Results about {query}</p>
+                ) : (
+                  <></>
+                )}
+              </div>
+              {!loading ? (
+                <div>
+                  {blogs && blogs.length > 0 ? (
+                    blogs.map((blog) => {
+                      return (
+                        <article
+                          // key={index}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        >
+                          <a className="blogCard">
+                            <div className="blogCardLeftWrapper">
+                              <div className="blogCardLeft">
+                                <div className="blogDateandReadTime">
+                                  <p>Jan 19, 2023</p>
+                                  <p>&nbsp;|&nbsp;</p>
+                                  <p>4 mins read</p>
+                                </div>
+                                <div className="titleandDescriptionImage">
+                                  <h1 className="blogTitle">{blog.title}</h1>
+                                  <p className="blogDescription">
+                                    {blog.description}
+                                  </p>
+                                </div>
+                              </div>
+                              <img
+                                className="blogImage"
+                                src={blog.image}
+                                style={{
+                                  objectFit: "cover",
+                                  objectPosition: "center",
+                                }}
+                                alt="blog-Image"
+                              />
+                            </div>
 
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
-              <article
-                // key={index}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <a className="blogCard">
-                  <div className="blogCardLeftWrapper">
-                    <div className="blogCardLeft">
-                      <div className="blogDateandReadTime">
-                        <p>Jan 19, 2023</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        <p>4 mins read</p>
-                      </div>
-                      <div className="titleandDescriptionImage">
-                        <h1 className="blogTitle">
-                          10 Breakthrough Technologies Changing Our World
-                        </h1>
-                        <p className="blogDescription">
-                          Explore 10 cutting-edge technologies shaping our
-                          world: AI, biotechnology, quantum computing, IoT,
-                          VR/AR, 5G, robotics, blockchain, renewable energy, &
-                          3D printing. Learn...
-                        </p>
-                      </div>
-                    </div>
-                    <img
-                      className="blogImage"
-                      src={BlogImage}
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      alt="blog-Image"
-                    />
-                  </div>
-
-                  <div className="imageAuthorName">
-                    <img
-                      src={profilepic}
-                      className="auhtorImage"
-                      alt="author-image"
-                    />
-                    <p className="authorName">Daniyal Habib</p>
-                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
-                    <p className="blogCategory">Technology</p>
-                  </div>
-                </a>
-              </article>
+                            <div className="imageAuthorName">
+                              <img
+                                src={blog.authorImage}
+                                className="auhtorImage"
+                                alt="author-image"
+                              />
+                              <p className="authorName">Daniyal Habib</p>
+                              <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
+                              <p className="blogCategory">{blog.category}</p>
+                            </div>
+                          </a>
+                        </article>
+                      );
+                    })
+                  ) : (
+                    <p>{error}</p>
+                  )}
+                </div>
+              ) : (
+                <span className="loader"></span>
+              )}
             </div>
           </div>
           <div className="tagsRight">
@@ -608,6 +200,8 @@ const AllBlogs = () => {
                   type="text"
                   className="searchField"
                   placeholder="Search"
+                  onKeyDown={handleEnter}
+                  onChange={(e) => setValue(e.target.value)}
                 />
                 <i>
                   <svg
@@ -627,24 +221,148 @@ const AllBlogs = () => {
               <div className="sortContainer">
                 <p>Sort By:</p>
                 <div className="categories">
-                  <span className="category categoryActive">Popular</span>
-                  <span className="category">Latest</span>
+                  <span
+                    className={
+                      activediv === "Popular" ? "categoryActive" : "category"
+                    }
+                    onClick={getBlogsPopular}
+                  >
+                    Popular
+                  </span>
+                  <span
+                    className={
+                      activediv === "Latest" ? "categoryActive" : "category"
+                    }
+                    onClick={getDataLatest}
+                  >
+                    Latest
+                  </span>
                 </div>
               </div>
               <div className="categoryContainer">
                 <p>Category:</p>
                 <div className="categories">
-                  <span className="category categoryActive">All</span>
-                  <span className="category">Technology</span>
-                  <span className="category">Science</span>
-                  <span className="category">Education</span>
-                  <span className="category">Finance</span>
-                  <span className="category">Lifestyle</span>
-                  <span className="category">Business</span>
-                  <span className="category">News</span>
-                  <span className="category">Travel</span>
-                  <span className="category">Sports</span>
-                  <span className="category">Health</span>
+                  <span
+                    className={
+                      activediv === "div1" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div1");
+                      setCategory("");
+                    }}
+                  >
+                    All
+                  </span>
+                  <span
+                    className={
+                      activediv === "div2" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div2");
+                      setCategory("Tech");
+                    }}
+                  >
+                    Technology
+                  </span>
+                  <span
+                    className={
+                      activediv === "div3" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div3");
+                      setCategory("Science");
+                    }}
+                  >
+                    Science
+                  </span>
+                  <span
+                    className={
+                      activediv === "div4" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div4");
+                      setCategory("Education");
+                    }}
+                  >
+                    Education
+                  </span>
+                  <span
+                    className={
+                      activediv === "div5" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div5");
+                      setCategory("Finance");
+                    }}
+                  >
+                    Finance
+                  </span>
+                  <span
+                    className={
+                      activediv === "div6" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div6");
+                      setCategory("LifeStyle");
+                    }}
+                  >
+                    Lifestyle
+                  </span>
+                  <span
+                    className={
+                      activediv === "div7" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div7");
+                      setCategory("Business");
+                    }}
+                  >
+                    Business
+                  </span>
+                  <span
+                    className={
+                      activediv === "div8" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div8");
+                      setCategory("News");
+                    }}
+                  >
+                    News
+                  </span>
+                  <span
+                    className={
+                      activediv === "div9" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div9");
+                      setCategory("Travel");
+                    }}
+                  >
+                    Travel
+                  </span>
+                  <span
+                    className={
+                      activediv === "div10" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div10");
+                      setCategory("Sports");
+                    }}
+                  >
+                    Sports
+                  </span>
+                  <span
+                    className={
+                      activediv === "div11" ? "categoryActive" : "category"
+                    }
+                    onClick={() => {
+                      setActiveDiv("div11");
+                      setCategory("Health");
+                    }}
+                  >
+                    Health
+                  </span>
                 </div>
               </div>
             </div>

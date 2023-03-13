@@ -7,23 +7,22 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
 import { submitPost, upload_Image } from "../Api/Api";
-import "../App.css";
-const blogdefaultValues = {
-  title: "",
-  description: "",
-  body: "",
-  image: "",
-  category: "",
-  comments: [],
-  CreatedAt: new Date(),
-  author: "",
-  authorImage: "",
-  auhtorId: "",
-  approved: true,
-  tags: [],
-};
 const CreateBlog = () => {
   document.title = "Create Blog";
+  const { user, token } = useContext(UserContext);
+  const blogdefaultValues = {
+    title: "",
+    description: "",
+    body: "",
+    image: "",
+    category: "",
+    comments: [],
+    CreatedAt: new Date(),
+    author: "",
+    authorImage: "",
+    auhtorId: "",
+    tags: [],
+  };
   const [progress, setProgress] = useState(false);
   const [tags, setTags] = useState([]);
   const [value, setValue] = useState("");
@@ -36,11 +35,7 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
-  const { user, admin } = useContext(UserContext);
   const navigate = useNavigate();
-  const setApproved = () => {
-    return admin ? true : false;
-  };
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
@@ -53,7 +48,6 @@ const CreateBlog = () => {
   };
   const submitBlog = async () => {
     try {
-      let token;
       await submitPost(blog, token).then(async () => {
         navigate("/dashboard");
         setBlog(blogdefaultValues);
@@ -99,10 +93,6 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 title: e.target.value,
-                author: user.displayName,
-                authorImage: user.photoURL,
-                authorId: user.uid,
-                approved: setApproved(),
               });
               setChar(e.target.value.length);
             }}
@@ -127,6 +117,9 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 description: e.target.value,
+                author: user.displayName,
+                authorImage: user.photoURL,
+                authorId: user.uid,
               });
               setCharDescription(e.target.value.length);
             }}
@@ -372,15 +365,6 @@ const CreateBlog = () => {
             </div>
           </div>
         </div>
-        {/* <input
-          className="titleinput tagsinput"
-          value={value}
-          type="text"
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          onKeyDown={handleEnterPress}
-        /> */}
 
         <div className="createblogformcontainer">
           {image ? (

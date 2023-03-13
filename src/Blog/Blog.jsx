@@ -11,33 +11,35 @@ import { CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
 const Blog = () => {
   const [blog, setBlog] = useState({});
+  const [loading, setLoading] = useState(false);
   const [authorBlogs, setAuthorBlogs] = useState([]);
   const [author, setblogAuthor] = useState(blog && blog.author);
   const [refresh, setRefresh] = useState(false);
   const params = useParams();
   const id = params._id;
   const fetchBlog = (id) => {
+    setLoading(true);
     getBlog(id).then((res) => {
       setBlog(res.data);
+      setblogAuthor(res.data.author);
+      setLoading(false);
     });
   };
   const getAuhorBlogs = () => {
-    setblogAuthor(blog.author);
-    author_blogs(blog.author).then((res) => {
+    author_blogs(author).then((res) => {
       setAuthorBlogs(res.data);
     });
   };
   const navigate = useNavigate();
-  const doc_title = blog.title;
   useEffect(() => {
     fetchBlog(id);
-    document.title = doc_title;
-    getAuhorBlogs();
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      getAuhorBlogs();
+    }, 3000);
     if (refresh) {
       fetchBlog(id);
     }
-  }, [id, refresh, doc_title, author]);
+  }, [id, refresh, author]);
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;
   let readingTime = noOfWords / wordsPerMinute;
@@ -51,57 +53,60 @@ const Blog = () => {
       <div className="blogMainContainer paddingtop">
         <Helmet>
           <meta charSet="utf-8" name="description" content={blog.description} />
-          <title>My Title</title>
+          <title>{blog && blog.title}</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
-        {blog ? (
-          <div className="blogLeft">
-            <div className="blogDateandReadTime">
-              <p>{displayDate}</p>
-              <p>&nbsp;|&nbsp;</p>
 
-              {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
-            </div>
-            <div className="titleandDescriptionImage">
-              <h1 className="blogTitle">{blog.title}</h1>
-              <p className="blogDescription">{blog.description}</p>
-              <div className="imageAuthorName">
-                <img
-                  src={blog.authorImage}
-                  className="auhtorImage"
-                  alt="author_Image"
-                />
-                <p className="authorName">{blog.author}</p>
+        <div className="blogLeft">
+          {loading ? (
+            <span className="loader"></span>
+          ) : (
+            <>
+              <div className="blogDateandReadTime">
+                <p>{displayDate}</p>
+                <p>&nbsp;|&nbsp;</p>
+
+                {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
               </div>
-              <img
-                className="blogImage"
-                src={blog.image}
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  width: "100%",
-                  height: "450px",
-                }}
-                loading="lazy"
-                alt="blog_image"
+              <div className="titleandDescriptionImage">
+                <h1 className="blogTitle">{blog.title}</h1>
+                <p className="blogDescription">{blog.description}</p>
+                <div className="imageAuthorName">
+                  <img
+                    src={blog.authorImage}
+                    className="auhtorImage"
+                    alt="author_image"
+                  />
+                  <p className="authorName">{blog.author}</p>
+                </div>
+                <img
+                  className="blogImage"
+                  src={blog.image}
+                  style={{
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    width: "100%",
+                    height: "450px",
+                  }}
+                  alt="blog_image"
+                />
+              </div>
+
+              <div
+                className="blogBody"
+                dangerouslySetInnerHTML={{ __html: blog.body }}
+              ></div>
+
+              <Comments
+                blog={blog}
+                id={id}
+                setRefresh={setRefresh}
+                refresh={refresh}
               />
-            </div>
+            </>
+          )}
+        </div>
 
-            <div
-              className="blogBody"
-              dangerouslySetInnerHTML={{ __html: blog.body }}
-            ></div>
-
-            <Comments
-              blog={blog}
-              id={id}
-              setRefresh={setRefresh}
-              refresh={refresh}
-            />
-          </div>
-        ) : (
-          <CircularProgress />
-        )}
         <div className="blogRight">
           <div className="blogRightContent">
             <div className="authorBlogs">
@@ -122,6 +127,7 @@ const Blog = () => {
                     <div
                       className="Card"
                       onClick={() => navigate(`/blogs/${title}/${blog._id}`)}
+                      key={index}
                     >
                       <div className="blogContent">
                         <h5 className="posttitle">{blog.category}</h5>
@@ -147,7 +153,7 @@ const Blog = () => {
                   );
                 })
               ) : (
-                <CircularProgress />
+                <span className="loader"></span>
               )}
             </div>
             <div className="blogTags">
@@ -217,7 +223,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
                 <img
                   className="avatar_Comment"
                   src={commment.userimage}
-                  alt="profile_Image"
+                  alt="comment_author"
                 />
                 <p>{commment.username}</p>
                 <p>&nbsp;&nbsp;|&nbsp; &nbsp;{date}</p>
@@ -236,12 +242,13 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
               <img
                 className="avatar_Comment"
                 src={user && user.photoURL ? user.photoURL : profilepic}
-                alt="profile_Image"
+                alt="author_image"
               />
               <p>{user.displayName}</p>
             </div>
 
             <textarea
+              // aria-label="comment"
               value={comment.comment}
               className="comment_Area"
               aria-label="comment_Area"
@@ -261,7 +268,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
               }}
             />
           </div>
-          <div onClick={submit_Comment} className="commentButton">
+          <p onClick={submit_Comment} className="commentButton">
             Submit
             <svg
               width="22"
@@ -275,7 +282,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
                 fill="#FC2C7E"
               />
             </svg>
-          </div>
+          </p>
         </div>
       ) : (
         <p>Login to comment on this blog</p>

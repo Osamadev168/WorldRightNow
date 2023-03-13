@@ -5,7 +5,12 @@ import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
-import { edit_Blog, getBlog, upload_Image } from "../Api/Api";
+import {
+  edit_Blog,
+  getBlog,
+  getBlogData_Update,
+  upload_Image,
+} from "../Api/Api";
 import "../App.css";
 const CreateBlog = () => {
   const blogdefaultValues = {
@@ -36,7 +41,7 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
-  const { user } = useContext(UserContext);
+  const { user, admin } = useContext(UserContext);
   const navigate = useNavigate();
   const setApproved = () => {
     return admin ? true : false;
@@ -54,9 +59,11 @@ const CreateBlog = () => {
     });
   };
   const getBlogData = () => {
-    getBlog(blog_id).then((res) => {
-      setBlog(res.data);
-      setTags(res.data.tags);
+    getBlogData_Update(blog_id).then((res) => {
+      if (res) {
+        setBlog(res.data[0]);
+        setTags(res.data.tags);
+      }
     });
   };
   const submitBlog = async () => {
@@ -206,13 +213,13 @@ const CreateBlog = () => {
             </div>
           </div>
           <div className="container2">
-            {tags.length > 0 ? (
+            {tags && tags.length > 0 ? (
               <h4 className="createblogbodytext">Added Tags</h4>
             ) : (
               <></>
             )}
             <div className="tagscontainer">
-              {tags.length > 0 ? (
+              {tags && tags.length > 0 ? (
                 tags.map((tag, index) => {
                   return (
                     <div
