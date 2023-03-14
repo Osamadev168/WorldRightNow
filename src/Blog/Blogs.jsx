@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 const Blogs = () => {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
   const [end, setEnd] = useState(false);
   const getBlogs = (page, number) => {
@@ -121,3 +121,7 @@ const Blogs = () => {
 };
 
 export default Blogs;
+
+const PopularBlogs = () => {
+  return <Blogs />;
+};
