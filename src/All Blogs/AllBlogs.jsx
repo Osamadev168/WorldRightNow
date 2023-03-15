@@ -3,24 +3,24 @@ import { useEffect } from "react";
 import {
   fetchDataLatest,
   fetchDataPopular,
-  getAllBlogs,
   getBlogsForSlider,
   SearchBlogs,
 } from "../Api/Api";
 import Slider from "react-slick";
-// import { stepLabelClasses } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Skeleton } from "@mui/material";
 const AllBlogs = () => {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("All");
   const [value, setValue] = useState("");
+  const [type, setType] = useState("Popular");
   const [search, setSearch] = useState(false);
   const [sliderBlogs, setSliderBlogs] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [query, setQuery] = useState("");
+  const [categoryChange, setCategoryChange] = useState(false);
   const [activediv, setActiveDiv] = useState("Popular");
   const [error, setError] = useState("");
-  const [popular, setPopular] = useState(false);
+  const [popular, setPopular] = useState(true);
   const [loading, setLoading] = useState(false);
   const [latest, setLatest] = useState(false);
   const [currentSilde, setCurrentSlide] = useState(0);
@@ -71,15 +71,10 @@ const AllBlogs = () => {
       setSliderBlogs(res.data);
     });
   };
-  const getBlogs = (page, number) => {
-    getAllBlogs(page, number).then((res) => {
-      setBlogs(res.data);
-    });
-  };
-  const loadProducts = () => {
+  const loadDataPopular = () => {
     setPage(page + 1);
     setTimeout(() => {
-      getAllBlogs(page, limit, category).then((res) => {
+      fetchDataPopular(category, page, limit).then((res) => {
         setBlogs((prev) => [...prev, ...res.data]);
         if (res.data.length === 0) {
           setEnd(true);
@@ -87,67 +82,107 @@ const AllBlogs = () => {
           setEnd(false);
         }
       });
-      console.log(blogs.length, page, limit);
-    }, 4000);
+    }, 1000);
+    console.log(page, blogs.length);
+  };
+  const loadDataLatest = () => {
+    setPage(page + 1);
+
+    setTimeout(() => {
+      fetchDataLatest(category, page, limit).then((res) => {
+        setBlogs((prev) => [...prev, ...res.data]);
+        if (res.data.length === 0) {
+          setEnd(true);
+        } else {
+          setEnd(false);
+        }
+      });
+    }, 1000);
+  };
+  const getDataForCategory = () => {
+    if (latest) {
+      setLoading(true);
+      fetchDataLatest(category, page, limit).then((res) => {
+        setBlogs(res.data);
+        setPage(page + 1);
+        if (res.data.length === 0) {
+          setError("No Blogs Found");
+          setEnd(true);
+        } else {
+          setEnd(false);
+        }
+        setLoading(false);
+      });
+    } else if (popular) {
+      setLoading(true);
+      fetchDataPopular(category, page, limit).then((res) => {
+        setBlogs(res.data);
+        setPage(page + 1);
+
+        if (res.data.length === 0) {
+          setEnd(true);
+        } else {
+          setEnd(false);
+        }
+        setLoading(false);
+      });
+    }
   };
   const handleEnter = (e) => {
     if (e.key === "Enter") {
-      // setLatest(false);
+      setLatest(false);
+      setPopular(false);
       setLoading(true);
       setSearch(true);
       setQuery(value);
       setCategory("");
       setValue("");
       setActiveDiv("");
+      setType("");
     }
   };
   const handleClick = () => {
+    setLatest(false);
+    setPopular(false);
     setLoading(true);
     setSearch(true);
     setQuery(value);
     setCategory("");
+    setType("");
+
     setValue("");
   };
   const handlePopular = () => {
+    setPopular(true);
+    setPage(0);
+    setCategory("All");
+    setCategoryChange(false);
+    setActiveDiv("");
+    setBlogs([]);
     setSearch(false);
-    // setLoading(true);
     setLatest(false);
-    setCategory("");
-    setPopular(!popular);
-    // getBlogsPopular("");
-    setActiveDiv("Popular");
+    setType("Popular");
   };
   const handleLatest = () => {
-    setCategory("");
-    // getBlogsPopular("");
+    setLatest(true);
+    setCategoryChange(false);
     setSearch(false);
+    setPopular(false);
+    setBlogs([]);
+    setCategory("All");
 
-    setLatest(true);
-    setActiveDiv("Latest");
+    setPage(0);
+    setType("Latest");
+    setActiveDiv("");
   };
-  const getDataLatest = () => {
-    setLoading(true);
-    setLatest(true);
-    setQuery("");
-    fetchDataLatest(0, 10, category).then((res) => {
-      setBlogs(res.data);
-      setLoading(false);
-      if (res.data.length === 0) {
-        setError("No Blogs Found in this category:(");
-      }
-    });
+  const handleCategoryChange = (category, div) => {
+    setPage(0);
+    setBlogs([]);
+    setCategoryChange(true);
+    setCategory(category);
+    setActiveDiv(div);
   };
-  const getBlogsPopular = () => {
-    setLoading(true);
-    setQuery("");
-    fetchDataPopular(0, 10, category).then((res) => {
-      setBlogs(res.data);
-      setLoading(false);
-      if (res.data.length === 0) {
-        setError("No Blogs Found in this category:(");
-      }
-    });
-  };
+
   const Search = () => {
     SearchBlogs(query).then((res) => {
       setEnd(true);
@@ -161,73 +196,48 @@ const AllBlogs = () => {
       }
     });
   };
+  const getPopularData = () => {
+    setLoading(true);
+    fetchDataPopular(category, page, limit).then((res) => {
+      setBlogs(res.data);
+      if (res.data.length === 0) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
+      setLoading(false);
+    });
+  };
+  const getLatestData = () => {
+    setLoading(true);
+    fetchDataLatest(category, page, limit).then((res) => {
+      setBlogs(res.data);
+      if (res.data.length === 0) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
+      setLoading(false);
+    });
+  };
   useEffect(() => {
     getSliderData();
-    // if (!query || category) {
-    //   if (!latest) {
-    //     getBlogsPopular();
-    //   }
-    //   if (latest) {
-    //     getDataLatest();
-    //   }
-    // }
-
-    if (latest) {
-      if (category && !search) {
-        setLoading(true);
-        fetchDataLatest(0, 10, category).then((res) => {
-          setBlogs(res.data);
-          setLoading(false);
-          if (res.data.length === 0) {
-            setError("no blogs found in this category");
-            setEnd(true);
-          }
-        });
-      } else if (!search) {
-        fetchDataLatest(0, 10, "").then((res) => {
-          setBlogs(res.data);
-          if (res.data.length === 0) {
-            setError("no blogs found in this category");
-            setEnd(true);
-          }
-        });
-      }
-    } else if (!latest) {
-      if (category && !search) {
-        setLoading(true);
-
-        fetchDataPopular(0, 10, category).then((res) => {
-          setBlogs(res.data);
-          setLoading(false);
-
-          if (res.data.length === 0) {
-            setError("NOT FOUND");
-            setEnd(true);
-          }
-        });
-      } else if (!search) {
-        setLoading(true);
-        fetchDataPopular(0, 10, "").then((res) => {
-          setBlogs(res.data);
-          setLoading(false);
-
-          if (res.data.length === 0) {
-            setError("NOT FOUND");
-            setEnd(true);
-          }
-        });
-      }
+    if (popular && !categoryChange) {
+      getPopularData();
     }
-
-    // if (category) {
-    //   getBlogs(0, 10, category);
-    // }
+    if (latest && !categoryChange) {
+      getLatestData();
+    }
     window.scrollTo(0, 0);
-    // getBlogs(0, 10, "");
+    if (categoryChange || category) {
+      getDataForCategory();
+      console.log(categoryChange, category);
+    }
     if (query && search) {
       Search();
     }
-  }, [query, category, latest, popular]);
+    console.log(categoryChange, category);
+  }, [query, categoryChange, popular, latest, category]);
   return (
     <>
       <div className="AllBlogsContainer paddingtop">
@@ -235,7 +245,7 @@ const AllBlogs = () => {
           {sliderBlogs && sliderBlogs.length > 0 ? (
             sliderBlogs.map((blog, index) => {
               let wordsPerMinute = 150;
-              let noOfWords = blog.body.split(" ").length;
+              let noOfWords = blog && blog.body.split(" ").length;
               let readingTime = noOfWords / wordsPerMinute;
               let round = Math.floor(readingTime);
               let date = new Date(blog.CreatedAt).toDateString();
@@ -276,38 +286,38 @@ const AllBlogs = () => {
                     <div className="blogType">
                       <span className="type">Trending</span>
                     </div>
-                  </div>
-                  <div className="sliderDots">
-                    <div
-                      className={currentSilde === 0 ? "dot activeDot" : "dot"}
-                      onClick={() => {
-                        sliderRef.current.slickGoTo(0);
-                      }}
-                    ></div>
-                    <div
-                      className={currentSilde === 1 ? "dot activeDot" : "dot"}
-                      onClick={() => {
-                        sliderRef.current.slickGoTo(1);
-                      }}
-                    ></div>
-                    <div
-                      className={currentSilde === 2 ? "dot activeDot" : "dot"}
-                      onClick={() => {
-                        sliderRef.current.slickGoTo(2);
-                      }}
-                    ></div>
-                    <div
-                      className={currentSilde === 3 ? "dot activeDot" : "dot"}
-                      onClick={() => {
-                        sliderRef.current.slickGoTo(3);
-                      }}
-                    ></div>
-                    <div
-                      className={currentSilde === 4 ? "dot activeDot" : "dot"}
-                      onClick={() => {
-                        sliderRef.current.slickGoTo(4);
-                      }}
-                    ></div>
+                    <div className="sliderDots">
+                      <div
+                        className={currentSilde === 0 ? "dot activeDot" : "dot"}
+                        onClick={() => {
+                          sliderRef.current.slickGoTo(0);
+                        }}
+                      ></div>
+                      <div
+                        className={currentSilde === 1 ? "dot activeDot" : "dot"}
+                        onClick={() => {
+                          sliderRef.current.slickGoTo(1);
+                        }}
+                      ></div>
+                      <div
+                        className={currentSilde === 2 ? "dot activeDot" : "dot"}
+                        onClick={() => {
+                          sliderRef.current.slickGoTo(2);
+                        }}
+                      ></div>
+                      <div
+                        className={currentSilde === 3 ? "dot activeDot" : "dot"}
+                        onClick={() => {
+                          sliderRef.current.slickGoTo(3);
+                        }}
+                      ></div>
+                      <div
+                        className={currentSilde === 4 ? "dot activeDot" : "dot"}
+                        onClick={() => {
+                          sliderRef.current.slickGoTo(4);
+                        }}
+                      ></div>
+                    </div>
                   </div>
                 </div>
               );
@@ -318,6 +328,7 @@ const AllBlogs = () => {
             </div>
           )}
         </Slider>
+
         <div className="tagsContainerMain">
           <div className="tagsLeft">
             <div className="blogsContainer">
@@ -331,15 +342,9 @@ const AllBlogs = () => {
               {!loading ? (
                 <InfiniteScroll
                   dataLength={blogs.length}
-                  next={loadProducts}
+                  next={latest ? loadDataLatest : loadDataPopular}
                   hasMore={!end}
-                  loader={
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      style={{ width: "100%", height: 200 }}
-                    />
-                  }
+                  loader={<Skeleton height={200} />}
                   endMessage={end ? <p></p> : <></>}
                 >
                   <div>
@@ -454,7 +459,9 @@ const AllBlogs = () => {
                 <div className="categories">
                   <span
                     className={
-                      activediv === "Popular" ? "categoryActive" : "category"
+                      type === "Popular"
+                        ? "category categoryActive"
+                        : "category"
                     }
                     onClick={handlePopular}
                   >
@@ -462,7 +469,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "Latest" ? "categoryActive" : "category"
+                      type === "Latest" ? "category categoryActive" : "category"
                     }
                     onClick={handleLatest}
                   >
@@ -475,109 +482,91 @@ const AllBlogs = () => {
                 <div className="categories">
                   <span
                     className={
-                      activediv === "div1" ? "categoryActive" : "category"
+                      activediv === "div1"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div1");
-                      setCategory("");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("All", "div1")}
                   >
                     All
                   </span>
                   <span
                     className={
-                      activediv === "div2" ? "categoryActive" : "category"
+                      activediv === "div2"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div2");
-                      setCategory("Technology");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Technology", "div2")}
                   >
                     Technology
                   </span>
                   <div
                     className={
-                      activediv === "div3" ? "categoryActive" : "category"
+                      activediv === "div3"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div3");
-                      setCategory("Science");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Science", "div3")}
                   >
                     Science
                   </div>
                   <span
                     className={
-                      activediv === "div4" ? "categoryActive" : "category"
+                      activediv === "div4"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div4");
-                      setCategory("Education");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Education", "div4")}
                   >
                     Education
                   </span>
                   <span
                     className={
-                      activediv === "div5" ? "categoryActive" : "category"
+                      activediv === "div5"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div5");
-                      setCategory("Finance");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Finance", "div5")}
                   >
                     Finance
                   </span>
                   <span
                     className={
-                      activediv === "div6" ? "categoryActive" : "category"
+                      activediv === "div6"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div6");
-                      setCategory("LifeStyle");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Lifestyle", "div6")}
                   >
                     Lifestyle
                   </span>
                   <span
                     className={
-                      activediv === "div7" ? "categoryActive" : "category"
+                      activediv === "div7"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div7");
-                      setCategory("Business");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Business", "div7")}
                   >
                     Business
                   </span>
                   <span
                     className={
-                      activediv === "div8" ? "categoryActive" : "category"
+                      activediv === "div8"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div8");
-                      setCategory("News");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("News", "div8")}
                   >
                     News
                   </span>
                   <span
                     className={
-                      activediv === "div9" ? "categoryActive" : "category"
+                      activediv === "div9"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div9");
-                      setCategory("Travel");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Travel", "div9")}
                   >
                     Travel
                   </span>
@@ -585,23 +574,17 @@ const AllBlogs = () => {
                     className={
                       activediv === "div10" ? "categoryActive" : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div10");
-                      setCategory("Sports");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Sports", "div10")}
                   >
                     Sports
                   </span>
                   <span
                     className={
-                      activediv === "div11" ? "categoryActive" : "category"
+                      activediv === "div11"
+                        ? "category categoryActive"
+                        : "category"
                     }
-                    onClick={() => {
-                      setActiveDiv("div11");
-                      setCategory("Health");
-                      setSearch(false);
-                    }}
+                    onClick={() => handleCategoryChange("Health", "div11")}
                   >
                     Health
                   </span>
