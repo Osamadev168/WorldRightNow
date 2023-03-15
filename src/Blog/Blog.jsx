@@ -35,7 +35,7 @@ const Blog = () => {
     fetchBlog(id);
     setTimeout(() => {
       getAuhorBlogs();
-    }, 3000);
+    }, 1000);
     if (refresh) {
       fetchBlog(id);
     }
@@ -186,6 +186,18 @@ const Blog = () => {
 };
 const Comments = ({ blog, id, setRefresh, refresh }) => {
   const [userid, setuserid] = useState("");
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      if (comment.comment !== "") {
+        submitComment(id, comment).then(() => {
+          setComment(defaultValues);
+        });
+        setRefresh(!refresh);
+      } else {
+        alert("Comment must not be empty..!!");
+      }
+    }
+  };
   useEffect(() => {
     setuserid(user && user.uid);
   }, [userid]);
@@ -250,6 +262,7 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
             <textarea
               // aria-label="comment"
               value={comment.comment}
+              onKeyDown={handleEnter}
               className="comment_Area"
               aria-label="comment_Area"
               onChange={(e) => {

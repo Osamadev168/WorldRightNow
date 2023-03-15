@@ -10,6 +10,7 @@ import { submitPost, upload_Image } from "../Api/Api";
 const CreateBlog = () => {
   document.title = "Create Blog";
   const { user, token } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const blogdefaultValues = {
     title: "",
     description: "",
@@ -47,14 +48,18 @@ const CreateBlog = () => {
     });
   };
   const submitBlog = async () => {
+    setLoading(true);
+    console.log(blog.body);
     try {
       await submitPost(blog, token).then(async () => {
-        navigate("/dashboard");
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
+        setLoading(false);
+        navigate("/dashboard");
       });
     } catch (e) {
       alert(e.message);
+      setLoading(false);
     }
   };
   const handleEnterPress = (e) => {
@@ -68,11 +73,14 @@ const CreateBlog = () => {
   };
   useEffect(() => {
     setBlog({ ...blog, tags: tags });
+    if (tags) {
+      setBlog({ ...blog, tags: tags });
+    }
     setImage(sessionStorage.getItem("image"));
     if (file) {
       uploadImage();
     }
-  }, [file, refresh]);
+  }, [file, refresh, tags]);
 
   return (
     <div
@@ -454,8 +462,14 @@ const CreateBlog = () => {
           type="button"
           onClick={submitBlog}
         >
-          <h1>Submit</h1>
-          <img src={Send} />
+          {loading ? (
+            <span className="loader"></span>
+          ) : (
+            <>
+              <h1>Submit</h1>
+              <img src={Send} />
+            </>
+          )}
         </button>
       </div>
     </div>

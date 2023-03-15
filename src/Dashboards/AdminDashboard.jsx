@@ -59,7 +59,6 @@ const AdminDashboard = () => {
                 setRefreh(!refresh);
               })
             }
-            autoFocus
           >
             Yes
           </Button>

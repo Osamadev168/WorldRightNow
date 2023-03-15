@@ -30,21 +30,15 @@ export const UserStatus = async (token) => {
     console.error(e.message);
   }
 };
-export const fetchDataPopular = async (page, limit, category) => {
-  let response = await axios.post(
-    `${url}/get/all/blogs/popular/${page}/${limit}`,
-    {
-      category: category,
-    }
+export const fetchDataPopular = async (category, page, limit) => {
+  let response = await axios.get(
+    `${url}/get/all/blogs/popular/${category}/${page}/${limit}`
   );
   return response;
 };
-export const fetchDataLatest = async (page, limit, category) => {
-  let response = await axios.post(
-    `${url}/get/all/blogs/latest/${page}/${limit}`,
-    {
-      category: category,
-    }
+export const fetchDataLatest = async (category, page, limit) => {
+  let response = await axios.get(
+    `${url}/get/all/blogs/latest/${category}/${page}/${limit}`
   );
   return response;
 };
@@ -170,6 +164,14 @@ export const getBlogsForSlider = async () => {
   try {
     let response = await axios.get(`${url}/blogs/slider`);
     return response;
+  } catch (e) {
+    console.error(e.message);
+  }
+};
+
+export const AddView = async (id) => {
+  try {
+    await axios.post(`${url}/post/${id}`);
   } catch (e) {
     console.error(e.message);
   }

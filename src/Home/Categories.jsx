@@ -4,7 +4,7 @@ const Categories = ({ setCategory }) => {
   const [activediv, setActiveDiv] = useState("");
   useEffect(() => {
     setActiveDiv("div1");
-    setCategory("");
+    setCategory("All");
   }, []);
   return (
     <div className="categoriesmaindiv">
@@ -13,7 +13,7 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div1" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div1");
-            setCategory("");
+            setCategory("All");
           }}
         >
           <div>All</div>
