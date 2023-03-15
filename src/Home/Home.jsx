@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     document.title = "Home";
   }, []);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("All");
   return (
     <>
       <Helmet>

@@ -44,7 +44,7 @@ const Popular = ({ category }) => {
     ],
   };
   const getPosts = () => {
-    fetchDataPopular(category).then((res) => {
+    fetchDataPopular(category, 0, 10).then((res) => {
       setPosts(res.data);
     });
   };
@@ -54,7 +54,7 @@ const Popular = ({ category }) => {
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
-        {category === "" ? (
+        {category === "All" ? (
           <h3>Popular Blogs</h3>
         ) : (
           <h3>Popular in {category}</h3>

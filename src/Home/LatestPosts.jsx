@@ -1,5 +1,4 @@
 import Slider from "react-slick";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useEffect, useRef, useState } from "react";
 import { fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
@@ -45,7 +44,7 @@ const LatestPosts = ({ category }) => {
     ],
   };
   const getPosts = () => {
-    fetchDataLatest(category).then((res) => {
+    fetchDataLatest(category, 0, 10).then((res) => {
       setPosts(res.data);
     });
   };
@@ -55,7 +54,7 @@ const LatestPosts = ({ category }) => {
   return (
     <div className="mainPopularContainer">
       <div className="titleCategory">
-        {category === "" ? (
+        {category === "All" ? (
           <h3>Latest Blogs</h3>
         ) : (
           <h3>Latest in {category}</h3>

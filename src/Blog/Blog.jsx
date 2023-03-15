@@ -35,7 +35,7 @@ const Blog = () => {
     fetchBlog(id);
     setTimeout(() => {
       getAuhorBlogs();
-    }, 3000);
+    }, 1000);
     if (refresh) {
       fetchBlog(id);
     }
