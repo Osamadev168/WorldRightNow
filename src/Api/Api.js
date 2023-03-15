@@ -168,3 +168,11 @@ export const getBlogsForSlider = async () => {
     console.error(e.message);
   }
 };
+
+export const AddView = async (id) => {
+  try {
+    await axios.post(`${url}/post/${id}`);
+  } catch (e) {
+    console.error(e.message);
+  }
+};

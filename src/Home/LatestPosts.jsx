@@ -1,13 +1,12 @@
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
-import { fetchDataLatest } from "../Api/Api";
+import { AddView, fetchDataLatest } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 const LatestPosts = ({ category }) => {
   const [post, setPosts] = useState([]);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const sliderRef = useRef(null);
   const settings = {
     dots: false,
@@ -44,8 +43,10 @@ const LatestPosts = ({ category }) => {
     ],
   };
   const getPosts = () => {
+    setLoading(true);
     fetchDataLatest(category, 0, 10).then((res) => {
       setPosts(res.data);
+      setLoading(false);
     });
   };
   useEffect(() => {
@@ -60,72 +61,72 @@ const LatestPosts = ({ category }) => {
           <h3>Latest in {category}</h3>
         )}
       </div>
-      {post.length < 0 ? (
-        <CircularProgress />
+      {loading ? (
+        <span className="loader"></span>
       ) : (
-        <Slider {...settings} ref={sliderRef} className="slider">
-          {post && post.length > 0 ? (
-            post.map((posts, index) => {
-              let wordsPerMinute = 150;
-              let noOfWords = posts.body.split(" ").length;
-              let readingTime = noOfWords / wordsPerMinute;
-              let round = Math.floor(readingTime);
-              let date = new Date(posts.CreatedAt).toDateString();
-              let displayMonth = date.substring(4, 10);
-              let displayYear = date.substring(10);
-              let displayDate = `${displayMonth},${displayYear}`;
-              let title = posts.title;
-              title = title.replace(/\s+/g, "-");
-
-              return (
-                <a
-                  href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                    posts._id
-                  }`}
-                >
-                  <div
-                    className="PopularCard"
-                    key={index}
-                    onClick={() =>
-                      navigate(
-                        `/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                          posts._id
-                        }`
-                      )
-                    }
-                  >
-                    <img
-                      src={posts.image}
-                      className="image"
-                      loading="lazy"
-                      alt="blog_image"
-                    />
-                    <div className="title">
-                      <h1 className="posttitle">{posts.category}</h1>
-                      <div className="info">
-                        <p>{displayDate}</p>
-                        <p>&nbsp;|&nbsp;</p>
-                        {round <= 0 ? (
-                          <p>Quick read</p>
-                        ) : (
-                          <p>{round}mins read</p>
-                        )}
-                      </div>
-                    </div>
-                    <div className="description">
-                      <p className="blogtitle">{posts.title}</p>
-                      <p className="data">{posts.description}</p>
-                    </div>
-                  </div>
-                </a>
-              );
-            })
+        <>
+          {post.length === 0 ? (
+            <CircularProgress />
           ) : (
-            <div>
-              <span className="loader"></span>
-            </div>
+            <Slider {...settings} ref={sliderRef} className="slider">
+              {post && post.length > 0 ? (
+                post.map((posts, index) => {
+                  let wordsPerMinute = 150;
+                  let noOfWords = posts.body.split(" ").length;
+                  let readingTime = noOfWords / wordsPerMinute;
+                  let round = Math.floor(readingTime);
+                  let date = new Date(posts.CreatedAt).toDateString();
+                  let displayMonth = date.substring(4, 10);
+                  let displayYear = date.substring(10);
+                  let displayDate = `${displayMonth},${displayYear}`;
+                  let title = posts.title;
+                  title = title.replace(/\s+/g, "-");
+
+                  return (
+                    <a
+                      href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                        posts._id
+                      }`}
+                    >
+                      <div
+                        className="PopularCard"
+                        key={index}
+                        onClick={() => AddView(posts._id)}
+                      >
+                        <img
+                          src={posts.image}
+                          className="image"
+                          loading="lazy"
+                          alt="blog_image"
+                        />
+                        <div className="title">
+                          <h1 className="posttitle">{posts.category}</h1>
+                          <div className="info">
+                            <p>{displayDate}</p>
+                            <p>&nbsp;|&nbsp;</p>
+                            {round <= 0 ? (
+                              <p>Quick read</p>
+                            ) : (
+                              <p>{round}mins read</p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="description">
+                          <p className="blogtitle">{posts.title}</p>
+                          <p className="data">{posts.description}</p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })
+              ) : (
+                <div>
+                  <span className="loader"></span>
+                </div>
+              )}
+            </Slider>
           )}
-        </Slider>
+        </>
       )}
       <div className="sliderButtons">
         <div

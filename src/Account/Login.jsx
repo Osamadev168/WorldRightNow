@@ -16,7 +16,6 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
@@ -32,7 +31,9 @@ export const Signup = ({
 }) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
+  const [laoding, setLoading] = useState(false);
   const createAccountwithEmailandPassword = () => {
+    setLoading(true);
     if (password === confirmpassword) {
       const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, email, password)
@@ -40,15 +41,15 @@ export const Signup = ({
           await updateProfile(userCredential.user, {
             displayName: userName,
           });
-
-          navigate("/account/info/user");
-          sendEmailVerification(userCredential.user);
+          setLoading(false);
+          navigate("/");
         })
         .catch((error) => {
           alert(error.message);
         });
     } else {
       alert("passwords didnt match");
+      setLoading(false);
     }
   };
 
@@ -120,7 +121,7 @@ export const Signup = ({
           className="primaryButton loginButton"
           onClick={createAccountwithEmailandPassword}
         >
-          <h1>Sign Up</h1>
+          {laoding ? <span className="loader"></span> : <h1>Sign Up</h1>}
         </div>
         <div className="or">
           <div className="orline"></div>
@@ -196,19 +197,19 @@ export const Login = ({
   setPassword,
   email,
   password,
-  isAdmin,
 }) => {
-  const [progress, setProgress] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const loginwithEmailPassword = async () => {
-    setProgress(true);
-
+    setLoading(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
+        setLoading(false);
         navigate("/");
       })
       .catch((error) => {
+        setLoading(false);
         alert(error.message);
       });
   };
@@ -280,7 +281,7 @@ export const Login = ({
           className="primaryButton loginButton"
           onClick={loginwithEmailPassword}
         >
-          {progress ? <CircularProgress /> : <h1>Login</h1>}
+          {loading ? <span className="loader"></span> : <h1>Login</h1>}
         </div>
         <div className="or">
           <div className="orline"></div>

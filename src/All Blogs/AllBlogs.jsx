@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import {
+  AddView,
   fetchDataLatest,
   fetchDataPopular,
   getBlogsForSlider,
@@ -9,6 +10,7 @@ import {
 import Slider from "react-slick";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Skeleton } from "@mui/material";
+import { Helmet } from "react-helmet";
 const AllBlogs = () => {
   const [category, setCategory] = useState("All");
   const [value, setValue] = useState("");
@@ -240,6 +242,16 @@ const AllBlogs = () => {
   }, [query, categoryChange, popular, latest, category]);
   return (
     <>
+      <Helmet>
+        <meta
+          charSet="utf-8"
+          name="description"
+          content="Explore whats happening around you"
+        />
+        <title>Blogs | Hubble Feed</title>
+
+        <link rel="canonical" href="/all/blogs" />
+      </Helmet>
       <div className="AllBlogsContainer paddingtop">
         <Slider {...settings} ref={sliderRef} className="slider">
           {sliderBlogs && sliderBlogs.length > 0 ? (
@@ -366,6 +378,7 @@ const AllBlogs = () => {
                             style={{
                               cursor: "pointer",
                             }}
+                            onClick={() => AddView(blog._id)}
                           >
                             <a
                               className="blogCard"
