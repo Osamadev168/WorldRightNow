@@ -110,12 +110,12 @@ body {
   width: 35px;
   height: 35px;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .HeaderMainContainer .profile .profiledropdown {
   position: absolute;
@@ -220,7 +220,13 @@ body {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 800;
-  color: #141a31;
+  color: #220327;
+}
+.heroContainer .mainContainerBanner .bannerdiv1 .text1banner span {
+  background: linear-gradient(91.79deg, #fc2c7e -0.15%, #a02cfc 54.18%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .heroContainer .mainContainerBanner .bannerdiv1 .text2banner {
   font-family: "Montserrat";
@@ -297,7 +303,7 @@ body {
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0 1px #141a31;
+  box-shadow: inset 0 0 0 1px #220327;
   padding: 10px 35px;
   border-radius: 50px;
   font-size: 15px;
@@ -438,8 +444,8 @@ body {
   justify-content: center;
   border: 1px solid transparent;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .sliderButtons .nextButton:hover,
 .sliderButtons .prevButton:hover {
@@ -585,62 +591,7 @@ body {
   font-size: 18px;
   color: #eaeaea;
   line-height: 30px;
-}
-
-.inputcontainer {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-.inputcontainer .inputcontactus {
-  box-sizing: border-box;
-  color: #f8fafb;
-  width: 400px;
-  height: 48px;
-  left: 0px;
-  padding: 10px 20px;
-  background: transparent;
-  border: 1px solid #f8f8f8;
-  border-radius: 50px 0px 0px 50px;
-  font-size: 18px;
-  font-weight: 500;
-}
-.inputcontainer .inputcontactus::-moz-placeholder {
-  color: #9a9a9a;
-  font-size: 16px;
-  font-weight: 500;
-  font-style: italic;
-}
-.inputcontainer .inputcontactus::placeholder {
-  color: #9a9a9a;
-  font-size: 16px;
-  font-weight: 500;
-  font-style: italic;
-}
-.inputcontainer .newsletterButton {
-  background: #fc2c7e;
-  color: #ffffff;
-  border-radius: 0px 50px 50px 0px;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 0px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-  margin-left: -2px;
-}
-.inputcontainer .newsletterButton svg {
-  stroke: #ffffff;
-}
-.inputcontainer .newsletterButton:hover {
-  background: #ffffff;
-  color: #fc2c7e;
-}
-.inputcontainer .newsletterButton:hover svg {
-  stroke: #fc2c7e;
+  margin-bottom: 40px;
 }
 
 .footerhome {
@@ -782,6 +733,12 @@ body {
   font-weight: 500;
 }
 
+.message {
+  min-height: 200px;
+  border-radius: 12px;
+  padding: 20px 20px;
+}
+
 .inputContainer {
   display: flex;
   flex-direction: column;
@@ -805,17 +762,12 @@ body {
 }
 
 .forgetPassword {
-  text-align: right;
-  float: right;
-  display: flex;
-  flex-direction: column;
-  font-family: "Montserrat";
-  font-style: normal;
   font-weight: 500;
   font-size: 15px;
   color: #fc2c7e;
   margin-top: -8px;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .loginButton {
@@ -826,7 +778,7 @@ body {
   cursor: pointer;
   width: 100%;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 18px;
   color: #ffffff;
 }
 
@@ -863,8 +815,6 @@ body {
   min-height: 38px;
   color: #000000;
   position: relative;
-}
-.facebookButton a {
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
@@ -887,6 +837,8 @@ body {
 .signuptext {
   color: #fc2c7e;
   cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .blogMainContainer {
@@ -920,12 +872,7 @@ body {
   display: flex;
   gap: 10px;
 }
-.blogMainContainer
-  .blogRight
-  .blogRightContent
-  .authorBlogs
-  .Card
-  .blogContent {
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
   flex: 7;
 }
 .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
@@ -976,7 +923,7 @@ body {
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0 1px #141a31;
+  box-shadow: inset 0 0 0 1px #220327;
   padding: 7px 15px;
   border-radius: 50px;
   font-size: 12px;
@@ -984,12 +931,7 @@ body {
   text-decoration: none;
   color: inherit;
 }
-.blogMainContainer
-  .blogRight
-  .blogRightContent
-  .blogTags
-  .tagsContainer
-  .tag:hover {
+.blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag:hover {
   background: rgba(0, 0, 0, 0.05);
   box-shadow: none;
 }
@@ -1160,7 +1102,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 80px;
   width: 65%;
   margin: auto;
 }
@@ -1175,6 +1117,15 @@ body {
 .ck.ck-editor__editable_inline {
   border: 1px solid #4e4e4e !important;
   border-radius: 0px 0px 10px 10px !important;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+  background: transparent !important;
+}
+
+.ck.ck-toolbar {
+  background: transparent !important;
+  border-radius: 10px 10px 0px 0px !important;
 }
 
 .createblogformcontainer {
@@ -1226,7 +1177,7 @@ body {
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0 1px #141a31;
+  box-shadow: inset 0 0 0 1px #220327;
   padding: 4px 20px;
   border-radius: 50px;
   font-size: 12px;
@@ -1290,6 +1241,7 @@ body {
   font-size: 10px;
   line-height: 24px;
   color: #909090;
+  border: 1px solid #909090;
 }
 
 .categorycreateblog {
@@ -1407,21 +1359,13 @@ body {
   cursor: pointer;
   position: relative;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .profilePic
-  .circularProgress {
+.dashboardContainer .userSettingContainer .userInfo .profilePic .circularProgress {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .profilePic
-  .imageEditButton {
+.dashboardContainer .userSettingContainer .userInfo .profilePic .imageEditButton {
   background: #000000;
   width: 100%;
   height: 100%;
@@ -1435,15 +1379,11 @@ body {
   color: #ffffff;
   background: rgba(0, 0, 0, 0.7);
   -webkit-backdrop-filter: blur(7.5px);
-  backdrop-filter: blur(7.5px);
+          backdrop-filter: blur(7.5px);
   opacity: 0;
   transition: all 200ms ease-out;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .profilePic:hover
-  .imageEditButton {
+.dashboardContainer .userSettingContainer .userInfo .profilePic:hover .imageEditButton {
   opacity: 1;
 }
 .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer {
@@ -1451,89 +1391,31 @@ body {
   flex-direction: column;
   gap: 10px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  p,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  p {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer p,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer p {
   font-weight: 500;
   font-size: 18px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userEmail,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userName,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userEmail,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userName {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userEmail,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userEmail,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
   font-weight: 700;
   font-size: 18px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userName,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userName {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
   border: none;
   background: none;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userNameButton,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userNameButton {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userNameButton,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userNameButton {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1573,12 +1455,7 @@ body {
   width: 60%;
   gap: 20px;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  h2 {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
   font-size: 28px;
   font-weight: 800;
   line-height: 34px;
@@ -1591,20 +1468,10 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  h2:hover {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2:hover {
   text-decoration: underline;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  p {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -1619,50 +1486,24 @@ body {
   gap: 20px;
   align-items: center;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .status {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .status {
   padding: 10px 25px;
   border-radius: 50px;
   font-size: 18px;
   font-weight: 700;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .underreview {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .underreview {
   color: #000000;
   background-color: #ffa800;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .active {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .active {
   color: #ffffff;
   background-color: #009006;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .dateTime {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime {
   display: flex;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .dateTime
-  p {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime p {
   color: #140421;
   font-size: 16px;
   font-weight: 600;
@@ -1680,72 +1521,22 @@ body {
   align-items: center;
   gap: 25px;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .delete,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .edit,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .views,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .comments,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .delete,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .edit,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .views,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .comments {
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .delete,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .edit,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .views,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .delete,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .edit,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .views,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 16px;
   font-weight: 600;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .comments,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .comments {
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
   margin: 0;
 }
 
@@ -1867,7 +1658,7 @@ body {
   max-height: 215px;
   margin: 0;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
 .AllBlogsContainer .heroSlideshow .slide .blogInfo {
   flex: 5.5;
@@ -1888,12 +1679,7 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.AllBlogsContainer
-  .heroSlideshow
-  .slide
-  .blogInfo
-  .blogTitleDescription
-  h2:hover {
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2:hover {
   text-decoration: underline;
 }
 .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
@@ -1907,12 +1693,7 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-.AllBlogsContainer
-  .heroSlideshow
-  .slide
-  .blogInfo
-  .imageAuthorName
-  .blogCategory {
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .imageAuthorName .blogCategory {
   color: #fc2c7e;
   font-weight: 600;
 }
@@ -1933,7 +1714,7 @@ body {
 .AllBlogsContainer .scrollContainer p {
   font-weight: 600;
   font-size: 16px;
-  color: #141a31;
+  color: #220327;
   margin-bottom: 12px;
 }
 .AllBlogsContainer .scrollContainer .categories {
@@ -1967,7 +1748,7 @@ body {
   font-size: 13px;
   padding: 8px 20px;
   padding-right: 40px;
-  color: #141a31;
+  color: #220327;
   background-color: transparent;
 }
 .AllBlogsContainer .scrollContainer .searchContainer i {
@@ -2034,12 +1815,7 @@ body {
 .tagsContainerMain .tagsLeft .blogsContainer .blogCard .imageAuthorName {
   margin-top: -15px;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .imageAuthorName
-  .blogCategory {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .imageAuthorName .blogCategory {
   color: #fc2c7e;
 }
 .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeftWrapper {
@@ -2049,21 +1825,10 @@ body {
 .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
   flex: 7.5;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .blogCardLeft
-  .titleandDescriptionImage {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage {
   margin-top: 10px;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .blogCardLeft
-  .titleandDescriptionImage
-  .blogTitle {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
   font-weight: 800;
   font-size: 22px;
   line-height: 27px;
@@ -2073,13 +1838,7 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .blogCardLeft
-  .titleandDescriptionImage
-  .blogDescription {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogDescription {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -2128,7 +1887,7 @@ body {
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0 1px #141a31;
+  box-shadow: inset 0 0 0 1px #220327;
   padding: 4px 20px;
   border-radius: 50px;
   font-size: 12px;
@@ -2224,20 +1983,10 @@ body {
   .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card {
     gap: 8px;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .authorBlogs
-    .Card
-    .blogContent {
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
     flex: 7.5;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .authorBlogs
-    .Card
-    .blogImage {
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
     flex: 2.5;
     height: 50px;
   }
@@ -2247,12 +1996,7 @@ body {
   .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer {
     gap: 12px;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .blogTags
-    .tagsContainer
-    .tag {
+  .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag {
     padding: 6px 12px;
     font-size: 10px;
   }
@@ -2307,7 +2051,7 @@ body {
 }
 @media only screen and (max-width: 768px) {
   .heroSection {
-    background-image: url("./assets/BgTablet.png") !important;
+    background-image: url("./assets/BgTablet.webp") !important;
     background-size: cover;
     background-position: bottom;
   }
@@ -2364,6 +2108,7 @@ body {
   }
   .textcontactus {
     max-width: 100%;
+    align-items: center;
   }
   .text1contactus,
   .text2contactus {
@@ -2449,7 +2194,7 @@ body {
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 0 0 1px #141a31;
+    box-shadow: inset 0 0 0 1px #220327;
     padding: 4px 20px;
     border-radius: 50px;
     font-size: 12px;
@@ -2485,20 +2230,10 @@ body {
     width: 80%;
     align-items: center;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    h2 {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
     text-align: center;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    p {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
     text-align: center;
   }
   .dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime {
@@ -2603,14 +2338,7 @@ body {
   .dashboardContainer .userSettingContainer .userInfo {
     flex-direction: column;
   }
-  .TagsContainerParent
-    .tagsContainerMain
-    .tagsLeft
-    .blogsContainer
-    .blogCard
-    .blogCardLeft
-    .titleandDescriptionImage
-    .blogTitle {
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
     font-size: 20px;
   }
 }
@@ -2639,46 +2367,18 @@ body {
   .div1 {
     padding: 3.125em 3em;
   }
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userNameContainer,
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userEmailContainer {
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer {
     flex-direction: column;
     align-items: center;
     gap: 5px;
   }
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userNameContainer
-    p,
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userEmailContainer
-    p {
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer p,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer p {
     font-size: 14px;
   }
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userNameContainer
-    .userName,
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userEmailContainer
-    .userName {
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
     text-align: center;
     font-size: 14px;
   }
@@ -2797,21 +2497,11 @@ body {
   .dashboardContainer .blogsContainer .blogCard .blogInfo {
     width: 100%;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    h2 {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
     font-size: 20px;
     line-height: 28px;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    p {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
     font-size: 14px;
     line-height: 20px;
   }
@@ -2838,23 +2528,11 @@ body {
   .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
     flex: 7.5;
   }
-  .tagsContainerMain
-    .tagsLeft
-    .blogsContainer
-    .blogCard
-    .blogCardLeft
-    .titleandDescriptionImage
-    .blogTitle {
+  .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
     font-size: 18px;
     line-height: 25px;
   }
-  .tagsContainerMain
-    .tagsLeft
-    .blogsContainer
-    .blogCard
-    .blogCardLeft
-    .titleandDescriptionImage
-    .blogDescription {
+  .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogDescription {
     font-size: 12px;
   }
   .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogImage {
@@ -2874,46 +2552,4 @@ body {
   .loginsignuptoggle {
     font-size: 17px;
   }
-} /*# sourceMappingURL=App.css.map */
-.loader {
-  width: 2.2em;
-  height: 2.2em;
-  display: block;
-  position: relative;
-  animation: spinRing 1125ms linear infinite;
-}
-.loader::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  height: auto;
-  width: auto;
-  border: 3px solid #743569;
-  border-radius: 50%;
-  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 500%);
-  animation: spinRingInner 1125ms cubic-bezier(0.77, 0, 0.175, 1) infinite;
-}
-@keyframes spinRing {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes spinRingInner {
-  0% {
-    transform: rotate(-180deg);
-  }
-  50% {
-    transform: rotate(-160deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map */
