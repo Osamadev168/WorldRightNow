@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="div2footer">
         <div className="div3footer">
           <div className="companyname">
-            <p>Copyright © 2023 Company Name</p>
+            <p>Copyright © 2023 Hubble Feed</p>
           </div>
           <div className="infofooter">
             <p>All Rights Reserved</p>

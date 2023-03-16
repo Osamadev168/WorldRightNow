@@ -5,16 +5,13 @@ const ContactHome = () => {
       <div className="rectangle">
         <div className="div1">
           <div className="textcontactus">
-            <h3 className="text1contactus">
-              Never miss out on an interesting blog
-            </h3>
+            <h3 className="text1contactus">Let’s get started</h3>
             <p className="text2contactus">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus
-              quam sit non et quam vitae cras. Sed tincidunt purus semper sed.
-              Adipiscing in quis enim nunc, cursus. Condimentum in iaculis
-              libero laoreet pharetra.
+              Are you ready to take your business to the next level? Hubble Feed
+              offers expert blog posting services to help you elevate your
+              business. Contact us today to get started.
             </p>
-            <div className="inputcontainer">
+            {/* <div className="inputcontainer">
               <input
                 className="inputcontactus"
                 type="email"
@@ -38,7 +35,10 @@ const ContactHome = () => {
                   />
                 </svg>
               </a>
-            </div>
+            </div> */}
+            <a className="primaryButton" href="/blogs">
+              Contact us
+            </a>
           </div>
 
           <div className="picturecontactus">
