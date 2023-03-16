@@ -176,3 +176,10 @@ export const AddView = async (id) => {
     console.error(e.message);
   }
 };
+export const sendEmail = async (form) => {
+  try {
+    await axios.post(`http://localhost:7000/sendEmail`, form);
+  } catch (e) {
+    console.log(e);
+  }
+};
