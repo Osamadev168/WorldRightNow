@@ -36,7 +36,7 @@ const ContactHome = () => {
                 </svg>
               </a>
             </div> */}
-            <a className="primaryButton" href="/blogs">
+            <a className="primaryButton" href="/contact">
               Contact us
             </a>
           </div>

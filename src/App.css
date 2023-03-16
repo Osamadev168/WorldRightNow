@@ -965,7 +965,34 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.imageAuthorName .blogCategory {
+  color: #fc2c7e;
+  font-weight: 600;
+}
+
+.shareAndImageWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 15px;
+}
+.shareAndImageWrapper .shareIcons {
+  display: flex;
+  gap: 25px;
+}
+.shareAndImageWrapper .shareIcons .shareButton {
+  cursor: pointer;
+  border: 1px solid #5f5f5f;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.shareAndImageWrapper .shareIcons .shareButton:hover {
+  background-color: rgba(0, 0, 0, 0.0588235294);
 }
 
 .auhtorImage {
@@ -2390,6 +2417,13 @@ body {
     height: 100px;
   }
 }
+@media only screen and (max-width: 480px) {
+  .shareAndImageWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
 @media only screen and (max-width: 425px) {
   .heroContainer .mainContainerBanner {
     margin-top: 80px;
@@ -2551,5 +2585,14 @@ body {
   }
   .loginsignuptoggle {
     font-size: 17px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .heroContainer .mainContainerBanner .bannerdiv1 .text1banner {
+    font-size: 2rem;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 .text2banner {
+    font-size: 14px;
+    line-height: 22px;
   }
 }/*# sourceMappingURL=App.css.map */
