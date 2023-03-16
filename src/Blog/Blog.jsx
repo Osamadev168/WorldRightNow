@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { author_blogs, getBlog, submitComment } from "../Api/Api";
-import profilepic from "../../assets/profilepic.jpg";
+import profilepic from "../../assets/avatar.svg";
 import image from "../../assets/1.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBlogsfromTag } from "../Api/Api";
-import profilepic from "../../assets/profilepic.jpg";
 import image from "../../assets/1.jpg";
 import { Helmet } from "react-helmet";
 

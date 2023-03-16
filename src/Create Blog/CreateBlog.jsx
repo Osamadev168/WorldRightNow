@@ -114,7 +114,6 @@ const CreateBlog = () => {
             </label>
           </div>
         </div>
-        <div></div>
         <div className="createblogformcontainer">
           <textarea
             value={blog.description}
@@ -142,7 +141,9 @@ const CreateBlog = () => {
           </div>
         </div>
         <div className="createblogformcontainer">
-          <h4 className="createblogbodytext">Body</h4>
+          <label className="createblogbodytext" htmlFor="blogBody">
+            Body
+          </label>
           <CKEditor
             data={blog.body}
             editor={ClassicEditor}
@@ -308,7 +309,9 @@ const CreateBlog = () => {
         </div>
         <div className="createblogformcontainer tagssectioncontainer">
           <div className="container1">
-            <h4 className="createblogbodytext">Add Tags</h4>
+            <label className="createblogbodytext" htmlFor="addTags">
+              Add Tags
+            </label>
             <input
               className="titleinput tagsinput"
               value={value}
@@ -319,6 +322,7 @@ const CreateBlog = () => {
               }}
               onKeyDown={handleEnterPress}
               maxLength={20}
+              id="addTags"
             />
             <div className="hintcontainer">
               <label className="labelcreateblog">

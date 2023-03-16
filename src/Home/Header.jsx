@@ -66,9 +66,6 @@ const Header = () => {
           style={{ listStyle: "none" }}
         >
           <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
             <a href="/">About us</a>
           </li>
           <li>
@@ -81,7 +78,7 @@ const Header = () => {
             <a href="/">FAQ's</a>
           </li>
           <li>
-            <a href="/">Contact us</a>
+            <a href="/contact">Contact us</a>
           </li>
         </ul>
       </div>
@@ -155,7 +152,7 @@ const Header = () => {
 function DropdownItem(props) {
   return (
     <li className="dropdownitem" onClick={props.link}>
-      <img src={props.image} />
+      <img src={props.image} alt="icon" />
       <p>{props.text}</p>
     </li>
   );

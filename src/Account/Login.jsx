@@ -70,7 +70,7 @@ export const Signup = ({
       </div>
       <div className="formContainer">
         <div className="email">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
             className="input"
             onChange={(e) => setEmail(e.target.value)}
@@ -79,21 +79,23 @@ export const Signup = ({
             required
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             placeholder="example@domain.com"
+            id="email"
           />
         </div>
         <div className="email">
-          <label>Username</label>
+          <label htmlFor="username">Username</label>
           <input
             className="input"
             onChange={(e) => setUserName(e.target.value)}
             type="text"
-            name="text"
+            name="name"
             placeholder="Username"
+            id="username"
           />
         </div>
 
         <div className="email">
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             className="input"
             onChange={(e) => setPassword(e.target.value)}
@@ -102,10 +104,11 @@ export const Signup = ({
             required
             minlength="8"
             placeholder="Enter your password"
+            id="password"
           />
         </div>
         <div className="email">
-          <label>Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             className="input"
             onChange={(e) => setconfrimPassword(e.target.value)}
@@ -114,37 +117,48 @@ export const Signup = ({
             required
             minlength="8"
             placeholder="Confirm your password"
+            id="confirmPassword"
           />
         </div>
 
-        <div
+        <button
           className="primaryButton loginButton"
           onClick={createAccountwithEmailandPassword}
+          type="submit"
         >
-          {laoding ? <span className="loader"></span> : <h1>Sign Up</h1>}
-        </div>
+          {laoding ? <span className="loader"></span> : "Sign up"}
+        </button>
         <div className="or">
           <div className="orline"></div>
           <p>OR</p>
           <div className="orline"></div>
         </div>
-        <div className="facebookButton" onClick={loginwithFacebook}>
+        <button
+          className="facebookButton"
+          onClick={loginwithFacebook}
+          type="button"
+        >
           <img src={fbicon} />
-          <a>Continue with Facebook</a>
-        </div>
-        <div className="facebookButton" onClick={loginwithGoogle}>
+          Continue with Facebook
+        </button>
+        <button
+          className="facebookButton"
+          onClick={loginwithGoogle}
+          type="button"
+        >
           <img src={googleicon} />
-          <a>Continue with Google</a>
-        </div>
+          Continue with Google
+        </button>
         <div className="loginsignuptoggle">
-          <a className="signupaccount">Already have an account? &nbsp;</a>
-          <a
+          <p className="signupaccount">Already have an account? &nbsp;</p>
+          <button
             className="signuptext"
             onClick={() => setActive("login")}
             style={{ textDecoration: "underline" }}
+            type="button"
           >
             Login
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -251,7 +265,7 @@ export const Login = ({
       </div>
       <div className="formContainer">
         <div className="email">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
             className="input"
             onChange={(e) => setEmail(e.target.value)}
@@ -260,10 +274,11 @@ export const Login = ({
             required
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             placeholder="example@domain.com"
+            id="email"
           />
         </div>
         <div className="email">
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             className="input"
             onChange={(e) => setPassword(e.target.value)}
@@ -272,39 +287,54 @@ export const Login = ({
             required
             minlength="8"
             placeholder="Enter your password"
+            id="password"
           />
-          <div onClick={resetPassword}>
-            <h1 className="forgetPassword">Forget password?</h1>
-          </div>
+          <button
+            onClick={resetPassword}
+            className="forgetPassword"
+            type="button"
+          >
+            Forgot password?
+          </button>
         </div>
-        <div
+        <button
           className="primaryButton loginButton"
           onClick={loginwithEmailPassword}
+          type="submit"
         >
-          {loading ? <span className="loader"></span> : <h1>Login</h1>}
-        </div>
+          {loading ? <span className="loader"></span> : "Login"}
+        </button>
         <div className="or">
           <div className="orline"></div>
           <p>OR</p>
           <div className="orline"></div>
         </div>{" "}
-        <div className="facebookButton" onClick={loginwithFacebook}>
+        <button
+          className="facebookButton"
+          onClick={loginwithFacebook}
+          type="button"
+        >
           <img src={fbicon} />
-          <a>Continue with Facebook</a>
-        </div>
-        <div className="facebookButton" onClick={loginwithGoogle}>
+          Continue with Facebook
+        </button>
+        <button
+          className="facebookButton"
+          onClick={loginwithGoogle}
+          type="button"
+        >
           <img src={googleicon} />
-          <a>Continue with Google</a>
-        </div>
+          Continue with Google
+        </button>
         <div className="loginsignuptoggle">
-          <a className="signupaccount">Don't have an account? &nbsp;</a>
-          <a
+          <p className="signupaccount">Don't have an account? &nbsp;</p>
+          <button
             className="signuptext"
             onClick={() => setActive("singup")}
             style={{ textDecoration: "underline" }}
+            type="button"
           >
             Sign Up
-          </a>
+          </button>
         </div>
       </div>
     </div>

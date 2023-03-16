@@ -19,6 +19,7 @@ import Blogs from "./Blog/Blogs";
 import { Helmet } from "react-helmet";
 import Search from "./Blog/Search";
 import SearchBlog from "./Create Blog/SearchBog";
+import Contact from "./Contact us/contact";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -156,6 +157,16 @@ const App = () => {
                 <Header />
                 <AllBlogs />
                 <FooterContainer />
+              </Wrapper>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <Wrapper>
+                <Header />
+                <Contact />
+                <Footer />
               </Wrapper>
             }
           />
