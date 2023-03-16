@@ -6,8 +6,6 @@ import Popular from "./Popular";
 import Hero from "./hero";
 import FooterContainer from "./FooterContainer.jsx";
 import { useEffect } from "react";
-import { useContext } from "react";
-import { UserContext } from "../Context/Context.jsx";
 import { Helmet } from "react-helmet";
 const Home = () => {
   useEffect(() => {

@@ -81,16 +81,15 @@ const LatestPosts = ({ category }) => {
                   let displayDate = `${displayMonth},${displayYear}`;
                   let title = posts.title;
                   title = title.replace(/\s+/g, "-");
-
                   return (
                     <a
                       href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
                         posts._id
                       }`}
+                      key={index}
                     >
                       <div
                         className="PopularCard"
-                        key={index}
                         onClick={() => AddView(posts._id)}
                       >
                         <img

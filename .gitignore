@@ -9,6 +9,8 @@ lerna-debug.log*
 Firebase
 ckeditor
 node_modules
+.firebaserc
+firebase.json
 dist
 dist-ssr
 *.local

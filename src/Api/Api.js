@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:7000";
+const url = "https://server-blog-production.up.railway.app";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
