@@ -1,6 +1,30 @@
+import { useState } from "react";
+import { sendEmail } from "../Api/Api";
 import "../App.css";
 
 const Contact = () => {
+  const defaultValuesForm = {
+    name: "",
+    message: "",
+    email: "",
+  };
+  const [error, setError] = useState("");
+  const [form, setForm] = useState(defaultValuesForm);
+  const [loading, setLoading] = useState(false);
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [message, setMessage] = useState("");
+  const send_Email = () => {
+    setLoading(true);
+    sendEmail(form).then((res) => {
+      setLoading(false);
+      setError("Please provide a valid email address");
+      setError(false);
+      if (!res) {
+        setError("invaLid Email");
+      }
+    });
+  };
   return (
     <div className="mainLoginContainer paddingtop">
       <h1 className="loginText">Contact us</h1>
@@ -13,6 +37,7 @@ const Contact = () => {
             id="username"
             className="input"
             placeholder="What should we call you?"
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
         </div>
         <div className="email">
@@ -23,6 +48,7 @@ const Contact = () => {
             id="email"
             className="input"
             placeholder="example@domain.com"
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
         </div>
         <div className="email">
@@ -33,11 +59,23 @@ const Contact = () => {
             id="message"
             className="input message"
             placeholder="I want to collaborate..."
+            onChange={(e) => setForm({ ...form, message: e.target.value })}
           />
         </div>
-        <button type="submit" className="primaryButton loginButton">
-          Submit
-        </button>
+        {!error ? <></> : <p>{error}</p>}
+        {loading ? (
+          <div className="primaryButton loginButton">
+            <span className="loader"></span>
+          </div>
+        ) : (
+          <button
+            // type="submit"
+            className="primaryButton loginButton"
+            onClick={send_Email}
+          >
+            Submit
+          </button>
+        )}
       </div>
     </div>
   );

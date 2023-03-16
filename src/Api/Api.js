@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:7000";
+const url = "https://server-blog-production.up.railway.app";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
@@ -174,5 +174,13 @@ export const AddView = async (id) => {
     await axios.post(`${url}/post/${id}`);
   } catch (e) {
     console.error(e.message);
+  }
+};
+export const sendEmail = async (form) => {
+  try {
+    let response = await axios.post(`http://localhost:7000/sendEmail`, form);
+    return response;
+  } catch (e) {
+    console.log(e.message);
   }
 };

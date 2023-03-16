@@ -1,5 +1,4 @@
 import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home/Home.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Account/Login.jsx";
@@ -15,10 +14,8 @@ import { useEffect, useState } from "react";
 import BlogTag from "./Blog/BlogTag";
 import AllBlogs from "./All Blogs/AllBlogs";
 import Dashboard from "./Dashboards/Dashboard";
-import Blogs from "./Blog/Blogs";
 import { Helmet } from "react-helmet";
-import Search from "./Blog/Search";
-import SearchBlog from "./Create Blog/SearchBog";
+
 import Contact from "./Contact us/contact";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
@@ -44,7 +41,7 @@ const App = () => {
       <BrowserRouter>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>My Title</title>
+          <title>HubbleFeed</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <Routes>
@@ -95,18 +92,6 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
-          <Route
-            path="/blog/search"
-            element={
-              <ProtectedRoutes>
-                <Wrapper>
-                  <Header />
-                  <Search />
-                  <Footer />
-                </Wrapper>
-              </ProtectedRoutes>
-            }
-          />
 
           <Route
             path="/dashboard"
@@ -140,16 +125,7 @@ const App = () => {
               </Wrapper>
             }
           />
-          <Route
-            path="/blogs"
-            element={
-              <Wrapper>
-                <Header />
-                <AllBlogs />
-                <FooterContainer />
-              </Wrapper>
-            }
-          />
+
           <Route
             path="/all/blogs"
             element={
