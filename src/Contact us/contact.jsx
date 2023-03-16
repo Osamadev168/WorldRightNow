@@ -8,6 +8,7 @@ const Contact = () => {
     message: "",
     email: "",
   };
+  const [error, setError] = useState("");
   const [form, setForm] = useState(defaultValuesForm);
   const [loading, setLoading] = useState(false);
   // const [name, setName] = useState("");
@@ -15,8 +16,13 @@ const Contact = () => {
   // const [message, setMessage] = useState("");
   const send_Email = () => {
     setLoading(true);
-    sendEmail(form).then(() => {
+    sendEmail(form).then((res) => {
       setLoading(false);
+      setError("Please provide a valid email address");
+      setError(false);
+      if (!res) {
+        setError("invaLid Email");
+      }
     });
   };
   return (
@@ -56,13 +62,14 @@ const Contact = () => {
             onChange={(e) => setForm({ ...form, message: e.target.value })}
           />
         </div>
+        {!error ? <></> : <p>{error}</p>}
         {loading ? (
           <div className="primaryButton loginButton">
             <span className="loader"></span>
           </div>
         ) : (
           <button
-            type="submit"
+            // type="submit"
             className="primaryButton loginButton"
             onClick={send_Email}
           >
