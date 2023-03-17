@@ -178,7 +178,7 @@ export const AddView = async (id) => {
 };
 export const sendEmail = async (form) => {
   try {
-    let response = await axios.post(`http://localhost:7000/sendEmail`, form);
+    let response = await axios.post(`${url}/sendEmail`, form);
     return response;
   } catch (e) {
     console.log(e.message);

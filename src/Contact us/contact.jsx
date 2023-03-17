@@ -11,17 +11,16 @@ const Contact = () => {
   const [error, setError] = useState("");
   const [form, setForm] = useState(defaultValuesForm);
   const [loading, setLoading] = useState(false);
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [message, setMessage] = useState("");
   const send_Email = () => {
     setLoading(true);
     sendEmail(form).then((res) => {
       setLoading(false);
       setError("Please provide a valid email address");
       setError(false);
+      setForm(defaultValuesForm);
       if (!res) {
         setError("invaLid Email");
+        setForm(defaultValuesForm);
       }
     });
   };
