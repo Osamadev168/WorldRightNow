@@ -3,12 +3,15 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { author_blogs, getBlog, submitComment } from "../Api/Api";
 import profilepic from "../../assets/avatar.svg";
-import image from "../../assets/1.jpg";
 import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
-import { CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
 //Share Icons
 import facebookIcon from "../../assets/facebook-Icon.svg";
 import twitterIcon from "../../assets/twitterIcon.svg";
@@ -88,16 +91,44 @@ const Blog = () => {
                     <p className="blogCategory">{blog.category}</p>
                   </div>
                   <div className="shareIcons">
-                    <button className="shareButton" type="button">
-                      <img src={facebookIcon} alt="facebook-icon" />
-                    </button>
-                    <button className="shareButton" type="button">
-                      <img src={twitterIcon} alt="facebook-icon" />
-                    </button>
-                    <button className="shareButton" type="button">
-                      <img src={whatsappIcon} alt="facebook-icon" />
-                    </button>
-                    <button className="shareButton" type="button">
+                    <FacebookShareButton
+                      url={window.location.href}
+                      quote={`${blog.title}, ${blog.description}`}
+                    >
+                      <button className="shareButton" type="button">
+                        <img src={facebookIcon} alt="facebook-icon" />
+                      </button>
+                    </FacebookShareButton>
+
+                    <TwitterShareButton
+                      url={window.location.href}
+                      title={blog.title}
+                      via={blog.description}
+                    >
+                      <button className="shareButton" type="button">
+                        <img src={twitterIcon} alt="facebook-icon" />
+                      </button>
+                    </TwitterShareButton>
+                    <WhatsappShareButton
+                      url={window.location.href}
+                      title={blog.title}
+                      separator={blog.description}
+                    >
+                      <button className="shareButton" type="button">
+                        <img src={whatsappIcon} alt="facebook-icon" />
+                      </button>
+                    </WhatsappShareButton>
+                    <button
+                      className="shareButton"
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText(window.location.href)
+                          .then(() => {
+                            alert("Link Copied to Clipboard");
+                          });
+                      }}
+                    >
                       <img src={shareIcon} alt="facebook-icon" />
                     </button>
                   </div>
