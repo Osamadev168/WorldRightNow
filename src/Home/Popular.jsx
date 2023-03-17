@@ -96,7 +96,7 @@ const Popular = ({ category }) => {
                         />
 
                         <div className="title">
-                          <h1 className="blogstitle">{blog.category}</h1>
+                          <h1 className="blogtitle">{blog.category}</h1>
                           <div className="info">
                             <p>{displayDate}</p>
 
