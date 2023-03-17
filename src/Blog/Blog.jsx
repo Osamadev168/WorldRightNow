@@ -9,6 +9,11 @@ import { useContext } from "react";
 import { UserContext } from "../Context/Context";
 import { CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
+//Share Icons
+import facebookIcon from "../../assets/facebook-Icon.svg";
+import twitterIcon from "../../assets/twitterIcon.svg";
+import whatsappIcon from "../../assets/whatsappIcon.svg";
+import shareIcon from "../../assets/shareIcon.svg";
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [loading, setLoading] = useState(false);
@@ -71,14 +76,33 @@ const Blog = () => {
               <div className="titleandDescriptionImage">
                 <h1 className="blogTitle">{blog.title}</h1>
                 <p className="blogDescription">{blog.description}</p>
-                <div className="imageAuthorName">
-                  <img
-                    src={blog.authorImage}
-                    className="auhtorImage"
-                    alt="author_image"
-                  />
-                  <p className="authorName">{blog.author}</p>
+                <div className="shareAndImageWrapper">
+                  <div className="imageAuthorName">
+                    <img
+                      src={blog.authorImage}
+                      className="auhtorImage"
+                      alt="author_image"
+                    />
+                    <p className="authorName">{blog.author}</p>
+                    <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
+                    <p className="blogCategory">{blog.category}</p>
+                  </div>
+                  <div className="shareIcons">
+                    <button className="shareButton" type="button">
+                      <img src={facebookIcon} alt="facebook-icon" />
+                    </button>
+                    <button className="shareButton" type="button">
+                      <img src={twitterIcon} alt="facebook-icon" />
+                    </button>
+                    <button className="shareButton" type="button">
+                      <img src={whatsappIcon} alt="facebook-icon" />
+                    </button>
+                    <button className="shareButton" type="button">
+                      <img src={shareIcon} alt="facebook-icon" />
+                    </button>
+                  </div>
                 </div>
+
                 <img
                   className="blogImage"
                   src={blog.image}
