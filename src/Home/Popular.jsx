@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material";
 const Popular = ({ category }) => {
   const [blogs, setBlogs] = useState([]);
   const [laoding, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const sliderRef = useRef(null);
   const settings = {
     dots: false,
@@ -47,6 +48,10 @@ const Popular = ({ category }) => {
     fetchDataPopular(category, 0, 10).then((res) => {
       setBlogs(res.data);
       setLoading(false);
+      if (res.data.length === 0) {
+        setLoading(false);
+        setMessage("No Data Available!");
+      }
     });
   };
   useEffect(() => {
@@ -61,76 +66,75 @@ const Popular = ({ category }) => {
           <h3>Popular in {category}</h3>
         )}
       </div>
+
       {laoding ? (
         <span className="loader"></span>
       ) : (
-        <>
-          {blogs.length === 0 ? (
-            <CircularProgress role="progressbar" />
-          ) : (
-            <Slider {...settings} ref={sliderRef} className="slider">
-              {blogs && blogs.length > 0 ? (
-                blogs.map((blog, index) => {
-                  let wordsPerMinute = 250;
-                  let noOfWords = blog.body.split(" ").length;
-                  let readingTime = noOfWords / wordsPerMinute;
-                  let round = Math.floor(readingTime);
-                  let date = new Date(blog.CreatedAt).toDateString();
-                  let displayMonth = date.substring(4, 10);
-                  let displayYear = date.substring(10);
-                  let displayDate = `${displayMonth},${displayYear}`;
-                  let title = blog.title;
-                  title = title.replace(/\s+/g, "-");
-                  return (
-                    <a href={`/blogs/${title}/${blog._id}`} key={index}>
-                      <div
-                        className="PopularCard"
-                        onClick={() => AddView(blog._id)}
-                      >
-                        <img
-                          src={blog.image}
-                          className="image"
-                          loading="lazy"
-                          alt="blog_Image"
-                          placeholder="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmuma.ir%2Fwp-content%2Fuploads%2F2022%2F11%2F%3FND&psig=AOvVaw3RQQy1z2uVtTtbXR6VV5Ve&ust=1678208652683000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNj2rsfkx_0CFQAAAAAdAAAAABAE"
-                        />
+        <Slider {...settings} ref={sliderRef} className="slider">
+          {blogs && blogs.length > 0 ? (
+            blogs.map((blog, index) => {
+              let wordsPerMinute = 250;
+              let noOfWords = blog.body.split(" ").length;
+              let readingTime = noOfWords / wordsPerMinute;
+              let round = Math.floor(readingTime);
+              let date = new Date(blog.CreatedAt).toDateString();
+              let displayMonth = date.substring(4, 10);
+              let displayYear = date.substring(10);
+              let displayDate = `${displayMonth},${displayYear}`;
+              let title = blog.title;
+              title = title.replace(/\s+/g, "-");
+              return (
+                <a
+                  href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
+                    blog._id
+                  }`}
+                  key={index}
+                >
+                  <div
+                    className="PopularCard"
+                    onClick={() => AddView(blog._id)}
+                  >
+                    <img
+                      src={blog.image}
+                      className="image"
+                      loading="lazy"
+                      alt="blog_Image"
+                      placeholder="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmuma.ir%2Fwp-content%2Fuploads%2F2022%2F11%2F%3FND&psig=AOvVaw3RQQy1z2uVtTtbXR6VV5Ve&ust=1678208652683000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNj2rsfkx_0CFQAAAAAdAAAAABAE"
+                    />
 
-                        <div className="title">
-                          <h1 className="blogtitle">{blog.category}</h1>
-                          <div className="info">
-                            <p>{displayDate}</p>
+                    <div className="title">
+                      <h1 className="blogtitle">{blog.category}</h1>
+                      <div className="info">
+                        <p>{displayDate}</p>
 
-                            <p>&nbsp;|&nbsp;</p>
-                            {round <= 0 ? (
-                              <p>Quick read</p>
-                            ) : (
-                              <p>{round} mins read</p>
-                            )}
-                            <p>&nbsp;|&nbsp;</p>
-                            {round <= 0 ? (
-                              <p>Quick read</p>
-                            ) : (
-                              <p>{round}mins read</p>
-                            )}
-                          </div>
-                        </div>
-                        <div className="description">
-                          <p className="blogtitle">{blog.title}</p>
-                          <p className="data">{blog.description}</p>
-                        </div>
+                        <p>&nbsp;|&nbsp;</p>
+                        {round <= 0 ? (
+                          <p>Quick read</p>
+                        ) : (
+                          <p>{round} mins read</p>
+                        )}
+                        <p>&nbsp;|&nbsp;</p>
+                        {round <= 0 ? (
+                          <p>Quick read</p>
+                        ) : (
+                          <p>{round}mins read</p>
+                        )}
                       </div>
-                    </a>
-                  );
-                })
-              ) : (
-                <div>
-                  <span className="loader"></span>
-                </div>
-              )}
-            </Slider>
+                    </div>
+                    <div className="description">
+                      <p className="blogtitle">{blog.title}</p>
+                      <p className="data">{blog.description}</p>
+                    </div>
+                  </div>
+                </a>
+              );
+            })
+          ) : (
+            <p>{message}</p>
           )}
-        </>
+        </Slider>
       )}
+
       <div className="sliderButtons">
         <div
           className="prevButton"

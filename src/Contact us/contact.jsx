@@ -9,18 +9,20 @@ const Contact = () => {
     email: "",
   };
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [form, setForm] = useState(defaultValuesForm);
   const [loading, setLoading] = useState(false);
   const send_Email = () => {
     setLoading(true);
     sendEmail(form).then((res) => {
       setLoading(false);
-      setError("Please provide a valid email address");
       setError(false);
       setForm(defaultValuesForm);
+      setMessage("Email Sent!");
       if (!res) {
-        setError("invaLid Email");
         setForm(defaultValuesForm);
+        setError("InvaLid Email");
+        setMessage("");
       }
     });
   };
@@ -35,6 +37,7 @@ const Contact = () => {
             name="name"
             id="username"
             className="input"
+            value={form.name}
             placeholder="What should we call you?"
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
@@ -45,6 +48,7 @@ const Contact = () => {
             type="email"
             name="email"
             id="email"
+            value={form.email}
             className="input"
             placeholder="example@domain.com"
             onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -55,6 +59,7 @@ const Contact = () => {
           <textarea
             type="text"
             name="message"
+            value={form.message}
             id="message"
             className="input message"
             placeholder="I want to collaborate..."
@@ -62,6 +67,8 @@ const Contact = () => {
           />
         </div>
         {!error ? <></> : <p>{error}</p>}
+        {!message ? <></> : <p>{message}</p>}
+
         {loading ? (
           <div className="primaryButton loginButton">
             <span className="loader"></span>

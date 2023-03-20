@@ -1,6 +1,6 @@
 import axios from "axios";
-const url = "http://localhost:7000";
-// "https://server-blog-production.up.railway.app" ||
+const url = "https://server-blog-production.up.railway.app";
+// const url = "http://localhost:7000";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
@@ -137,12 +137,12 @@ export const author_blogs = async (author) => {
 };
 export const UpdateUserData = async (user, uid, displayName, photoURL) => {
   try {
-    await axios.put(`http://localhost:7000/blog/update`, {
+    await axios.put(`${url}/blog/update`, {
       authorId: uid,
       authorName: displayName,
       authorImage: user && photoURL,
     });
-    await axios.post("http://localhost:7000/blog/update/comments", {
+    await axios.post(`${url}/blog/update/comments`, {
       authorId: uid,
       authorName: displayName,
       authorImage: user && photoURL,

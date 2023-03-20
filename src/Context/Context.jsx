@@ -7,14 +7,18 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [token, setToken] = useState("");
+  const [loading, setLoading] = useState(false);
   const auth = getAuth(app);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      setLoading(true);
       currentUser.getIdToken(true).then(async (token) => {
+        setLoading(true);
         setToken(token);
         UserStatus(token).then((res) => {
           setAdmin(res.data);
+          setLoading(false);
         });
       });
 
@@ -28,7 +32,7 @@ const ContextProvider = ({ children }) => {
     };
   }, [user]);
   return (
-    <UserContext.Provider value={{ user, admin, token }}>
+    <UserContext.Provider value={{ user, admin, token, loading }}>
       {children}
     </UserContext.Provider>
   );

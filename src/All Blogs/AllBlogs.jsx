@@ -248,9 +248,9 @@ const AllBlogs = () => {
           name="description"
           content="Explore whats happening around you"
         />
-        <title>Blogs | Hubble Feed</title>
+        <title>Blogs|Hubble Feed</title>
 
-        <link rel="canonical" href="/all/blogs" />
+        <link rel="canonical" href="https://www.hubblefeed.com/all/blogs" />
       </Helmet>
       <div className="AllBlogsContainer paddingtop">
         <Slider {...settings} ref={sliderRef} className="slider">

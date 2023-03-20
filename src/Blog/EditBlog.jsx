@@ -34,15 +34,17 @@ const CreateBlog = () => {
     upload_Image(data).then((res) => {
       setBlog({ ...blog, image: res.data.url });
       setImage(res.data.url);
-      sessionStorage.setItem("image", res.data.url);
       setProgress(false);
     });
   };
   const getBlogData = () => {
     getBlogData_Update(blog_id, token).then((res) => {
       if (res) {
+        setBlog({ ...blog, tags: res.data[0].tags });
         setBlog(res.data[0]);
+
         setTags(res.data[0].tags);
+        setImage(res.data[0].image);
       }
     });
   };
@@ -60,7 +62,7 @@ const CreateBlog = () => {
   };
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value) {
-      setTags([...tags, value.toLowerCase().replace(/\s+/g, "-")]);
+      setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setData(false);
       setRefresh(!refresh);
@@ -73,7 +75,6 @@ const CreateBlog = () => {
       getBlogData();
     }
     setBlog({ ...blog, tags: tags });
-    setImage(sessionStorage.getItem("image"));
     if (file) {
       uploadImage();
     }
@@ -160,6 +161,40 @@ const CreateBlog = () => {
                 "Redo",
                 "MediaEmbed",
               ],
+              link: {
+                decorators: {
+                  isExternal: {
+                    mode: "manual",
+                    label: "noopener noreferrer",
+                    callback: (url) => url.startsWith("http://"),
+                    attributes: {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    },
+                  },
+
+                  isNofollow: {
+                    mode: "manual",
+                    label: "nofollow",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "nofollow",
+                    },
+                  },
+                  Sponsored: {
+                    mode: "manual",
+                    label: "Sponsored",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "sponsored",
+                    },
+                  },
+                },
+              },
             }}
           />
           <label className="labelcreateblog">
@@ -410,28 +445,25 @@ const CreateBlog = () => {
                   setProgress(true);
                 }}
               />
-              {blog && blog.image !== "" ? (
-                <img src={blog.image} className="imagecontainer" />
-              ) : (
-                <>
-                  <p className="uploadimagetext">Select Image</p>
-                  <svg
+              <img src={image} className="imagecontainer" />
+              <>
+                <p className="uploadimagetext">Select Image</p>
+                <svg
+                  width="100%"
+                  height="100%"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
                     width="100%"
                     height="100%"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      width="100%"
-                      height="100%"
-                      rx="20"
-                      stroke="black"
-                      stroke-dasharray="20 20"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </>
-              )}
+                    rx="20"
+                    stroke="black"
+                    stroke-dasharray="20 20"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </>
             </div>
           )}
         </div>
@@ -441,10 +473,9 @@ const CreateBlog = () => {
           onClick={submitBlog}
         >
           {progress ? (
-            <CircularProgress />
+            <span className="loader"></span>
           ) : (
             <>
-              {" "}
               <h1>Update</h1>
               <img src={Send} />
             </>

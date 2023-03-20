@@ -57,13 +57,17 @@ const Blog = () => {
   let displayMonth = date.substring(4, 10);
   let displayYear = date.substring(10);
   let displayDate = `${displayMonth},${displayYear}`;
+
   return (
     <>
       <div className="blogMainContainer paddingtop">
         <Helmet>
           <meta charSet="utf-8" name="description" content={blog.description} />
           <title>{blog && blog.title}</title>
-          <link rel="canonical" href="http://mysite.com/example" />
+          <link
+            rel="canonical"
+            href={`https://www.hubblefeed.com/blog/${blog.title}/${blog._id}`}
+          />
         </Helmet>
 
         <div className="blogLeft">
@@ -113,6 +117,8 @@ const Blog = () => {
                       src={blog.authorImage}
                       className="auhtorImage"
                       alt="author_image"
+                      width={30}
+                      height={30}
                     />
                     <p className="authorName">{blog.author}</p>
                     <p>&nbsp; &nbsp; &gt; &nbsp; &nbsp;</p>
@@ -124,7 +130,12 @@ const Blog = () => {
                       quote={`${blog.title}, ${blog.description}`}
                     >
                       <button className="shareButton" type="button">
-                        <img src={facebookIcon} alt="facebook-icon" />
+                        <img
+                          src={facebookIcon}
+                          alt="facebook-icon"
+                          width={20}
+                          height={20}
+                        />
                       </button>
                     </FacebookShareButton>
 
@@ -134,7 +145,12 @@ const Blog = () => {
                       via={blog.description}
                     >
                       <button className="shareButton" type="button">
-                        <img src={twitterIcon} alt="facebook-icon" />
+                        <img
+                          src={twitterIcon}
+                          alt="facebook-icon"
+                          width={20}
+                          height={20}
+                        />
                       </button>
                     </TwitterShareButton>
                     <WhatsappShareButton
@@ -143,7 +159,12 @@ const Blog = () => {
                       separator={blog.description}
                     >
                       <button className="shareButton" type="button">
-                        <img src={whatsappIcon} alt="facebook-icon" />
+                        <img
+                          src={whatsappIcon}
+                          alt="facebook-icon"
+                          width={20}
+                          height={20}
+                        />
                       </button>
                     </WhatsappShareButton>
                     <button
@@ -153,11 +174,16 @@ const Blog = () => {
                         navigator.clipboard
                           .writeText(window.location.href)
                           .then(() => {
-                            alert("Link Copied to Clipboard");
+                            alert("Link Copied to Clipboard!");
                           });
                       }}
                     >
-                      <img src={shareIcon} alt="facebook-icon" />
+                      <img
+                        src={shareIcon}
+                        alt="facebook-icon"
+                        width={20}
+                        height={20}
+                      />
                     </button>
                   </div>
                 </div>
@@ -168,10 +194,11 @@ const Blog = () => {
                   style={{
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    width: "100%",
-                    height: "450px",
                   }}
                   alt="blog_image"
+                  width="100%"
+                  height={450}
+                  loading="lazy"
                 />
               </div>
 
@@ -231,6 +258,7 @@ const Blog = () => {
                         className="blogImage"
                         src={blog.image}
                         alt="author_blog_image"
+                        loading="lazy"
                       />
                     </div>
                   );
