@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getBlogsfromTag } from "../Api/Api";
-import image from "../../assets/1.jpg";
 import { Helmet } from "react-helmet";
 
 const BlogTag = () => {
   const [blogs, setBlogs] = useState([]);
   const [tags, setTags] = useState([]);
-  const navigate = useNavigate();
   const params = useParams();
   const tag = params.tags;
   const getData = () => {
@@ -34,7 +32,7 @@ const BlogTag = () => {
           content={`Explore a wealth of information on ${tag} with [Website Name]. Our curated collection of articles and blog posts provides insights and expertise on all aspects of ${tag}. Stay up-to-date with the latest trends and ideas in ${tag} by browsing our comprehensive resources today.`}
         />
         <title>Explore</title>
-        <link rel="canonical" href="http://mysite.com/example" />
+        <link rel="canonical" href={`https://www.hubblefeed.com/blog/${tag}`} />
       </Helmet>
       <h4 className="blogsContaining">
         Blogs Containing

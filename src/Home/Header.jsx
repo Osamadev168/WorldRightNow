@@ -59,7 +59,7 @@ const Header = () => {
             cursor: "pointer",
           }}
         >
-          Logo
+          Hubble Feed
         </p>
         <ul
           className={`div2Header ${isOpen ? "menuOpened" : "menuclosed"}`}

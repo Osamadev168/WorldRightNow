@@ -1,6 +1,6 @@
 import axios from "axios";
-const url =
-  "https://server-blog-production.up.railway.app" || "http://localhost:7000";
+const url = "https://server-blog-production.up.railway.app";
+// const url = "http://localhost:7000";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
@@ -112,17 +112,17 @@ export const getBlogsfromTag = async (tag) => {
     console.error(e.message);
   }
 };
-export const getBlogData_Update = async (id) => {
+export const getBlogData_Update = async (id, token) => {
   try {
-    let response = await axios.get(`${url}/blog/data/${id}`);
+    let response = await axios.get(`${url}/blog/data/${id}/${token}`);
     return response;
   } catch (e) {
     console.error(e.message);
   }
 };
-export const edit_Blog = async (id, blog) => {
+export const edit_Blog = async (id, blog, token) => {
   try {
-    await axios.put(`${url}/blog/update/${id}`, blog);
+    await axios.put(`${url}/blog/update/${id}/${token}`, blog);
   } catch (e) {
     console.error(e.message);
   }
@@ -137,12 +137,12 @@ export const author_blogs = async (author) => {
 };
 export const UpdateUserData = async (user, uid, displayName, photoURL) => {
   try {
-    await axios.put(`http://localhost:7000/blog/update`, {
+    await axios.put(`${url}/blog/update`, {
       authorId: uid,
       authorName: displayName,
       authorImage: user && photoURL,
     });
-    await axios.post("http://localhost:7000/blog/update/comments", {
+    await axios.post(`${url}/blog/update/comments`, {
       authorId: uid,
       authorName: displayName,
       authorImage: user && photoURL,
