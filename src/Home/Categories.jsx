@@ -22,7 +22,7 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div2" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div2");
-            setCategory("Tech");
+            setCategory("Technology");
           }}
         >
           <div>Technology</div>
@@ -58,7 +58,7 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div6" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div6");
-            setCategory("AI");
+            setCategory("Artificial Intelligence");
           }}
         >
           <div>Artificial Intelligence</div>

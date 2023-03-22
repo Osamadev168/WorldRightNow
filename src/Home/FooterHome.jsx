@@ -5,13 +5,13 @@ const Footer = () => {
   return (
     <div className="footerhome">
       <div className="footercontent">
-        <h1>LOGO</h1>
+        <h1>Hubble Feed</h1>
         <div className="div1footer">
           <a href="/">About us</a>
           <a href="/">Pricing</a>
-          <a href="/">Blogs</a>
+          <a href="/all/blogs">Blogs</a>
           <a href="/">FAQ's</a>
-          <a href="/">Contact us</a>
+          <a href="/contact">Contact us</a>
         </div>
       </div>
       <div className="div2footer">

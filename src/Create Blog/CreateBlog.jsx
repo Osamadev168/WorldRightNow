@@ -2,6 +2,8 @@ import Send from "../../assets/Send.svg";
 import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import { editorElement } from "@ckeditor/ckeditor5-react";
+
 import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
@@ -49,7 +51,6 @@ const CreateBlog = () => {
   };
   const submitBlog = async () => {
     setLoading(true);
-    console.log(blog.body);
     try {
       await submitPost(blog, token).then(async () => {
         setBlog(blogdefaultValues);
@@ -61,6 +62,7 @@ const CreateBlog = () => {
       alert(e.message);
       setLoading(false);
     }
+    console.log(blog.body);
   };
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value && tags.length < 10) {
@@ -147,9 +149,10 @@ const CreateBlog = () => {
           <CKEditor
             data={blog.body}
             editor={ClassicEditor}
-            onChange={(event, editor) =>
-              setBlog({ ...blog, body: editor.getData() })
-            }
+            onChange={(event, editor) => {
+              setBlog({ ...blog, body: editor.getData() }),
+                console.log(editor.getData());
+            }}
             config={{
               placeholder: "Start typing your blog post here...",
               mediaEmbed: { previewsInData: true },
@@ -167,6 +170,40 @@ const CreateBlog = () => {
                 "Redo",
                 "MediaEmbed",
               ],
+              link: {
+                decorators: {
+                  isExternal: {
+                    mode: "manual",
+                    label: "noopener noreferrer",
+                    callback: (url) => url.startsWith("http://"),
+                    attributes: {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    },
+                  },
+
+                  isNofollow: {
+                    mode: "manual",
+                    label: "nofollow",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "nofollow",
+                    },
+                  },
+                  Sponsored: {
+                    mode: "manual",
+                    label: "Sponsored",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "sponsored",
+                    },
+                  },
+                },
+              },
             }}
           />
           <label className="labelcreateblog">

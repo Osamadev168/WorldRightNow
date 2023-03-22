@@ -5,33 +5,15 @@ import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  edit_Blog,
-  getBlog,
-  getBlogData_Update,
-  upload_Image,
-} from "../Api/Api";
+import { edit_Blog, getBlogData_Update, upload_Image } from "../Api/Api";
 import "../App.css";
 const CreateBlog = () => {
-  const blogdefaultValues = {
-    title: "",
-    description: "",
-    body: "",
-    image: "",
-    category: "",
-    comments: [],
-    CreatedAt: new Date().toDateString,
-    author: "",
-    auhtorId: "",
-    approved: true,
-    tags: [],
-  };
   const [editBlog, setEditBlog] = useState({});
   const [tags, setTags] = useState([]);
-  const [data, setData] = useState(true);
-  document.title = "Create Blog";
+  document.title = "Update Blog";
   const [progress, setProgress] = useState(false);
   const [value, setValue] = useState("");
+  const [data, setData] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [char, setChar] = useState(0);
   const [charTags, setCharTags] = useState(0);
@@ -41,11 +23,8 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const inputFile = useRef(null);
-  const { user, admin } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   const navigate = useNavigate();
-  const setApproved = () => {
-    return admin ? true : false;
-  };
   const params = useParams();
   const blog_id = params.blogid;
   const uploadImage = async () => {
@@ -55,24 +34,27 @@ const CreateBlog = () => {
     upload_Image(data).then((res) => {
       setBlog({ ...blog, image: res.data.url });
       setImage(res.data.url);
-      sessionStorage.setItem("image", res.data.url);
+      setProgress(false);
     });
   };
   const getBlogData = () => {
-    getBlogData_Update(blog_id).then((res) => {
+    getBlogData_Update(blog_id, token).then((res) => {
       if (res) {
+        setBlog({ ...blog, tags: res.data[0].tags });
         setBlog(res.data[0]);
-        setTags(res.data.tags);
+
+        setTags(res.data[0].tags);
+        setImage(res.data[0].image);
       }
     });
   };
   const submitBlog = async () => {
+    setProgress(true);
     try {
-      setBlog({ ...blog, image: sessionStorage.getItem("image") });
-      await edit_Blog(blog_id, blog).then(() => {
+      await edit_Blog(blog_id, blog, token).then(() => {
         navigate("/dashboard");
-        setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
+        setProgress(false);
       });
     } catch (e) {
       alert(e.message);
@@ -80,7 +62,7 @@ const CreateBlog = () => {
   };
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value) {
-      setTags([...tags, value.toLowerCase().replace(/\s+/g, "-")]);
+      setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setData(false);
       setRefresh(!refresh);
@@ -93,11 +75,10 @@ const CreateBlog = () => {
       getBlogData();
     }
     setBlog({ ...blog, tags: tags });
-    setImage(sessionStorage.getItem("image"));
     if (file) {
       uploadImage();
     }
-  }, [file, data, refresh]);
+  }, [file, , data, refresh]);
 
   return (
     <div
@@ -110,7 +91,7 @@ const CreateBlog = () => {
       <div className="createbloginput">
         <div className="createblogformcontainer">
           <textarea
-            value={blog.title ? blog.title : blog.title}
+            value={blog.title}
             className="titleinput"
             placeholder="Title"
             maxLength={100}
@@ -118,9 +99,6 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 title: e.target.value,
-                author: user.displayName,
-                authorId: user.uid,
-                approved: setApproved(),
               });
               setChar(e.target.value.length);
             }}
@@ -183,6 +161,40 @@ const CreateBlog = () => {
                 "Redo",
                 "MediaEmbed",
               ],
+              link: {
+                decorators: {
+                  isExternal: {
+                    mode: "manual",
+                    label: "noopener noreferrer",
+                    callback: (url) => url.startsWith("http://"),
+                    attributes: {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    },
+                  },
+
+                  isNofollow: {
+                    mode: "manual",
+                    label: "nofollow",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "nofollow",
+                    },
+                  },
+                  Sponsored: {
+                    mode: "manual",
+                    label: "Sponsored",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "sponsored",
+                    },
+                  },
+                },
+              },
             }}
           />
           <label className="labelcreateblog">
@@ -433,28 +445,25 @@ const CreateBlog = () => {
                   setProgress(true);
                 }}
               />
-              {blog && blog.image !== "" ? (
-                <img src={blog.image} className="imagecontainer" />
-              ) : (
-                <>
-                  <p className="uploadimagetext">Select Image</p>
-                  <svg
+              <img src={image} className="imagecontainer" />
+              <>
+                <p className="uploadimagetext">Select Image</p>
+                <svg
+                  width="100%"
+                  height="100%"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
                     width="100%"
                     height="100%"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      width="100%"
-                      height="100%"
-                      rx="20"
-                      stroke="black"
-                      stroke-dasharray="20 20"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </>
-              )}
+                    rx="20"
+                    stroke="black"
+                    stroke-dasharray="20 20"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </>
             </div>
           )}
         </div>
@@ -463,8 +472,14 @@ const CreateBlog = () => {
           type="button"
           onClick={submitBlog}
         >
-          <h1>Update</h1>
-          <img src={Send} />
+          {progress ? (
+            <span className="loader"></span>
+          ) : (
+            <>
+              <h1>Update</h1>
+              <img src={Send} />
+            </>
+          )}
         </button>
       </div>
     </div>
