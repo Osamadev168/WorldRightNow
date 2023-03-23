@@ -192,8 +192,8 @@ const Blog = () => {
                   className="blogImage"
                   src={blog.image}
                   style={{
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    objectFit: "cover",
+                    objectPosition: "center",
                   }}
                   alt="blog_image"
                   width="100%"
