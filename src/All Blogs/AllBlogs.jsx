@@ -32,11 +32,11 @@ const AllBlogs = () => {
   const sliderRef = useRef(null);
   const settings = {
     infinite: true,
-    speed: 500,
+    speed: 700,
     draggable: false,
     slidesToShow: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 4000,
     afterChange: (current) => setCurrentSlide(current),
     slidesToScroll: 1,
     arrows: false,
@@ -336,7 +336,13 @@ const AllBlogs = () => {
             })
           ) : (
             <div>
-              <span className="loader"></span>
+              <Skeleton
+                animation="wave"
+                style={{
+                  width: "100%",
+                  height: 200,
+                }}
+              />
             </div>
           )}
         </Slider>
@@ -344,19 +350,25 @@ const AllBlogs = () => {
         <div className="tagsContainerMain">
           <div className="tagsLeft">
             <div className="blogsContainer">
-              <div>
-                {query && !category && search ? (
-                  <p>Search Results about {query}</p>
-                ) : (
-                  <></>
-                )}
-              </div>
+              {query && !category && search ? (
+                <p>Search Results about {query}</p>
+              ) : (
+                <></>
+              )}
               {!loading ? (
                 <InfiniteScroll
                   dataLength={blogs.length}
                   next={latest ? loadDataLatest : loadDataPopular}
                   hasMore={!end}
-                  loader={<Skeleton height={200} />}
+                  loader={
+                    <Skeleton
+                      animation="wave"
+                      style={{
+                        width: "100%",
+                        height: 200,
+                      }}
+                    />
+                  }
                   endMessage={end ? <p></p> : <></>}
                 >
                   <div>
@@ -436,7 +448,13 @@ const AllBlogs = () => {
                   </div>
                 </InfiniteScroll>
               ) : (
-                <span className="loader"></span>
+                <Skeleton
+                  animation="wave"
+                  style={{
+                    width: "100%",
+                    height: 200,
+                  }}
+                />
               )}
             </div>
           </div>

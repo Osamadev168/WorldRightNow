@@ -9,7 +9,6 @@ import imgDashboard from "../../assets/dashboard.svg";
 import imgWrite from "../../assets/write.svg";
 import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
-
 const Header = () => {
   const { user } = useContext(UserContext);
   const [refresh, setRefresh] = useState(false);

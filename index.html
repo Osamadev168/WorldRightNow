@@ -5,29 +5,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="manifest" href="./manifest.json" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&display=swap"
+      rel="stylesheet"
+      as="style"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&display=swap"
+      rel="preload"
+      as="style"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HubbleFeed</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script
-      async
-      charset="utf-8"
-      src="//cdn.embedly.com/widgets/platform.js"
-    ></script>
-    <script>
-      document.querySelectorAll("div[data-oembed-url]").forEach((element) => {
-        while (element.firstChild) {
-          element.removeChild(element.firstChild);
-        }
-        const anchor = document.createElement("a");
-
-        anchor.setAttribute("href", element.dataset.oembedUrl);
-        anchor.className = "embedly-card";
-
-        element.appendChild(anchor);
-      });
-    </script>
   </body>
 </html>

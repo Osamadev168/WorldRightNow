@@ -33,6 +33,7 @@ const CreateBlog = () => {
     data.append("image", file);
     upload_Image(data).then((res) => {
       setBlog({ ...blog, image: res.data.url });
+
       setImage(res.data.url);
       setProgress(false);
     });
@@ -40,9 +41,7 @@ const CreateBlog = () => {
   const getBlogData = () => {
     getBlogData_Update(blog_id, token).then((res) => {
       if (res) {
-        setBlog({ ...blog, tags: res.data[0].tags });
         setBlog(res.data[0]);
-
         setTags(res.data[0].tags);
         setImage(res.data[0].image);
       }
@@ -50,6 +49,8 @@ const CreateBlog = () => {
   };
   const submitBlog = async () => {
     setProgress(true);
+    setBlog({ ...blog, tags: tags });
+
     try {
       await edit_Blog(blog_id, blog, token).then(() => {
         navigate("/dashboard");
@@ -100,6 +101,7 @@ const CreateBlog = () => {
                 ...blog,
                 title: e.target.value,
               });
+
               setChar(e.target.value.length);
             }}
           />
@@ -124,6 +126,7 @@ const CreateBlog = () => {
                 ...blog,
                 description: e.target.value,
               });
+
               setCharDescription(e.target.value.length);
             }}
           />
@@ -141,9 +144,9 @@ const CreateBlog = () => {
           <CKEditor
             data={blog.body}
             editor={ClassicEditor}
-            onChange={(event, editor) =>
-              setBlog({ ...blog, body: editor.getData() })
-            }
+            onChange={(event, editor) => {
+              setBlog({ ...blog, body: editor.getData() });
+            }}
             config={{
               placeholder: "Start typing your blog post here...",
               mediaEmbed: { previewsInData: true },

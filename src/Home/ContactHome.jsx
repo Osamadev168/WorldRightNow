@@ -42,7 +42,7 @@ const ContactHome = () => {
           </div>
 
           <div className="picturecontactus">
-            <img src={Picture} alt="info" />
+            <img src={Picture} alt="info" loading="lazy" />
           </div>
         </div>
       </div>
