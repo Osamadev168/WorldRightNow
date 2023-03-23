@@ -20,7 +20,7 @@ const Home = () => {
           name="description"
           content="HubbleFeed is a great place to start sharing your ideas online and reach dense audiance Join today!"
         />
-        <title>Home|HubbleFeed</title>
+        <title>Hubble Feed</title>
         <link rel="canonical" href="https://www.hubblefeed.com/" />
       </Helmet>
       <Hero />

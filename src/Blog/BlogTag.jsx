@@ -98,15 +98,17 @@ const BlogTag = () => {
                             </p>
                           </div>
                         </div>
-                        <img
-                          className="blogImage"
-                          src={blog.image}
-                          style={{
-                            objectFit: "cover",
-                            objectPosition: "center",
-                          }}
-                          alt="blog-Image"
-                        />
+                        <div className="blogImageContainer">
+                          <img
+                            className="blogImage"
+                            src={blog.image}
+                            style={{
+                              objectFit: "cover",
+                              objectPosition: "center",
+                            }}
+                            alt="blog-Image"
+                          />
+                        </div>
                       </div>
 
                       <div className="imageAuthorName">

@@ -36,7 +36,7 @@ const AllBlogs = () => {
     draggable: false,
     slidesToShow: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     afterChange: (current) => setCurrentSlide(current),
     slidesToScroll: 1,
     arrows: false,
@@ -248,7 +248,7 @@ const AllBlogs = () => {
           name="description"
           content="Explore whats happening around you"
         />
-        <title>Blogs|Hubble Feed</title>
+        <title>Blogs | Hubble Feed</title>
 
         <link rel="canonical" href="https://www.hubblefeed.com/all/blogs" />
       </Helmet>
@@ -282,7 +282,11 @@ const AllBlogs = () => {
                       <div className="info">
                         <p>{displayDate}</p>
                         <p>&nbsp;|&nbsp;</p>
-                        <p>{round}</p>
+                        {round <= 0 ? (
+                          <p>Quick read</p>
+                        ) : (
+                          <p>{round} mins read</p>
+                        )}
                       </div>
                       <div className="blogTitleDescription">
                         <h2>{blog.title}</h2>
@@ -356,8 +360,52 @@ const AllBlogs = () => {
                   dataLength={blogs.length}
                   next={latest ? loadDataLatest : loadDataPopular}
                   hasMore={!end}
-                  loader={<Skeleton height={200} />}
-                  endMessage={end ? <p></p> : <></>}
+                  loader={
+                    <div className="skeletonContainer">
+                      <div className="skeletonFirstSection">
+                        <div className="skeletonTextSection">
+                          <Skeleton
+                            className="skeletonDate"
+                            variant="rectangular"
+                          ></Skeleton>
+                          <Skeleton
+                            className="skeletonTitle"
+                            variant="rectangular"
+                          ></Skeleton>
+                          <Skeleton
+                            className="skeletonDescription"
+                            variant="rectangular"
+                          ></Skeleton>
+                        </div>
+                        <div className="skeletonImageSection">
+                          <Skeleton
+                            className="skeletonImage"
+                            variant="rectangular"
+                          ></Skeleton>
+                        </div>
+                      </div>
+                      <div className="skeletonSecondSection">
+                        <Skeleton
+                          className="skeletonProfileImage"
+                          variant="circular"
+                        ></Skeleton>
+                        <Skeleton
+                          className="skeletonAuthorName"
+                          variant="rectangular"
+                        ></Skeleton>
+                      </div>
+                    </div>
+                  }
+                  endMessage={
+                    end ? (
+                      <p style={{ marginTop: 25, fontWeight: 600 }}>
+                        That's all for now! Check back later for more exciting
+                        blogs!
+                      </p>
+                    ) : (
+                      <></>
+                    )
+                  }
                 >
                   <div className="blogsContainer">
                     {blogs && blogs.length > 0 ? (
@@ -374,6 +422,7 @@ const AllBlogs = () => {
                         title = title.replace(/\s+/g, "-");
                         return (
                           <article
+                            className="article"
                             key={index}
                             style={{
                               cursor: "pointer",
@@ -395,7 +444,7 @@ const AllBlogs = () => {
                                     {round <= 0 ? (
                                       <p>Quick read</p>
                                     ) : (
-                                      <p>{round}mins read</p>
+                                      <p>{round} mins read</p>
                                     )}
                                   </div>
                                   <div className="titleandDescriptionImage">
@@ -405,15 +454,17 @@ const AllBlogs = () => {
                                     </p>
                                   </div>
                                 </div>
-                                <img
-                                  className="blogImage"
-                                  src={blog.image}
-                                  style={{
-                                    objectFit: "cover",
-                                    objectPosition: "center",
-                                  }}
-                                  alt="blog-Image"
-                                />
+                                <div className="blogImageContainer">
+                                  <img
+                                    className="blogImage"
+                                    src={blog.image}
+                                    style={{
+                                      objectFit: "cover",
+                                      objectPosition: "center",
+                                    }}
+                                    alt="blog-Image"
+                                  />
+                                </div>
                               </div>
 
                               <div className="imageAuthorName">
@@ -467,9 +518,7 @@ const AllBlogs = () => {
                 <div className="categories">
                   <span
                     className={
-                      type === "Popular"
-                        ? "category categoryActive"
-                        : "category"
+                      type === "Popular" ? "categoryActive" : "category"
                     }
                     onClick={handlePopular}
                   >
@@ -477,7 +526,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      type === "Latest" ? "category categoryActive" : "category"
+                      type === "Latest" ? "categoryActive" : "category"
                     }
                     onClick={handleLatest}
                   >
@@ -490,9 +539,7 @@ const AllBlogs = () => {
                 <div className="categories">
                   <span
                     className={
-                      activediv === "div1"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div1" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("All", "div1")}
                   >
@@ -500,9 +547,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div2"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div2" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Technology", "div2")}
                   >
@@ -510,9 +555,7 @@ const AllBlogs = () => {
                   </span>
                   <div
                     className={
-                      activediv === "div3"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div3" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Science", "div3")}
                   >
@@ -520,9 +563,7 @@ const AllBlogs = () => {
                   </div>
                   <span
                     className={
-                      activediv === "div4"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div4" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Education", "div4")}
                   >
@@ -530,9 +571,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div5"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div5" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Finance", "div5")}
                   >
@@ -540,9 +579,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div6"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div6" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Lifestyle", "div6")}
                   >
@@ -550,9 +587,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div7"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div7" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Business", "div7")}
                   >
@@ -560,9 +595,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div8"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div8" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("News", "div8")}
                   >
@@ -570,9 +603,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div9"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div9" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Travel", "div9")}
                   >
@@ -580,9 +611,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div10"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div10" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Sports", "div10")}
                   >
@@ -590,9 +619,7 @@ const AllBlogs = () => {
                   </span>
                   <span
                     className={
-                      activediv === "div11"
-                        ? "category categoryActive"
-                        : "category"
+                      activediv === "div11" ? "categoryActive" : "category"
                     }
                     onClick={() => handleCategoryChange("Health", "div11")}
                   >
