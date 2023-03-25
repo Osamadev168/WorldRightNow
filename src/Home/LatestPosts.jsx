@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
-import { AddView, fetchDataLatest } from "../Api/Api";
+import { AddView, fetchDataLatest, fetchLatestBlogsHome } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 import { CircularProgress } from "@mui/material";
@@ -45,7 +45,7 @@ const LatestPosts = ({ category }) => {
   };
   const getPosts = () => {
     setLoading(true);
-    fetchDataLatest(category, 0, 10).then((res) => {
+    fetchLatestBlogsHome(category).then((res) => {
       setPosts(res.data);
       setLoading(false);
       if (res.data.length === 0) {

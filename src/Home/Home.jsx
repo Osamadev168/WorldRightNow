@@ -5,12 +5,8 @@ import LatestPosts from "./LatestPosts";
 import Popular from "./Popular";
 import Hero from "./hero";
 import FooterContainer from "./FooterContainer.jsx";
-import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 const Home = () => {
-  useEffect(() => {
-    document.title = "Home";
-  }, []);
   const [category, setCategory] = useState("All");
   return (
     <>

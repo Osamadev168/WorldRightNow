@@ -1,6 +1,6 @@
 import axios from "axios";
-// const url = "https://server-blog-production.up.railway.app";
-const url = "http://localhost:7000";
+const url = "https://server-blog-production.up.railway.app";
+// const url = "http://localhost:7000";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
@@ -9,18 +9,7 @@ export const upload_Image = async (image) => {
     alert(e.message);
   }
 };
-export const getAllBlogs = async (page, limit, category) => {
-  try {
-    let response = await axios.post(
-      `${url}/get/all/blogs/popular/${page}/${limit}`,
-      { category: category }
-    );
 
-    return response;
-  } catch (e) {
-    console.error(e.message);
-  }
-};
 export const UserStatus = async (token) => {
   try {
     let response = await axios.post(`${url}/admin`, {
@@ -41,6 +30,14 @@ export const fetchDataLatest = async (category, page, limit) => {
   let response = await axios.get(
     `${url}/get/all/blogs/latest/${category}/${page}/${limit}`
   );
+  return response;
+};
+export const fetchLatestBlogsHome = async (category) => {
+  let response = await axios.get(`${url}/blogs/latest/home/${category}`);
+  return response;
+};
+export const fetchPopularBlogsHome = async (category) => {
+  let response = await axios.get(`${url}/blogs/popular/home/${category}`);
   return response;
 };
 export const submitPost = async (blog, token) => {

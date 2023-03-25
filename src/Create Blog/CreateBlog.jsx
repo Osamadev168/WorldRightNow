@@ -2,8 +2,6 @@ import Send from "../../assets/Send.svg";
 import Upload from "../../assets/imageUpload.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import { editorElement } from "@ckeditor/ckeditor5-react";
-
 import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
@@ -37,8 +35,35 @@ const CreateBlog = () => {
   const [blog, setBlog] = useState(blogdefaultValues);
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
+  const [bodyLength, setBodyLength] = useState(0);
   const inputFile = useRef(null);
   const navigate = useNavigate();
+  function uploadAdapter(loader) {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          const body = new FormData();
+          loader.file.then((file) => {
+            body.append("image", file);
+            upload_Image(body)
+              .then((res) => {
+                resolve({
+                  default: res.data.url,
+                });
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          });
+        });
+      },
+    };
+  }
+  function uploadPlugin(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
@@ -151,11 +176,24 @@ const CreateBlog = () => {
             editor={ClassicEditor}
             onChange={(event, editor) => {
               setBlog({ ...blog, body: editor.getData() }),
-                console.log(editor.getData());
+                setBodyLength(
+                  editor
+                    .getData()
+                    .replace(
+                      /<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g,
+                      ""
+                    )
+                    .split(" ").length
+                );
             }}
             config={{
+              extraPlugins: [uploadPlugin],
               placeholder: "Start typing your blog post here...",
               mediaEmbed: { previewsInData: true },
+              imageUpload: { previewsInData: true },
+              FontSize: {
+                options: ["tiny", "default", "big"],
+              },
               toolbar: [
                 "Heading",
                 "|",
@@ -169,27 +207,27 @@ const CreateBlog = () => {
                 "Undo",
                 "Redo",
                 "MediaEmbed",
+                "ImageUpload",
+                "fontSize",
               ],
               link: {
                 decorators: {
                   isExternal: {
                     mode: "manual",
-                    label: "noopener noreferrer",
+                    label: "nofollow",
                     callback: (url) => url.startsWith("http://"),
                     attributes: {
                       target: "_blank",
-                      rel: "noopener noreferrer",
+                      rel: "nofollow",
                     },
                   },
 
                   isNofollow: {
                     mode: "manual",
-                    label: "nofollow",
+                    label: "Do follow",
                     callback: (url) => url.startsWith("http://"),
-
                     attributes: {
                       target: "_blank",
-                      rel: "nofollow",
                     },
                   },
                   Sponsored: {
@@ -202,12 +240,25 @@ const CreateBlog = () => {
                       rel: "sponsored",
                     },
                   },
+                  SponsoredNofollow: {
+                    mode: "manual",
+                    label: "Sponsored Nofollow",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "sponsored nofollow",
+                    },
+                  },
                 },
               },
             }}
           />
           <label className="labelcreateblog">
             Hint: Break the content in several parts
+          </label>
+          <label className="labelcreateblog">
+            Total Words So far {bodyLength}
           </label>
         </div>
         <div className="createblogformcontainer">

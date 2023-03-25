@@ -22,17 +22,45 @@ const CreateBlog = () => {
   const [blog, setBlog] = useState({});
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
+  const [bodyLength, setBodyLength] = useState(0);
+
   const inputFile = useRef(null);
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
   const params = useParams();
   const blog_id = params.blogid;
+  function uploadAdapter(loader) {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          const body = new FormData();
+          loader.file.then((file) => {
+            body.append("image", file);
+            upload_Image(body)
+              .then((res) => {
+                resolve({
+                  default: res.data.url,
+                });
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          });
+        });
+      },
+    };
+  }
+  function uploadPlugin(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
     data.append("image", file);
     upload_Image(data).then((res) => {
-      setBlog({ ...blog, image: res.data.url });
+      setBlog({ ...blog, image: res.data.url, tags: tags });
 
       setImage(res.data.url);
       setProgress(false);
@@ -44,6 +72,7 @@ const CreateBlog = () => {
         setBlog(res.data[0]);
         setTags(res.data[0].tags);
         setImage(res.data[0].image);
+        setActiveDiv(res.data[0].category);
       }
     });
   };
@@ -80,7 +109,13 @@ const CreateBlog = () => {
       uploadImage();
     }
   }, [file, , data, refresh]);
-
+  const handleCategory = (category) => {
+    setActiveDiv(category);
+    setBlog({ ...blog, category: category });
+  };
+  const handleActiveDiv = (category) => {
+    return activediv === category ? "categoryActive" : "category";
+  };
   return (
     <div
       style={{
@@ -100,6 +135,7 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 title: e.target.value,
+                tags: tags,
               });
 
               setChar(e.target.value.length);
@@ -125,6 +161,7 @@ const CreateBlog = () => {
               setBlog({
                 ...blog,
                 description: e.target.value,
+                tags: tags,
               });
 
               setCharDescription(e.target.value.length);
@@ -145,9 +182,20 @@ const CreateBlog = () => {
             data={blog.body}
             editor={ClassicEditor}
             onChange={(event, editor) => {
-              setBlog({ ...blog, body: editor.getData() });
+              setBlog({ ...blog, body: editor.getData(), tags: tags });
+              setBodyLength(
+                editor
+                  .getData()
+                  .replace(
+                    /<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g,
+                    ""
+                  )
+                  .split(" ").length
+              );
             }}
             config={{
+              extraPlugins: [uploadPlugin],
+
               placeholder: "Start typing your blog post here...",
               mediaEmbed: { previewsInData: true },
               toolbar: [
@@ -163,27 +211,26 @@ const CreateBlog = () => {
                 "Undo",
                 "Redo",
                 "MediaEmbed",
+                "ImageUpload",
               ],
               link: {
                 decorators: {
                   isExternal: {
                     mode: "manual",
-                    label: "noopener noreferrer",
+                    label: "nofollow",
                     callback: (url) => url.startsWith("http://"),
                     attributes: {
                       target: "_blank",
-                      rel: "noopener noreferrer",
+                      rel: "nofollow",
                     },
                   },
 
                   isNofollow: {
                     mode: "manual",
-                    label: "nofollow",
+                    label: "Do follow",
                     callback: (url) => url.startsWith("http://"),
-
                     attributes: {
                       target: "_blank",
-                      rel: "nofollow",
                     },
                   },
                   Sponsored: {
@@ -196,12 +243,25 @@ const CreateBlog = () => {
                       rel: "sponsored",
                     },
                   },
+                  SponsoredNofollow: {
+                    mode: "manual",
+                    label: "Sponsored Nofollow",
+                    callback: (url) => url.startsWith("http://"),
+
+                    attributes: {
+                      target: "_blank",
+                      rel: "sponsored nofollow",
+                    },
+                  },
                 },
               },
             }}
           />
           <label className="labelcreateblog">
             Hint: Break the content in several parts
+          </label>
+          <label className="labelcreateblog">
+            Total Words So far {bodyLength}
           </label>
         </div>
         <div className="createblogformcontainer tagssectioncontainer">
@@ -280,129 +340,80 @@ const CreateBlog = () => {
           <div className="categoriesmaindiv">
             <div className="div1categories">
               <div
-                className={activediv === "div2" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div2");
-                  setBlog({ ...blog, category: "Technology" });
-                }}
+                className={handleActiveDiv("Technology")}
+                onClick={() => handleCategory("Technology")}
               >
                 <a>Technology</a>
               </div>
               <div
-                className={activediv === "div3" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div3");
-                  setBlog({ ...blog, category: "Sports" });
-                }}
+                className={handleActiveDiv("Sports")}
+                onClick={() => handleCategory("Sports")}
               >
                 <a>Sports</a>
               </div>
               <div
-                className={activediv === "div4" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div4");
-                  setBlog({ ...blog, category: "Science" });
-                }}
+                className={handleActiveDiv("Science")}
+                onClick={() => handleCategory("Science")}
               >
                 <a>Science</a>
               </div>
               <div
-                className={activediv === "div5" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div5");
-                  setBlog({ ...blog, category: "Fashion" });
-                }}
+                className={handleActiveDiv("Fashion")}
+                onClick={() => handleCategory("Fashion")}
               >
                 <a>Fashion</a>
               </div>
               <div
-                className={activediv === "div6" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div6");
-                  setBlog({ ...blog, category: "Artificial Intelligence" });
-                }}
+                className={handleActiveDiv("Artificial Intelligence")}
+                onClick={() => handleCategory("Artificial Intelligence")}
               >
                 <a>Artificial Intelligence</a>
               </div>
               <div
-                className={activediv === "div7" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div7");
-                  setBlog({ ...blog, category: "Forex Trading" });
-                }}
+                className={handleActiveDiv("Forex Trading")}
+                onClick={() => handleCategory("Forex Trading")}
               >
                 <a>Forex Trading</a>
               </div>
               <div
-                className={activediv === "div8" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div8");
-                  setBlog({ ...blog, category: "Politics" });
-                }}
+                className={handleActiveDiv("Politics")}
+                onClick={() => handleCategory("Politics")}
               >
                 <a>Politics</a>
               </div>
               <div
-                className={activediv === "div9" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div9");
-                  setBlog({ ...blog, category: "Art" });
-                }}
+                className={handleActiveDiv("Art")}
+                onClick={() => handleCategory("Art")}
               >
                 <a>Art</a>
               </div>
               <div
-                className={
-                  activediv === "div10" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div10");
-                  setBlog({ ...blog, category: "Programming" });
-                }}
+                className={handleActiveDiv("Programming")}
+                onClick={() => handleCategory("Programming")}
               >
                 <a>Programming</a>
               </div>
               <div
-                className={
-                  activediv === "div11" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div11");
-                  setBlog({ ...blog, category: "Networking" });
-                }}
+                className={handleActiveDiv("Networking")}
+                onClick={() => handleCategory("Networking")}
               >
                 <a>Networking</a>
               </div>
               <div
-                className={
-                  activediv === "div12" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div12");
-                  setBlog({ ...blog, category: "Life Hacks" });
-                }}
+                className={handleActiveDiv("LifeHacks")}
+                onClick={() => handleCategory("LifeHacks")}
               >
                 <a>Life Hacks</a>
               </div>
               <div
-                className={
-                  activediv === "div13" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div13");
-                  setBlog({ ...blog, category: "Crime" });
-                }}
+                className={handleActiveDiv("Crime")}
+                onClick={() => handleCategory("Crime")}
               >
                 <a>Crime</a>
               </div>
               <div
-                className={
-                  activediv === "div14" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div14");
-                  setBlog({ ...blog, category: "Anime" });
-                }}
+                className={handleActiveDiv("Anime")}
+                onClick={() => handleCategory("Anime")}
               >
                 <a>Anime</a>
               </div>

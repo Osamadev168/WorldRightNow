@@ -11,6 +11,37 @@ import Slider from "react-slick";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Skeleton } from "@mui/material";
 import { Helmet } from "react-helmet";
+
+const Loader = () => {
+  return (
+    <div className="skeletonContainer">
+      <div className="skeletonFirstSection">
+        <div className="skeletonTextSection">
+          <Skeleton className="skeletonDate" variant="rectangular"></Skeleton>
+          <Skeleton className="skeletonTitle" variant="rectangular"></Skeleton>
+          <Skeleton
+            className="skeletonDescription"
+            variant="rectangular"
+          ></Skeleton>
+        </div>
+        <div className="skeletonImageSection">
+          <Skeleton className="skeletonImage" variant="rectangular"></Skeleton>
+        </div>
+      </div>
+      <div className="skeletonSecondSection">
+        <Skeleton
+          className="skeletonProfileImage"
+          variant="circular"
+        ></Skeleton>
+        <Skeleton
+          className="skeletonAuthorName"
+          variant="rectangular"
+        ></Skeleton>
+      </div>
+    </div>
+  );
+};
+
 const AllBlogs = () => {
   const [category, setCategory] = useState("All");
   const [value, setValue] = useState("");
@@ -289,7 +320,15 @@ const AllBlogs = () => {
                         )}
                       </div>
                       <div className="blogTitleDescription">
-                        <h2>{blog.title}</h2>
+                        <a
+                          href={`/blogs/${title.replace(
+                            /[^a-zA-Z0-9 ]/g,
+                            "-"
+                          )}/${blog._id}`}
+                        >
+                          <h2>{blog.title}</h2>
+                        </a>
+
                         <p>{blog.description}</p>
                       </div>
                       <div className="imageAuthorName">
@@ -339,15 +378,7 @@ const AllBlogs = () => {
               );
             })
           ) : (
-            <div>
-              <Skeleton
-                animation="wave"
-                style={{
-                  width: "100%",
-                  height: 200,
-                }}
-              />
-            </div>
+            <Loader />
           )}
         </Slider>
 
