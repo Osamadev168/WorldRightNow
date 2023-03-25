@@ -89,33 +89,37 @@ const LatestPosts = ({ category }) => {
                   }`}
                   key={index}
                 >
-                  <div
+                  <article
                     className="PopularCard"
                     onClick={() => AddView(posts._id)}
                   >
-                    <img
-                      src={posts.image}
-                      className="image"
-                      loading="lazy"
-                      alt="blog_image"
-                    />
+                    <div className="imageContainer">
+                      <img
+                        src={posts.image}
+                        className="image"
+                        loading="lazy"
+                        alt="blog_Image"
+                        placeholder="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmuma.ir%2Fwp-content%2Fuploads%2F2022%2F11%2F%3FND&psig=AOvVaw3RQQy1z2uVtTtbXR6VV5Ve&ust=1678208652683000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNj2rsfkx_0CFQAAAAAdAAAAABAE"
+                      />
+                    </div>
+
                     <div className="title">
-                      <h1 className="posttitle">{posts.category}</h1>
+                      <h3 className="posttitle">{posts.category}</h3>
                       <div className="info">
-                        <p>{displayDate}</p>
+                        <time pubdate="pubdate">{displayDate}</time>
                         <p>&nbsp;|&nbsp;</p>
                         {round <= 0 ? (
                           <p>Quick read</p>
                         ) : (
-                          <p>{round}mins read</p>
+                          <p>{round} mins read</p>
                         )}
                       </div>
                     </div>
                     <div className="description">
-                      <p className="blogtitle">{posts.title}</p>
+                      <h2 className="blogtitle">{posts.title}</h2>
                       <p className="data">{posts.description}</p>
                     </div>
-                  </div>
+                  </article>
                 </a>
               );
             })

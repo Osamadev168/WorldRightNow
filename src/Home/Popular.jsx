@@ -90,42 +90,37 @@ const Popular = ({ category }) => {
                   }`}
                   key={index}
                 >
-                  <div
+                  <article
                     className="PopularCard"
                     onClick={() => AddView(blog._id)}
                   >
-                    <img
-                      src={blog.image}
-                      className="image"
-                      loading="lazy"
-                      alt="blog_Image"
-                      placeholder="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmuma.ir%2Fwp-content%2Fuploads%2F2022%2F11%2F%3FND&psig=AOvVaw3RQQy1z2uVtTtbXR6VV5Ve&ust=1678208652683000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNj2rsfkx_0CFQAAAAAdAAAAABAE"
-                    />
+                    <div className="imageContainer">
+                      <img
+                        src={blog.image}
+                        className="image"
+                        loading="lazy"
+                        alt="blog_Image"
+                        placeholder="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmuma.ir%2Fwp-content%2Fuploads%2F2022%2F11%2F%3FND&psig=AOvVaw3RQQy1z2uVtTtbXR6VV5Ve&ust=1678208652683000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNj2rsfkx_0CFQAAAAAdAAAAABAE"
+                      />
+                    </div>
 
                     <div className="title">
-                      <h1 className="blogtitle">{blog.category}</h1>
+                      <h3 className="posttitle">{blog.category}</h3>
                       <div className="info">
-                        <p>{displayDate}</p>
-
+                        <time pubdate="pubdate">{displayDate}</time>
                         <p>&nbsp;|&nbsp;</p>
                         {round <= 0 ? (
                           <p>Quick read</p>
                         ) : (
                           <p>{round} mins read</p>
                         )}
-                        <p>&nbsp;|&nbsp;</p>
-                        {round <= 0 ? (
-                          <p>Quick read</p>
-                        ) : (
-                          <p>{round}mins read</p>
-                        )}
                       </div>
                     </div>
                     <div className="description">
-                      <p className="blogtitle">{blog.title}</p>
+                      <h2 className="blogtitle">{blog.title}</h2>
                       <p className="data">{blog.description}</p>
                     </div>
-                  </div>
+                  </article>
                 </a>
               );
             })
