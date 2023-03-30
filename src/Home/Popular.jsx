@@ -1,9 +1,8 @@
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
-import { AddView, fetchDataPopular, fetchPopularBlogsHome } from "../Api/Api";
+import { AddView, fetchPopularBlogsHome } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { CircularProgress } from "@mui/material";
 const Popular = ({ category }) => {
   const [blogs, setBlogs] = useState([]);
   const [laoding, setLoading] = useState(false);
@@ -83,17 +82,15 @@ const Popular = ({ category }) => {
               let displayDate = `${displayMonth},${displayYear}`;
               let title = blog.title;
               title = title.replace(/\s+/g, "-");
+              title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+              let category = blog.category;
+              category = category.replace(/\s+/g, "-");
               return (
-                <a
-                  href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                    blog._id
-                  }`}
-                  key={index}
+                <article
+                  className="PopularCard"
+                  onClick={() => AddView(blog._id)}
                 >
-                  <article
-                    className="PopularCard"
-                    onClick={() => AddView(blog._id)}
-                  >
+                  <a href={`/${category}/${title}/${blog._id}`} key={index}>
                     <div className="imageContainer">
                       <img
                         src={blog.image}
@@ -120,8 +117,8 @@ const Popular = ({ category }) => {
                       <h2 className="blogtitle">{blog.title}</h2>
                       <p className="data">{blog.description}</p>
                     </div>
-                  </article>
-                </a>
+                  </a>
+                </article>
               );
             })
           ) : (

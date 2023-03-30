@@ -119,7 +119,7 @@ export const getBlogData_Update = async (id, token) => {
 };
 export const edit_Blog = async (id, blog, token) => {
   try {
-    await axios.put(`${url}/blog/update/${id}/${token}`, blog);
+    await axios.patch(`${url}/blog/update/${id}/${token}`, blog);
   } catch (e) {
     console.error(e.message);
   }
@@ -134,7 +134,7 @@ export const author_blogs = async (author) => {
 };
 export const UpdateUserData = async (user, uid, displayName, photoURL) => {
   try {
-    await axios.put(`${url}/blog/update`, {
+    await axios.patch(`${url}/blog/update`, {
       authorId: uid,
       authorName: displayName,
       authorImage: user && photoURL,

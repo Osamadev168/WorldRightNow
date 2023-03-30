@@ -67,10 +67,10 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div7" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div7");
-            setCategory("Forex Trading");
+            setCategory("Health");
           }}
         >
-          <div>Forex Trading</div>
+          <div>Health</div>
         </div>
         <div
           className={activediv === "div8" ? "categoryActive" : "category"}

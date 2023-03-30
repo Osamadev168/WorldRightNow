@@ -51,7 +51,7 @@ const AdminPosts = ({ setAdminPosts }) => {
     data.append("image", file);
     upload_Image(data).then(async (res) => {
       updateProfile(user, {
-        photoURL: res.data.url,
+        photoURL: res.data.secure_url,
       }).then(() => {
         UpdateUserData(user, user.uid, user.displayName, user.photoURL);
         setTimeout(() => {
@@ -236,6 +236,9 @@ const AdminPosts = ({ setAdminPosts }) => {
           let blog_status = blogs.approved === true ? true : false;
           let title = blogs.title;
           title = title.replace(/\s+/g, "-");
+          title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+          let category = blogs.category;
+          category = category.replace(/\s+/g, "-");
           return (
             <div className="blogsContainer" key={index}>
               <div className="blogCard">
@@ -243,11 +246,7 @@ const AdminPosts = ({ setAdminPosts }) => {
                   <div
                     className="blogTitleDescription"
                     onClick={() =>
-                      navigate(
-                        `/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                          blogs._id
-                        }`
-                      )
+                      navigate(`/${category}/${title}/${blogs._id}`)
                     }
                   >
                     <h2>{blogs.title}</h2>

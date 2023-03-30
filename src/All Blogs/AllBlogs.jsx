@@ -11,7 +11,6 @@ import Slider from "react-slick";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Skeleton } from "@mui/material";
 import { Helmet } from "react-helmet";
-
 const Loader = () => {
   return (
     <div className="skeletonContainer">
@@ -62,46 +61,20 @@ const AllBlogs = () => {
   const [end, setEnd] = useState(false);
   const sliderRef = useRef(null);
   const settings = {
+    dots: false,
     infinite: true,
-    speed: 700,
-    draggable: false,
-    slidesToShow: 1,
+    speed: 300,
     autoplay: true,
-    autoplaySpeed: 5000,
-    afterChange: (current) => setCurrentSlide(current),
+    autoplaySpeed: 3000,
+    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    fade: true,
-    responsive: [
-      {
-        breakpoint: 1260,
-        settings: {
-          slidesToShow: 2.2,
-        },
-      },
-      {
-        breakpoint: 860,
-        settings: {
-          slidesToShow: 1.5,
-        },
-      },
-      {
-        breakpoint: 645,
-        settings: {
-          slidesToShow: 1.2,
-        },
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+    afterChange: (current) => setCurrentSlide(current),
   };
   const getSliderData = () => {
     getBlogsForSlider().then((res) => {
       setSliderBlogs(res.data);
+      console.log(sliderBlogs);
     });
   };
   const loadDataPopular = () => {
@@ -116,7 +89,6 @@ const AllBlogs = () => {
         }
       });
     }, 1000);
-    console.log(page, blogs.length);
   };
   const loadDataLatest = () => {
     setPage(page + 1);
@@ -219,7 +191,6 @@ const AllBlogs = () => {
   const Search = () => {
     SearchBlogs(query).then((res) => {
       setEnd(true);
-
       setBlogs(res.data);
       setLoading(false);
       setSearch(false);
@@ -229,6 +200,7 @@ const AllBlogs = () => {
       }
     });
   };
+
   const getPopularData = () => {
     setLoading(true);
     fetchDataPopular(category, page, limit).then((res) => {
@@ -264,12 +236,10 @@ const AllBlogs = () => {
     window.scrollTo(0, 0);
     if (categoryChange || category) {
       getDataForCategory();
-      console.log(categoryChange, category);
     }
     if (query && search) {
       Search();
     }
-    console.log(categoryChange, category);
   }, [query, categoryChange, popular, latest, category]);
   return (
     <>
@@ -297,6 +267,9 @@ const AllBlogs = () => {
               let displayDate = `${displayMonth},${displayYear}`;
               let title = blog.title;
               title = title.replace(/\s+/g, "-");
+              title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+              let category = blog.category;
+              category = category.replace(/\s+/g, "-");
               return (
                 <div className="heroSlideshow">
                   <div className="slide" key={index}>
@@ -320,15 +293,9 @@ const AllBlogs = () => {
                         )}
                       </div>
                       <div className="blogTitleDescription">
-                        <a
-                          href={`/blogs/${title.replace(
-                            /[^a-zA-Z0-9 ]/g,
-                            "-"
-                          )}/${blog._id}`}
-                        >
+                        <a href={`/${category}/${title}/${blog._id}`}>
                           <h2>{blog.title}</h2>
                         </a>
-
                         <p>{blog.description}</p>
                       </div>
                       <div className="imageAuthorName">
@@ -342,6 +309,7 @@ const AllBlogs = () => {
                       <span className="type">Trending</span>
                     </div>
                   </div>
+
                   <div className="sliderDots">
                     <div
                       className={currentSilde === 0 ? "dot activeDot" : "dot"}
@@ -381,7 +349,6 @@ const AllBlogs = () => {
             <Loader />
           )}
         </Slider>
-
         <div className="tagsContainerMain">
           <div className="tagsLeft">
             <div className="blogsContainer">
@@ -455,10 +422,12 @@ const AllBlogs = () => {
                         let displayDate = `${displayMonth},${displayYear}`;
                         let title = blog.title;
                         title = title.replace(/\s+/g, "-");
+                        title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+                        let category = blog.category;
+                        category = category.replace(/\s+/g, "-");
                         return (
                           <article
                             className="article"
-                            key={index}
                             style={{
                               cursor: "pointer",
                             }}
@@ -466,10 +435,8 @@ const AllBlogs = () => {
                           >
                             <a
                               className="blogCard"
-                              href={`/blogs/${title.replace(
-                                /[^a-zA-Z0-9 ]/g,
-                                "-"
-                              )}/${blog._id}`}
+                              href={`/${category}/${title}/${blog._id}`}
+                              key={index}
                             >
                               <div className="blogCardLeftWrapper">
                                 <div className="blogCardLeft">
@@ -676,5 +643,3 @@ const AllBlogs = () => {
   );
 };
 export default AllBlogs;
-
-const Latest = () => {};

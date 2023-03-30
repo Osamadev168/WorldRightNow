@@ -6,11 +6,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
 import { edit_Blog, getBlogData_Update, upload_Image } from "../Api/Api";
-import "../App.css";
 const CreateBlog = () => {
-  const [editBlog, setEditBlog] = useState({});
-  const [tags, setTags] = useState([]);
+  // document title
   document.title = "Update Blog";
+  //hooks
+  const [edit, setEdit] = useState(false);
+  const [tags, setTags] = useState([]);
   const [progress, setProgress] = useState(false);
   const [value, setValue] = useState("");
   const [data, setData] = useState(true);
@@ -23,12 +24,74 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const [bodyLength, setBodyLength] = useState(0);
-
   const inputFile = useRef(null);
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
   const params = useParams();
+  ///
+  // setting blog id
   const blog_id = params.blogid;
+  ////
+  // config object for text editor
+  const options = {
+    extraPlugins: [uploadPlugin],
+    placeholder: "Start typing your blog post here...",
+    mediaEmbed: { previewsInData: true },
+    toolbar: [
+      "Heading",
+      "|",
+      "Bold",
+      "Italic",
+      "Link",
+      "NumberedList",
+      "BulletedList",
+      "outdent",
+      "indent",
+      "insertTable",
+      "|",
+      "BlockQuote",
+      "Undo",
+      "Redo",
+      "|",
+      "MediaEmbed",
+      "ImageUpload",
+    ],
+    link: {
+      decorators: {
+        NewTab: {
+          mode: "manual",
+          label: "Open in new tab",
+          attributes: {
+            target: "_blank",
+          },
+        },
+        isExternal: {
+          mode: "manual",
+          label: "No follow",
+          attributes: {
+            rel: "nofollow",
+          },
+        },
+
+        Dofollow: {
+          mode: "manual",
+          label: "Do follow",
+          attributes: {},
+        },
+
+        Sponsored: {
+          mode: "manual",
+          label: "Sponsored",
+
+          attributes: {
+            rel: "sponsored",
+          },
+        },
+      },
+    },
+  };
+  ///
+  // uploadAdapter for text editor
   function uploadAdapter(loader) {
     return {
       upload: () => {
@@ -39,7 +102,7 @@ const CreateBlog = () => {
             upload_Image(body)
               .then((res) => {
                 resolve({
-                  default: res.data.url,
+                  default: res.data.secure_url,
                 });
               })
               .catch((err) => {
@@ -55,20 +118,25 @@ const CreateBlog = () => {
       return uploadAdapter(loader);
     };
   }
+  ///
+  //upload feature image
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
     data.append("image", file);
     upload_Image(data).then((res) => {
-      setBlog({ ...blog, image: res.data.url, tags: tags });
-
-      setImage(res.data.url);
+      setBlog({ ...blog, image: res.data.secure_url, tags: tags });
+      setEdit(true);
+      setImage(res.data.secure_url);
       setProgress(false);
     });
   };
+  ///
+  // getting blog data
   const getBlogData = () => {
     getBlogData_Update(blog_id, token).then((res) => {
       if (res) {
+        setEdit(false);
         setBlog(res.data[0]);
         setTags(res.data[0].tags);
         setImage(res.data[0].image);
@@ -76,10 +144,10 @@ const CreateBlog = () => {
       }
     });
   };
+  //
+  // update blog
   const submitBlog = async () => {
     setProgress(true);
-    setBlog({ ...blog, tags: tags });
-
     try {
       await edit_Blog(blog_id, blog, token).then(() => {
         navigate("/dashboard");
@@ -90,8 +158,11 @@ const CreateBlog = () => {
       alert(e.message);
     }
   };
+  //
+  // other functions
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value) {
+      setEdit(true);
       setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setData(false);
@@ -99,6 +170,57 @@ const CreateBlog = () => {
       setValue("");
       setCharTags(0);
     }
+  };
+  const handleCategory = (category) => {
+    setEdit(true);
+    setActiveDiv(category);
+    setBlog({ ...blog, category: category, tags: tags });
+  };
+  const handleActiveDiv = (category) => {
+    return activediv === category ? "categoryActive" : "category";
+  };
+  const handleTitleChange = (e) => {
+    setBlog({
+      ...blog,
+      title: e.target.value,
+      tags: tags,
+    });
+    setEdit(true);
+    setChar(e.target.value.length);
+  };
+  const handleDescriptionChange = (e) => {
+    setBlog({
+      ...blog,
+      description: e.target.value,
+      tags: tags,
+    });
+    setEdit(true);
+    setCharDescription(e.target.value.length);
+  };
+  const handleBodyChange = (event, editor) => {
+    setBlog({ ...blog, body: editor.getData(), tags: tags });
+    setEdit(true);
+    setBodyLength(
+      editor
+        .getData()
+        .replace(/<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g, "")
+        .split(" ").length
+    );
+  };
+  const handleTagsChange = (e) => {
+    setEdit(true);
+    setValue(e.target.value);
+    setCharTags(e.target.value.length);
+  };
+  const handleTagRemove = (tag) => {
+    setData(false);
+    setEdit(true);
+    tags.splice(tags.indexOf(tag), 1);
+    setRefresh(!refresh);
+  };
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    setProgress(true);
   };
   useEffect(() => {
     if (data) {
@@ -109,13 +231,7 @@ const CreateBlog = () => {
       uploadImage();
     }
   }, [file, , data, refresh]);
-  const handleCategory = (category) => {
-    setActiveDiv(category);
-    setBlog({ ...blog, category: category });
-  };
-  const handleActiveDiv = (category) => {
-    return activediv === category ? "categoryActive" : "category";
-  };
+
   return (
     <div
       style={{
@@ -131,15 +247,7 @@ const CreateBlog = () => {
             className="titleinput"
             placeholder="Title"
             maxLength={100}
-            onChange={(e) => {
-              setBlog({
-                ...blog,
-                title: e.target.value,
-                tags: tags,
-              });
-
-              setChar(e.target.value.length);
-            }}
+            onChange={handleTitleChange}
           />
           <div className="hintcontainer">
             <label className="labelcreateblog">
@@ -157,19 +265,11 @@ const CreateBlog = () => {
             maxLength={250}
             className="titleinput descriptioninput"
             placeholder="Description"
-            onChange={(e) => {
-              setBlog({
-                ...blog,
-                description: e.target.value,
-                tags: tags,
-              });
-
-              setCharDescription(e.target.value.length);
-            }}
+            onChange={handleDescriptionChange}
           />
           <div className="hintcontainer">
             <label className="labelcreateblog">
-              Hint: Keep it short and concise
+              Hint: Keep it short and descriptive
             </label>
             <label className="labelcreateblog">
               {`${charDescription <= 250 ? charDescription : 250}/250`}
@@ -181,81 +281,8 @@ const CreateBlog = () => {
           <CKEditor
             data={blog.body}
             editor={ClassicEditor}
-            onChange={(event, editor) => {
-              setBlog({ ...blog, body: editor.getData(), tags: tags });
-              setBodyLength(
-                editor
-                  .getData()
-                  .replace(
-                    /<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g,
-                    ""
-                  )
-                  .split(" ").length
-              );
-            }}
-            config={{
-              extraPlugins: [uploadPlugin],
-
-              placeholder: "Start typing your blog post here...",
-              mediaEmbed: { previewsInData: true },
-              toolbar: [
-                "Heading",
-                "|",
-                "Bold",
-                "Italic",
-                "Link",
-                "NumberedList",
-                "BulletedList",
-                "|",
-                "BlockQuote",
-                "Undo",
-                "Redo",
-                "MediaEmbed",
-                "ImageUpload",
-              ],
-              link: {
-                decorators: {
-                  isExternal: {
-                    mode: "manual",
-                    label: "nofollow",
-                    callback: (url) => url.startsWith("http://"),
-                    attributes: {
-                      target: "_blank",
-                      rel: "nofollow",
-                    },
-                  },
-
-                  isNofollow: {
-                    mode: "manual",
-                    label: "Do follow",
-                    callback: (url) => url.startsWith("http://"),
-                    attributes: {
-                      target: "_blank",
-                    },
-                  },
-                  Sponsored: {
-                    mode: "manual",
-                    label: "Sponsored",
-                    callback: (url) => url.startsWith("http://"),
-
-                    attributes: {
-                      target: "_blank",
-                      rel: "sponsored",
-                    },
-                  },
-                  SponsoredNofollow: {
-                    mode: "manual",
-                    label: "Sponsored Nofollow",
-                    callback: (url) => url.startsWith("http://"),
-
-                    attributes: {
-                      target: "_blank",
-                      rel: "sponsored nofollow",
-                    },
-                  },
-                },
-              },
-            }}
+            onChange={handleBodyChange}
+            config={options}
           />
           <label className="labelcreateblog">
             Hint: Break the content in several parts
@@ -266,24 +293,24 @@ const CreateBlog = () => {
         </div>
         <div className="createblogformcontainer tagssectioncontainer">
           <div className="container1">
-            <h4 className="createblogbodytext">Add Tags</h4>
+            <label className="createblogbodytext" htmlFor="addTags">
+              Add Tags
+            </label>
             <input
               className="titleinput tagsinput"
               value={value}
               type="text"
-              onChange={(e) => {
-                setValue(e.target.value);
-                setCharTags(e.target.value.length);
-              }}
+              id="addTags"
+              onChange={handleTagsChange}
               onKeyDown={handleEnterPress}
-              maxLength={20}
+              maxLength={25}
             />
             <div className="hintcontainer">
               <label className="labelcreateblog">
                 Hint: Keep the tags relevant to the blog
               </label>
               <label className="labelcreateblog">
-                {`${charTags <= 20 ? charTags : 20}/20`}
+                {`${charTags <= 25 ? charTags : 25}/25`}
               </label>
             </div>
           </div>
@@ -299,13 +326,7 @@ const CreateBlog = () => {
                   return (
                     <div
                       className="tag"
-                      onClick={() => {
-                        setData(false);
-
-                        tags.splice(tags.indexOf(tag), 1);
-
-                        setRefresh(!refresh);
-                      }}
+                      onClick={() => handleTagRemove(tag)}
                       key={index}
                     >
                       {tag}
@@ -333,10 +354,8 @@ const CreateBlog = () => {
             </div>
           </div>
         </div>
-        <div>{editBlog.tags}</div>
         <div className="createblogformcontainer">
           <h4 className="createblogbodytext">Select a category</h4>
-
           <div className="categoriesmaindiv">
             <div className="div1categories">
               <div
@@ -370,10 +389,10 @@ const CreateBlog = () => {
                 <a>Artificial Intelligence</a>
               </div>
               <div
-                className={handleActiveDiv("Forex Trading")}
-                onClick={() => handleCategory("Forex Trading")}
+                className={handleActiveDiv("Health")}
+                onClick={() => handleCategory("Health")}
               >
-                <a>Forex Trading</a>
+                <a>Health</a>
               </div>
               <div
                 className={handleActiveDiv("Politics")}
@@ -434,10 +453,7 @@ const CreateBlog = () => {
                 id="file"
                 ref={inputFile}
                 style={{ display: "none" }}
-                onChange={(e) => {
-                  setFile(e.target.files[0]);
-                  setProgress(true);
-                }}
+                onChange={handleFileChange}
               />
             </div>
           ) : (
@@ -454,10 +470,7 @@ const CreateBlog = () => {
                 id="file"
                 ref={inputFile}
                 style={{ display: "none" }}
-                onChange={(e) => {
-                  setFile(e.target.files[0]);
-                  setProgress(true);
-                }}
+                onChange={handleFileChange}
               />
               <img src={image} className="imagecontainer" />
               <>
@@ -482,9 +495,10 @@ const CreateBlog = () => {
           )}
         </div>
         <button
-          className={"createblogbutton"}
+          className={edit ? "createblogbutton" : "createblogbutton2"}
           type="button"
           onClick={submitBlog}
+          disabled={edit ? false : true}
         >
           {progress ? (
             <span className="loader"></span>

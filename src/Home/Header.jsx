@@ -1,5 +1,5 @@
 import "../App.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
 import { UserContext } from "../Context/Context";
 import { getAuth, signOut } from "firebase/auth";
@@ -11,11 +11,9 @@ import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
 const Header = () => {
   const { user } = useContext(UserContext);
-  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const logout = () => {
     signOut(getAuth(app)).then(() => {
-      setRefresh(true);
       localStorage.removeItem("authUser");
       localStorage.removeItem("admin");
     });
