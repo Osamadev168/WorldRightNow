@@ -74,7 +74,6 @@ const AllBlogs = () => {
   const getSliderData = () => {
     getBlogsForSlider().then((res) => {
       setSliderBlogs(res.data);
-      console.log(sliderBlogs);
     });
   };
   const loadDataPopular = () => {

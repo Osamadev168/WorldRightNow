@@ -8,6 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 Firebase
 ckeditor
+ckeditor
+CustomEditor
 node_modules
 .firebaserc
 firebase.json

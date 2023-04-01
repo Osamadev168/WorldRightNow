@@ -76,19 +76,19 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div8" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div8");
-            setCategory("Politics");
+            setCategory("News");
           }}
         >
-          <div>Politics</div>
+          <div>News</div>
         </div>
         <div
           className={activediv === "div9" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div9");
-            setCategory("Art");
+            setCategory("Hollywood");
           }}
         >
-          <div>Art</div>
+          <div>Hollywood</div>
         </div>
         <div
           className={activediv === "div10" ? "categoryActive" : "category"}
@@ -103,16 +103,16 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div11" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div11");
-            setCategory("Networking");
+            setCategory("Gaming");
           }}
         >
-          <div>Networking</div>
+          <div>Gaming</div>
         </div>
         <div
           className={activediv === "div12" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div12");
-            setCategory("Life Hacks");
+            setCategory("LifeHacks");
           }}
         >
           <div>Life Hacks</div>
@@ -121,19 +121,19 @@ const Categories = ({ setCategory }) => {
           className={activediv === "div13" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div13");
-            setCategory("Crime");
+            setCategory("Travel");
           }}
         >
-          <div>Crime</div>
+          <div>Travel</div>
         </div>
         <div
           className={activediv === "div14" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div14");
-            setCategory("Anime");
+            setCategory("Education");
           }}
         >
-          <div>Anime</div>
+          <div>Education</div>
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@ import Footer from "./Home/Footer.jsx";
 import FooterContainer from "./Home/FooterContainer.jsx";
 import Blog from "./Blog/Blog.jsx";
 import EditBlog from "./Blog/EditBlog";
-import Wrapper from "./Home/Wrapper.jsx";
 import { lazy, useEffect, useState } from "react";
 const CreateBlog = lazy(() => import("./Create Blog/CreateBlog.jsx"));
 import BlogTag from "./Blog/BlogTag";

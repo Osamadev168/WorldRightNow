@@ -1,11 +1,11 @@
 import Send from "../../assets/Send.svg";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
 import { edit_Blog, getBlogData_Update, upload_Image } from "../Api/Api";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import "ckeditor5-custom-build/build/ckeditor";
 const CreateBlog = () => {
   // document title
   document.title = "Update Blog";
@@ -37,25 +37,11 @@ const CreateBlog = () => {
     extraPlugins: [uploadPlugin],
     placeholder: "Start typing your blog post here...",
     mediaEmbed: { previewsInData: true },
-    toolbar: [
-      "Heading",
-      "|",
-      "Bold",
-      "Italic",
-      "Link",
-      "NumberedList",
-      "BulletedList",
-      "outdent",
-      "indent",
-      "insertTable",
-      "|",
-      "BlockQuote",
-      "Undo",
-      "Redo",
-      "|",
-      "MediaEmbed",
-      "ImageUpload",
-    ],
+    wordCount: {
+      onUpdate: (stats) => {
+        setBodyLength(stats.words);
+      },
+    },
     link: {
       decorators: {
         NewTab: {
@@ -262,7 +248,7 @@ const CreateBlog = () => {
         <div className="createblogformcontainer">
           <textarea
             value={blog.description}
-            maxLength={250}
+            maxLength={300}
             className="titleinput descriptioninput"
             placeholder="Description"
             onChange={handleDescriptionChange}
@@ -272,7 +258,7 @@ const CreateBlog = () => {
               Hint: Keep it short and descriptive
             </label>
             <label className="labelcreateblog">
-              {`${charDescription <= 250 ? charDescription : 250}/250`}
+              {`${charDescription <= 300 ? charDescription : 300}/300`}
             </label>
           </div>
         </div>
@@ -303,14 +289,14 @@ const CreateBlog = () => {
               id="addTags"
               onChange={handleTagsChange}
               onKeyDown={handleEnterPress}
-              maxLength={25}
+              maxLength={30}
             />
             <div className="hintcontainer">
               <label className="labelcreateblog">
                 Hint: Keep the tags relevant to the blog
               </label>
               <label className="labelcreateblog">
-                {`${charTags <= 25 ? charTags : 25}/25`}
+                {`${charTags <= 30 ? charTags : 30}/30`}
               </label>
             </div>
           </div>
@@ -395,16 +381,16 @@ const CreateBlog = () => {
                 <a>Health</a>
               </div>
               <div
-                className={handleActiveDiv("Politics")}
-                onClick={() => handleCategory("Politics")}
+                className={handleActiveDiv("News")}
+                onClick={() => handleCategory("News")}
               >
-                <a>Politics</a>
+                <a>News</a>
               </div>
               <div
-                className={handleActiveDiv("Art")}
-                onClick={() => handleCategory("Art")}
+                className={handleActiveDiv("Hollywood")}
+                onClick={() => handleCategory("Hollywood")}
               >
-                <a>Art</a>
+                <a>Hollywood</a>
               </div>
               <div
                 className={handleActiveDiv("Programming")}
@@ -413,10 +399,10 @@ const CreateBlog = () => {
                 <a>Programming</a>
               </div>
               <div
-                className={handleActiveDiv("Networking")}
-                onClick={() => handleCategory("Networking")}
+                className={handleActiveDiv("Travel")}
+                onClick={() => handleCategory("Travel")}
               >
-                <a>Networking</a>
+                <a>Travel</a>
               </div>
               <div
                 className={handleActiveDiv("LifeHacks")}
@@ -425,16 +411,16 @@ const CreateBlog = () => {
                 <a>Life Hacks</a>
               </div>
               <div
-                className={handleActiveDiv("Crime")}
-                onClick={() => handleCategory("Crime")}
+                className={handleActiveDiv("Gaming")}
+                onClick={() => handleCategory("Gaming")}
               >
-                <a>Crime</a>
+                <a>Gaming</a>
               </div>
               <div
-                className={handleActiveDiv("Anime")}
-                onClick={() => handleCategory("Anime")}
+                className={handleActiveDiv("Education")}
+                onClick={() => handleCategory("Education")}
               >
-                <a>Anime</a>
+                <a>Education</a>
               </div>
             </div>
           </div>

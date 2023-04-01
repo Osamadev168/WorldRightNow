@@ -7,7 +7,7 @@ import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
 import { submitPost, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import Editor from "@ckeditor/ckeditor5-build-classic";
+import "ckeditor5-custom-build/build/ckeditor";
 const CreateBlog = () => {
   // document title
   document.title = "Create Blog";
@@ -76,25 +76,11 @@ const CreateBlog = () => {
     extraPlugins: [uploadPlugin],
     placeholder: "Start typing your blog post here...",
     mediaEmbed: { previewsInData: true },
-    toolbar: [
-      "Heading",
-      "|",
-      "Bold",
-      "Italic",
-      "Link",
-      "NumberedList",
-      "BulletedList",
-      "outdent",
-      "indent",
-      "insertTable",
-      "|",
-      "BlockQuote",
-      "Undo",
-      "Redo",
-      "|",
-      "MediaEmbed",
-      "ImageUpload",
-    ],
+    wordCount: {
+      onUpdate: (stats) => {
+        setBodyLength(stats.words);
+      },
+    },
     link: {
       decorators: {
         NewTab: {
@@ -136,7 +122,12 @@ const CreateBlog = () => {
     const data = new FormData();
     data.append("image", file);
     upload_Image(data).then((res) => {
-      setBlog({ ...blog, image: res.data.secure_url, CreatedAt: new Date() });
+      setBlog({
+        ...blog,
+        image: res.data.secure_url,
+        CreatedAt: new Date(),
+        tags: tags,
+      });
       setImage(res.data.secure_url);
       sessionStorage.setItem("image", res.data.secure_url);
     });
@@ -145,6 +136,7 @@ const CreateBlog = () => {
   /// submit blog
   const submitBlog = async () => {
     setLoading(true);
+
     try {
       await submitPost(blog, token).then(async () => {
         setBlog(blogdefaultValues);
@@ -186,13 +178,7 @@ const CreateBlog = () => {
     setCharDescription(e.target.value.length);
   };
   const handleBodyChange = (event, editor) => {
-    setBlog({ ...blog, body: editor.getData() }),
-      setBodyLength(
-        editor
-          .getData()
-          .replace(/<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g, "")
-          .split(" ").length
-      );
+    setBlog({ ...blog, body: editor.getData() });
   };
   const handleActiveDiv = (category) => {
     return activediv === category ? "categoryActive" : "category";
@@ -255,7 +241,7 @@ const CreateBlog = () => {
         <div className="createblogformcontainer">
           <textarea
             value={blog.description}
-            maxLength={250}
+            maxLength={300}
             className="titleinput descriptioninput"
             placeholder="Description"
             onChange={handleDescriptionChange}
@@ -265,7 +251,7 @@ const CreateBlog = () => {
               Hint: Keep it short and concise
             </label>
             <label className="labelcreateblog">
-              {`${charDescription <= 250 ? charDescription : 250}/250`}
+              {`${charDescription <= 300 ? charDescription : 300}/300`}
             </label>
           </div>
         </div>
@@ -275,7 +261,7 @@ const CreateBlog = () => {
           </label>
           <CKEditor
             data={blog.body}
-            editor={Editor}
+            editor={ClassicEditor}
             onChange={handleBodyChange}
             config={options}
           />
@@ -330,16 +316,16 @@ const CreateBlog = () => {
                 className={activediv === "div8" ? "categoryActive" : "category"}
                 onClick={() => {
                   setActiveDiv("div8");
-                  setBlog({ ...blog, category: "Politics" });
+                  setBlog({ ...blog, category: "News" });
                 }}
               >
-                <a>Politics</a>
+                <a>News</a>
               </div>
               <div
-                className={handleActiveDiv("Art")}
-                onClick={() => handleCategoryChange("Art")}
+                className={handleActiveDiv("Gaming")}
+                onClick={() => handleCategoryChange("Gaming")}
               >
-                <a>Art</a>
+                <a>Gaming</a>
               </div>
               <div
                 className={handleActiveDiv("Programming")}
@@ -348,10 +334,10 @@ const CreateBlog = () => {
                 <a>Programming</a>
               </div>
               <div
-                className={handleActiveDiv("Networking")}
-                onClick={() => handleCategoryChange("Networking")}
+                className={handleActiveDiv("Hollywood")}
+                onClick={() => handleCategoryChange("Hollywood")}
               >
-                <a>Networking</a>
+                <a>Hollywood</a>
               </div>
               <div
                 className={handleActiveDiv("LifeHacks")}
@@ -360,14 +346,14 @@ const CreateBlog = () => {
                 <a>Life Hacks</a>
               </div>
               <div
-                className={handleActiveDiv("Crime")}
-                onClick={() => handleCategoryChange("Crime")}
+                className={handleActiveDiv("Education")}
+                onClick={() => handleCategoryChange("Education")}
               >
-                <a>Crime</a>
+                <a>Education</a>
               </div>
               <div
-                className={handleActiveDiv("Anime")}
-                onClick={() => handleCategoryChange("Anime")}
+                className={handleActiveDiv("Travel")}
+                onClick={() => handleCategoryChange("Travel")}
               >
                 <a>Anime</a>
               </div>
@@ -385,7 +371,7 @@ const CreateBlog = () => {
               type="text"
               onChange={handleTagChange}
               onKeyDown={handleEnterPress}
-              maxLength={20}
+              maxLength={30}
               id="addTags"
             />
             <div className="hintcontainer">
@@ -393,7 +379,7 @@ const CreateBlog = () => {
                 Hint: Keep the tags relevant to the blog
               </label>
               <label className="labelcreateblog">
-                {`${charTags <= 20 ? charTags : 20}/20`}
+                {`${charTags <= 30 ? charTags : 30}/30`}
               </label>
             </div>
           </div>

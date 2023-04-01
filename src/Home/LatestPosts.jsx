@@ -1,13 +1,15 @@
 import Slider from "react-slick";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AddView, fetchLatestBlogsHome } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
+import { UserContext } from "../Context/Context";
 const LatestPosts = ({ category }) => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const sliderRef = useRef(null);
+  const { user } = useContext(UserContext);
   const settings = {
     dots: false,
     infinite: false,
@@ -53,6 +55,11 @@ const LatestPosts = ({ category }) => {
       }
     });
   };
+  const handleAddView = (blogs) => {
+    if (user.uid !== blogs.authorId) {
+      AddView(blogs._id);
+    }
+  };
   useEffect(() => {
     getPosts();
   }, [category]);
@@ -87,7 +94,7 @@ const LatestPosts = ({ category }) => {
               return (
                 <article
                   className="PopularCard"
-                  onClick={() => AddView(blogs._id)}
+                  onClick={() => handleAddView(blogs)}
                 >
                   <a href={`/${category}/${title}/${blogs._id}`} key={index}>
                     <div className="imageContainer">
