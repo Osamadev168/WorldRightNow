@@ -8,23 +8,27 @@ const ContextProvider = ({ children }) => {
   const [admin, setAdmin] = useState(false);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
+  const [profilePic, setProfilePic] = useState("");
   const auth = getAuth(app);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      setLoading(true);
-      currentUser.getIdToken(true).then(async (token) => {
+      if (currentUser) {
+        setUser(currentUser);
+        setProfilePic(currentUser.photoURL);
         setLoading(true);
-        setToken(token);
-        UserStatus(token).then((res) => {
-          setAdmin(res.data);
-          setLoading(false);
+        currentUser.getIdToken(true).then(async (token) => {
+          setLoading(true);
+          setToken(token);
+          UserStatus(token).then((res) => {
+            setAdmin(res.data);
+            setLoading(false);
+          });
         });
-      });
 
-      currentUser
-        ? localStorage.setItem("authUser", JSON.stringify(currentUser))
-        : localStorage.removeItem("authUser");
+        currentUser
+          ? localStorage.setItem("authUser", true)
+          : localStorage.removeItem("authUser");
+      }
     });
 
     return () => {
@@ -32,7 +36,7 @@ const ContextProvider = ({ children }) => {
     };
   }, [user]);
   return (
-    <UserContext.Provider value={{ user, admin, token, loading }}>
+    <UserContext.Provider value={{ user, admin, token, loading, profilePic }}>
       {children}
     </UserContext.Provider>
   );

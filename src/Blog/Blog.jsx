@@ -7,6 +7,7 @@ import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
 import { Helmet } from "react-helmet";
+import ReactHtmlParser from "react-html-parser";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -23,7 +24,7 @@ const Blog = () => {
   const [author, setblogAuthor] = useState(blog && blog.author);
   const [refresh, setRefresh] = useState(false);
   const params = useParams();
-  const { admin, token } = useContext(UserContext);
+  const { admin } = useContext(UserContext);
   const id = params._id;
   const fetchBlog = (id) => {
     setLoading(true);
@@ -204,10 +205,7 @@ const Blog = () => {
                 />
               </div>
 
-              <div
-                className="blogBody"
-                dangerouslySetInnerHTML={{ __html: blog.body }}
-              ></div>
+              <div className="blogBody">{ReactHtmlParser(blog.body)}</div>
 
               <Comments
                 blog={blog}

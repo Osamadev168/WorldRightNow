@@ -10,7 +10,6 @@ const CreateBlog = () => {
   // document title
   document.title = "Update Blog";
   //hooks
-  const [edit, setEdit] = useState(false);
   const [tags, setTags] = useState([]);
   const [progress, setProgress] = useState(false);
   const [value, setValue] = useState("");
@@ -112,9 +111,7 @@ const CreateBlog = () => {
     data.append("image", file);
     upload_Image(data).then((res) => {
       setBlog({ ...blog, image: res.data.secure_url, tags: tags });
-      setEdit(true);
       setImage(res.data.secure_url);
-      setProgress(false);
     });
   };
   ///
@@ -122,7 +119,6 @@ const CreateBlog = () => {
   const getBlogData = () => {
     getBlogData_Update(blog_id, token).then((res) => {
       if (res) {
-        setEdit(false);
         setBlog(res.data[0]);
         setTags(res.data[0].tags);
         setImage(res.data[0].image);
@@ -134,6 +130,10 @@ const CreateBlog = () => {
   // update blog
   const submitBlog = async () => {
     setProgress(true);
+    if (blog.tags.length === 0) {
+      blog.tags = tags;
+    }
+    setBlog({ ...blog, tags: tags });
     try {
       await edit_Blog(blog_id, blog, token).then(() => {
         navigate("/dashboard");
@@ -148,7 +148,6 @@ const CreateBlog = () => {
   // other functions
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value) {
-      setEdit(true);
       setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
       setBlog({ ...blog, tags: tags });
       setData(false);
@@ -158,8 +157,8 @@ const CreateBlog = () => {
     }
   };
   const handleCategory = (category) => {
-    setEdit(true);
     setActiveDiv(category);
+
     setBlog({ ...blog, category: category, tags: tags });
   };
   const handleActiveDiv = (category) => {
@@ -171,7 +170,6 @@ const CreateBlog = () => {
       title: e.target.value,
       tags: tags,
     });
-    setEdit(true);
     setChar(e.target.value.length);
   };
   const handleDescriptionChange = (e) => {
@@ -180,12 +178,10 @@ const CreateBlog = () => {
       description: e.target.value,
       tags: tags,
     });
-    setEdit(true);
     setCharDescription(e.target.value.length);
   };
   const handleBodyChange = (event, editor) => {
     setBlog({ ...blog, body: editor.getData(), tags: tags });
-    setEdit(true);
     setBodyLength(
       editor
         .getData()
@@ -194,13 +190,11 @@ const CreateBlog = () => {
     );
   };
   const handleTagsChange = (e) => {
-    setEdit(true);
     setValue(e.target.value);
     setCharTags(e.target.value.length);
   };
   const handleTagRemove = (tag) => {
     setData(false);
-    setEdit(true);
     tags.splice(tags.indexOf(tag), 1);
     setRefresh(!refresh);
   };
@@ -480,12 +474,8 @@ const CreateBlog = () => {
             </div>
           )}
         </div>
-        <button
-          className={edit ? "createblogbutton" : "createblogbutton2"}
-          type="button"
-          onClick={submitBlog}
-          disabled={edit ? false : true}
-        >
+        {/* {blog !== edit && ( */}
+        <button className="createblogbutton" type="button" onClick={submitBlog}>
           {progress ? (
             <span className="loader"></span>
           ) : (
@@ -495,6 +485,7 @@ const CreateBlog = () => {
             </>
           )}
         </button>
+        {/* )} */}
       </div>
     </div>
   );

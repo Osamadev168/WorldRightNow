@@ -10,8 +10,14 @@ import imgWrite from "../../assets/write.svg";
 import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
 const Header = () => {
+  // Hooks
   const { user } = useContext(UserContext);
+  const [isOpen, setOpen] = useState(false);
+  const [profileOpen, profileClose] = useState(false);
+  let profileRef = useRef();
   const navigate = useNavigate();
+  ////
+  // functions
   const logout = () => {
     signOut(getAuth(app)).then(() => {
       localStorage.removeItem("authUser");
@@ -19,33 +25,29 @@ const Header = () => {
     });
     navigate("/account");
   };
-  let profileRef = useRef();
+  const toggleProfile = () => {
+    profileClose(!profileOpen);
+  };
+  const toggleHamburger = () => {
+    setOpen(!isOpen);
+  };
+  //
+  // effect
   useEffect(() => {
     let handler = (e) => {
       if (!profileRef.current.contains(e.target)) {
         profileClose(false);
       }
     };
+    document.body.classList.toggle("noscroll", isOpen);
+
     document.addEventListener("mousedown", handler);
     return () => {
       document.removeEventListener("mousedown", handler);
-    };
-  });
-  const [isOpen, setOpen] = useState(false);
-  const toggleHamburger = () => {
-    setOpen(!isOpen);
-  };
-  useEffect(() => {
-    document.body.classList.toggle("noscroll", isOpen);
-    return () => {
       document.body.classList.remove("noscroll");
     };
   }, [isOpen]);
-  const [profileOpen, profileClose] = useState(false);
-  const toggleProfile = () => {
-    profileClose(!profileOpen);
-  };
-
+  /////
   return (
     <div className="HeaderMainContainer">
       <div className="div1Header">
@@ -262,14 +264,14 @@ const Header = () => {
         <div
           className={`accountContainer ${isOpen ? "menuOpened" : "menuclosed"}`}
         >
-          {user && user !== null ? (
+          {user ? (
             <>
               <div className="profile" ref={profileRef}>
                 <div className="picdropdown" onClick={toggleProfile}>
                   <img
                     referrerPolicy="no-referrer"
                     className="profilepic"
-                    src={user && user.photoURL ? user.photoURL : profilepic}
+                    src={user.photoURL ? user.photoURL : profilepic}
                     alt="user_image"
                     loading="lazy"
                   />

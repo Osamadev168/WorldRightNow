@@ -46,6 +46,7 @@ export const Signup = ({
         })
         .catch((error) => {
           alert(error.message);
+          setLoading(false);
         });
     } else {
       alert("passwords didnt match");

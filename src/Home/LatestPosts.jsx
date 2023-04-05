@@ -58,6 +58,8 @@ const LatestPosts = ({ category }) => {
   const handleAddView = (blogs) => {
     if (user.uid !== blogs.authorId) {
       AddView(blogs._id);
+    } else if (!user) {
+      AddView(blogs._id);
     }
   };
   useEffect(() => {

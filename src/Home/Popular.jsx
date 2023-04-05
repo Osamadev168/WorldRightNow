@@ -58,6 +58,8 @@ const Popular = ({ category }) => {
   const handleAddView = (blog) => {
     if (user.uid !== blog.authorId) {
       AddView(blog._id);
+    } else if (!user) {
+      AddView(blog._id);
     }
   };
   useEffect(() => {
