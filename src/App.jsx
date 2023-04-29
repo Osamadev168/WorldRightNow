@@ -15,6 +15,10 @@ import AllBlogs from "./All Blogs/AllBlogs";
 import Dashboard from "./Dashboards/Dashboard";
 import { Helmet } from "react-helmet";
 import Contact from "./Contact us/contact";
+import Privacy from "./Privacy&Terms/Privacy";
+import Terms from "./Privacy&Terms/Terms";
+import WriteForUs from "./Privacy&Terms/Writeforus";
+import AboutUs from "./Privacy&Terms/AboutUs";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -126,6 +130,42 @@ const App = () => {
             element={
               <>
                 <Contact />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <>
+                <Privacy />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/terms&conditions"
+            element={
+              <>
+                <Terms />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/write-for-us"
+            element={
+              <>
+                <WriteForUs />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/about-us"
+            element={
+              <>
+                <AboutUs />
                 <Footer />
               </>
             }

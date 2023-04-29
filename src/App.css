@@ -166,6 +166,9 @@ body {
   font-size: 16px;
   padding: 8px 35px;
   width: auto;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
 }
 .HeaderMainContainer .accountContainer {
   display: flex;
@@ -3065,5 +3068,33 @@ body {
   }
   100% {
     transform: rotate(180deg);
+  }
+}
+
+.privacy-policy {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #434343;
+  border: #8f15a8 solid 0.3px;
+  border-image: linear-gradient(to right, #8f15a8, #c850c0);
+  border-image-slice: 1;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+}
+@media only screen and (max-width: 768px) {
+  .privacy-policy {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .primaryButton {
+    padding: 8px 20px;
+    white-space: nowrap;
   }
 }

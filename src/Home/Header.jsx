@@ -11,7 +11,7 @@ import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
 const Header = () => {
   // Hooks
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [isOpen, setOpen] = useState(false);
   const [profileOpen, profileClose] = useState(false);
   let profileRef = useRef();
@@ -22,6 +22,7 @@ const Header = () => {
     signOut(getAuth(app)).then(() => {
       localStorage.removeItem("authUser");
       localStorage.removeItem("admin");
+      setUser(null);
     });
     navigate("/account");
   };
@@ -244,16 +245,13 @@ const Header = () => {
           style={{ listStyle: "none" }}
         >
           <li>
-            <a href="/">About us</a>
+            <a href="/about-us">About us</a>
           </li>
           <li>
-            <a href="/">Pricing</a>
+            <a href="/write-for-us">Write for us</a>
           </li>
           <li>
             <a href="/all/blogs">Blogs</a>
-          </li>
-          <li>
-            <a href="/">FAQ's</a>
           </li>
           <li>
             <a href="/contact">Contact us</a>
