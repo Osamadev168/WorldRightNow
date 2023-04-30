@@ -588,17 +588,17 @@ const AllBlogs = () => {
                     className={
                       activediv === "div6" ? "categoryActive" : "category"
                     }
-                    onClick={() => handleCategoryChange("Lifestyle", "div6")}
+                    onClick={() => handleCategoryChange("LifeHacks", "div6")}
                   >
-                    Lifestyle
+                    LifeHacks
                   </span>
                   <span
                     className={
                       activediv === "div7" ? "categoryActive" : "category"
                     }
-                    onClick={() => handleCategoryChange("Business", "div7")}
+                    onClick={() => handleCategoryChange("General", "div7")}
                   >
-                    Business
+                    General
                   </span>
                   <span
                     className={

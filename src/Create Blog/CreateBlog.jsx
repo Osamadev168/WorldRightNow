@@ -1,7 +1,7 @@
 import Send from "../../assets/Send.svg";
 import React from "react";
 import Upload from "../../assets/imageUpload.svg";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, lazy, Suspense } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
@@ -116,6 +116,7 @@ const CreateBlog = () => {
     },
   };
   //
+
   // upload feature image
   const uploadImage = async () => {
     setProgress(true);
@@ -259,12 +260,14 @@ const CreateBlog = () => {
           <label className="createblogbodytext" htmlFor="blogBody">
             Body
           </label>
-          <CKEditor
-            data={blog.body}
-            editor={ClassicEditor}
-            onChange={handleBodyChange}
-            config={options}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <CKEditor
+              data={blog.body}
+              editor={ClassicEditor}
+              onChange={handleBodyChange}
+              config={options}
+            />
+          </Suspense>
           <label className="labelcreateblog">
             Hint: Break the content in several parts
           </label>
