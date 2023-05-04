@@ -19,6 +19,7 @@ import Privacy from "./Privacy&Terms/Privacy";
 import Terms from "./Privacy&Terms/Terms";
 import WriteForUs from "./Privacy&Terms/Writeforus";
 import AboutUs from "./Privacy&Terms/AboutUs";
+import Rss from "./RSS/Rss";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -46,6 +47,7 @@ const App = () => {
           <title>HubbleFeed</title>
           <link rel="canonical" href="https://www.hubblefeed.com" />
         </Helmet>
+
         <Header />
         <Routes>
           <Route
@@ -57,6 +59,7 @@ const App = () => {
               </>
             }
           />
+          <Route path="/rss" element={<Rss />} />
 
           <Route path="/" element={<Home />} />
           <Route

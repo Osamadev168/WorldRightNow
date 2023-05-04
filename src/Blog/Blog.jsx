@@ -60,17 +60,41 @@ const Blog = () => {
   let title = blog.title?.replace(/[^a-zA-Z0-9 ]/g, "-");
   title = title?.replace(/\s+/g, "-");
   let category = blog.category?.replace(/\s+/g, "-");
+  const schema = {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.hubblefeed.com/${category}/${title}/${blog._id}`,
+    },
+    headline: blog.title,
+    description: blog.description,
+    author: {
+      "@type": "Person",
+      name: blog.author,
+    },
+    datePublished: blog.CreatedAt,
+    image: blog.image,
+    publisher: {
+      "@type": "Organization",
+      name: "Hubblefeed",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.hubblefeed.com/Favicon.svg",
+      },
+    },
+  };
   return (
     <>
       <div className="blogMainContainer paddingtop">
         <Helmet>
-          <meta charSet="utf-8" name="description" content={blog.description} />
-          <title>{blog && blog.title}</title>
-
+          <title>{blog.title}</title>
+          <meta name="description" content={blog.description} />
           <link
             rel="canonical"
             href={`https://www.hubblefeed.com/${category}/${title}/${blog._id}`}
           />
+          <script type="application/ld+json">{JSON.stringify(schema)}</script>
         </Helmet>
 
         <div className="blogLeft">

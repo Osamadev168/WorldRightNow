@@ -10,6 +10,15 @@ export const upload_Image = async (image) => {
   }
 };
 
+export const getRssFeed = async () => {
+  try {
+    let response = await axios.get(`${url}/rss`);
+    console.log(response);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
 export const UserStatus = async (token) => {
   try {
     let response = await axios.post(`${url}/admin`, {
