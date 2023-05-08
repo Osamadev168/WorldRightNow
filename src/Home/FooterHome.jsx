@@ -191,12 +191,18 @@ const Footer = () => {
               <rect width="186" height="22" fill="white" />
             </clipPath>
           </defs>
-        </svg>{" "}
+        </svg>
         <div className="div1footer">
-          <a href="/">About us</a>
-          <a href="/">Pricing</a>
+          <a
+            style={{
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+            href="/about-us"
+          >
+            About us
+          </a>
           <a href="/all/blogs">Blogs</a>
-          <a href="/">FAQ's</a>
           <a href="/contact">Contact us</a>
         </div>
       </div>
@@ -214,7 +220,7 @@ const Footer = () => {
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
-              href="/"
+              href="/terms&conditions"
             >
               Terms and Conditions
             </a>
@@ -226,7 +232,7 @@ const Footer = () => {
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
-              href="/"
+              href="/privacy-policy"
             >
               Privacy Policy
             </a>

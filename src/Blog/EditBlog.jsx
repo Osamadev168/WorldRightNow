@@ -1,16 +1,16 @@
 import Send from "../../assets/Send.svg";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
 import { edit_Blog, getBlogData_Update, upload_Image } from "../Api/Api";
-import "../App.css";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import "ckeditor5-custom-build/build/ckeditor";
 const CreateBlog = () => {
-  const [editBlog, setEditBlog] = useState({});
-  const [tags, setTags] = useState([]);
+  // document title
   document.title = "Update Blog";
+  //hooks
+  const [tags, setTags] = useState([]);
   const [progress, setProgress] = useState(false);
   const [value, setValue] = useState("");
   const [data, setData] = useState(true);
@@ -22,34 +22,118 @@ const CreateBlog = () => {
   const [blog, setBlog] = useState({});
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
+  const [bodyLength, setBodyLength] = useState(0);
   const inputFile = useRef(null);
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
   const params = useParams();
+  ///
+  // setting blog id
   const blog_id = params.blogid;
+  ////
+  // config object for text editor
+  const options = {
+    extraPlugins: [uploadPlugin],
+    placeholder: "Start typing your blog post here...",
+    mediaEmbed: { previewsInData: true },
+    wordCount: {
+      onUpdate: (stats) => {
+        setBodyLength(stats.words);
+      },
+    },
+    link: {
+      decorators: {
+        NewTab: {
+          mode: "manual",
+          label: "Open in new tab",
+          attributes: {
+            target: "_blank",
+          },
+        },
+        isExternal: {
+          mode: "manual",
+          label: "No follow",
+          attributes: {
+            rel: "nofollow",
+          },
+        },
+
+        Dofollow: {
+          mode: "manual",
+          label: "Do follow",
+          attributes: {},
+        },
+
+        Sponsored: {
+          mode: "manual",
+          label: "Sponsored",
+
+          attributes: {
+            rel: "sponsored",
+          },
+        },
+      },
+    },
+  };
+  ///
+  // uploadAdapter for text editor
+  function uploadAdapter(loader) {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          const body = new FormData();
+          loader.file.then((file) => {
+            body.append("image", file);
+            upload_Image(body)
+              .then((res) => {
+                resolve({
+                  default: res.data.secure_url,
+                });
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          });
+        });
+      },
+    };
+  }
+  function uploadPlugin(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
+  ///
+  //upload feature image
   const uploadImage = async () => {
     setProgress(true);
     const data = new FormData();
     data.append("image", file);
     upload_Image(data).then((res) => {
-      setBlog({ ...blog, image: res.data.url });
-      setImage(res.data.url);
-      setProgress(false);
+      setBlog({ ...blog, image: res.data.secure_url, tags: tags });
+      setImage(res.data.secure_url);
     });
   };
+  ///
+  // getting blog data
   const getBlogData = () => {
     getBlogData_Update(blog_id, token).then((res) => {
       if (res) {
-        setBlog({ ...blog, tags: res.data[0].tags });
         setBlog(res.data[0]);
-
         setTags(res.data[0].tags);
         setImage(res.data[0].image);
+        setActiveDiv(res.data[0].category);
       }
     });
   };
+  //
+  // update blog
   const submitBlog = async () => {
     setProgress(true);
+    if (blog.tags.length === 0) {
+      blog.tags = tags;
+    }
+    setBlog({ ...blog, tags: tags });
     try {
       await edit_Blog(blog_id, blog, token).then(() => {
         navigate("/dashboard");
@@ -60,6 +144,8 @@ const CreateBlog = () => {
       alert(e.message);
     }
   };
+  //
+  // other functions
   const handleEnterPress = (e) => {
     if (e.key === "Enter" && value) {
       setTags([...tags, value.toLowerCase().trim().replace(/\s+/g, "-")]);
@@ -69,6 +155,52 @@ const CreateBlog = () => {
       setValue("");
       setCharTags(0);
     }
+  };
+  const handleCategory = (category) => {
+    setActiveDiv(category);
+
+    setBlog({ ...blog, category: category, tags: tags });
+  };
+  const handleActiveDiv = (category) => {
+    return activediv === category ? "categoryActive" : "category";
+  };
+  const handleTitleChange = (e) => {
+    setBlog({
+      ...blog,
+      title: e.target.value,
+      tags: tags,
+    });
+    setChar(e.target.value.length);
+  };
+  const handleDescriptionChange = (e) => {
+    setBlog({
+      ...blog,
+      description: e.target.value,
+      tags: tags,
+    });
+    setCharDescription(e.target.value.length);
+  };
+  const handleBodyChange = (event, editor) => {
+    setBlog({ ...blog, body: editor.getData(), tags: tags });
+    setBodyLength(
+      editor
+        .getData()
+        .replace(/<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g, "")
+        .split(" ").length
+    );
+  };
+  const handleTagsChange = (e) => {
+    setValue(e.target.value);
+    setCharTags(e.target.value.length);
+  };
+  const handleTagRemove = (tag) => {
+    setData(false);
+    tags.splice(tags.indexOf(tag), 1);
+    setRefresh(!refresh);
+  };
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    setProgress(true);
   };
   useEffect(() => {
     if (data) {
@@ -95,13 +227,7 @@ const CreateBlog = () => {
             className="titleinput"
             placeholder="Title"
             maxLength={100}
-            onChange={(e) => {
-              setBlog({
-                ...blog,
-                title: e.target.value,
-              });
-              setChar(e.target.value.length);
-            }}
+            onChange={handleTitleChange}
           />
           <div className="hintcontainer">
             <label className="labelcreateblog">
@@ -116,23 +242,17 @@ const CreateBlog = () => {
         <div className="createblogformcontainer">
           <textarea
             value={blog.description}
-            maxLength={250}
+            maxLength={300}
             className="titleinput descriptioninput"
             placeholder="Description"
-            onChange={(e) => {
-              setBlog({
-                ...blog,
-                description: e.target.value,
-              });
-              setCharDescription(e.target.value.length);
-            }}
+            onChange={handleDescriptionChange}
           />
           <div className="hintcontainer">
             <label className="labelcreateblog">
-              Hint: Keep it short and concise
+              Hint: Keep it short and descriptive
             </label>
             <label className="labelcreateblog">
-              {`${charDescription <= 250 ? charDescription : 250}/250`}
+              {`${charDescription <= 300 ? charDescription : 300}/300`}
             </label>
           </div>
         </div>
@@ -141,86 +261,36 @@ const CreateBlog = () => {
           <CKEditor
             data={blog.body}
             editor={ClassicEditor}
-            onChange={(event, editor) =>
-              setBlog({ ...blog, body: editor.getData() })
-            }
-            config={{
-              placeholder: "Start typing your blog post here...",
-              mediaEmbed: { previewsInData: true },
-              toolbar: [
-                "Heading",
-                "|",
-                "Bold",
-                "Italic",
-                "Link",
-                "NumberedList",
-                "BulletedList",
-                "|",
-                "BlockQuote",
-                "Undo",
-                "Redo",
-                "MediaEmbed",
-              ],
-              link: {
-                decorators: {
-                  isExternal: {
-                    mode: "manual",
-                    label: "noopener noreferrer",
-                    callback: (url) => url.startsWith("http://"),
-                    attributes: {
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                    },
-                  },
-
-                  isNofollow: {
-                    mode: "manual",
-                    label: "nofollow",
-                    callback: (url) => url.startsWith("http://"),
-
-                    attributes: {
-                      target: "_blank",
-                      rel: "nofollow",
-                    },
-                  },
-                  Sponsored: {
-                    mode: "manual",
-                    label: "Sponsored",
-                    callback: (url) => url.startsWith("http://"),
-
-                    attributes: {
-                      target: "_blank",
-                      rel: "sponsored",
-                    },
-                  },
-                },
-              },
-            }}
+            onChange={handleBodyChange}
+            config={options}
           />
           <label className="labelcreateblog">
             Hint: Break the content in several parts
           </label>
+          <label className="labelcreateblog">
+            Total Words So far {bodyLength}
+          </label>
         </div>
         <div className="createblogformcontainer tagssectioncontainer">
           <div className="container1">
-            <h4 className="createblogbodytext">Add Tags</h4>
+            <label className="createblogbodytext" htmlFor="addTags">
+              Add Tags
+            </label>
             <input
               className="titleinput tagsinput"
               value={value}
               type="text"
-              onChange={(e) => {
-                setValue(e.target.value);
-                setCharTags(e.target.value.length);
-              }}
+              id="addTags"
+              onChange={handleTagsChange}
               onKeyDown={handleEnterPress}
-              maxLength={20}
+              maxLength={30}
             />
             <div className="hintcontainer">
               <label className="labelcreateblog">
                 Hint: Keep the tags relevant to the blog
               </label>
               <label className="labelcreateblog">
-                {`${charTags <= 20 ? charTags : 20}/20`}
+                {`${charTags <= 30 ? charTags : 30}/30`}
               </label>
             </div>
           </div>
@@ -236,13 +306,7 @@ const CreateBlog = () => {
                   return (
                     <div
                       className="tag"
-                      onClick={() => {
-                        setData(false);
-
-                        tags.splice(tags.indexOf(tag), 1);
-
-                        setRefresh(!refresh);
-                      }}
+                      onClick={() => handleTagRemove(tag)}
                       key={index}
                     >
                       {tag}
@@ -270,138 +334,87 @@ const CreateBlog = () => {
             </div>
           </div>
         </div>
-        <div>{editBlog.tags}</div>
         <div className="createblogformcontainer">
           <h4 className="createblogbodytext">Select a category</h4>
-
           <div className="categoriesmaindiv">
             <div className="div1categories">
               <div
-                className={activediv === "div2" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div2");
-                  setBlog({ ...blog, category: "Technology" });
-                }}
+                className={handleActiveDiv("Technology")}
+                onClick={() => handleCategory("Technology")}
               >
                 <a>Technology</a>
               </div>
               <div
-                className={activediv === "div3" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div3");
-                  setBlog({ ...blog, category: "Sports" });
-                }}
+                className={handleActiveDiv("Sports")}
+                onClick={() => handleCategory("Sports")}
               >
                 <a>Sports</a>
               </div>
               <div
-                className={activediv === "div4" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div4");
-                  setBlog({ ...blog, category: "Science" });
-                }}
+                className={handleActiveDiv("Science")}
+                onClick={() => handleCategory("Science")}
               >
                 <a>Science</a>
               </div>
               <div
-                className={activediv === "div5" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div5");
-                  setBlog({ ...blog, category: "Fashion" });
-                }}
+                className={handleActiveDiv("Fashion")}
+                onClick={() => handleCategory("Fashion")}
               >
                 <a>Fashion</a>
               </div>
               <div
-                className={activediv === "div6" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div6");
-                  setBlog({ ...blog, category: "Artificial Intelligence" });
-                }}
+                className={handleActiveDiv("Artificial Intelligence")}
+                onClick={() => handleCategory("Artificial Intelligence")}
               >
                 <a>Artificial Intelligence</a>
               </div>
               <div
-                className={activediv === "div7" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div7");
-                  setBlog({ ...blog, category: "Forex Trading" });
-                }}
+                className={handleActiveDiv("Health")}
+                onClick={() => handleCategory("Health")}
               >
-                <a>Forex Trading</a>
+                <a>Health</a>
               </div>
               <div
-                className={activediv === "div8" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div8");
-                  setBlog({ ...blog, category: "Politics" });
-                }}
+                className={handleActiveDiv("News")}
+                onClick={() => handleCategory("News")}
               >
-                <a>Politics</a>
+                <a>News</a>
               </div>
               <div
-                className={activediv === "div9" ? "categoryActive" : "category"}
-                onClick={() => {
-                  setActiveDiv("div9");
-                  setBlog({ ...blog, category: "Art" });
-                }}
+                className={handleActiveDiv("Hollywood")}
+                onClick={() => handleCategory("Hollywood")}
               >
-                <a>Art</a>
+                <a>Hollywood</a>
               </div>
               <div
-                className={
-                  activediv === "div10" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div10");
-                  setBlog({ ...blog, category: "Programming" });
-                }}
+                className={handleActiveDiv("Programming")}
+                onClick={() => handleCategory("Programming")}
               >
                 <a>Programming</a>
               </div>
               <div
-                className={
-                  activediv === "div11" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div11");
-                  setBlog({ ...blog, category: "Networking" });
-                }}
+                className={handleActiveDiv("Travel")}
+                onClick={() => handleCategory("Travel")}
               >
-                <a>Networking</a>
+                <a>Travel</a>
               </div>
               <div
-                className={
-                  activediv === "div12" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div12");
-                  setBlog({ ...blog, category: "Life Hacks" });
-                }}
+                className={handleActiveDiv("LifeHacks")}
+                onClick={() => handleCategory("LifeHacks")}
               >
                 <a>Life Hacks</a>
               </div>
               <div
-                className={
-                  activediv === "div13" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div13");
-                  setBlog({ ...blog, category: "Crime" });
-                }}
+                className={handleActiveDiv("Gaming")}
+                onClick={() => handleCategory("Gaming")}
               >
-                <a>Crime</a>
+                <a>Gaming</a>
               </div>
               <div
-                className={
-                  activediv === "div14" ? "categoryActive" : "category"
-                }
-                onClick={() => {
-                  setActiveDiv("div14");
-                  setBlog({ ...blog, category: "Anime" });
-                }}
+                className={handleActiveDiv("Education")}
+                onClick={() => handleCategory("Education")}
               >
-                <a>Anime</a>
+                <a>Education</a>
               </div>
             </div>
           </div>
@@ -420,10 +433,7 @@ const CreateBlog = () => {
                 id="file"
                 ref={inputFile}
                 style={{ display: "none" }}
-                onChange={(e) => {
-                  setFile(e.target.files[0]);
-                  setProgress(true);
-                }}
+                onChange={handleFileChange}
               />
             </div>
           ) : (
@@ -440,10 +450,7 @@ const CreateBlog = () => {
                 id="file"
                 ref={inputFile}
                 style={{ display: "none" }}
-                onChange={(e) => {
-                  setFile(e.target.files[0]);
-                  setProgress(true);
-                }}
+                onChange={handleFileChange}
               />
               <img src={image} className="imagecontainer" />
               <>
@@ -467,11 +474,8 @@ const CreateBlog = () => {
             </div>
           )}
         </div>
-        <button
-          className={"createblogbutton"}
-          type="button"
-          onClick={submitBlog}
-        >
+        {/* {blog !== edit && ( */}
+        <button className="createblogbutton" type="button" onClick={submitBlog}>
           {progress ? (
             <span className="loader"></span>
           ) : (
@@ -481,6 +485,7 @@ const CreateBlog = () => {
             </>
           )}
         </button>
+        {/* )} */}
       </div>
     </div>
   );

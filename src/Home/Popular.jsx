@@ -1,14 +1,15 @@
 import Slider from "react-slick";
-import { useEffect, useRef, useState } from "react";
-import { AddView, fetchDataPopular } from "../Api/Api";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AddView, fetchPopularBlogsHome } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { CircularProgress } from "@mui/material";
+import { UserContext } from "../Context/Context";
 const Popular = ({ category }) => {
   const [blogs, setBlogs] = useState([]);
   const [laoding, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const sliderRef = useRef(null);
+  const { user } = useContext(UserContext);
   const settings = {
     dots: false,
     infinite: false,
@@ -45,7 +46,7 @@ const Popular = ({ category }) => {
   };
   const getBlogs = () => {
     setLoading(true);
-    fetchDataPopular(category, 0, 10).then((res) => {
+    fetchPopularBlogsHome(category).then((res) => {
       setBlogs(res.data);
       setLoading(false);
       if (res.data.length === 0) {
@@ -53,6 +54,13 @@ const Popular = ({ category }) => {
         setMessage("No Data Available!");
       }
     });
+  };
+  const handleAddView = (blog) => {
+    if (user.uid !== blog.authorId) {
+      AddView(blog._id);
+    } else if (!user) {
+      AddView(blog._id);
+    }
   };
   useEffect(() => {
     getBlogs();
@@ -83,17 +91,15 @@ const Popular = ({ category }) => {
               let displayDate = `${displayMonth},${displayYear}`;
               let title = blog.title;
               title = title.replace(/\s+/g, "-");
+              title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+              let category = blog.category;
+              category = category.replace(/\s+/g, "-");
               return (
-                <a
-                  href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                    blog._id
-                  }`}
-                  key={index}
+                <article
+                  className="PopularCard"
+                  onClick={() => handleAddView(blog)}
                 >
-                  <article
-                    className="PopularCard"
-                    onClick={() => AddView(blog._id)}
-                  >
+                  <a href={`/${category}/${title}/${blog._id}`} key={index}>
                     <div className="imageContainer">
                       <img
                         src={blog.image}
@@ -120,8 +126,8 @@ const Popular = ({ category }) => {
                       <h2 className="blogtitle">{blog.title}</h2>
                       <p className="data">{blog.description}</p>
                     </div>
-                  </article>
-                </a>
+                  </a>
+                </article>
               );
             })
           ) : (

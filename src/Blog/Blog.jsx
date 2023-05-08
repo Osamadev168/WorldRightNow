@@ -7,12 +7,12 @@ import Popular from "../Home/Popular";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
 import { Helmet } from "react-helmet";
+import ReactHtmlParser from "react-html-parser";
 import {
   FacebookShareButton,
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
-//Share Icons
 import facebookIcon from "../../assets/facebook-Icon.svg";
 import twitterIcon from "../../assets/twitterIcon.svg";
 import whatsappIcon from "../../assets/whatsappIcon.svg";
@@ -24,7 +24,7 @@ const Blog = () => {
   const [author, setblogAuthor] = useState(blog && blog.author);
   const [refresh, setRefresh] = useState(false);
   const params = useParams();
-  const { admin, token } = useContext(UserContext);
+  const { admin } = useContext(UserContext);
   const id = params._id;
   const fetchBlog = (id) => {
     setLoading(true);
@@ -57,17 +57,44 @@ const Blog = () => {
   let displayMonth = date.substring(4, 10);
   let displayYear = date.substring(10);
   let displayDate = `${displayMonth},${displayYear}`;
-
+  let title = blog.title?.replace(/[^a-zA-Z0-9 ]/g, "-");
+  title = title?.replace(/\s+/g, "-");
+  let category = blog.category?.replace(/\s+/g, "-");
+  const schema = {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.hubblefeed.com/${category}/${title}/${blog._id}`,
+    },
+    headline: blog.title,
+    description: blog.description,
+    author: {
+      "@type": "Person",
+      name: blog.author,
+    },
+    datePublished: blog.CreatedAt,
+    image: blog.image,
+    publisher: {
+      "@type": "Organization",
+      name: "Hubblefeed",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.hubblefeed.com/Favicon.svg",
+      },
+    },
+  };
   return (
     <>
       <div className="blogMainContainer paddingtop">
         <Helmet>
-          <meta charSet="utf-8" name="description" content={blog.description} />
-          <title>{blog && blog.title}</title>
+          <title>{blog.title}</title>
+          <meta name="description" content={blog.description} />
           <link
             rel="canonical"
-            href={`https://www.hubblefeed.com/blog/${blog.title}/${blog._id}`}
+            href={`https://www.hubblefeed.com/${category}/${title}/${blog._id}`}
           />
+          <script type="application/ld+json">{JSON.stringify(schema)}</script>
         </Helmet>
 
         <div className="blogLeft">
@@ -127,7 +154,7 @@ const Blog = () => {
                   <div className="shareIcons">
                     <FacebookShareButton
                       url={window.location.href}
-                      quote={`${blog.title}, ${blog.description}`}
+                      quote={`${blog.title}`}
                     >
                       <button className="shareButton" type="button">
                         <img
@@ -142,7 +169,7 @@ const Blog = () => {
                     <TwitterShareButton
                       url={window.location.href}
                       title={blog.title}
-                      via={blog.description}
+                      via="HubbleFeed"
                     >
                       <button className="shareButton" type="button">
                         <img
@@ -202,10 +229,7 @@ const Blog = () => {
                 />
               </div>
 
-              <div
-                className="blogBody"
-                dangerouslySetInnerHTML={{ __html: blog.body }}
-              ></div>
+              <div className="blogBody">{ReactHtmlParser(blog.body)}</div>
 
               <Comments
                 blog={blog}
@@ -233,10 +257,15 @@ const Blog = () => {
                   let displayDate = `${displayMonth},${displayYear}`;
                   let title = blog.title;
                   title = title.replace(/\s+/g, "-");
+                  title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+                  let category = blog.category;
+                  category = category.replace(/\s+/g, "-");
                   return (
                     <div
                       className="Card"
-                      onClick={() => navigate(`/blogs/${title}/${blog._id}`)}
+                      onClick={() =>
+                        navigate(`/${category}/${title}/${blog._id}`)
+                      }
                       key={index}
                     >
                       <div className="blogContent">

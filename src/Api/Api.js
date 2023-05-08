@@ -9,16 +9,14 @@ export const upload_Image = async (image) => {
     alert(e.message);
   }
 };
-export const getAllBlogs = async (page, limit, category) => {
-  try {
-    let response = await axios.post(
-      `${url}/get/all/blogs/popular/${page}/${limit}`,
-      { category: category }
-    );
 
+export const getRssFeed = async () => {
+  try {
+    let response = await axios.get(`${url}/rss`);
+    console.log(response);
     return response;
   } catch (e) {
-    console.error(e.message);
+    console.log(e);
   }
 };
 export const UserStatus = async (token) => {
@@ -41,6 +39,14 @@ export const fetchDataLatest = async (category, page, limit) => {
   let response = await axios.get(
     `${url}/get/all/blogs/latest/${category}/${page}/${limit}`
   );
+  return response;
+};
+export const fetchLatestBlogsHome = async (category) => {
+  let response = await axios.get(`${url}/blogs/latest/home/${category}`);
+  return response;
+};
+export const fetchPopularBlogsHome = async (category) => {
+  let response = await axios.get(`${url}/blogs/popular/home/${category}`);
   return response;
 };
 export const submitPost = async (blog, token) => {
@@ -122,7 +128,7 @@ export const getBlogData_Update = async (id, token) => {
 };
 export const edit_Blog = async (id, blog, token) => {
   try {
-    await axios.put(`${url}/blog/update/${id}/${token}`, blog);
+    await axios.patch(`${url}/blog/update/${id}/${token}`, blog);
   } catch (e) {
     console.error(e.message);
   }
@@ -137,7 +143,7 @@ export const author_blogs = async (author) => {
 };
 export const UpdateUserData = async (user, uid, displayName, photoURL) => {
   try {
-    await axios.put(`${url}/blog/update`, {
+    await axios.patch(`${url}/blog/update`, {
       authorId: uid,
       authorName: displayName,
       authorImage: user && photoURL,

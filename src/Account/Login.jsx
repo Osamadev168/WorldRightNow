@@ -46,6 +46,7 @@ export const Signup = ({
         })
         .catch((error) => {
           alert(error.message);
+          setLoading(false);
         });
     } else {
       alert("passwords didnt match");
@@ -230,7 +231,12 @@ export const Login = ({
   const loginwithFacebook = () => {
     const auth = getAuth(app);
     const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
+    signInWithPopup(
+      auth,
+      provider.setCustomParameters({
+        prompt: "select_account",
+      })
+    )
       .then(() => {
         navigate("/");
       })

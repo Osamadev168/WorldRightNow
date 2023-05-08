@@ -1,14 +1,15 @@
 import Slider from "react-slick";
-import { useEffect, useRef, useState } from "react";
-import { AddView, fetchDataLatest } from "../Api/Api";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AddView, fetchLatestBlogsHome } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
-import { CircularProgress } from "@mui/material";
+import { UserContext } from "../Context/Context";
 const LatestPosts = ({ category }) => {
-  const [post, setPosts] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const sliderRef = useRef(null);
+  const { user } = useContext(UserContext);
   const settings = {
     dots: false,
     infinite: false,
@@ -45,14 +46,21 @@ const LatestPosts = ({ category }) => {
   };
   const getPosts = () => {
     setLoading(true);
-    fetchDataLatest(category, 0, 10).then((res) => {
-      setPosts(res.data);
+    fetchLatestBlogsHome(category).then((res) => {
+      setBlogs(res.data);
       setLoading(false);
       if (res.data.length === 0) {
         setLoading(false);
         setMessage("No Data Available!");
       }
     });
+  };
+  const handleAddView = (blogs) => {
+    if (user.uid !== blogs.authorId) {
+      AddView(blogs._id);
+    } else if (!user) {
+      AddView(blogs._id);
+    }
   };
   useEffect(() => {
     getPosts();
@@ -70,32 +78,30 @@ const LatestPosts = ({ category }) => {
         <span className="loader"></span>
       ) : (
         <Slider {...settings} ref={sliderRef} className="slider">
-          {post && post.length > 0 ? (
-            post.map((posts, index) => {
+          {blogs && blogs.length > 0 ? (
+            blogs.map((blogs, index) => {
               let wordsPerMinute = 150;
-              let noOfWords = posts.body.split(" ").length;
+              let noOfWords = blogs.body.split(" ").length;
               let readingTime = noOfWords / wordsPerMinute;
               let round = Math.floor(readingTime);
-              let date = new Date(posts.CreatedAt).toDateString();
+              let date = new Date(blogs.CreatedAt).toDateString();
               let displayMonth = date.substring(4, 10);
               let displayYear = date.substring(10);
               let displayDate = `${displayMonth},${displayYear}`;
-              let title = posts.title;
+              let title = blogs.title;
               title = title.replace(/\s+/g, "-");
+              title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+              let category = blogs.category;
+              category = category.replace(/\s+/g, "-");
               return (
-                <a
-                  href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                    posts._id
-                  }`}
-                  key={index}
+                <article
+                  className="PopularCard"
+                  onClick={() => handleAddView(blogs)}
                 >
-                  <article
-                    className="PopularCard"
-                    onClick={() => AddView(posts._id)}
-                  >
+                  <a href={`/${category}/${title}/${blogs._id}`} key={index}>
                     <div className="imageContainer">
                       <img
-                        src={posts.image}
+                        src={blogs.image}
                         className="image"
                         loading="lazy"
                         alt="blog_Image"
@@ -104,7 +110,7 @@ const LatestPosts = ({ category }) => {
                     </div>
 
                     <div className="title">
-                      <h3 className="posttitle">{posts.category}</h3>
+                      <h3 className="posttitle">{blogs.category}</h3>
                       <div className="info">
                         <time pubdate="pubdate">{displayDate}</time>
                         <p>&nbsp;|&nbsp;</p>
@@ -116,11 +122,11 @@ const LatestPosts = ({ category }) => {
                       </div>
                     </div>
                     <div className="description">
-                      <h2 className="blogtitle">{posts.title}</h2>
-                      <p className="data">{posts.description}</p>
+                      <h2 className="blogtitle">{blogs.title}</h2>
+                      <p className="data">{blogs.description}</p>
                     </div>
-                  </article>
-                </a>
+                  </a>
+                </article>
               );
             })
           ) : (

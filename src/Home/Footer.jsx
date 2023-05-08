@@ -193,10 +193,16 @@ const Footer = () => {
           </defs>
         </svg>
         <div className="div1footer">
-          <a>About us</a>
-          <a>Pricing</a>
+          <a
+            style={{
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+            href="/about-us"
+          >
+            About us
+          </a>
           <a href="/all/blogs">Blogs</a>
-          <a>FAQ's</a>
           <a href="/contact">Contact us</a>
         </div>
       </div>
@@ -214,6 +220,7 @@ const Footer = () => {
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
+              href="/terms&conditions"
             >
               Terms and Conditions
             </a>
@@ -225,6 +232,7 @@ const Footer = () => {
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
+              href="/privacy-policy"
             >
               Privacy Policy
             </a>

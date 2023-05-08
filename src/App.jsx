@@ -3,20 +3,23 @@ import Home from "./Home/Home.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Account/Login.jsx";
 import ContextProvider from "./Context/Context.jsx";
-import CreateBlog from "./Create Blog/CreateBlog.jsx";
 import Header from "./Home/Header.jsx";
 import Footer from "./Home/Footer.jsx";
 import FooterContainer from "./Home/FooterContainer.jsx";
 import Blog from "./Blog/Blog.jsx";
 import EditBlog from "./Blog/EditBlog";
-import Wrapper from "./Home/Wrapper.jsx";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
+const CreateBlog = lazy(() => import("./Create Blog/CreateBlog.jsx"));
 import BlogTag from "./Blog/BlogTag";
 import AllBlogs from "./All Blogs/AllBlogs";
 import Dashboard from "./Dashboards/Dashboard";
 import { Helmet } from "react-helmet";
-
 import Contact from "./Contact us/contact";
+import Privacy from "./Privacy&Terms/Privacy";
+import Terms from "./Privacy&Terms/Terms";
+import WriteForUs from "./Privacy&Terms/Writeforus";
+import AboutUs from "./Privacy&Terms/AboutUs";
+import Rss from "./RSS/Rss";
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -42,29 +45,30 @@ const App = () => {
         <Helmet>
           <meta charSet="utf-8" />
           <title>HubbleFeed</title>
-          <link rel="canonical" href="http://mysite.com/example" />
+          <link rel="canonical" href="https://www.hubblefeed.com" />
         </Helmet>
+
+        <Header />
         <Routes>
           <Route
             path="*"
             element={
-              <Wrapper>
-                <Header />
+              <>
                 <InValidRoute />
                 <Footer />
-              </Wrapper>
+              </>
             }
           />
+          <Route path="/rss" element={<Rss />} />
 
           <Route path="/" element={<Home />} />
           <Route
             path="/account"
             element={
-              <Wrapper>
-                <Header />
+              <>
                 <Login />
                 <Footer />
-              </Wrapper>
+              </>
             }
           />
 
@@ -72,11 +76,8 @@ const App = () => {
             path="/createblog"
             element={
               <ProtectedRoutes>
-                <Wrapper>
-                  <Header />
-                  <CreateBlog />
-                  <Footer />
-                </Wrapper>
+                <CreateBlog />
+                <Footer />
               </ProtectedRoutes>
             }
           />
@@ -84,11 +85,8 @@ const App = () => {
             path="/blog/edit/:blogid"
             element={
               <ProtectedRoutes>
-                <Wrapper>
-                  <Header />
-                  <EditBlog />
-                  <Footer />
-                </Wrapper>
+                <EditBlog />
+                <Footer />
               </ProtectedRoutes>
             }
           />
@@ -97,53 +95,82 @@ const App = () => {
             path="/dashboard"
             element={
               <ProtectedRoutes>
-                <Wrapper>
-                  <Header />
-                  <Dashboard />
-                  <Footer />
-                </Wrapper>
+                <Dashboard />
+                <Footer />
               </ProtectedRoutes>
             }
           />
           <Route
-            path="/blogs/:title/:_id"
+            path="/:category/:title/:_id"
             element={
-              <Wrapper>
-                <Header />
+              <>
                 <Blog />
                 <FooterContainer />
-              </Wrapper>
+              </>
             }
           />
           <Route
             path="/blog/:tags"
             element={
-              <Wrapper>
-                <Header />
+              <>
                 <BlogTag />
                 <FooterContainer />
-              </Wrapper>
+              </>
             }
           />
 
           <Route
             path="/all/blogs"
             element={
-              <Wrapper>
-                <Header />
+              <>
                 <AllBlogs />
                 <FooterContainer />
-              </Wrapper>
+              </>
             }
           />
           <Route
             path="/contact"
             element={
-              <Wrapper>
-                <Header />
+              <>
                 <Contact />
                 <Footer />
-              </Wrapper>
+              </>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <>
+                <Privacy />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/terms&conditions"
+            element={
+              <>
+                <Terms />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/write-for-us"
+            element={
+              <>
+                <WriteForUs />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/about-us"
+            element={
+              <>
+                <AboutUs />
+                <Footer />
+              </>
             }
           />
         </Routes>

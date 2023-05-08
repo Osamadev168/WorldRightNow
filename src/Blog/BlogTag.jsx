@@ -29,7 +29,7 @@ const BlogTag = () => {
         <meta
           charSet="utf-8"
           name="description"
-          content={`Explore a wealth of information on ${tag} with [Website Name]. Our curated collection of articles and blog posts provides insights and expertise on all aspects of ${tag}. Stay up-to-date with the latest trends and ideas in ${tag} by browsing our comprehensive resources today.`}
+          content={`Explore a wealth of information on ${tag} with HubbleFeed. Our curated collection of articles and blog posts provides insights and expertise on all aspects of ${tag}. Stay up-to-date with the latest trends and ideas in ${tag} by browsing our comprehensive resources today.`}
         />
         <title>Explore</title>
         <link rel="canonical" href={`https://www.hubblefeed.com/blog/${tag}`} />
@@ -67,6 +67,9 @@ const BlogTag = () => {
                 let displayDate = `${displayMonth},${displayYear}`;
                 let title = blog.title;
                 title = title.replace(/\s+/g, "-");
+                title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+                let category = blog.category;
+                category = category.replace(/\s+/g, "-");
                 return (
                   <article
                     key={index}
@@ -75,9 +78,7 @@ const BlogTag = () => {
                     }}
                   >
                     <a
-                      href={`/blogs/${title.replace(/[^a-zA-Z0-9 ]/g, "-")}/${
-                        blog._id
-                      }`}
+                      href={`/${category}/${title}/${blog._id}`}
                       className="blogCard"
                     >
                       <div className="blogCardLeftWrapper">

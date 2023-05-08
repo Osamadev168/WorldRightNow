@@ -54,7 +54,7 @@ const UserDashboard = () => {
     data.append("image", file);
     upload_Image(data).then(async (res) => {
       updateProfile(user, {
-        photoURL: res.data.url,
+        photoURL: res.data.secure_url,
       }).then(() => {
         UpdateUserData(user, user.uid, user.displayName, user.photoURL);
         setTimeout(() => {
@@ -234,6 +234,9 @@ const UserDashboard = () => {
           let blog_status = blogs.approved === true ? true : false;
           let title = blogs.title;
           title = title.replace(/\s+/g, "-");
+          title = title.replace(/[^a-zA-Z0-9 ]/g, "-");
+          let category = blogs.category;
+          category = category.replace(/\s+/g, "-");
           return loader ? (
             <span className="loader"></span>
           ) : (
