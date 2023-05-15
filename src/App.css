@@ -2984,7 +2984,11 @@ body {
     text-align: center;
   }
   .heroSection {
-    height: 100vh;
+    height: 120vh;
+  }
+  .heroParentContainer {
+    max-height: 120vh;
+    height: 120vh;
   }
   .heroParentContainer .heroImageContainer {
     left: 50%;
