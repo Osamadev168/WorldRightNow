@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^37.1.0",
     "@ckeditor/ckeditor5-react": "^5.1.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.5",
     "axios": "^1.2.4",
+    "ckeditor5-custom-build": "file:CustomEditor",
     "firebase": "^9.16.0",
     "firebase-tools": "^11.24.1",
     "framer-motion": "^10.12.10",

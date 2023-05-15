@@ -5,8 +5,7 @@ import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
 import { edit_Blog, getBlogData_Update, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import classicEditor from "@ckeditor/ckeditor5-build-classic";
-
+import "ckeditor5-custom-build/build/ckeditor";
 const CreateBlog = () => {
   // document title
   document.title = "Update Blog";

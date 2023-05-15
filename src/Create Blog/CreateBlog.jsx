@@ -7,7 +7,7 @@ import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
 import { submitPost, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import classicEditor from "@ckeditor/ckeditor5-build-classic";
+import "ckeditor5-custom-build/build/ckeditor";
 const CreateBlog = () => {
   // document title
   document.title = "Create Blog";
@@ -263,7 +263,7 @@ const CreateBlog = () => {
           <Suspense fallback={<div>Loading...</div>}>
             <CKEditor
               data={blog.body}
-              editor={classicEditor}
+              editor={ClassicEditor}
               onChange={handleBodyChange}
               config={options}
             />
