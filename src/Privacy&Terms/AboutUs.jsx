@@ -11,6 +11,7 @@ import React from "react";
 import { staggerContainer, fadeIn } from "../utils/motion";
 import ServiceCard from "../Home/ServiceCard";
 import FAQ from "../../src/Home/FAQ";
+import aboutBG from "../../assets/abouthero.webp";
 
 const AboutUs = () => {
   return (
@@ -21,6 +22,7 @@ const AboutUs = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
+        style={{ backgroundImage: `url(${aboutBG})` }}
       >
         <motion.h1
           className="aboutHeroHeading"
