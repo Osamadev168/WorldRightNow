@@ -20,6 +20,9 @@ import Terms from "./Privacy&Terms/Terms";
 import WriteForUs from "./Privacy&Terms/Writeforus";
 import AboutUs from "./Privacy&Terms/AboutUs";
 import Rss from "./RSS/Rss";
+import Pricing from "./Pricing/pricing";
+import FAQ from "./Home/FAQ";
+
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
   useEffect(() => {
@@ -33,7 +36,7 @@ const ProtectedRoutes = ({ children }) => {
 const InValidRoute = () => {
   return (
     <div style={{ margin: 160 }}>
-      <h1>Not found :(</h1>
+      <h1>Not found</h1>
     </div>
   );
 };
@@ -44,7 +47,7 @@ const App = () => {
       <BrowserRouter>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>HubbleFeed</title>
+          <title>Hubble Feed</title>
           <link rel="canonical" href="https://www.hubblefeed.com" />
         </Helmet>
 
@@ -169,7 +172,25 @@ const App = () => {
             element={
               <>
                 <AboutUs />
-                <Footer />
+                <FooterContainer />
+              </>
+            }
+          />
+          <Route
+            path="/pricing"
+            element={
+              <>
+                <Pricing margin={"150px"} />
+                <FooterContainer />
+              </>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <>
+                <FAQ data={faqData} margin={"150px"} />
+                <FooterContainer />
               </>
             }
           />
@@ -178,4 +199,35 @@ const App = () => {
     </ContextProvider>
   );
 };
+
+//FAQ data
+const faqData = [
+  {
+    question: "How do you ensure that your content is SEO optimized?",
+    answer:
+      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+  },
+  {
+    question:
+      "What topics do you cover in your blog and guest posting services?",
+    answer:
+      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+  },
+  {
+    question:
+      "How long does it take to receive a completed blog post or guest article?",
+    answer:
+      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+  },
+  {
+    question: "Can I choose the topics for my blog or guest posts?",
+    answer:
+      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+  },
+  {
+    question: "Can you create content for any industry or niche?",
+    answer:
+      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+  },
+];
 export default App;

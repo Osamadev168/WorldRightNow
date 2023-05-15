@@ -5,7 +5,8 @@ import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
 import { edit_Blog, getBlogData_Update, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import "ckeditor5-custom-build/build/ckeditor";
+import classicEditor from "@ckeditor/ckeditor5-build-classic";
+
 const CreateBlog = () => {
   // document title
   document.title = "Update Blog";
@@ -260,7 +261,7 @@ const CreateBlog = () => {
           <h4 className="createblogbodytext">Body</h4>
           <CKEditor
             data={blog.body}
-            editor={ClassicEditor}
+            editor={classicEditor}
             onChange={handleBodyChange}
             config={options}
           />

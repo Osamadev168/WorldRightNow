@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&display=swap";
+
 body {
   background-color: #f9f9f9;
 }
@@ -24,18 +26,26 @@ body {
 }
 
 .HeaderMainContainer {
+  width: 100%;
+  min-height: 10vh;
+  border-bottom: 1px solid rgba(231, 231, 231, 0);
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  transition: all 0.25s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.HeaderMainContainer .headerContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 0 5%;
-  min-height: 8vh;
-  border-bottom: 1px solid #e7e7e7;
-  background-color: #f9f9f9;
-  position: fixed;
-  top: 0;
-  z-index: 100;
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 .HeaderMainContainer .div1Header {
   display: flex;
@@ -108,12 +118,12 @@ body {
   width: 35px;
   height: 35px;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .HeaderMainContainer .profile .profiledropdown {
   position: absolute;
@@ -161,15 +171,6 @@ body {
   padding: 0px;
   gap: 24px;
 }
-.HeaderMainContainer .div3Header .primaryButton,
-.HeaderMainContainer .div3Header .secondaryButton {
-  font-size: 16px;
-  padding: 8px 35px;
-  width: auto;
-  display: inline-block;
-  margin: 0 auto;
-  text-align: center;
-}
 .HeaderMainContainer .accountContainer {
   display: flex;
   flex-direction: row;
@@ -177,7 +178,45 @@ body {
   padding: 0px;
   gap: 24px;
 }
-.HeaderMainContainer .hamburger {
+.HeaderMainContainer .accountContainer .headerButton {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px 35px;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 33px;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+  background: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
+  color: #ffffff;
+}
+.HeaderMainContainer .accountContainer .headerButton:hover {
+  color: #fc2c7e;
+  background: rgba(255, 255, 255, 0.5450980392);
+  box-shadow: inset 0 0 0 1.5px #fc2c7e;
+  transition: all 200ms ease-out;
+}
+
+.lightHeader .div1Header .div2Header a {
+  color: #e3e3e3;
+}
+.lightHeader .div1Header .div2Header a:hover {
+  color: #ffffff;
+}
+.lightHeader .profile .picdropdown svg path {
+  fill: rgba(255, 255, 255, 0.7058823529);
+}
+
+.scrolled {
+  border-bottom: 1px solid #e7e7e7;
+  background-color: #f9f9f9;
+  min-height: 8vh;
+}
+
+.hamburger {
   width: 30px;
   height: 15px;
   display: flex;
@@ -186,8 +225,8 @@ body {
   cursor: pointer;
   display: none;
 }
-.HeaderMainContainer .hamburger .line1,
-.HeaderMainContainer .hamburger .line2 {
+.hamburger .line1,
+.hamburger .line2 {
   width: 100%;
   height: 2px;
   background: #fc2c7e;
@@ -195,35 +234,141 @@ body {
   transition: transform 0.3s ease-out;
 }
 
-.hamburger.burgerOpened .line1 {
+.burgerOpened .line1 {
   transform: rotate(-45deg) translate(-1px, 8px);
 }
 
-.hamburger.burgerOpened .line2 {
+.burgerOpened .line2 {
   transform: rotate(45deg) translate(-1px, -8px);
 }
 
+.heroParentContainer {
+  max-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+.heroParentContainer .heroImageContainer {
+  z-index: 20;
+  width: 55%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.heroParentContainer .heroImageContainer .heroImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  max-width: 100%;
+  z-index: 10;
+}
+.heroParentContainer .heroImageContainer .HoveringCard {
+  width: 195px;
+  height: 122px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1.5px solid rgba(160, 44, 252, 0.2);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  border-radius: 8px;
+  position: absolute;
+  bottom: 30%;
+  right: 57%;
+  z-index: 11;
+  animation: upDown 3s infinite ease-out;
+}
+.heroParentContainer .heroImageContainer .HoveringCard .cardNav {
+  display: flex;
+  border-bottom: 1.5px solid rgba(160, 44, 252, 0.2);
+  gap: 5px;
+  padding: 5px 10px;
+}
+.heroParentContainer .heroImageContainer .HoveringCard .cardNav .cardDot {
+  width: 4px;
+  height: 4px;
+  background: rgba(160, 44, 252, 0.25);
+  border-radius: 100%;
+}
+.heroParentContainer .heroImageContainer .HoveringCard .hoveringCardText {
+  width: 88%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+.heroParentContainer .heroImageContainer .HoveringCard .hoveringCardText .textLeft {
+  font-weight: 500;
+  font-size: 14px;
+  color: #140421;
+}
+.heroParentContainer .heroImageContainer .HoveringCard .hoveringCardText .textRight {
+  font-weight: 700;
+  font-size: 14px;
+  color: #140421;
+}
+.heroParentContainer .heroImageContainer .HoveringCard .cardChart {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+.heroParentContainer .heroImageContainer .HoveringCardRight {
+  bottom: 63%;
+  right: 11%;
+  z-index: 9;
+  border: 1.5px solid rgba(252, 44, 126, 0.25);
+  animation-delay: 1.5s;
+}
+.heroParentContainer .heroImageContainer .HoveringCardRight .cardNav {
+  border-bottom: 1.5px solid rgba(252, 44, 126, 0.25);
+}
+.heroParentContainer .heroImageContainer .HoveringCardRight .cardNav .cardDot {
+  background: rgba(252, 44, 126, 0.25);
+}
+
+@keyframes upDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.textContainer {
+  overflow: hidden;
+  display: inline-block;
+  margin-top: -15px;
+}
+.textContainer .textBlock {
+  display: inline-block;
+}
+
 .heroContainer {
-  max-width: 90%;
+  width: 90%;
+  max-width: 1300px;
   margin: auto;
   display: flex;
   align-items: center;
   justify-items: center;
   min-height: 100vh;
+  z-index: 21;
+  position: relative;
 }
 .heroContainer .mainContainerBanner .bannerdiv1 {
-  width: 55%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
 .heroContainer .mainContainerBanner .bannerdiv1 .text1banner {
-  font-size: 55px;
+  font-size: 3.8vw;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 800;
   color: #220327;
 }
-.heroContainer .mainContainerBanner .bannerdiv1 .text1banner span {
+.heroContainer .mainContainerBanner .bannerdiv1 .text1banner .gradientText {
   background: linear-gradient(91.79deg, #fc2c7e -0.15%, #a02cfc 54.18%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -233,8 +378,8 @@ body {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 1.25vw;
+  line-height: 1.875vw;
   color: #404040;
   margin-top: 10px;
 }
@@ -243,6 +388,451 @@ body {
   flex-direction: row;
   gap: 30px;
   margin-top: 40px;
+}
+
+.servicesSection {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.servicesSection .servicesCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-top: 50px;
+  max-width: 1200px;
+}
+.servicesSection .servicesCards .cardContainer {
+  position: relative;
+}
+.servicesSection .servicesCards .cardContainer:hover .servicesCard {
+  transform: scale(1.07);
+}
+.servicesSection .servicesCards .cardContainer:hover .servicesCard::before {
+  opacity: 1;
+}
+.servicesSection .servicesCards .cardContainer:hover .servicesCard .cardNav::before {
+  opacity: 1;
+}
+.servicesSection .servicesCards .cardContainer:hover .servicesCard .cardNav .cardDot {
+  background: #220327;
+}
+.servicesSection .servicesCards .cardContainer:hover .cardShadow {
+  opacity: 1;
+}
+.servicesSection .servicesCards .cardContainer .cardShadow {
+  width: 80%;
+  height: 120px;
+  background: linear-gradient(106deg, rgba(252, 44, 126, 0.2) -4.71%, rgba(160, 44, 252, 0.3) 106.09%);
+  filter: blur(26.1963px);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.25s ease-out;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard {
+  border-radius: 12px 12px 15px 15px;
+  border: 0.5px solid #d8d8d8;
+  background: linear-gradient(106deg, #f9f9f9 31.18%, #f9f9f9 106.09%);
+  overflow: hidden;
+  transition: all 0.25s ease-out;
+  position: relative;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(106deg, #f5dbed 31.18%, #e1bef6 106.09%);
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.25s ease-out;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardNav {
+  position: relative;
+  height: 20px;
+  border-bottom: 0.5px solid #d8d8d8;
+  border-radius: 12px 12px 0px 0px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 0px 20px;
+  transition: all 0.25s ease-out;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardNav::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(106deg, rgba(252, 44, 126, 0.15) -4.71%, rgba(160, 44, 252, 0.3) 106.09%);
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.25s ease-out;
+  left: 0;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardNav .cardDot {
+  width: 6px;
+  height: 6px;
+  background: #848484;
+  border-radius: 100%;
+  transition: all 1s ease-out;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 18px;
+  height: 170px;
+  justify-content: center;
+  gap: 8px;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardContent .cardIcon {
+  width: 37px;
+  height: 32px;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardContent .cardTitle {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 26px;
+  color: #220327;
+}
+.servicesSection .servicesCards .cardContainer .servicesCard .cardContent .cardText {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #220327;
+  margin-top: -9px;
+}
+
+.paragraph {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #404040;
+  max-width: 845px;
+}
+
+.featuresSection {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.featuresSection .featuresCardsSection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "item1 item1 item2 item3" "item4 item4 item4 item4";
+  grid-gap: 20px;
+  margin-top: 40px;
+}
+.featuresSection .featuresCardsSection .featuresCard {
+  background-color: #f4f4f4;
+  border-radius: 25px;
+  padding: 60px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.featuresSection .featuresCardsSection .featuresCard h3 {
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 38px;
+  color: #220327;
+}
+.featuresSection .featuresCardsSection .featuresCard .macbook {
+  position: absolute;
+  width: 100%;
+  right: -150px;
+  bottom: -100px;
+}
+.featuresSection .featuresCardsSection .featuresCard .macbook2 {
+  position: absolute;
+  width: 65%;
+  right: -100px;
+  bottom: -150px;
+}
+.featuresSection .featuresCardsSection .featuresCard .phone {
+  position: absolute;
+  width: 100%;
+  right: -40px;
+  top: -180px;
+}
+.featuresSection .featuresCardsSection .featuresCard .plansContainer {
+  position: absolute;
+  width: 190%;
+  top: 50px;
+  right: -185px;
+}
+.featuresSection .featuresCardsSection .featuresCard .plansContainer .plan {
+  width: 100%;
+  position: absolute;
+}
+.featuresSection .featuresCardsSection .card1 {
+  grid-area: item1;
+  height: 410px;
+}
+.featuresSection .featuresCardsSection .card2 {
+  grid-area: item2;
+  padding: 40px 30px;
+  display: flex;
+  align-items: flex-end;
+}
+.featuresSection .featuresCardsSection .card2 h3 {
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 32px;
+}
+.featuresSection .featuresCardsSection .card3 {
+  grid-area: item3;
+  padding: 40px 30px;
+}
+.featuresSection .featuresCardsSection .card3 h3 {
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 32px;
+}
+.featuresSection .featuresCardsSection .card4 {
+  grid-area: item4;
+  padding: 80px 50px;
+}
+
+.pricingSection {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+.pricingSection .plansSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-top: 40px;
+}
+.pricingSection .plansSection .plan1 {
+  border-radius: 15px 15px 25px 25px;
+  padding: 1px;
+  transition: all 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.pricingSection .plansSection .plan1:hover {
+  padding: 1.5px;
+  transform: scale(1.04) !important;
+}
+.pricingSection .plansSection .plan1:hover .normalPlan {
+  opacity: 0;
+}
+.pricingSection .plansSection .plan1:hover .planNav .navDot {
+  background: #fc2c7e;
+}
+.pricingSection .plansSection .plan1:hover .planContent .planButton {
+  width: 100%;
+  transform: scaleX(1.05);
+}
+.pricingSection .plansSection .plan1:hover .planContent .planButton .gradientContainer {
+  color: #ffffff;
+  background: transparent;
+  width: 100%;
+}
+.pricingSection .plansSection .plan1 .hoveredPlan {
+  background: linear-gradient(146.83deg, #fc2c7e -10.54%, #a02cfc 110.52%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.pricingSection .plansSection .plan1 .normalPlan {
+  background: linear-gradient(146.83deg, #d8d8d8 -10.54%, #d8d8d8 110.52%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.3s ease-out;
+}
+.pricingSection .plansSection .plan1 .planNav {
+  display: flex;
+  gap: 8px;
+  padding: 10px 25px;
+  background: #f9f9f9;
+  border-radius: 13px 13px 0px 0px;
+  margin-bottom: 1px;
+}
+.pricingSection .plansSection .plan1 .planNav .navDot {
+  width: 6px;
+  height: 6px;
+  background: #848484;
+  border-radius: 100%;
+  transition: all 0.3s ease-out;
+}
+.pricingSection .plansSection .plan1 .planContent {
+  padding: 30px 25px;
+  padding-bottom: 40px;
+  background: #f9f9f9;
+  border-radius: 0px 0px 23px 23px;
+}
+.pricingSection .plansSection .plan1 .planContent .planName {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+  color: #220327;
+  margin-bottom: 2px;
+}
+.pricingSection .plansSection .plan1 .planContent .planPrice {
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 46px;
+  background: linear-gradient(95.71deg, #fc2c7e -6.49%, #a02cfc 111.02%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 30px;
+}
+.pricingSection .plansSection .plan1 .planContent .planDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 45px;
+}
+.pricingSection .plansSection .plan1 .planContent .planDescription .descriptionPoint {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.pricingSection .plansSection .plan1 .planContent .planDescription .descriptionPoint p {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #220327;
+}
+.pricingSection .plansSection .plan1 .planContent .planButton {
+  width: 100%;
+  background: linear-gradient(90.61deg, #fc2c7e -5.7%, #a02cfc 106.3%);
+  border-radius: 30px;
+  padding: 1.5px;
+  transition: all 0.3s ease-out;
+}
+.pricingSection .plansSection .plan1 .planContent .planButton .gradientContainer {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 20px;
+  color: #220327;
+  background: #f9f9f9;
+  width: 100%;
+  border-radius: 30px;
+  padding: 7px;
+  display: grid;
+  place-items: center;
+  transition: all 0.3s ease-out;
+}
+.pricingSection .plansSection .plan2 {
+  background: linear-gradient(146.83deg, #fc2c7e -10.54%, #a02cfc 110.52%);
+  padding: 1.5px;
+}
+.pricingSection .plansSection .plan2 .planNav2 {
+  background: #f9f9f9;
+  border-radius: 13px 13px 0px 0px;
+  margin-bottom: 1.5px;
+}
+.pricingSection .plansSection .plan2 .planNav2 .navDot {
+  background: #263238;
+}
+.pricingSection .plansSection .plan2 .planContent2 {
+  background: #f9f9f9;
+  border-radius: 0px 0px 23px 23px;
+}
+
+.faqSection {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+.faqSection .faqItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 55px;
+}
+.faqSection .faqItemsContainer .faqItem .questionContainer {
+  display: flex;
+  justify-content: space-between;
+  background: #f9f9f9;
+  border: 0.5px solid #d8d8d8;
+  border-radius: 13px;
+  padding: 20px 40px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+.faqSection .faqItemsContainer .faqItem .questionContainer .numberQuestion {
+  display: flex;
+  align-items: center;
+}
+.faqSection .faqItemsContainer .faqItem .questionContainer .numberQuestion .faqNumber {
+  width: 35px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+  color: #220327;
+}
+.faqSection .faqItemsContainer .faqItem .questionContainer .numberQuestion .faqQuestion {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #220327;
+}
+.faqSection .faqItemsContainer .faqItem .questionContainer .up {
+  transform: rotate(180deg);
+}
+.faqSection .faqItemsContainer .faqItem .questionContainer .arrow {
+  transition: all 0.4s ease-out;
+}
+.faqSection .faqItemsContainer .faqItem .faqAnswer {
+  position: relative;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 28px;
+  color: #3d3d3d;
+  background: #f2f2f2;
+  border: 0.5px solid #d8d8d8;
+  border-radius: 0px 0px 15px 15px;
+  padding: 50px 15% 30px 75px;
+  margin-top: -10px;
+  z-index: -1;
+  transition: all 0.3s ease-out;
+}
+.faqSection .faqItemsContainer .faqItem .expanded {
+  opacity: 1;
+  visibility: visible;
+  padding: 50px 15% 30px 75px;
+}
+.faqSection .faqItemsContainer .faqItem .collapsed {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  padding: 0px 15% 0px 75px;
 }
 
 .primaryButton,
@@ -272,24 +862,32 @@ body {
 }
 
 .secondaryButton {
-  box-shadow: inset 0 0 0 1.5px #000000;
-  color: #000000;
-}
-.secondaryButton:hover {
-  background: #fc2c7e;
-  color: #ffffff;
-  box-shadow: inset 0 0 0 1.5px #fc2c7e;
+  padding: 1.5px;
+  background-image: linear-gradient(265.52deg, #fc2c7e 0%, #a02cfc 100%);
   transition: all 200ms ease-out;
+}
+.secondaryButton div {
+  background-color: #f5f5f5;
+  padding: 10px 40px;
+  border-radius: 40px;
+  transition: all 200ms ease-out;
+  color: #220327;
+}
+.secondaryButton:hover div {
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .categoriesmaindiv {
   width: 90%;
+  max-width: 1300px;
   margin: auto;
   font-family: "Montserrat";
   font-size: small;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 60px;
 }
 .categoriesmaindiv .div1categories,
 .categoriesmaindiv .div2categories {
@@ -331,6 +929,7 @@ body {
 
 .mainPopularContainer {
   width: 90%;
+  max-width: 1300px;
   margin: auto;
   margin-top: 50px;
   font-family: "Montserrat";
@@ -370,7 +969,7 @@ body {
   width: 100%;
   height: 176px;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   border-radius: 12px 12px 0px 0px;
   transition: transform 250ms ease-in-out;
 }
@@ -456,8 +1055,8 @@ body {
   justify-content: center;
   border: 1px solid transparent;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .sliderButtons .nextButton:hover,
 .sliderButtons .prevButton:hover {
@@ -471,6 +1070,7 @@ body {
 
 .informationmaincontainer {
   width: 90%;
+  max-width: 1300px;
   margin: auto;
   margin-bottom: 5em;
 }
@@ -486,63 +1086,104 @@ body {
   color: #141a31;
 }
 
-.div1Info,
-.div2Info,
-.div3Info {
+.stepsContainer {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  margin-top: 60px;
+}
+.stepsContainer .step {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
+  width: 100%;
+  gap: 120px;
 }
-.div1Info .infoContent,
-.div2Info .infoContent,
-.div3Info .infoContent {
-  width: 48%;
+.stepsContainer .step .stepText {
+  flex: 1;
 }
-
-.div2Info {
-  margin: 30px 0;
-}
-
-.vector1 {
-  width: 100px;
-  height: 89.98px;
-}
-
-.text1 {
-  font-family: "Montserrat";
-  font-style: normal;
+.stepsContainer .step .stepText .stepHeading {
   font-weight: 800;
   font-size: 30px;
-  color: #000000;
+  line-height: 37px;
+  color: #220327;
 }
-
-.text2 {
-  font-family: "Montserrat";
-  font-style: normal;
+.stepsContainer .step .stepText .stepDescription {
   font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 23px;
+  margin-top: 8px;
   color: #5f5f5f;
 }
-
-.vectorContainer1,
-.vectorContainer2 {
-  width: 52%;
+.stepsContainer .step .stepAnimation {
+  flex: 1;
+  height: 270px;
+  background: #f4f4f4;
+  border-radius: 15px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.vectorContainer1 {
-  justify-content: flex-end;
-  padding-right: 2.5em;
+.stepsContainer .step .stepAnimation .animationContainer {
+  width: 85%;
 }
-
-.vectorContainer2 {
-  justify-content: flex-start;
-  padding-left: 2.5em;
+.stepsContainer .step .stepAnimation .animationContainer .upperContent .blogAnim {
+  margin-top: 0 !important;
+}
+.stepsContainer .step .stepAnimation .animationContainer .upperContent .dataInput:last-child {
+  margin-top: 15px;
+}
+.stepsContainer .step .stepAnimation .animationContainer .upperContent .dataInput .nameHeading {
+  width: 56px;
+  height: 13px;
+  background: #e4e4e4;
+  border-radius: 20px;
+  transform-origin: left;
+}
+.stepsContainer .step .stepAnimation .animationContainer .upperContent .dataInput .nameInput {
+  width: 100%;
+  height: 40px;
+  background: #e4e4e4;
+  border-radius: 37px;
+  margin-top: 10px;
+  transform-origin: left;
+}
+.stepsContainer .step .stepAnimation .animationContainer .upperContent .dataInput .titleInput {
+  width: 100%;
+  height: 32px;
+  transform-origin: center;
+}
+.stepsContainer .step .stepAnimation .animationContainer .upperContent .dataInput .blogInput {
+  height: 86px;
+  border-radius: 10px;
+  margin-top: 12px;
+  transform-origin: center;
+}
+.stepsContainer .step .stepAnimation .animationContainer .lowerButton {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(90.75deg, #a02cfc -2.9%, #fc2c7e 102.91%);
+  border-radius: 77px;
+  margin-top: 20px;
+  display: grid;
+  place-items: center;
+  transform-origin: left;
+}
+.stepsContainer .step .stepAnimation .animationContainer .firstButton {
+  margin-top: 0;
+}
+.stepsContainer .step .stepAnimation .animationContainer .secondButton {
+  margin-top: 25px;
+}
+.stepsContainer .step .stepAnimation .animationContainer .centerButton {
+  transform-origin: center;
 }
 
 .contacthome {
   width: 90%;
+  max-width: 1300px;
   margin: auto;
   padding: 0px;
   gap: 200px;
@@ -641,6 +1282,7 @@ body {
 
 .div2footer {
   width: 90%;
+  max-width: 1300px;
   margin: auto;
   position: relative;
   margin-bottom: 30px;
@@ -662,6 +1304,7 @@ body {
   align-items: center;
   font-family: "Montserrat";
   width: 90%;
+  max-width: 1300px;
   margin: auto;
   margin-top: 300px;
   color: #f1f1f1;
@@ -881,12 +1524,7 @@ body {
   display: flex;
   gap: 10px;
 }
-.blogMainContainer
-  .blogRight
-  .blogRightContent
-  .authorBlogs
-  .Card
-  .blogContent {
+.blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
   flex: 7;
 }
 .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
@@ -894,7 +1532,7 @@ body {
   height: 70px;
   background-size: cover;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   border-radius: 5px;
   margin: 0;
 }
@@ -946,12 +1584,7 @@ body {
   text-decoration: none;
   color: inherit;
 }
-.blogMainContainer
-  .blogRight
-  .blogRightContent
-  .blogTags
-  .tagsContainer
-  .tag:hover {
+.blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag:hover {
   background: rgba(0, 0, 0, 0.05);
   box-shadow: none;
 }
@@ -1038,13 +1671,6 @@ body {
 .blogBody p {
   font-size: 17px;
   color: #515151;
-  margin-top: 5px;
-  line-height: 24px;
-}
-
-.blogBody a {
-  font-size: 17px;
-  color: #f15b5b;
   margin-top: 5px;
   line-height: 24px;
 }
@@ -1413,21 +2039,13 @@ body {
   cursor: pointer;
   position: relative;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .profilePic
-  .circularProgress {
+.dashboardContainer .userSettingContainer .userInfo .profilePic .circularProgress {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .profilePic
-  .imageEditButton {
+.dashboardContainer .userSettingContainer .userInfo .profilePic .imageEditButton {
   background: #000000;
   width: 100%;
   height: 100%;
@@ -1441,15 +2059,11 @@ body {
   color: #ffffff;
   background: rgba(0, 0, 0, 0.7);
   -webkit-backdrop-filter: blur(7.5px);
-  backdrop-filter: blur(7.5px);
+          backdrop-filter: blur(7.5px);
   opacity: 0;
   transition: all 200ms ease-out;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .profilePic:hover
-  .imageEditButton {
+.dashboardContainer .userSettingContainer .userInfo .profilePic:hover .imageEditButton {
   opacity: 1;
 }
 .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer {
@@ -1457,89 +2071,31 @@ body {
   flex-direction: column;
   gap: 10px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  p,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  p {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer p,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer p {
   font-weight: 500;
   font-size: 18px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userEmail,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userName,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userEmail,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userName {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userEmail,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userEmail,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
   font-weight: 700;
   font-size: 18px;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userName,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userName {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
   border: none;
   background: none;
 }
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userNameContainer
-  .userNameButton,
-.dashboardContainer
-  .userSettingContainer
-  .userInfo
-  .userCredentialContainer
-  .userEmailContainer
-  .userNameButton {
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userNameButton,
+.dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userNameButton {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1579,12 +2135,7 @@ body {
   width: 60%;
   gap: 20px;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  h2 {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
   font-size: 28px;
   font-weight: 800;
   line-height: 34px;
@@ -1597,20 +2148,10 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  h2:hover {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2:hover {
   text-decoration: underline;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogTitleDescription
-  p {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -1625,50 +2166,24 @@ body {
   gap: 20px;
   align-items: center;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .status {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .status {
   padding: 10px 25px;
   border-radius: 50px;
   font-size: 18px;
   font-weight: 700;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .underreview {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .underreview {
   color: #000000;
   background-color: #ffa800;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .active {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .active {
   color: #ffffff;
   background-color: #009006;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .dateTime {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime {
   display: flex;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogInfo
-  .blogStatusDateTime
-  .dateTime
-  p {
+.dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime .dateTime p {
   color: #140421;
   font-size: 16px;
   font-weight: 600;
@@ -1686,72 +2201,22 @@ body {
   align-items: center;
   gap: 25px;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .delete,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .edit,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .views,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .comments,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .delete,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .edit,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .views,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .comments {
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .delete,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .edit,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .views,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .delete,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .edit,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .views,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 16px;
   font-weight: 600;
 }
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogOptions
-  .comments,
-.dashboardContainer
-  .blogsContainer
-  .blogCard
-  .blogOptionsStats
-  .blogStats
-  .comments {
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogOptions .comments,
+.dashboardContainer .blogsContainer .blogCard .blogOptionsStats .blogStats .comments {
   margin: 0;
 }
 
@@ -1873,7 +2338,7 @@ body {
   max-height: 215px;
   margin: 0;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
 .AllBlogsContainer .heroSlideshow .slide .blogInfo {
   flex: 5.5;
@@ -1894,12 +2359,7 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.AllBlogsContainer
-  .heroSlideshow
-  .slide
-  .blogInfo
-  .blogTitleDescription
-  h2:hover {
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription h2:hover {
   text-decoration: underline;
 }
 .AllBlogsContainer .heroSlideshow .slide .blogInfo .blogTitleDescription p {
@@ -1913,12 +2373,7 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-.AllBlogsContainer
-  .heroSlideshow
-  .slide
-  .blogInfo
-  .imageAuthorName
-  .blogCategory {
+.AllBlogsContainer .heroSlideshow .slide .blogInfo .imageAuthorName .blogCategory {
   color: #fc2c7e;
   font-weight: 600;
 }
@@ -2063,12 +2518,7 @@ body {
 .tagsContainerMain .tagsLeft .blogsContainer .blogCard .imageAuthorName {
   margin-top: -15px;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .imageAuthorName
-  .blogCategory {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .imageAuthorName .blogCategory {
   color: #fc2c7e;
 }
 .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeftWrapper {
@@ -2078,21 +2528,10 @@ body {
 .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
   flex: 7.5;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .blogCardLeft
-  .titleandDescriptionImage {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage {
   margin-top: 10px;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .blogCardLeft
-  .titleandDescriptionImage
-  .blogTitle {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
   font-weight: 800;
   font-size: 22px;
   line-height: 27px;
@@ -2102,13 +2541,7 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.tagsContainerMain
-  .tagsLeft
-  .blogsContainer
-  .blogCard
-  .blogCardLeft
-  .titleandDescriptionImage
-  .blogDescription {
+.tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogDescription {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -2220,10 +2653,7 @@ body {
   margin-top: 15px;
   border-radius: 5px;
 }
-.skeletonContainer
-  .skeletonFirstSection
-  .skeletonTextSection
-  .skeletonDescription {
+.skeletonContainer .skeletonFirstSection .skeletonTextSection .skeletonDescription {
   width: 100%;
   height: 30px;
   margin-top: 10px;
@@ -2250,7 +2680,144 @@ body {
   border-radius: 3px;
 }
 
+.aboutHero {
+  width: 100%;
+  height: 80vh;
+  background-image: url(/assets/About\ Hero.webp);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+}
+.aboutHero .aboutHeroHeading {
+  max-width: 820px;
+  font-weight: 700;
+  font-size: 55px;
+  line-height: 70px;
+  color: #ffffff;
+}
+
+.ourStory,
+.ourVision {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+  gap: 50px;
+  max-width: 1300px;
+}
+.ourStory .imageCard,
+.ourVision .imageCard {
+  flex: 1;
+  border-radius: 0px 0px 20px 20px;
+  overflow: hidden;
+}
+.ourStory .imageCard .cardNav,
+.ourVision .imageCard .cardNav {
+  border: 0.5px solid #d8d8d8;
+  border-radius: 12px 12px 0px 0px;
+  display: flex;
+  gap: 7px;
+  padding: 10px 25px;
+}
+.ourStory .imageCard .cardNav .dot,
+.ourVision .imageCard .cardNav .dot {
+  width: 6px;
+  height: 6px;
+  background: #848484;
+  border-radius: 100%;
+}
+.ourStory .imageCard img,
+.ourVision .imageCard img {
+  width: 100%;
+}
+.ourStory .textSection,
+.ourVision .textSection {
+  flex: 1;
+}
+.ourStory .textSection .textHeading,
+.ourVision .textSection .textHeading {
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 51px;
+  color: #220327;
+}
+.ourStory .textSection .textDescription,
+.ourVision .textSection .textDescription {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 30px;
+  color: #404040;
+}
+
+@media only screen and (min-width: 1500px) {
+  .heroContainer .mainContainerBanner .bannerdiv1 {
+    min-width: 65%;
+  }
+}
 @media only screen and (max-width: 1024px) {
+  .ourStory,
+  .ourVision {
+    width: 90%;
+  }
+  .servicesSection .servicesCards {
+    gap: 35px;
+  }
+  .servicesSection .servicesCards .cardContainer .servicesCard .cardContent .cardText {
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard h3 {
+    font-size: 26px;
+    line-height: 33px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .macbook {
+    right: -150px;
+    bottom: -50px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .phone {
+    right: -30px;
+    top: -110px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .plansContainer {
+    top: 80px;
+    right: -120px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .macbook2 {
+    right: -85px;
+    bottom: -80px;
+  }
+  .featuresSection .featuresCardsSection .card1 {
+    height: 350px;
+  }
+  .featuresSection .featuresCardsSection .card2,
+  .featuresSection .featuresCardsSection .card3 {
+    padding: 40px 20px;
+  }
+  .featuresSection .featuresCardsSection .card2 h3,
+  .featuresSection .featuresCardsSection .card3 h3 {
+    font-size: 22px;
+    line-height: 27px;
+  }
+  .stepsContainer {
+    width: 100%;
+  }
+  .pricingSection .plansSection {
+    gap: 25px;
+  }
+  .pricingSection .plansSection .plan1 .planContent .planDescription .descriptionPoint p {
+    font-size: 12px;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCard {
+    bottom: 20%;
+    right: 52%;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCardRight {
+    bottom: 63%;
+    right: 11%;
+  }
   .HeaderMainContainer .div1Header .div2Header {
     gap: 30px;
   }
@@ -2312,21 +2879,11 @@ body {
     gap: 8px;
     flex-direction: column;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .authorBlogs
-    .Card
-    .blogContent {
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
     flex: 7.5;
     order: 2;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .authorBlogs
-    .Card
-    .blogImage {
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
     width: 80px;
     height: 50px;
     order: 1;
@@ -2337,12 +2894,7 @@ body {
   .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer {
     gap: 12px;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .blogTags
-    .tagsContainer
-    .tag {
+  .blogMainContainer .blogRight .blogRightContent .blogTags .tagsContainer .tag {
     padding: 6px 12px;
     font-size: 10px;
   }
@@ -2365,10 +2917,7 @@ body {
   .skeletonContainer .skeletonFirstSection .skeletonTextSection {
     flex: 7;
   }
-  .skeletonContainer
-    .skeletonFirstSection
-    .skeletonImageSection
-    .skeletonImage {
+  .skeletonContainer .skeletonFirstSection .skeletonImageSection .skeletonImage {
     width: 200px;
     height: 120px;
   }
@@ -2404,15 +2953,124 @@ body {
   .HeaderMainContainer .div1Header .menuOpened {
     transform: translateX(0%);
   }
-  .HeaderMainContainer .hamburger {
+  .hamburger {
     display: flex;
   }
 }
 @media only screen and (max-width: 768px) {
+  .aboutHero .aboutHeroHeading {
+    font-size: 32px;
+    max-width: 500px;
+    line-height: 48px;
+  }
+  .ourStory,
+  .ourVision {
+    width: 70%;
+    flex-direction: column;
+  }
+  .ourStory .imageCard,
+  .ourVision .imageCard {
+    order: 2;
+  }
+  .ourStory .textSection,
+  .ourVision .textSection {
+    order: 1;
+  }
+  .ourStory .textSection .textHeading,
+  .ourVision .textSection .textHeading {
+    text-align: center;
+  }
+  .ourStory .textSection .textDescription,
+  .ourVision .textSection .textDescription {
+    text-align: center;
+  }
   .heroSection {
-    background-image: url("./assets/BgTablet.webp") !important;
-    background-size: cover;
-    background-position: bottom;
+    background-image: url(/assets/herobg\ Table.webp) !important;
+    height: 100vh;
+  }
+  .heroParentContainer .heroImageContainer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .heroParentContainer .heroImageContainer .HoveringCard {
+    bottom: 12%;
+    right: 60%;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCardRight {
+    bottom: 28%;
+    right: -12%;
+  }
+  .servicesSection .servicesCards {
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .servicesSection .servicesCards .cardContainer .servicesCard .cardContent .cardTitle {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 3px;
+  }
+  .servicesSection .servicesCards .cardContainer .servicesCard .cardContent .cardText {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .featuresSection .featuresCardsSection {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "item1 item1 item1 item2 item2" "item3 item3 item4 item4 item4";
+  }
+  .featuresSection .featuresCardsSection .featuresCard .macbook {
+    right: -140px;
+    bottom: -20px;
+    width: 105%;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .phone {
+    right: -50px;
+    top: -125px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .plansContainer {
+    top: 40px;
+    right: -145px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .macbook2 {
+    right: -160px;
+    bottom: -95px;
+    width: 135%;
+  }
+  .featuresSection .featuresCardsSection .featuresCard h3 {
+    font-size: 22px;
+    line-height: 27px;
+  }
+  .featuresSection .featuresCardsSection .card1 {
+    padding: 40px 40px 160px 40px;
+  }
+  .featuresSection .featuresCardsSection .card2,
+  .featuresSection .featuresCardsSection .card3 h3 {
+    line-height: 27px;
+  }
+  .featuresSection .featuresCardsSection .card4 {
+    padding: 30px 30px 160px 30px;
+  }
+  .stepsContainer .step {
+    gap: 40px;
+  }
+  .stepsContainer .step .stepText .stepHeading {
+    font-size: 24px;
+  }
+  .stepsContainer .step .stepText .stepDescription {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 3px;
+  }
+  .pricingSection .plansSection {
+    grid-template-columns: 1fr;
+    max-width: 375px;
+    margin: 0 auto;
+    margin-top: 40px;
+  }
+  .pricingSection .plansSection .plan2 {
+    order: 1 !important;
+  }
+  .pricingSection .plansSection .plan1 {
+    order: 2;
   }
   .heroContainer {
     align-items: flex-start;
@@ -2423,7 +3081,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 190px;
   }
   .heroContainer .mainContainerBanner .bannerdiv1 {
     width: 100%;
@@ -2437,7 +3095,9 @@ body {
   }
   .infoMainText {
     font-size: 38px;
-    margin-bottom: 40px;
+  }
+  .paragraph {
+    width: 90%;
   }
   .div1Info .infoContent,
   .div2Info .infoContent,
@@ -2589,20 +3249,10 @@ body {
     width: 80%;
     align-items: center;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    h2 {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
     text-align: center;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    p {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
     text-align: center;
   }
   .dashboardContainer .blogsContainer .blogCard .blogInfo .blogStatusDateTime {
@@ -2673,20 +3323,10 @@ body {
   .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card {
     flex-direction: row;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .authorBlogs
-    .Card
-    .blogContent {
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogContent {
     order: 1;
   }
-  .blogMainContainer
-    .blogRight
-    .blogRightContent
-    .authorBlogs
-    .Card
-    .blogImage {
+  .blogMainContainer .blogRight .blogRightContent .authorBlogs .Card .blogImage {
     order: 2;
   }
 }
@@ -2707,6 +3347,13 @@ body {
   }
 }
 @media only screen and (max-width: 590px) {
+  .heroContainer .mainContainerBanner .bannerdiv1 .text1banner {
+    font-size: 2rem;
+  }
+  .heroContainer .mainContainerBanner .bannerdiv1 .text2banner {
+    font-size: 14px;
+    line-height: 23px;
+  }
   .heroContainer .mainContainerBanner .bannerdiv2 {
     flex-direction: column;
     gap: 15px;
@@ -2717,6 +3364,10 @@ body {
   .secondaryButton {
     width: 80%;
   }
+  .secondaryButton div {
+    width: 100%;
+    text-align: center;
+  }
   .loginButton {
     width: 100%;
   }
@@ -2726,14 +3377,7 @@ body {
   .dashboardContainer .userSettingContainer .userInfo {
     flex-direction: column;
   }
-  .TagsContainerParent
-    .tagsContainerMain
-    .tagsLeft
-    .blogsContainer
-    .blogCard
-    .blogCardLeft
-    .titleandDescriptionImage
-    .blogTitle {
+  .TagsContainerParent .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
     font-size: 20px;
   }
 }
@@ -2756,52 +3400,21 @@ body {
     max-width: 100%;
     margin-top: 150px;
   }
-  .heroSection {
-    background: none;
-  }
   .div1 {
     padding: 3.125em 3em;
   }
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userNameContainer,
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userEmailContainer {
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer {
     flex-direction: column;
     align-items: center;
     gap: 5px;
   }
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userNameContainer
-    p,
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userEmailContainer
-    p {
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer p,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer p {
     font-size: 14px;
   }
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userNameContainer
-    .userName,
-  .dashboardContainer
-    .userSettingContainer
-    .userInfo
-    .userCredentialContainer
-    .userEmailContainer
-    .userName {
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userNameContainer .userName,
+  .dashboardContainer .userSettingContainer .userInfo .userCredentialContainer .userEmailContainer .userName {
     text-align: center;
     font-size: 14px;
   }
@@ -2812,10 +3425,7 @@ body {
     width: 150px;
     height: 100px;
   }
-  .skeletonContainer
-    .skeletonFirstSection
-    .skeletonImageSection
-    .skeletonImage {
+  .skeletonContainer .skeletonFirstSection .skeletonImageSection .skeletonImage {
     width: 150px;
     height: 100px;
   }
@@ -2828,8 +3438,127 @@ body {
   }
 }
 @media only screen and (max-width: 425px) {
+  .ourStory,
+  .ourVision {
+    width: 90%;
+  }
+  .ourStory .textSection .textHeading,
+  .ourVision .textSection .textHeading {
+    font-size: 32px;
+  }
+  .ourStory .textSection .textDescription,
+  .ourVision .textSection .textDescription {
+    font-size: 14px;
+    line-height: 24px;
+  }
   .heroContainer .mainContainerBanner {
-    margin-top: 80px;
+    margin-top: 120px;
+  }
+  .heroParentContainer .heroImageContainer {
+    width: 80%;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCard {
+    width: 150px;
+    height: 94px;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCard .cardChart {
+    bottom: -12px;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCard .hoveringCardText .textLeft {
+    font-size: 10px;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCard .hoveringCardText .textRight {
+    font-size: 10px;
+  }
+  .heroParentContainer .heroImageContainer .HoveringCardRight {
+    bottom: 24%;
+    right: -4%;
+  }
+  .HeaderMainContainer .div1Header .logoHeader {
+    width: 150px;
+  }
+  .servicesSection .servicesCards {
+    grid-template-columns: 1fr;
+  }
+  .featuresSection .featuresCardsSection {
+    grid-template-columns: 1fr;
+    grid-template-areas: "item1" "item2" "item3" "item4";
+  }
+  .featuresSection .featuresCardsSection .featuresCard .macbook {
+    right: -137px;
+    bottom: -25px;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .phone {
+    right: -31px;
+    top: -175px;
+    width: 75%;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .plansContainer {
+    top: 10px;
+    right: -120px;
+    width: 145%;
+  }
+  .featuresSection .featuresCardsSection .featuresCard .macbook2 {
+    right: -150px;
+    bottom: -65px;
+  }
+  .featuresSection .featuresCardsSection .card1 {
+    height: 285px;
+    padding: 25px 25px;
+  }
+  .featuresSection .featuresCardsSection .card2 {
+    height: 346px;
+    padding: 25px 25px;
+  }
+  .featuresSection .featuresCardsSection .card3 {
+    height: 320px;
+    padding: 25px 25px;
+  }
+  .featuresSection .featuresCardsSection .card4 {
+    height: 300px;
+    padding: 25px 25px;
+  }
+  .stepsContainer {
+    margin-top: 30px;
+  }
+  .stepsContainer .step {
+    flex-direction: column;
+  }
+  .stepsContainer .step .stepText {
+    order: 1;
+  }
+  .stepsContainer .step .stepText .stepHeading {
+    text-align: center;
+  }
+  .stepsContainer .step .stepText .stepDescription {
+    text-align: center;
+  }
+  .stepsContainer .step .stepAnimation {
+    order: 2;
+    width: 100%;
+    padding: 30px 0px;
+  }
+  .faqSection .faqItemsContainer .faqItem .questionContainer {
+    padding: 20px 20px;
+  }
+  .faqSection .faqItemsContainer .faqItem .questionContainer .numberQuestion {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .faqSection .faqItemsContainer .faqItem .questionContainer .numberQuestion .faqNumber {
+    min-width: 20px;
+    font-size: 17px;
+  }
+  .faqSection .faqItemsContainer .faqItem .questionContainer .numberQuestion .faqQuestion {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .faqSection .faqItemsContainer .faqItem .faqAnswer {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .faqSection .faqItemsContainer .faqItem .expanded {
+    padding: 30px 30px 30px 30px;
   }
   .categoriesmaindiv .div1categories .category {
     padding: 8px 15px;
@@ -2846,8 +3575,8 @@ body {
     font-size: 24px;
   }
   .infoMainText {
-    font-size: 32px;
-    line-height: 42px;
+    font-size: 26px;
+    line-height: 38px;
   }
   .text1 {
     font-size: 28px;
@@ -2934,21 +3663,11 @@ body {
   .dashboardContainer .blogsContainer .blogCard .blogInfo {
     width: 100%;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    h2 {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription h2 {
     font-size: 20px;
     line-height: 28px;
   }
-  .dashboardContainer
-    .blogsContainer
-    .blogCard
-    .blogInfo
-    .blogTitleDescription
-    p {
+  .dashboardContainer .blogsContainer .blogCard .blogInfo .blogTitleDescription p {
     font-size: 14px;
     line-height: 20px;
   }
@@ -2975,23 +3694,11 @@ body {
   .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft {
     flex: 7.5;
   }
-  .tagsContainerMain
-    .tagsLeft
-    .blogsContainer
-    .blogCard
-    .blogCardLeft
-    .titleandDescriptionImage
-    .blogTitle {
+  .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogTitle {
     font-size: 18px;
     line-height: 25px;
   }
-  .tagsContainerMain
-    .tagsLeft
-    .blogsContainer
-    .blogCard
-    .blogCardLeft
-    .titleandDescriptionImage
-    .blogDescription {
+  .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogCardLeft .titleandDescriptionImage .blogDescription {
     font-size: 12px;
   }
   .tagsContainerMain .tagsLeft .blogsContainer .blogCard .blogImage {
@@ -2999,10 +3706,7 @@ body {
     width: 100px;
     height: 100px;
   }
-  .skeletonContainer
-    .skeletonFirstSection
-    .skeletonImageSection
-    .skeletonImage {
+  .skeletonContainer .skeletonFirstSection .skeletonImageSection .skeletonImage {
     width: 100px;
     height: 100px;
   }
@@ -3027,74 +3731,4 @@ body {
     font-size: 14px;
     line-height: 22px;
   }
-} /*# sourceMappingURL=App.css.map */
-
-.loader {
-  width: 2.2em;
-  height: 2.2em;
-  display: block;
-  position: relative;
-  animation: spinRing 1425ms linear infinite;
-}
-.loader::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  height: auto;
-  width: auto;
-  border: 3.5px solid #8f15a8;
-  border-radius: 50%;
-  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 12.5%);
-  animation: spinRingInner 1425ms cubic-bezier(0.77, 0, 0.175, 1) infinite;
-}
-@keyframes spinRing {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes spinRingInner {
-  0% {
-    transform: rotate(-180deg);
-  }
-  50% {
-    transform: rotate(-160deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-
-.privacy-policy {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  color: #434343;
-  border: #8f15a8 solid 0.3px;
-  border-image: linear-gradient(to right, #8f15a8, #c850c0);
-  border-image-slice: 1;
-  border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
-}
-@media only screen and (max-width: 768px) {
-  .privacy-policy {
-    font-size: 14px;
-    line-height: 20px;
-    padding: 8px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .primaryButton {
-    padding: 8px 20px;
-    white-space: nowrap;
-  }
-}
+}/*# sourceMappingURL=App.css.map */
