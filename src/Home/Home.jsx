@@ -243,31 +243,29 @@ const Home = () => {
 //FAQ data
 const faqData = [
   {
-    question: "How do you ensure that your content is SEO optimized?",
+    question: "What is Hubble Feed and how can it help my business?",
     answer:
-      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+      "Hubble Feed is a comprehensive blogging solution designed to help businesses and individuals grow their online presence. By providing a platform for creating, managing, and publishing SEO-optimized blogs, Hubble Feed can attract new audiences, increase website traffic, and boost revenue.",
   },
   {
-    question:
-      "What topics do you cover in your blog and guest posting services?",
+    question: "How can Hubble Feed help attract an audience?",
     answer:
-      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+      "Hubble Feed utilizes top-quality, SEO-optimized content to attract new readers and reach your target audience effectively. Our platform also provides the ability to tailor-make solutions to fit your unique content requirements.",
   },
   {
-    question:
-      "How long does it take to receive a completed blog post or guest article?",
+    question: "How does Hubble Feed drive organic growth and engagement?",
     answer:
-      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+      "Hubble Feed uses SEO excellence to drive organic growth and engagement. This involves optimizing your blog posts to be easily discovered by search engines, resulting in more traffic to your blog and increased engagement from your audience.",
   },
   {
-    question: "Can I choose the topics for my blog or guest posts?",
+    question: "What are the custom packages offered by Hubble Feed?",
     answer:
-      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+      "Hubble Feed offers custom packages to suit your budget and content requirements. Whether you're a small business or an individual blogger, we have packages that can cater to your unique needs.",
   },
   {
-    question: "Can you create content for any industry or niche?",
+    question: "How user-friendly is the Hubble Feed platform?",
     answer:
-      "To ensure high-quality content, a small publishing fee is required. You can pay the fee before or after submitting your blog, and our team will review your payment within an hour. Once your payment is confirmed, your blog will be published and visible to our engaged readership.",
+      "Hubble Feed has an intuitive interface that makes it easy to create, manage, and publish content. It also offers a personal dashboard where you can monitor all of your published and unpublished blogs.",
   },
 ];
 

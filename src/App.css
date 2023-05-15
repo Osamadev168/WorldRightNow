@@ -2683,7 +2683,6 @@ body {
 .aboutHero {
   width: 100%;
   height: 80vh;
-  background-image: url(/assets/About\ Hero.webp);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -2985,7 +2984,6 @@ body {
     text-align: center;
   }
   .heroSection {
-    background-image: url(/assets/herobg\ Table.webp) !important;
     height: 100vh;
   }
   .heroParentContainer .heroImageContainer {
