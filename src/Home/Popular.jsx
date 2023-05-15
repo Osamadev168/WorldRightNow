@@ -55,13 +55,7 @@ const Popular = ({ category }) => {
       }
     });
   };
-  const handleAddView = (blog) => {
-    if (user.uid !== blog.authorId) {
-      AddView(blog._id);
-    } else if (!user) {
-      AddView(blog._id);
-    }
-  };
+
   useEffect(() => {
     getBlogs();
   }, [category]);
@@ -97,7 +91,7 @@ const Popular = ({ category }) => {
               return (
                 <article
                   className="PopularCard"
-                  onClick={() => handleAddView(blog)}
+                  onClick={() => AddView(blog._id)}
                 >
                   <a href={`/${category}/${title}/${blog._id}`} key={index}>
                     <div className="imageContainer">

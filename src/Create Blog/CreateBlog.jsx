@@ -366,7 +366,7 @@ const CreateBlog = () => {
         <div className="createblogformcontainer tagssectioncontainer">
           <div className="container1">
             <label className="createblogbodytext" htmlFor="addTags">
-              Add Tags
+              Add Tags (press enter to add a tag)
             </label>
             <input
               className="titleinput tagsinput"
