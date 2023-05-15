@@ -3033,9 +3033,11 @@ $cardTransition2: all 0.3s ease-out;
     }
   }
   .heroSection {
-    height: 100vh;
+    height: 120vh;
   }
   .heroParentContainer {
+    max-height: 120vh;
+    height: 120vh;
     .heroImageContainer {
       left: 50%;
       transform: translateX(-50%);
