@@ -4,6 +4,8 @@ import { AddView, fetchLatestBlogsHome } from "../Api/Api";
 import next from "../../assets/next.svg";
 import prev from "../../assets/Previous.svg";
 import { UserContext } from "../Context/Context";
+import { motion } from "framer-motion";
+import { staggerContainer, fadeIn } from "../utils/motion";
 const LatestPosts = ({ category }) => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -66,7 +68,13 @@ const LatestPosts = ({ category }) => {
     getPosts();
   }, [category]);
   return (
-    <div className="mainPopularContainer">
+    <motion.div
+      className="mainPopularContainer"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.25 }}
+    >
       <div className="titleCategory">
         {category === "All" ? (
           <h3>Latest Blogs</h3>
@@ -94,9 +102,10 @@ const LatestPosts = ({ category }) => {
               let category = blogs.category;
               category = category.replace(/\s+/g, "-");
               return (
-                <article
+                <motion.article
                   className="PopularCard"
                   onClick={() => handleAddView(blogs)}
+                  variants={fadeIn("left", "tween", 50, index * 0.1, 0.3)}
                 >
                   <a href={`/${category}/${title}/${blogs._id}`} key={index}>
                     <div className="imageContainer">
@@ -126,7 +135,7 @@ const LatestPosts = ({ category }) => {
                       <p className="data">{blogs.description}</p>
                     </div>
                   </a>
-                </article>
+                </motion.article>
               );
             })
           ) : (
@@ -148,7 +157,7 @@ const LatestPosts = ({ category }) => {
           <img src={next} alt="button" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default LatestPosts;
