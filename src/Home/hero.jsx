@@ -5,7 +5,6 @@ import "../App.css";
 const Hero = () => {
   return (
     <div className="heroSection" style={{ backgroundImage: `url(${image})` }}>
-      <Header />
       <Banner />
     </div>
   );
