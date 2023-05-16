@@ -2601,6 +2601,7 @@ $cardTransition2: all 0.3s ease-out;
 
 .skeletonContainer {
   margin-top: 40px;
+  width: 100%; //remove later
   .skeletonFirstSection {
     display: flex;
     width: 100%;
@@ -2638,6 +2639,7 @@ $cardTransition2: all 0.3s ease-out;
     align-items: center;
     gap: 10px;
     margin-top: -8px;
+
     .skeletonProfileImage {
       width: 40px;
       height: 40px;
@@ -2646,6 +2648,33 @@ $cardTransition2: all 0.3s ease-out;
       width: 25%;
       height: 25px;
       border-radius: 3px;
+    }
+  }
+}
+
+.blogSkeletonContainer {
+  .skeletonFirstSection {
+    .skeletonTextSection {
+      .skeletonTitle {
+        height: 95px;
+      }
+      .skeletonDescription {
+        height: 60px;
+      }
+    }
+  }
+  .skeletonSecondSection {
+    margin-top: 15px;
+    .skeletonRightSection {
+      display: flex;
+      gap: 25px;
+      margin-left: auto;
+    }
+  }
+  .skeletonImageSection {
+    margin-top: 30px;
+    .skeletonImage {
+      height: 450px;
     }
   }
 }

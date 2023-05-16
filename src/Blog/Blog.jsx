@@ -17,6 +17,57 @@ import facebookIcon from "../../assets/facebook-Icon.svg";
 import twitterIcon from "../../assets/twitterIcon.svg";
 import whatsappIcon from "../../assets/whatsappIcon.svg";
 import shareIcon from "../../assets/shareIcon.svg";
+import { Skeleton } from "@mui/material";
+
+//Skeleton
+
+const Loader = () => {
+  return (
+    <div className="skeletonContainer blogSkeletonContainer">
+      <div className="skeletonFirstSection">
+        <div className="skeletonTextSection">
+          <Skeleton className="skeletonDate" variant="rectangular"></Skeleton>
+          <Skeleton className="skeletonTitle" variant="rectangular"></Skeleton>
+          <Skeleton
+            className="skeletonDescription"
+            variant="rectangular"
+          ></Skeleton>
+        </div>
+      </div>
+      <div className="skeletonSecondSection">
+        <Skeleton
+          className="skeletonProfileImage"
+          variant="circular"
+        ></Skeleton>
+        <Skeleton
+          className="skeletonAuthorName"
+          variant="rectangular"
+        ></Skeleton>
+        <div className="skeletonRightSection">
+          <Skeleton
+            className="skeletonProfileImage"
+            variant="circular"
+          ></Skeleton>
+          <Skeleton
+            className="skeletonProfileImage"
+            variant="circular"
+          ></Skeleton>
+          <Skeleton
+            className="skeletonProfileImage"
+            variant="circular"
+          ></Skeleton>
+          <Skeleton
+            className="skeletonProfileImage"
+            variant="circular"
+          ></Skeleton>
+        </div>
+      </div>
+      <div className="skeletonImageSection">
+        <Skeleton className="skeletonImage" variant="rectangular"></Skeleton>
+      </div>
+    </div>
+  );
+};
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [loading, setLoading] = useState(false);
@@ -99,7 +150,7 @@ const Blog = () => {
 
         <div className="blogLeft">
           {loading ? (
-            <span className="loader"></span>
+            <Loader />
           ) : (
             <>
               <div className="blogDateandReadTime">
