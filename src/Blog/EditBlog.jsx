@@ -260,7 +260,7 @@ const CreateBlog = () => {
           <h4 className="createblogbodytext">Body</h4>
           <CKEditor
             data={blog.body}
-            editor={classicEditor}
+            editor={ClassicEditor}
             onChange={handleBodyChange}
             config={options}
           />

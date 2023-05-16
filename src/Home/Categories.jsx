@@ -118,6 +118,15 @@ const Categories = ({ setCategory }) => {
           <div>Life Hacks</div>
         </div>
         <div
+          className={activediv === "div130" ? "categoryActive" : "category"}
+          onClick={() => {
+            setActiveDiv("div130");
+            setCategory("General");
+          }}
+        >
+          <div>General</div>
+        </div>
+        <div
           className={activediv === "div13" ? "categoryActive" : "category"}
           onClick={() => {
             setActiveDiv("div13");

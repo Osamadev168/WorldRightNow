@@ -21,7 +21,7 @@ const Contact = () => {
       setMessage("Email Sent!");
       if (!res) {
         setForm(defaultValuesForm);
-        setError("InvaLid Email");
+        setError("Please provide a valid email!");
         setMessage("");
       }
     });
