@@ -2633,6 +2633,7 @@ body {
 
 .skeletonContainer {
   margin-top: 40px;
+  width: 100%;
 }
 .skeletonContainer .skeletonFirstSection {
   display: flex;
@@ -2678,6 +2679,27 @@ body {
   width: 25%;
   height: 25px;
   border-radius: 3px;
+}
+
+.blogSkeletonContainer .skeletonFirstSection .skeletonTextSection .skeletonTitle {
+  height: 95px;
+}
+.blogSkeletonContainer .skeletonFirstSection .skeletonTextSection .skeletonDescription {
+  height: 60px;
+}
+.blogSkeletonContainer .skeletonSecondSection {
+  margin-top: 15px;
+}
+.blogSkeletonContainer .skeletonSecondSection .skeletonRightSection {
+  display: flex;
+  gap: 25px;
+  margin-left: auto;
+}
+.blogSkeletonContainer .skeletonImageSection {
+  margin-top: 30px;
+}
+.blogSkeletonContainer .skeletonImageSection .skeletonImage {
+  height: 450px;
 }
 
 .aboutHero {
