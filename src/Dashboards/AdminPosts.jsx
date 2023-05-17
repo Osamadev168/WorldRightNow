@@ -261,7 +261,11 @@ const AdminPosts = ({ setAdminPosts }) => {
                     <div className="dateTime">
                       <p> {moment(blogs.CreatedAt).fromNow()}</p>
                       <p>&nbsp;|&nbsp;</p>
-                      {round <= 0 ? <p>Quick read</p> : <p>{round}mins read</p>}
+                      {round <= 0 ? (
+                        <p>Quick read</p>
+                      ) : (
+                        <p>{round} mins read</p>
+                      )}
                     </div>
                   </div>
                 </div>

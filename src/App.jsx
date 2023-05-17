@@ -22,6 +22,7 @@ import AboutUs from "./Privacy&Terms/AboutUs";
 import Rss from "./RSS/Rss";
 import Pricing from "./Pricing/pricing";
 import FAQ from "./Home/FAQ";
+import notFound from "../assets/404.svg";
 
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
@@ -35,8 +36,8 @@ const ProtectedRoutes = ({ children }) => {
 };
 const InValidRoute = () => {
   return (
-    <div style={{ margin: 160 }}>
-      <h1>Not found</h1>
+    <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+      <img src={notFound} alt="Not Found" style={{ width: "40%" }} />
     </div>
   );
 };
