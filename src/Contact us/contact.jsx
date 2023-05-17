@@ -18,7 +18,9 @@ const Contact = () => {
       setLoading(false);
       setError(false);
       setForm(defaultValuesForm);
-      setMessage("Email Sent!");
+      setMessage(
+        "Thank you for contacting hubblefeed we will get back to you shortly!"
+      );
       if (!res) {
         setForm(defaultValuesForm);
         setError("Please provide a valid email!");
