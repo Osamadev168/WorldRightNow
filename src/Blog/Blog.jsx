@@ -68,6 +68,80 @@ const Loader = () => {
     </div>
   );
 };
+const Loader2 = () => {
+  return (
+    <div className="rightSkeletonContainer">
+      <div className="cardSkeletonContainer">
+        <div className="cardLeft">
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent1"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent2"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent3"
+          ></Skeleton>
+        </div>
+        <Skeleton variant="rectangular" className="cardRight"></Skeleton>
+      </div>
+      <div className="cardSkeletonContainer">
+        <div className="cardLeft">
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent1"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent2"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent3"
+          ></Skeleton>
+        </div>
+        <Skeleton variant="rectangular" className="cardRight"></Skeleton>
+      </div>
+      <div className="cardSkeletonContainer">
+        <div className="cardLeft">
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent1"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent2"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent3"
+          ></Skeleton>
+        </div>
+        <Skeleton variant="rectangular" className="cardRight"></Skeleton>
+      </div>
+      <div className="cardSkeletonContainer">
+        <div className="cardLeft">
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent1"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent2"
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            className="cardLeftContent3"
+          ></Skeleton>
+        </div>
+        <Skeleton variant="rectangular" className="cardRight"></Skeleton>
+      </div>
+    </div>
+  );
+};
 const Blog = () => {
   const [blog, setBlog] = useState({});
   const [loading, setLoading] = useState(false);
@@ -146,9 +220,19 @@ const Blog = () => {
             href={`https://www.hubblefeed.com/${category}/${title}/${blog._id}`}
           />
           <script type="application/ld+json">{JSON.stringify(schema)}</script>
-        </Helmet>
 
-        <div className="blogLeft">
+          {/* Open Graph metadata */}
+          <meta property="og:title" content={blog.title} />
+          <meta property="og:type" content="article" />
+          <meta property="og:description" content={blog.description} />
+          <meta property="og:image" content={blog.image} />
+          <meta property="og:image:alt" content={blog.title} />
+          <meta
+            property="og:url"
+            content={`https://www.hubblefeed.com/${category}/${title}/${blog._id}`}
+          />
+        </Helmet>
+        <article className="blogLeft">
           {loading ? (
             <Loader />
           ) : (
@@ -290,7 +374,7 @@ const Blog = () => {
               />
             </>
           )}
-        </div>
+        </article>
 
         <div className="blogRight">
           <div className="blogRightContent">
@@ -312,7 +396,7 @@ const Blog = () => {
                   let category = blog.category;
                   category = category.replace(/\s+/g, "-");
                   return (
-                    <div
+                    <article
                       className="Card"
                       onClick={() =>
                         navigate(`/${category}/${title}/${blog._id}`)
@@ -320,7 +404,7 @@ const Blog = () => {
                       key={index}
                     >
                       <div className="blogContent">
-                        <h5 className="posttitle">{blog.category}</h5>
+                        <p className="posttitle">{blog.category}</p>
                         <div className="info">
                           <p>{displayDate}</p>
                           <p>&nbsp;|&nbsp;</p>
@@ -340,11 +424,11 @@ const Blog = () => {
                         alt="author_blog_image"
                         loading="lazy"
                       />
-                    </div>
+                    </article>
                   );
                 })
               ) : (
-                <span className="loader"></span>
+                <Loader2 />
               )}
             </div>
             <div className="blogTags">
