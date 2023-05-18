@@ -12,10 +12,20 @@ import { staggerContainer, fadeIn } from "../utils/motion";
 import ServiceCard from "../Home/ServiceCard";
 import FAQ from "../../src/Home/FAQ";
 import aboutBG from "../../assets/abouthero.webp";
+import { Helmet } from "react-helmet";
 
 const AboutUs = () => {
   return (
     <>
+      <Helmet>
+        <meta
+          charSet="utf-8"
+          name="description"
+          content=" Boost your online presence with Hubble Feed - your go-to for smart blogging solutions. We simplify SEO-optimized content creation, prioritizing client success and innovation. Let's grow together!"
+        />
+        <title>About us</title>
+        <link href="https://www.hubblefeed.com/about-us" />
+      </Helmet>
       <motion.section
         className="aboutHero"
         variants={staggerContainer}

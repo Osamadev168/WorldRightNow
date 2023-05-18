@@ -250,7 +250,7 @@ const AllBlogs = () => {
         />
         <title>Blogs | Hubble Feed</title>
 
-        <link rel="canonical" href="https://www.hubblefeed.com/all/blogs" />
+        <link rel="canonical" href="https://www.hubblefeed.com/blogs" />
       </Helmet>
       <div className="AllBlogsContainer paddingtop">
         <Slider {...settings} ref={sliderRef} className="slider">

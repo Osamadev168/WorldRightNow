@@ -216,7 +216,6 @@ const Blog = () => {
           <title>{blog.title}</title>
           <meta name="description" content={blog.description} />
           <link
-            rel="canonical"
             href={`https://www.hubblefeed.com/${category}/${title}/${blog._id}`}
           />
           <script type="application/ld+json">{JSON.stringify(schema)}</script>
