@@ -98,7 +98,7 @@ const Header = ({ headerStyle }) => {
               <a href="/pricing">Pricing</a>
             </li>
             <li>
-              <a href="/all/blogs">Blogs</a>
+              <a href="/blogs">Blogs</a>
             </li>
             <li>
               <a href="/faq">FAQ</a>

@@ -46,12 +46,6 @@ const App = () => {
   return (
     <ContextProvider>
       <BrowserRouter>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>Hubble Feed</title>
-          <link rel="canonical" href="https://www.hubblefeed.com" />
-        </Helmet>
-
         <Header />
         <Routes>
           <Route
@@ -70,6 +64,9 @@ const App = () => {
             path="/account"
             element={
               <>
+                <Helmet>
+                  <link href="https://www.hubblefeed.com/account" />
+                </Helmet>
                 <Login />
                 <Footer />
               </>
@@ -124,7 +121,7 @@ const App = () => {
           />
 
           <Route
-            path="/all/blogs"
+            path="/blogs"
             element={
               <>
                 <AllBlogs />
@@ -136,6 +133,10 @@ const App = () => {
             path="/contact"
             element={
               <>
+                <Helmet>
+                  <title>Contact</title>
+                  <link href="https://www.hubblefeed.com/contact" />
+                </Helmet>
                 <Contact />
                 <Footer />
               </>
@@ -160,15 +161,6 @@ const App = () => {
             }
           />
           <Route
-            path="/write-for-us"
-            element={
-              <>
-                <WriteForUs />
-                <Footer />
-              </>
-            }
-          />
-          <Route
             path="/about-us"
             element={
               <>
@@ -181,6 +173,10 @@ const App = () => {
             path="/pricing"
             element={
               <>
+                <Helmet>
+                  <title>Pricing</title>
+                  <link href="https://www.hubblefeed.com/pricing" />
+                </Helmet>
                 <Pricing margin={"150px"} />
                 <FooterContainer />
               </>
@@ -190,6 +186,10 @@ const App = () => {
             path="/faq"
             element={
               <>
+                <Helmet>
+                  <title>FAQs</title>
+                  <link href="https://www.hubblefeed.com/faq" />
+                </Helmet>
                 <FAQ data={faqData} margin={"150px"} />
                 <FooterContainer />
               </>

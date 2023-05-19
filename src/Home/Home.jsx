@@ -33,9 +33,9 @@ const Home = () => {
         <meta
           charSet="utf-8"
           name="description"
-          content="HubbleFeed is a great place to start sharing your ideas online and reach dense audiance Join today!"
+          content="Grow your business on Hubble Feed! Boost your reach with our SEO optimised blogs. Increased exposure for your success. Start blogging now! Contact us."
         />
-        <title>Hubble Feed</title>
+        <title>Hubble Feed - Blog posting of the future</title>
         <link rel="canonical" href="https://www.hubblefeed.com/" />
       </Helmet>
 
