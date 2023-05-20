@@ -174,6 +174,20 @@ const Blog = () => {
       fetchBlog(id);
     }
   }, [id, refresh, author]);
+
+  // Detect <a> tag with rel="sponsored" and add a class to it
+  useEffect(() => {
+    const handleSponsoredLinks = () => {
+      const links = document.querySelectorAll('a[rel="sponsored"]');
+      links.forEach((link) => {
+        link.classList.add("sponsoredLink");
+      });
+    };
+
+    if (loading) return; // Wait for the content to be loaded
+    handleSponsoredLinks();
+  }, [loading]);
+
   let wordsPerMinute = 150;
   let noOfWords = blog.body?.split(" ").length;
   let readingTime = noOfWords / wordsPerMinute;

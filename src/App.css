@@ -1704,6 +1704,18 @@ body {
 .blogBody figure img {
   max-width: 100% !important;
 }
+.blogBody .sponsoredLink {
+  color: #fc2c7e;
+  border: 1px solid #fc2c7e;
+  padding: 8px 30px;
+  border-radius: 50px;
+  margin-top: 20px;
+  transition: all 250ms ease-in-out;
+}
+.blogBody .sponsoredLink:hover {
+  background-color: #fc2c7e;
+  color: #ffffff;
+}
 
 .titleinput {
   width: 100%;

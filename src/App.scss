@@ -1701,6 +1701,18 @@ $cardTransition2: all 0.3s ease-out;
       max-width: 100% !important;
     }
   }
+  .sponsoredLink {
+    color: $primaryColor;
+    border: 1px solid $primaryColor;
+    padding: 8px 30px;
+    border-radius: 50px;
+    margin-top: 20px;
+    transition: all 250ms ease-in-out;
+    &:hover {
+      background-color: $primaryColor;
+      color: #ffffff;
+    }
+  }
 }
 
 //Create Blog Page
@@ -3942,6 +3954,7 @@ $cardTransition2: all 0.3s ease-out;
       font-size: 18px;
     }
   }
+
   //Dashboard Page
 
   .dashboardContainer {
