@@ -175,7 +175,6 @@ const Blog = () => {
     }
   }, [id, refresh, author]);
 
-  // Detect <a> tag with rel="sponsored" and add a class to it
   useEffect(() => {
     const handleSponsoredLinks = () => {
       const links = document.querySelectorAll('a[rel="sponsored"]');
@@ -184,7 +183,7 @@ const Blog = () => {
       });
     };
 
-    if (loading) return; // Wait for the content to be loaded
+    if (loading) return; 
     handleSponsoredLinks();
   }, [loading]);
 
@@ -223,6 +222,10 @@ const Blog = () => {
       },
     },
   };
+  function formatDateTime(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
   return (
     <>
       <div className="blogMainContainer paddingtop">
@@ -251,11 +254,18 @@ const Blog = () => {
           ) : (
             <>
               <div className="blogDateandReadTime">
-                <p>{displayDate}</p>
+                <p>{formatDateTime(new Date(blog.CreatedAt))}</p>
                 <p>&nbsp;|&nbsp;</p>
 
                 {round <= 0 ? <p>Quick Read</p> : <p>{round} mins read</p>}
               </div>
+              {blog.updatedAt ? (
+  <p>
+    Updated At: <strong>{formatDateTime(new Date(blog.updatedAt))}</strong>
+  </p>
+) : null}
+ <hr></hr>
+
               <div className="titleandDescriptionImage">
                 <h1 className="blogTitle">{blog.title}</h1>
                 <p className="blogDescription">{blog.description}</p>
@@ -392,7 +402,7 @@ const Blog = () => {
         <div className="blogRight">
           <div className="blogRightContent">
             <div className="authorBlogs">
-              <h4>More from {blog.author}</h4>
+              <h4>More from <strong>{blog.author}</strong></h4>
               {authorBlogs && authorBlogs.length > 0 ? (
                 authorBlogs.map((blog, index) => {
                   let wordsPerMinute = 150;
@@ -517,20 +527,25 @@ const Comments = ({ blog, id, setRefresh, refresh }) => {
       {blog.comments && blog.comments.length > 0 ? (
         blog.comments.map((commment) => {
           const date = new Date(commment.date).toDateString();
-          return (
-            <div className="main_Comments_Container">
-              <div className="photo_UserName_Contianer">
-                <img
-                  className="avatar_Comment"
-                  src={commment.userimage}
-                  alt="comment_author"
-                />
-                <p>{commment.username}</p>
-                <p>&nbsp;&nbsp;|&nbsp; &nbsp;{date}</p>
+          if (commment._id !== "64b3b6add688de9120c56136"){
+
+            return  (
+              <div className="main_Comments_Container">
+                <div className="photo_UserName_Contianer">
+                  <img
+                    className="avatar_Comment"
+                    src={commment.userimage}
+                    alt="comment_author"
+                  />
+                  <p>{commment.username}</p>
+                  <p>&nbsp;&nbsp;|&nbsp; &nbsp;{date}</p>
+                </div>
+                <p className="comment_Content">{commment.comment}</p>
               </div>
-              <p className="comment_Content">{commment.comment}</p>
-            </div>
-          );
+            )
+          }
+          
+         
         })
       ) : (
         <></>

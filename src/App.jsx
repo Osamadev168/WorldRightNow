@@ -17,7 +17,6 @@ import { Helmet } from "react-helmet";
 import Contact from "./Contact us/contact";
 import Privacy from "./Privacy&Terms/Privacy";
 import Terms from "./Privacy&Terms/Terms";
-import WriteForUs from "./Privacy&Terms/Writeforus";
 import AboutUs from "./Privacy&Terms/AboutUs";
 import Rss from "./RSS/Rss";
 import Pricing from "./Pricing/pricing";
@@ -43,6 +42,7 @@ const InValidRoute = () => {
 };
 
 const App = () => {
+  
   return (
     <ContextProvider>
       <BrowserRouter>

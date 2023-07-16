@@ -129,11 +129,13 @@ const CreateBlog = () => {
   //
   // update blog
   const submitBlog = async () => {
+
     setProgress(true);
+    setBlog({ ...blog , updatedAt : new Date()})
     if (blog.tags.length === 0) {
       blog.tags = tags;
     }
-    setBlog({ ...blog, tags: tags });
+    setBlog({ ...blog, tags: tags  });
     try {
       await edit_Blog(blog_id, blog, token).then(() => {
         navigate("/dashboard");
@@ -210,6 +212,8 @@ const CreateBlog = () => {
     if (file) {
       uploadImage();
     }
+    console.log(blog)
+
   }, [file, , data, refresh]);
 
   return (
@@ -474,7 +478,6 @@ const CreateBlog = () => {
             </div>
           )}
         </div>
-        {/* {blog !== edit && ( */}
         <button className="createblogbutton" type="button" onClick={submitBlog}>
           {progress ? (
             <span className="loader"></span>
@@ -485,7 +488,6 @@ const CreateBlog = () => {
             </>
           )}
         </button>
-        {/* )} */}
       </div>
     </div>
   );
