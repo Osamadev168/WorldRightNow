@@ -5,7 +5,7 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   build: {
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       external: ["ckeditor5-custom-build"],
       output: {

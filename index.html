@@ -9,15 +9,12 @@
     <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
     <link rel="apple-touch-icon" sizes="192x192" href="/public/apple-touch-icon.png">
     <meta name="theme-color" content="#FC2C7E">
-
-
     <link rel="manifest" href="./manifest.json" />
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4308415925415883"
       crossorigin="anonymous"
     ></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,33 +26,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      document.addEventListener('contextmenu', event => event.preventDefault());
-    
-      // Disable keyboard shortcuts for opening developer tools
-      document.addEventListener('keydown', event => {
-        // Check for key combinations that open developer tools
-        if (
-          (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl + Shift + I
-          (event.ctrlKey && event.shiftKey && event.keyCode === 67) || 
-          (event.ctrlKey && event.keyCode === 85)
-        ) {
-          event.preventDefault(); 
-        }
-        if (event.keyCode === 123) { 
-      event.preventDefault(); 
-    }
-      });
-    
-      document.addEventListener('DOMContentLoaded', function () {
-        var mode = document.querySelector("#node_env_mode").value;
-        if (
-          mode === "production" &&
-          typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object"
-        ) {
-          window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
-        }
-      });
-    </script>
   </body>
 </html>

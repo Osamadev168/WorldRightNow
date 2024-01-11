@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "cross-env GENERATE_SOURCEMAP=false vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -20,8 +20,8 @@
     "framer-motion": "^10.12.10",
     "hamburger-react": "^2.5.0",
     "moment": "^2.29.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-helmet": "^6.1.0",
     "react-html-parser": "^2.0.2",
     "react-infinite-scroll-component": "^6.1.0",
@@ -30,11 +30,13 @@
     "react-share": "^4.4.1",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1"
-  },
+  }
+,  
   "devDependencies": {
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
+    "cross-env": "^7.0.3",
     "vite": "^4.0.0"
   }
 }
