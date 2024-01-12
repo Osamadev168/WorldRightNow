@@ -261,8 +261,11 @@ export const Login = ({
       });
   };
   const resetPassword = async () => {
+    console.log(email)
     const auth = getAuth(app);
     await sendPasswordResetEmail(auth, email);
+       alert('A Password reset link has been sent to your email address')
+
   };
   return (
     <div className="mainLoginContainer paddingtop">
