@@ -5,18 +5,19 @@ import { useContext, useEffect, useRef, useState, lazy, Suspense } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
-import { submitPost, upload_Image } from "../Api/Api";
+import { saveUserDraft, submitPost, updateDraft, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "ckeditor5-custom-build/build/ckeditor";
 
 const CreateBlog = () => {
   // document title
-  document.title = "Create Blog|HubbleFeed";
+  document.title = "Create Blog | HubbleFeed";
   ////
   // hooks and other stuff
   const { user, token } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const blogdefaultValues = {
+    postID: "",
     title: "",
     description: "",
     body: "",
@@ -31,7 +32,11 @@ const CreateBlog = () => {
   };
 
   const [progress, setProgress] = useState(false);
+  const [titleSave , setTitleSave] = useState(false);
+  const [bodySave , setBodySave] = useState(false);
+  const [descriptionSave  , setDescriptionSave] = useState(false);
   const [tags, setTags] = useState([]);
+  const [blogDescription , SetBlogDescription] = useState("")
   const [value, setValue] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [char, setChar] = useState(0);
@@ -42,6 +47,7 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const [bodyLength, setBodyLength] = useState(0);
+  const [indicator , setIndicator] = useState(false)
   const inputFile = useRef(null);
   const navigate = useNavigate();
   ///
@@ -167,6 +173,9 @@ const CreateBlog = () => {
     setBlog({
       ...blog,
       title: e.target.value,
+      authorId: user.uid,
+    
+
     });
     setChar(e.target.value.length);
   };
@@ -179,6 +188,7 @@ const CreateBlog = () => {
       authorId: user.uid,
     });
     setCharDescription(e.target.value.length);
+    SetBlogDescription(e.target.value);
   };
   const handleBodyChange = (event, editor) => {
     setBlog({ ...blog, body: editor.getData() });
@@ -202,9 +212,30 @@ const CreateBlog = () => {
     setFile(e.target.files[0]);
     setProgress(true);
   };
-
-  ///
+  const saveProgress = async () => {
+    try {
+      let response;
+      if (blog.postID) {
+        response = await updateDraft(blog , blog.postID);
+        console.log("Draft updated:", response);
+        setTitleSave(false)
+        setBodySave(false)
+        setDescriptionSave(false)
+      } else {
+        response = await saveUserDraft(blog);
+        console.log("Draft saved:", response);
+        const postId = response.postID;
+        blog.postID = postId;
+        setTitleSave(false)
+        setBodySave(false)
+        setDescriptionSave(false)      }
+    } catch (error) {
+      console.error(`Error saving post: ${error.message}`);
+    }
+  };
+  
   useEffect(() => {
+
     setBlog({ ...blog, tags: tags });
     if (tags) {
       setBlog({ ...blog, tags: tags });
@@ -215,6 +246,16 @@ const CreateBlog = () => {
     }
   }, [file, refresh, tags]);
 
+  const getDescriptionValue = () =>
+   {
+     if (blogDescription === "")
+      {
+        return blog.description
+      }
+      else {
+        return blogDescription
+      }
+   }
   return (
     <div
       style={{
@@ -227,6 +268,11 @@ const CreateBlog = () => {
         <div className="createblogformcontainer">
           <textarea
             value={blog.title}
+            onBlur={() => 
+              {
+                saveProgress()
+                setTitleSave(true)
+              }}
             className="titleinput"
             placeholder="Title"
             maxLength={100}
@@ -240,11 +286,19 @@ const CreateBlog = () => {
             <label className="labelcreateblog">
               {`${char <= 100 ? char : 100}/100`}
             </label>
+            <label>
+              {titleSave === true ? "Saved" : ""}
+            </label>
           </div>
         </div>
         <div className="createblogformcontainer">
           <textarea
-            value={blog.description}
+          onBlur={() => 
+            {
+              saveProgress()
+              setDescriptionSave(true)
+            }}
+            value={blogDescription}
             maxLength={300}
             className="titleinput descriptioninput"
             placeholder="Description"
@@ -257,26 +311,40 @@ const CreateBlog = () => {
             <label className="labelcreateblog">
               {`${charDescription <= 300 ? charDescription : 300}/300`}
             </label>
+            <label>
+              {descriptionSave === true ? "Saved" : ""}
+            </label>
           </div>
         </div>
         <div className="createblogformcontainer">
           <label className="createblogbodytext" htmlFor="blogBody">
             Body
           </label>
-          <Suspense fallback={<div>Loading...</div>}>
-            <CKEditor
-              data={blog.body}
-              editor={ClassicEditor}
-              onChange={handleBodyChange}
-              config={options}
-            />
-          </Suspense>
+         <Suspense fallback={<div>Loading...</div>}>
+      <div onKeyUp={
+        () => 
+        {
+          saveProgress()
+          setBodySave(true)
+        }
+      }>
+        <CKEditor
+          data={blog.body}
+          editor={ClassicEditor}
+          onChange={handleBodyChange}
+          config={options}
+        />
+      </div>
+    </Suspense>
           <label className="labelcreateblog">
             Hint: Break the content in several parts
           </label>
           <label className="labelcreateblog">
             Total Words So far {bodyLength}
           </label>
+          <label>
+              {bodySave === true ? "Saved" : ""}
+            </label>
         </div>
         <div className="createblogformcontainer">
           <h4 className="createblogbodytext">Select a category</h4>
@@ -522,6 +590,9 @@ const CreateBlog = () => {
               <img src={Send} />
             </>
           )}
+        </button>
+        <button className="createblogbutton" onClick={saveProgress}>
+          Save as a Draft
         </button>
       </div>
     </div>

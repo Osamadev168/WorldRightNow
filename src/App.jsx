@@ -13,6 +13,7 @@ const CreateBlog = lazy(() => import("./Create Blog/CreateBlog.jsx"));
 import BlogTag from "./Blog/BlogTag";
 import AllBlogs from "./All Blogs/AllBlogs";
 import Dashboard from "./Dashboards/Dashboard";
+import Drafts from './Drafts/Drafts.jsx'
 import { Helmet } from "react-helmet";
 import Contact from "./Contact us/contact";
 import Privacy from "./Privacy&Terms/Privacy";
@@ -22,6 +23,7 @@ import Rss from "./RSS/Rss";
 import Pricing from "./Pricing/pricing";
 import FAQ from "./Home/FAQ";
 import notFound from "../assets/404.svg";
+import EditDraft from "./Blog/EditDraft.jsx";
 
 const ProtectedRoutes = ({ children }) => {
   const [authUser, setAuthUser] = useState(localStorage.getItem("authUser"));
@@ -91,12 +93,30 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+          <Route
+            path="/draft/edit/:draftID"
+            element={
+              <ProtectedRoutes>
+                <EditDraft />
+                <Footer />
+              </ProtectedRoutes>
+            }
+          />
 
           <Route
             path="/dashboard"
             element={
               <ProtectedRoutes>
                 <Dashboard />
+                <Footer />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/drafts"
+            element={
+              <ProtectedRoutes>
+                <Drafts />
                 <Footer />
               </ProtectedRoutes>
             }

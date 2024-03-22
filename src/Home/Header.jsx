@@ -6,6 +6,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { app } from "../Firebase/Config";
 import profilepic from "../../assets/Avatar.svg";
 import imgDashboard from "../../assets/dashboard.svg";
+import imgDrafts from "../../assets/paper.png";
 import imgWrite from "../../assets/write.svg";
 import imgHelp from "../../assets/help.svg";
 import imgLogout from "../../assets/logout.svg";
@@ -148,6 +149,9 @@ const Header = ({ headerStyle }) => {
                       <a href="/dashboard">
                         <DropdownItem text={"Dashboard"} image={imgDashboard} />
                       </a>
+                      <a href="/drafts">
+                        <DropdownItem text={"Drafts"} image={imgDrafts} />
+                      </a>
                       <a href="/createblog">
                         <DropdownItem text={"Create Blog"} image={imgWrite} />
                       </a>
@@ -183,7 +187,7 @@ const Header = ({ headerStyle }) => {
 function DropdownItem(props) {
   return (
     <li className="dropdownitem" onClick={props.link}>
-      <img src={props.image} alt="icon" />
+      <img src={props.image} alt="icon" style={{height : 18 , width : 18}}/>
       <p>{props.text}</p>
     </li>
   );

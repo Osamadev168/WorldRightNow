@@ -1,6 +1,6 @@
 import axios from "axios";
-const url = "https://server-blog-production.up.railway.app";
-// const url = "http://localhost:7000";
+// const url = "https://server-blog-production.up.railway.app";
+const url = "http://localhost:7000";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
@@ -9,11 +9,62 @@ export const upload_Image = async (image) => {
     alert(e.message);
   }
 };
+export const saveUserDraft = async (blog) => {
+  try 
+  {
+    let response = await axios.post(`http://localhost:7000/saveUserDraft`, blog);
+    return response.data; 
+  }
+  catch (error) 
+  {
+    throw error; 
+  }
+};
+export const updateDraft = async (blog , blogID) => {
+  try 
+  {
+    const response = await axios.post(`http://localhost:7000/updateDraft/${blogID}`, blog);
+    return response.data; 
+  }
+  catch (error) 
+  {
+    throw error; 
+  }
+};
+
+export const getDraftData = async (draftID) =>
+ {
+  try
+  {
+   let response = await axios.get(`${url}/getdraftdata/${draftID}`)
+   console.log(response)
+   return response
+  }
+
+  catch(e)
+   {
+    console.log(e)
+   }
+ }
+
+
+export const getUserDrafts = async (authorID) =>
+ {
+   try
+   {
+      const response = await axios.get(`${url}/getuserdrafts/${authorID}`)
+      console.log(response)
+      return response;
+   }
+   catch(e)
+    {
+      throw e;
+    }
+ }
 
 export const getRssFeed = async () => {
   try {
     let response = await axios.get(`${url}/rss`);
-    console.log(response);
     return response;
   } catch (e) {
     console.log(e);
