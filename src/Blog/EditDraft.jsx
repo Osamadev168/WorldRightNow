@@ -3,10 +3,25 @@ import { useContext, useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
-import { edit_Blog, getBlogData_Update, getDraftData, submitPost, upload_Image } from "../Api/Api";
+import { createPost, getDraftData, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "ckeditor5-custom-build/build/ckeditor";
 const EditDraft = () => {
+  const [title, setTitle] = useState("");
+  const [description , setDescription] = useState("");
+  const blogDefaultValues = {
+    title: title,
+    description: description,
+    body: "",
+    image: "",
+    category: "",
+    comments: [],
+    CreatedAt: new Date(),
+    author: "",
+    authorImage: "",
+    auhtorId: "",
+    tags: [],
+  };
   // document title
   document.title = "Update Blog";
   //hooks
@@ -19,12 +34,11 @@ const EditDraft = () => {
   const [charTags, setCharTags] = useState(0);
   const [charDescription, setCharDescription] = useState(0);
   const [activediv, setActiveDiv] = useState("");
-  const [blog, setBlog] = useState({});
+  const [blog, setBlog] = useState(blogDefaultValues);
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const [bodyLength, setBodyLength] = useState(0);
   const inputFile = useRef(null);
-  const { token } = useContext(UserContext);
   const navigate = useNavigate();
   const params = useParams();
   ///
@@ -116,26 +130,35 @@ const EditDraft = () => {
   };
   ///
   // getting blog data
-  const getBlogData = () => {
-    getDraftData(blog_id).then((res) => {
-
-      if (res) {
-        setBlog(res.data[0]);
-     
-      }
-    });
-  };
+  const getBlogData = async () => {
+    try {
+        const res = await  getDraftData(blog_id);
+        if (res && res.data && res.data.length > 0) {
+            const data = res.data[0];
+            const { title, description, tags, image, category, CreatedAt } = data;
+            setBlog({
+                ...data,
+                CreatedAt: CreatedAt ? new Date(CreatedAt) : new Date(),
+            });
+            setTitle(title || "");
+            setDescription(description || "");
+            if (tags) setTags(tags);
+            if (image) setImage(image);
+            if (category) setActiveDiv(category);
+            console.log(data);
+        } else {
+            console.error("No data returned from getDraftData");
+        }
+    } catch (error) {
+        console.error("Error while fetching blog data:", error);
+    }
+};
   //
   // update blog
   const submitBlog = async () => {
     setProgress(true);
-    setBlog({ ...blog , updatedAt : new Date()})
-    if (blog.tags.length === 0) {
-      blog.tags = tags;
-    }
-    setBlog({ ...blog, tags: tags  });
     try {
-      await submitPost( blog, token).then(() => {
+      await createPost(blog, blog_id).then(() => {
         navigate("/dashboard");
         sessionStorage.setItem("image", "");
         setProgress(false);
@@ -165,14 +188,17 @@ const EditDraft = () => {
     return activediv === category ? "categoryActive" : "category";
   };
   const handleTitleChange = (e) => {
+    setTitle(e.target.value)
     setBlog({
       ...blog,
       title: e.target.value,
       tags: tags,
     });
+
     setChar(e.target.value.length);
   };
   const handleDescriptionChange = (e) => {
+    setDescription(e.target.value)
     setBlog({
       ...blog,
       description: e.target.value,
@@ -203,16 +229,11 @@ const EditDraft = () => {
     setProgress(true);
   };
   useEffect(() => {
-    if (data) {
       getBlogData();
-    }
-    setBlog({ ...blog, tags: tags });
     if (file) {
       uploadImage();
     }
-
-  }, [file, , data, refresh]);
-
+  }, [file, refresh]);
   return (
     <div
       style={{
@@ -224,7 +245,7 @@ const EditDraft = () => {
       <div className="createbloginput">
         <div className="createblogformcontainer">
           <textarea
-            value={blog.title}
+            value={title}
             className="titleinput"
             placeholder="Title"
             maxLength={100}
@@ -242,7 +263,7 @@ const EditDraft = () => {
         <div></div>
         <div className="createblogformcontainer">
           <textarea
-            value={blog.description}
+            value={description}
             maxLength={300}
             className="titleinput descriptioninput"
             placeholder="Description"
@@ -475,7 +496,16 @@ const EditDraft = () => {
             </div>
           )}
         </div>
-        <button className="createblogbutton" type="button" onClick={submitBlog}>
+        <button className="createblogbutton" type="button" onClick={submitBlog}
+        disabled={
+          blog.title === "" ||
+          blog.description === "" ||
+          blog.body === "" ||
+          blog.category === ""
+            ? true
+            : false
+        }
+        >
           {progress ? (
             <span className="loader"></span>
           ) : (

@@ -1,6 +1,6 @@
 import axios from "axios";
-// const url = "https://server-blog-production.up.railway.app";
-const url = "http://localhost:7000";
+const url = "https://server-blog-production.up.railway.app";
+// const url = "http://localhost:7000";
 export const upload_Image = async (image) => {
   try {
     let response = await axios.post(`${url}/upload/image`, image);
@@ -9,10 +9,35 @@ export const upload_Image = async (image) => {
     alert(e.message);
   }
 };
+
+export const createPost = async (blog , draftID) =>
+ {
+  try 
+  {
+    let response = await axios.post(`${url}/draft/create/${draftID}`, blog);
+    return response.data; 
+  }
+  catch (error) 
+  {
+    throw error; 
+  }
+ }
+
+ export const deleteDraft = async (draftID) =>
+  {
+   try{
+      await axios.delete(`${url}/draft/delete/${draftID}`)
+   }
+   catch(e)
+    
+   {
+    console.log(e)
+   }
+  }
 export const saveUserDraft = async (blog) => {
   try 
   {
-    let response = await axios.post(`http://localhost:7000/saveUserDraft`, blog);
+    let response = await axios.post(`${url}/saveUserDraft`, blog);
     return response.data; 
   }
   catch (error) 
@@ -23,7 +48,7 @@ export const saveUserDraft = async (blog) => {
 export const updateDraft = async (blog , blogID) => {
   try 
   {
-    const response = await axios.post(`http://localhost:7000/updateDraft/${blogID}`, blog);
+    const response = await axios.post(`${url}/updateDraft/${blogID}`, blog);
     return response.data; 
   }
   catch (error) 
@@ -37,7 +62,6 @@ export const getDraftData = async (draftID) =>
   try
   {
    let response = await axios.get(`${url}/getdraftdata/${draftID}`)
-   console.log(response)
    return response
   }
 
@@ -101,10 +125,11 @@ export const fetchPopularBlogsHome = async (category) => {
   return response;
 };
 export const submitPost = async (blog, token) => {
+  console.log(blog)
   try {
     await axios.post(`${url}/create/${token}`, blog);
   } catch (e) {
-    console.error(e);
+    console.error(e.message);
   }
 };
 export const getUserPosts = async (authorId) => {

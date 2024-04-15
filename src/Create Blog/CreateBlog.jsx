@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { saveUserDraft, submitPost, updateDraft, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "ckeditor5-custom-build/build/ckeditor";
-
 const CreateBlog = () => {
   // document title
   document.title = "Create Blog | HubbleFeed";
@@ -30,7 +29,6 @@ const CreateBlog = () => {
     auhtorId: "",
     tags: [],
   };
-
   const [progress, setProgress] = useState(false);
   const [titleSave , setTitleSave] = useState(false);
   const [bodySave , setBodySave] = useState(false);
@@ -47,7 +45,6 @@ const CreateBlog = () => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const [bodyLength, setBodyLength] = useState(0);
-  const [indicator , setIndicator] = useState(false)
   const inputFile = useRef(null);
   const navigate = useNavigate();
   ///
@@ -139,6 +136,7 @@ const CreateBlog = () => {
       });
       setImage(res.data.secure_url);
       sessionStorage.setItem("image", res.data.secure_url);
+      saveProgress()
     });
   };
   ////
@@ -235,7 +233,6 @@ const CreateBlog = () => {
   };
   
   useEffect(() => {
-
     setBlog({ ...blog, tags: tags });
     if (tags) {
       setBlog({ ...blog, tags: tags });
@@ -245,17 +242,6 @@ const CreateBlog = () => {
       uploadImage();
     }
   }, [file, refresh, tags]);
-
-  const getDescriptionValue = () =>
-   {
-     if (blogDescription === "")
-      {
-        return blog.description
-      }
-      else {
-        return blogDescription
-      }
-   }
   return (
     <div
       style={{
