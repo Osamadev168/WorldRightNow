@@ -166,6 +166,7 @@ const EditDraft = () => {
     } catch (e) {
       alert(e.message);
     }
+    console.log(blog)
   };
   //
   // other functions

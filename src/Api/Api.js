@@ -77,7 +77,6 @@ export const getUserDrafts = async (authorID) =>
    try
    {
       const response = await axios.get(`${url}/getuserdrafts/${authorID}`)
-      console.log(response)
       return response;
    }
    catch(e)

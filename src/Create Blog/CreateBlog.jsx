@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState, lazy, Suspense } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
-import { saveUserDraft, submitPost, updateDraft, upload_Image } from "../Api/Api";
+import { deleteDraft, saveUserDraft, submitPost, updateDraft, upload_Image } from "../Api/Api";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "ckeditor5-custom-build/build/ckeditor";
 const CreateBlog = () => {
@@ -121,7 +121,7 @@ const CreateBlog = () => {
     },
   };
   //
-
+  let draftID;
   // upload feature image
   const uploadImage = async () => {
     setProgress(true);
@@ -143,12 +143,13 @@ const CreateBlog = () => {
   /// submit blog
   const submitBlog = async () => {
     setLoading(true);
-
+    
     try {
       await submitPost(blog, token).then(async () => {
         setBlog(blogdefaultValues);
         sessionStorage.setItem("image", "");
         setLoading(false);
+        deleteDraft(blog.postID)
         navigate("/dashboard");
       });
     } catch (e) {
@@ -215,15 +216,14 @@ const CreateBlog = () => {
       let response;
       if (blog.postID) {
         response = await updateDraft(blog , blog.postID);
-        console.log("Draft updated:", response);
         setTitleSave(false)
         setBodySave(false)
         setDescriptionSave(false)
       } else {
         response = await saveUserDraft(blog);
-        console.log("Draft saved:", response);
         const postId = response.postID;
         blog.postID = postId;
+        draftID = postId;
         setTitleSave(false)
         setBodySave(false)
         setDescriptionSave(false)      }
@@ -577,9 +577,7 @@ const CreateBlog = () => {
             </>
           )}
         </button>
-        <button className="createblogbutton" onClick={saveProgress}>
-          Save as a Draft
-        </button>
+    
       </div>
     </div>
   );
